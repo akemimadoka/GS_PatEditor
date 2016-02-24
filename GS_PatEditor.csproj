@@ -59,6 +59,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Editor\Editor.cs" />
+    <Compile Include="Editor\EditorUI.cs" />
+    <Compile Include="Editor\Nodes\AnimationNode.cs" />
+    <Compile Include="Editor\Nodes\FrameNode.cs" />
+    <Compile Include="Editor\Nodes\RootNode.cs" />
+    <Compile Include="Editor\Panels\FramePanel.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -89,6 +95,7 @@
     <Compile Include="Render\Shader.cs" />
     <Compile Include="Render\Sprite.cs" />
     <Compile Include="Render\VertexReflection.cs" />
+    <Compile Include="Simulation\World.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -115,6 +122,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
