@@ -26,8 +26,10 @@ float4x4 mat_ViewProj;
 
 sampler2D s_2D = sampler_state
 {
-	AddressU = Wrap;
-	AddressV = Wrap;
+    Filter = ANISOTROPIC;
+	AddressU = Border;
+	AddressV = Border;
+    
 };
 
 PS_IN VS(VS_IN input)

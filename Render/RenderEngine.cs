@@ -13,14 +13,14 @@ namespace GS_PatEditor.Render
 {
     class RenderEngine : IDisposable
     {
-        private Direct3D direct3d;
-        private Device device;
+        private Direct3D _Direct3d;
+        private Device _Device;
 
-        private Texture txt;
-        private VertexBuffer data;
-        private VertexDeclaration decl;
-        private int stride;
-        private Effect effect;
+        private Effect _Effect;
+
+        public Device Device { get { return _Device; } }
+
+        public event Action OnRender;
 
         [StructLayout(LayoutKind.Sequential)]
         struct Vertex
@@ -29,8 +29,6 @@ namespace GS_PatEditor.Render
             public Vector4 pos;
             [VertexField(DeclarationUsage.TextureCoordinate)]
             public Vector2 tex;
-            //[VertexField(DeclarationUsage.Color)]
-            //public Vector4 col;
         }
 
         public RenderEngine(Control ctrl)
@@ -39,69 +37,58 @@ namespace GS_PatEditor.Render
             present.PresentationInterval = PresentInterval.One;
             present.BackBufferFormat = Format.A8R8G8B8;
 
-            direct3d = new Direct3D();
-            device = new Device(direct3d, 0,
+            _Direct3d = new Direct3D();
+            _Device = new Device(_Direct3d, 0,
                 DeviceType.Hardware,
                 ctrl.Handle,
                 CreateFlags.HardwareVertexProcessing,
                 present);
 
-            device.SetRenderState(RenderState.CullMode, false);
-            device.SetRenderState(RenderState.ZFunc, Compare.Always);
+            _Device.SetRenderState(RenderState.CullMode, false);
+            _Device.SetRenderState(RenderState.ZFunc, Compare.Always);
 
-            device.SetTransform(TransformState.View, Matrix.Identity);
-            device.SetTransform(TransformState.Projection, device.GetViewProjectionMatrix());
+            _Device.SetTransform(TransformState.View, Matrix.Identity);
+            _Device.SetTransform(TransformState.Projection, _Device.GetViewProjectionMatrix());
 
-            device.SetRenderState(RenderState.AlphaTestEnable, false);
-            device.SetRenderState(RenderState.AlphaTestEnable, false);
-            device.SetRenderState(RenderState.AlphaRef, 0.1f);
-            device.SetRenderState(RenderState.AlphaFunc, Compare.GreaterEqual);
+            _Device.SetRenderState(RenderState.AlphaTestEnable, false);
+            _Device.SetRenderState(RenderState.AlphaTestEnable, false);
+            _Device.SetRenderState(RenderState.AlphaRef, 0.1f);
+            _Device.SetRenderState(RenderState.AlphaFunc, Compare.GreaterEqual);
 
-            device.SetRenderState(RenderState.AlphaBlendEnable, true);
-            device.SetRenderState(RenderState.BlendOperation, BlendOperation.Add);
-            device.SetRenderState(RenderState.SourceBlend, Blend.SourceAlpha);
-            device.SetRenderState(RenderState.DestinationBlend, Blend.InverseSourceAlpha);
+            _Device.SetRenderState(RenderState.AlphaBlendEnable, true);
+            _Device.SetRenderState(RenderState.BlendOperation, BlendOperation.Add);
+            _Device.SetRenderState(RenderState.SourceBlend, Blend.SourceAlpha);
+            _Device.SetRenderState(RenderState.DestinationBlend, Blend.InverseSourceAlpha);
 
-            effect = Effect.FromString(device, Shader.Value, ShaderFlags.None);
-            effect.SetValue("mat_ViewProj", device.GetViewProjectionMatrix());
-
-            txt = Texture.FromFile(device, @"E:\2.png", Usage.None, Pool.Default);
-            {
-                float x = 0, y = 0, r = 16, b = 16;
-                data = VertexReflection.CreateVertexBuffer(device, new[] {
-                    new Vertex { pos = new Vector4(x, y, 0, 1.0f), tex = new Vector2(0.0f, 0.0f) },
-                    new Vertex { pos = new Vector4(r, y, 0, 1.0f), tex = new Vector2(1.0f, 0.0f) },
-                    new Vertex { pos = new Vector4(x, b, 0, 1.0f), tex = new Vector2(0.0f, 1.0f) },
-                    new Vertex { pos = new Vector4(r, b, 0, 1.0f), tex = new Vector2(1.0f, 1.0f) },
-                });
-                decl = VertexReflection.CreateVertexDeclaration<Vertex>(device);
-                stride = Utilities.SizeOf<Vertex>();
-            }
+            _Effect = Effect.FromString(_Device, Shader.Value, ShaderFlags.None);
+            _Effect.SetValue("mat_ViewProj", _Device.GetViewProjectionMatrix());
         }
 
         public void Dispose()
         {
+            Utilities.Dispose(ref _Effect);
+            Utilities.Dispose(ref _Device);
+            Utilities.Dispose(ref _Direct3d);
         }
 
-        private Random rand = new Random();
         public void RenderAll()
         {
-            device.BeginScene();
-            device.Clear(ClearFlags.Target | ClearFlags.ZBuffer, Color.White, 1.0f, 0);
+            _Device.BeginScene();
+            _Device.Clear(ClearFlags.Target | ClearFlags.ZBuffer, Color.White, 1.0f, 0);
 
-            effect.Begin();
-            effect.BeginPass(0);
+            _Effect.Begin();
+            _Effect.BeginPass(0);
 
-            device.SetTexture(0, txt);
-            device.SetStreamSource(0, data, 0, stride);
-            device.VertexDeclaration = decl;
-            device.DrawPrimitives(PrimitiveType.TriangleStrip, 0, 2);
+            if (OnRender != null)
+            {
+                OnRender();
+            }
 
-            effect.EndPass();
-            effect.End();
+            _Effect.EndPass();
+            _Effect.End();
 
-            device.EndScene();
-            device.Present();
+            _Device.EndScene();
+            _Device.Present();
         }
     }
 }

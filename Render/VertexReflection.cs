@@ -46,14 +46,6 @@ namespace GS_PatEditor.Render
             return DeclarationType.Unused;
         }
 
-        public static VertexBuffer CreateVertexBuffer<T>(Device device, T[] data) where T : struct
-        {
-            var vertices = new VertexBuffer(device, data.Length * Utilities.SizeOf<T>(), Usage.WriteOnly, VertexFormat.None, Pool.Managed);
-            vertices.Lock(0, 0, LockFlags.None).WriteRange(data);
-            vertices.Unlock();
-            return vertices;
-        }
-
         public static VertexDeclaration CreateVertexDeclaration<T>(Device device) where T : struct
         {
             List<VertexElement> ret = new List<VertexElement>();

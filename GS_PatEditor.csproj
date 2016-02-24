@@ -87,6 +87,7 @@
     <Compile Include="Render\RenderEngine.cs" />
     <Compile Include="Render\RenderExt.cs" />
     <Compile Include="Render\Shader.cs" />
+    <Compile Include="Render\Sprite.cs" />
     <Compile Include="Render\VertexReflection.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
