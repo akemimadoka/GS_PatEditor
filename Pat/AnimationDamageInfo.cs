@@ -9,6 +9,7 @@ namespace GS_PatEditor.Pat
 {
     public enum AttackType
     {
+        None,
         Light,
         Heavy,
         Smash,

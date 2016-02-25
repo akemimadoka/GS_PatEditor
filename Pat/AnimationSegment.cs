@@ -11,9 +11,9 @@ namespace GS_PatEditor.Pat
     {
         None,
         Free,
-        Attack,
+        Light,
         Long,
-        Front,
+        Heavy,
         Magic,
     }
     [Serializable]

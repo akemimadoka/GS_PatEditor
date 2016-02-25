@@ -5,16 +5,16 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace GS_PatEditor.Editor
+namespace GS_PatEditor.Editor.Panels
 {
-    class EditorUI
+    class AnimationFrames
     {
-        public EditorUI(Editor editor)
+        public AnimationFrames(Editor parent)
         {
 
         }
 
-        public void InitUI(Control parent)
+        public void Init(Control ctrl)
         {
 
         }

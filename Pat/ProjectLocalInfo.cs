@@ -8,10 +8,12 @@ using System.Xml.Serialization;
 namespace GS_PatEditor.Pat
 {
     [Serializable]
+    [XmlRoot("GSPatLocal")]
+    [XmlType("GSPatLocal")]
     public class ProjectLocalInfo
     {
         [XmlArray]
         [XmlArrayItem("Directory")]
-        List<ProjectDirectoryPath> Directories;
+        public List<ProjectDirectoryPath> Directories;
     }
 }

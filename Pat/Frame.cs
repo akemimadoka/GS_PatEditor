@@ -49,12 +49,18 @@ namespace GS_PatEditor.Pat
     {
         [XmlElement]
         public string ImageID;
+
         [XmlElement]
         public int ScaleX;
+        public bool ShouldSerializeScaleX() { return ScaleX != 100; }
+
         [XmlElement]
         public int ScaleY;
+        public bool ShouldSerializeScaleY() { return ScaleY != 100; }
+
         [XmlElement]
         public int Rotate;
+        public bool ShouldSerializeRotate() { return Rotate != 0; }
 
         [XmlElement]
         public int OriginX;
@@ -64,7 +70,7 @@ namespace GS_PatEditor.Pat
         [XmlElement]
         public int Duration;
 
-        [XmlElement]
+        [XmlArray]
         public List<FramePoint> Points;
 
         [XmlElement]

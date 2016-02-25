@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GS_PatEditor.Editor.Panels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,12 +9,13 @@ namespace GS_PatEditor.Editor
 {
     class Editor
     {
-        public EditorUI UI { get; private set; }
+        public readonly AnimationFrames AnimationFramesUI;
         public Pat.Project Data { get; private set; }
 
-        public Editor()
+        public Editor(Pat.Project proj)
         {
-            UI = new EditorUI(this);
+            AnimationFramesUI = new AnimationFrames(this);
+            Data = proj;
         }
     }
 }
