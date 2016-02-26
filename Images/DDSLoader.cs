@@ -161,12 +161,12 @@ namespace GS_PatEditor.Images
         }
         #endregion
         #region Decoder
-        private static UInt32 ColorBGR565ToBGRA(UInt16 c)
+        private static UInt32 ColorBGR565ToBGRA(UInt16 c, UInt32 alpha)
         {
             UInt32 b = (UInt32)((c & 0x001F) << 3);
             UInt32 g = (UInt32)((c & 0x07E0) >> 3);
             UInt32 r = (UInt32)((c & 0xF800) >> 8);
-            return b | g << 8 | r << 16 | 0xFFu << 24;
+            return b | g << 8 | r << 16 | alpha << 24;
         }
         private static UInt32 Interpolate3(UInt32 colorNear, UInt32 colorFar)
         {
@@ -185,10 +185,11 @@ namespace GS_PatEditor.Images
             return c0 | c1 << 8 | c2 << 16 | c3 << 24;
         }
         //result should be UInt32[], but Marshal.Copy only support int[], so we have to use int here.
-        private static void DecodeDXT1Block(BinaryReader reader, UInt32[] paletteBuffer, int[] result, int offset, int stride)
+        //set result as BGRA, but only overwrite BGR, keeping A
+        private static void DecodeBC1Block(BinaryReader reader, UInt32[] paletteBuffer, int[] result, int offset, int stride)
         {
-            var c0 = ColorBGR565ToBGRA(reader.ReadUInt16());
-            var c1 = ColorBGR565ToBGRA(reader.ReadUInt16());
+            var c0 = ColorBGR565ToBGRA(reader.ReadUInt16(), 0);
+            var c1 = ColorBGR565ToBGRA(reader.ReadUInt16(), 0);
             paletteBuffer[0] = c0;
             paletteBuffer[1] = c1;
 
@@ -209,14 +210,58 @@ namespace GS_PatEditor.Images
             {
                 for (int x = 0; x < 4; ++x)
                 {
-                    var index = lookup & 3;
-                    result[offset + x + y * stride] = (int)paletteBuffer[index];
+                    var resultIndex = offset + x + y * stride;
+                    result[resultIndex] &= unchecked((int)0xFF000000);
+                    result[resultIndex] |= (int)paletteBuffer[lookup & 3];
                     lookup >>= 2;
+                }
+            }
+        }
+        //set result as BGRA but only overwrite A, keeping BGR
+        private static void DecodeBC4Block(BinaryReader reader, byte[] paletteBuffer, int[] result, int offset, int stride)
+        {
+            byte c0 = reader.ReadByte();
+            byte c1 = reader.ReadByte();
+            paletteBuffer[0] = c0;
+            paletteBuffer[1] = c1;
+
+            if (c0 > c1)
+            {
+                for (int i = 2; i < 8; ++i)
+                {
+                    paletteBuffer[i] = (byte)(((8.0f - i) * paletteBuffer[0] + (i - 1.0f) * paletteBuffer[1]) / 7.0f);
+                }
+            }
+            else
+            {
+                for (int i = 2; i < 6; ++i)
+                {
+                    paletteBuffer[i] = (byte)(((6.0f - i) * paletteBuffer[0] + (i - 1.0f) * paletteBuffer[1]) / 5.0f);
+                }
+                paletteBuffer[6] = 0;
+                paletteBuffer[7] = 255;
+            }
+            
+            for (int i = 0; i < 2; ++i)
+            {
+                UInt32 lookup = reader.ReadByte();
+                lookup |= ((UInt32)reader.ReadByte()) << 8;
+                lookup |= ((UInt32)reader.ReadByte()) << 16;
+                for (int j = 0; j < 8; ++j)
+                {
+                    var pos = i * 8 + j;
+                    var x = pos % 4;
+                    var y = pos / 4;
+                    var resultIndex = offset + x + y * stride;
+                    result[resultIndex] &= 0x00FFFFFF;
+                    result[resultIndex] |= paletteBuffer[lookup & 7] << 24;
+                    lookup >>= 3;
                 }
             }
         }
         private static Bitmap DecodeDXT1(BinaryReader reader, UInt32 width, UInt32 height)
         {
+            return null;
             var ret = new Bitmap((int)width, (int)height, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
             var locked = ret.LockBits(new Rectangle(0, 0, (int)width, (int)height),
                 ImageLockMode.WriteOnly, PixelFormat.Format32bppArgb);
@@ -229,7 +274,7 @@ namespace GS_PatEditor.Images
             {
                 for (int x = 0; x < width; x += 4)
                 {
-                    DecodeDXT1Block(reader, pal, buffer, x, stride);
+                    DecodeBC1Block(reader, pal, buffer, x, stride);
                 }
                 Marshal.Copy(buffer, 0, locked.Scan0 + locked.Stride * y, buffer.Length); //last parameter is number of elements
             }
@@ -237,19 +282,34 @@ namespace GS_PatEditor.Images
             ret.UnlockBits(locked);
             return ret;
         }
-        private static Bitmap DecodeDXT3(BinaryReader reader, UInt32 width, UInt32 height)
-        {
-            return null;
-        }
         private static Bitmap DecodeDXT5(BinaryReader reader, UInt32 width, UInt32 height)
         {
-            return null;
+            var ret = new Bitmap((int)width, (int)height, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+            var locked = ret.LockBits(new Rectangle(0, 0, (int)width, (int)height),
+                ImageLockMode.WriteOnly, PixelFormat.Format32bppArgb);
+
+            int stride = locked.Stride / 4; //number of pixels in a line
+            var buffer = new int[stride * 4]; //four lines
+            var pal1 = new UInt32[4];
+            var pal2 = new byte[8];
+
+            for (int y = 0; y < height; y += 4)
+            {
+                for (int x = 0; x < width; x += 4)
+                {
+                    DecodeBC4Block(reader, pal2, buffer, x, stride);
+                    DecodeBC1Block(reader, pal1, buffer, x, stride);
+                }
+                Marshal.Copy(buffer, 0, locked.Scan0 + locked.Stride * y, buffer.Length); //last parameter is number of elements
+            }
+
+            ret.UnlockBits(locked);
+            return ret;
         }
         #endregion
 
         public static Bitmap LoadDDS(BinaryReader reader)
         {
-            //input_file.stream.skip(magic.size());
             if (!magic.Equals(reader.ReadBytes(magic.Length)))
             {
                 return null;
@@ -270,8 +330,6 @@ namespace GS_PatEditor.Images
             {
                 if (magic_dxt1.Equals(header.pixel_format.four_cc))
                     return DecodeDXT1(reader, width, height);
-                else if (magic_dxt3.Equals(header.pixel_format.four_cc))
-                    return DecodeDXT3(reader, width, height);
                 else if (magic_dxt5.Equals(header.pixel_format.four_cc))
                     return DecodeDXT5(reader, width, height);
                 else
@@ -283,8 +341,8 @@ namespace GS_PatEditor.Images
             {
                 if (header.pixel_format.rgb_bit_count == 32)
                 {
-                    //image.reset(new res::Image(
-                    //    width, height, input_file.stream, res::PixelFormat::BGRA8888));
+                    //TODO read BGRA8888
+                    return null;
                 }
             }
             return null;
