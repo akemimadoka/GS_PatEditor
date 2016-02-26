@@ -8,13 +8,24 @@ namespace GS_PatEditor.Editor.Nodes
 {
     class AnimationNode
     {
-        public Pat.Animation Data;
+        public Pat.Animation Data { get; private set; }
+
         public FrameNode Frame;
+
+        public int SelectedSegmentIndex;
+        public int SelectedFrameIndex;
 
         public event Action OnReset;
 
-        public void Reset()
+        public AnimationNode()
         {
+            Frame = new FrameNode();
+        }
+
+        public void Reset(Pat.Animation data)
+        {
+            Data = data;
+
             Frame.Reset();
             if (OnReset != null)
             {

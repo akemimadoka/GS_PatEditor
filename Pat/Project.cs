@@ -29,6 +29,9 @@ namespace GS_PatEditor.Pat
         public List<Actor> Actors;
 
         [XmlIgnore]
+        public ProjectLocalInfo LocalInformation;
+
+        [XmlIgnore]
         public readonly ProjectImageFileList ImageList;
 
         public Project()

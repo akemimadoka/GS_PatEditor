@@ -15,26 +15,22 @@ namespace GS_PatEditor
         [STAThread]
         private static void Main()
         {
-            Project proj;
-            ProjectLocalInfo local;
-            Generate(out proj, out local);
+            var proj = Generate();
             using (var f = File.Open(@"E:\proj.xml", FileMode.CreateNew))
             {
                 Pat.PatSerialization.ProjectSerializer.Serialize(f, proj);
             }
             using (var f = File.Open(@"E:\proj_local.xml", FileMode.CreateNew))
             {
-                Pat.PatSerialization.LocalSerializer.Serialize(f, local);
+                Pat.PatSerialization.LocalSerializer.Serialize(f, proj.LocalInformation);
             }
         }
-        public static void Generate(out Project proj, out ProjectLocalInfo local)
+        public static Project Generate()
         {
             var patfile = OpenHomuraPat();
             if (patfile == null)
             {
-                proj = null;
-                local = null;
-                return;
+                return null;
             }
 
             GSPatFile gspat;
@@ -43,7 +39,7 @@ namespace GS_PatEditor
                 gspat = GSPatReader.ReadFromStream(file);
             }
 
-            proj = new Project();
+            var proj = new Project();
             proj.Images = new List<FrameImage>();
             proj.Animations = new List<Pat.Animation>();
             proj.Actions = new List<Pat.Action>();
@@ -59,9 +55,13 @@ namespace GS_PatEditor
                         Usage = ProjectDirectoryUsage.Image,
                     }
                 },
+                Palettes = new List<string>()
+                {
+                    "palette000.pal",
+                },
             };
 
-            local = new ProjectLocalInfo
+            proj.LocalInformation = new ProjectLocalInfo
             {
                 Directories = new List<ProjectDirectoryPath>()
                 {
@@ -76,6 +76,30 @@ namespace GS_PatEditor
             //import animation 0
             GSPat.Animation animation0 = gspat.Animations[0];
             ImportSimpleAnimation(proj, gspat, animation0, "walk");
+
+            CheckImageResources(proj, Path.GetDirectoryName(patfile));
+            return proj;
+        }
+        private static void CheckImageResources(Project proj, string dir)
+        {
+            for (int i = 0; i < proj.Images.Count; ++i)
+            {
+                var res = proj.Images[i].Resource.ResourceID;
+                var fullPath = Path.Combine(dir, res);
+                if (File.Exists(fullPath))
+                {
+                    continue;
+                }
+                if (Path.GetExtension(res) == ".png")
+                {
+                    if (File.Exists(Path.ChangeExtension(fullPath, ".cv2")))
+                    {
+                        proj.Images[i].Resource.ResourceID = Path.ChangeExtension(res, ".cv2");
+                        continue;
+                    }
+                }
+                //TODO warning
+            }
         }
         private static string OpenHomuraPat()
         {

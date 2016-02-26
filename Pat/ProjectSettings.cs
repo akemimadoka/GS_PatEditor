@@ -10,11 +10,15 @@ namespace GS_PatEditor.Pat
     [Serializable]
     public class ProjectSettings
     {
+        [XmlElement(ElementName = "ProjectName")]
+        public string ProjectName;
+
         [XmlArray]
         [XmlArrayItem("Directory")]
         public List<ProjectDirectoryDesc> Directories;
 
-        [XmlElement(ElementName = "ProjectName")]
-        public string ProjectName;
+        [XmlArray]
+        [XmlArrayItem("Palette")]
+        public List<string> Palettes;
     }
 }
