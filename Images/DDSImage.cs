@@ -38,6 +38,11 @@ namespace GS_PatEditor.Images
             get { return _Bitmap.Height; }
         }
 
+        public override bool UsePalette
+        {
+            get { return false; }
+        }
+
         public override void Dispose()
         {
             _Bitmap.Dispose();

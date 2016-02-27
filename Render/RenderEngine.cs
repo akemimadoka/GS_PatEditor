@@ -3,6 +3,7 @@ using SharpDX.Direct3D9;
 using SharpDX.Mathematics.Interop;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -11,7 +12,7 @@ using System.Windows.Forms;
 
 namespace GS_PatEditor.Render
 {
-    class RenderEngine : IDisposable
+    public class RenderEngine : IDisposable
     {
         private Direct3D _Direct3d;
         private Device _Device;
@@ -62,6 +63,12 @@ namespace GS_PatEditor.Render
 
             _Effect = Effect.FromString(_Device, Shader.Value, ShaderFlags.None);
             _Effect.SetValue("mat_ViewProj", _Device.GetViewProjectionMatrix());
+
+            using (var bitmap = new System.Drawing.Bitmap(1, 1, System.Drawing.Imaging.PixelFormat.Format32bppArgb))
+            {
+                bitmap.SetPixel(0, 0, System.Drawing.Color.Black);
+                _BlackTexture = CreateTextureFromBitmap(bitmap);
+            }
         }
 
         public void Dispose()
@@ -89,6 +96,25 @@ namespace GS_PatEditor.Render
 
             _Device.EndScene();
             _Device.Present();
+        }
+
+        private MemoryStream _BitmapStream = new MemoryStream(1024 * 1024);
+
+        public Texture CreateTextureFromBitmap(System.Drawing.Bitmap bitmap)
+        {
+            _BitmapStream.Seek(0, SeekOrigin.Begin);
+            bitmap.Save(_BitmapStream, System.Drawing.Imaging.ImageFormat.Bmp);
+
+            _BitmapStream.Seek(0, SeekOrigin.Begin);
+            //set size in FromStream, or it will be resized
+            return Texture.FromStream(_Device, _BitmapStream, bitmap.Width, bitmap.Height, 1,
+                Usage.None, Format.A8R8G8B8, Pool.Managed, Filter.Point, Filter.Point, 0);
+        }
+
+        private Texture _BlackTexture;
+        public Texture GetBlackTexture()
+        {
+            return _BlackTexture;
         }
     }
 }

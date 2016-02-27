@@ -36,8 +36,5 @@ namespace GS_PatEditor.Pat
         [XmlElement]
         public int H;
         public bool ShouldSerializeH() { return H != -1; }
-
-        [XmlIgnore]
-        public LoadedFrameImage LoadedImage;
     }
 }

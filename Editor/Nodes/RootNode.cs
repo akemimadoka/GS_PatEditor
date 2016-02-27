@@ -43,12 +43,12 @@ namespace GS_PatEditor.Editor.Nodes
             Animation.Reset(null);
         }
 
-        public static RootNode CreateRootNode(Pat.Project proj)
+        public static RootNode CreateRootNode(Pat.Project proj, Editor parent)
         {
             return new RootNode
             {
                 Data = proj,
-                Animation = new AnimationNode(),
+                Animation = new AnimationNode(parent),
                 SelectedAnimationIndex = proj.Animations.Count == 0 ? -1 : 0,
             };
         }

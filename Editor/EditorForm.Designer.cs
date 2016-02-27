@@ -28,9 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.animationFrames = new System.Windows.Forms.PictureBox();
             this.previewWindow = new System.Windows.Forms.PictureBox();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.animationFrames)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.previewWindow)).BeginInit();
@@ -64,6 +66,11 @@
             this.previewWindow.TabIndex = 2;
             this.previewWindow.TabStop = false;
             // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 16;
+            // 
             // EditorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -85,6 +92,7 @@
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.PictureBox animationFrames;
         private System.Windows.Forms.PictureBox previewWindow;
+        private System.Windows.Forms.Timer timer1;
 
     }
 }

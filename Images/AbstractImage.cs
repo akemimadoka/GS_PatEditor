@@ -13,7 +13,18 @@ namespace GS_PatEditor.Images
         public abstract Bitmap ToBitmap(Color[] pal, Rectangle rect);
         public abstract int Width { get; }
         public abstract int Height { get; }
+        public abstract bool UsePalette { get; }
 
         public abstract void Dispose();
+
+        public static int GetValidDimension(int size)
+        {
+            int ret = 16;
+            while (ret < size)
+            {
+                ret *= 2;
+            }
+            return ret;
+        }
     }
 }

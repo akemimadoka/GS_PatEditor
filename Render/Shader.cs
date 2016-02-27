@@ -26,7 +26,7 @@ float4x4 mat_ViewProj;
 
 sampler2D s_2D = sampler_state
 {
-    Filter = ANISOTROPIC;
+    Filter = Point;
 	AddressU = Border;
 	AddressV = Border;
     

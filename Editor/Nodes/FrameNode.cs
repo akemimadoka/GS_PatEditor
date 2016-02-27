@@ -8,23 +8,47 @@ namespace GS_PatEditor.Editor.Nodes
 {
     class FrameNode
     {
-        public enum EditMode
+        public enum FrameEditMode
         {
             None,
             Hit,
             Attack,
         }
+        public enum FramePreviewMode
+        {
+            Pause,
+            Play,
+        }
 
-        public Pat.Frame Data;
+        private readonly Editor _Parent;
 
-        public EditMode Mode;
+        public Pat.AnimationSegment SegmentData { get; private set; }
+        public Pat.Frame FrameData { get; private set; }
+
+        public FrameEditMode EditMode { get; private set; }
+        public FramePreviewMode PreviewMode { get; private set; }
+
         public List<int> EditingBoxes = new List<int>();
 
         public event Action OnReset;
 
-        public void Reset()
+        public FrameNode(Editor parent)
         {
-            Mode = EditMode.None;
+            _Parent = parent;
+        }
+
+        public void Reset(Pat.AnimationSegment seg, Pat.Frame frame)
+        {
+            SegmentData = seg;
+            FrameData = frame;
+
+            EditMode = FrameEditMode.None;
+            PreviewMode = FramePreviewMode.Pause;
+            if (_Parent.PreviewWindowUI != null)
+            {
+                _Parent.PreviewWindowUI.UpdatePreviewMode();
+            }
+
             if (OnReset != null)
             {
                 OnReset();

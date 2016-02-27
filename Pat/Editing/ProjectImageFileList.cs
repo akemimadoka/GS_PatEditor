@@ -1,4 +1,5 @@
 ﻿using GS_PatEditor.Images;
+using SharpDX.Direct3D9;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace GS_PatEditor.Pat.Editing
 {
-    public class ProjectImageFileList
+    public class ProjectImageFileList : IDisposable
     {
         private readonly Project _Project;
 
@@ -48,48 +49,98 @@ namespace GS_PatEditor.Pat.Editing
 
         private Color[] _Palette;
 
+        private readonly Dictionary<string, LoadedFrameImage> cachedImage = new Dictionary<string, LoadedFrameImage>();
+        private readonly LoadedFrameImage _EmptyImage = new LoadedFrameImage { Bitmap = null, UsePalette = false };
+
+        private readonly Dictionary<string, AbstractImage> cachedResource = new Dictionary<string, AbstractImage>();
+
         public ProjectImageFileList(Project proj)
         {
             _Project = proj;
         }
 
-        public void Refresh()
-        {
-
-        }
-
         public Bitmap GetImage(string id)
         {
+            LoadedFrameImage ret;
+            if (cachedImage.TryGetValue(id, out ret))
+            {
+                return ret.Bitmap;
+            }
+
             var imgDesc = _Project.Images.FirstOrDefault(f => f.ImageID == id);
-            if (imgDesc == null)
-            {
-                return null;
-            }
-            if (imgDesc.LoadedImage == null)
-            {
-                LoadImage(imgDesc);
-            }
-            return imgDesc.LoadedImage.Bitmap;
+            ret = imgDesc == null ? _EmptyImage : LoadImage(imgDesc);
+            cachedImage.Add(id, ret);
+
+            return ret.Bitmap;
         }
 
-        private void LoadImage(FrameImage image)
+        public Texture GetTexture(string id, Render.RenderEngine re)
         {
-            //TODO cache loaded resource image (containing palette: clear cache when changing palette)
+            LoadedFrameImage ret;
+            if (cachedImage.TryGetValue(id, out ret))
+            {
+                if (ret.Bitmap == null)
+                {
+                    return null;
+                }
+                if (ret.Texture == null)
+                {
+                    ret.Texture = re.CreateTextureFromBitmap(ret.Bitmap);
+                }
+                return ret.Texture;
+            }
+
+            var imgDesc = _Project.Images.FirstOrDefault(f => f.ImageID == id);
+            ret = imgDesc == null ? _EmptyImage : LoadImage(imgDesc);
+            cachedImage.Add(id, ret);
+
+            if (ret.Bitmap != null)
+            {
+                ret.Texture = re.CreateTextureFromBitmap(ret.Bitmap);
+            }
+            return ret.Texture;
+        }
+
+        private LoadedFrameImage LoadImage(FrameImage image)
+        {
             var res = _Project.FindResource(ProjectDirectoryUsage.Image, image.Resource.ResourceID);
             if (res != null)
             {
-                if (Path.GetExtension(res) == ".dds")
+                AbstractImage imageData = LoadResource(res);
+                if (imageData == null)
                 {
-                    image.LoadedImage = new LoadedFrameImage { Bitmap = ClipBitmap(new DDSImage(res), image) };
-                    return;
+                    return null;
                 }
-                else if (Path.GetExtension(res) == ".cv2")
+                return new LoadedFrameImage
                 {
-                    image.LoadedImage = new LoadedFrameImage { Bitmap = ClipBitmap(new CV2Image(res), image) };
-                    return;
-                }
+                    Bitmap = ClipBitmap(imageData, image),
+                    UsePalette = imageData.UsePalette
+                };
             }
-            image.LoadedImage = new LoadedFrameImage { Bitmap = null };
+            return null;
+        }
+
+        private AbstractImage LoadResource(string res)
+        {
+            AbstractImage ret;
+            if (cachedResource.TryGetValue(res, out ret))
+            {
+                return ret;
+            }
+            
+            if (Path.GetExtension(res) == ".dds")
+            {
+                ret = new DDSImage(res);
+            }
+            else if (Path.GetExtension(res) == ".cv2")
+            {
+                ret = new CV2Image(res);
+            }
+
+            //add it even if it's null (avoid keep trying)
+            cachedResource.Add(res, ret);
+
+            return ret;
         }
 
         private Bitmap ClipBitmap(AbstractImage res, FrameImage img)
@@ -111,6 +162,63 @@ namespace GS_PatEditor.Pat.Editing
                 return;
             }
             _Palette = CV2Palette.ReadPaletteFile(palName);
+
+            ClearFrameImages(true);
+        }
+
+        private List<string> _ToRemove = new List<string>();
+        private void ClearFrameImages(bool palletteOnly)
+        {
+            _ToRemove.Clear();
+
+            foreach (var img in cachedImage)
+            {
+                if (!img.Value.UsePalette && palletteOnly)
+                {
+                    continue;
+                }
+                _ToRemove.Add(img.Key);
+
+                var bitmap = img.Value.Bitmap;
+                if (bitmap != null)
+                {
+                    bitmap.Dispose();
+                }
+                var texture = img.Value.Texture;
+                if (texture != null)
+                {
+                    texture.Dispose();
+                }
+            }
+
+            foreach (var key in _ToRemove)
+            {
+                cachedImage.Remove(key);
+            }
+        }
+
+        private void ClearResources()
+        {
+            foreach (var res in cachedResource)
+            {
+                if (res.Value != null)
+                {
+                    res.Value.Dispose();
+                }
+            }
+            cachedResource.Clear();
+        }
+
+        public void Dispose()
+        {
+            ReloadAllResources();
+        }
+
+        public void ReloadAllResources()
+        {
+            ClearFrameImages(false);
+            ClearResources();
+            SelectedPalette = 0;
         }
     }
 }

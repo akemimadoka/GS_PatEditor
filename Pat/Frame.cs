@@ -49,6 +49,7 @@ namespace GS_PatEditor.Pat
     {
         [XmlElement]
         public string ImageID;
+        //TODO cache LoadedFrameImage
 
         [XmlElement]
         public int ScaleX;

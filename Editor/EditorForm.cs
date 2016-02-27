@@ -14,12 +14,21 @@ namespace GS_PatEditor.Editor
     {
         public static void ShowEditorForm(Pat.Project proj)
         {
-            EditorForm frm = new EditorForm();
-            Editor editor = new Editor(proj);
-            editor.AnimationFramesUI.Init(frm.animationFrames);
-            editor.PreviewWindowUI.Init(frm.previewWindow);
+            using (var frm = new EditorForm())
+            {
+                using (var editor = new Editor(proj))
+                {
+                    editor.AnimationFramesUI.Init(frm.animationFrames);
+                    editor.PreviewWindowUI.Init(frm.previewWindow);
 
-            Application.Run(frm);
+                    frm.timer1.Tick += delegate(object sender, EventArgs e)
+                    {
+                        editor.PreviewWindowUI.Refresh();
+                    };
+
+                    Application.Run(frm);
+                }
+            }
         }
 
         public EditorForm()
