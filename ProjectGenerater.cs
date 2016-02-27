@@ -78,6 +78,10 @@ namespace GS_PatEditor
             ImportSimpleAnimation(proj, gspat, animation0, "walk");
 
             CheckImageResources(proj, Path.GetDirectoryName(patfile));
+
+            //refresh image cache
+            proj.ImageList.SelectedPalette = 0;
+
             return proj;
         }
         private static void CheckImageResources(Project proj, string dir)
@@ -90,7 +94,8 @@ namespace GS_PatEditor
                 {
                     continue;
                 }
-                if (Path.GetExtension(res) == ".png")
+                var ext = Path.GetExtension(res);
+                if (ext == ".bmp")
                 {
                     if (File.Exists(Path.ChangeExtension(fullPath, ".cv2")))
                     {

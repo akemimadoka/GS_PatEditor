@@ -15,8 +15,8 @@ namespace GS_PatEditor.Pat
             return proj.Settings.Directories
                 .Where(dir => dir.Usage == usage)
                 .Join(proj.LocalInformation.Directories, s => s.Name, d => d.Name,
-                    (ProjectDirectoryDesc s, ProjectDirectoryPath d) => d.Path)
-                .Where(dir => File.Exists(Path.Combine(dir, id)))
+                    (ProjectDirectoryDesc s, ProjectDirectoryPath d) => Path.Combine(d.Path, id))
+                .Where(file => File.Exists(file))
                 .FirstOrDefault();
         }
     }

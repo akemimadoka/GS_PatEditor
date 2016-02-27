@@ -17,6 +17,7 @@ namespace GS_PatEditor.Editor
             EditorForm frm = new EditorForm();
             Editor editor = new Editor(proj);
             editor.AnimationFramesUI.Init(frm.animationFrames);
+            editor.PreviewWindowUI.Init(frm.previewWindow);
 
             Application.Run(frm);
         }

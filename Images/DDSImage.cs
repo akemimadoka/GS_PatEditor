@@ -1,30 +1,46 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace GS_PatEditor.Images
 {
-    class DDSImage
+    class DDSImage : AbstractImage
     {
-        private static void Main()
+        private Bitmap _Bitmap;
+
+        public DDSImage(string filename)
         {
-            foreach (var filename in System.IO.Directory.EnumerateFiles(@"E:\Games\[game]GRIEFSYNDROME\griefsyndrome\gs00",
-                "*.dds", System.IO.SearchOption.AllDirectories))
+            using (var file = File.OpenRead(filename))
             {
-                using (var file = System.IO.File.OpenRead(filename))
+                using (var reader = new BinaryReader(file))
                 {
-                    using (var reader = new System.IO.BinaryReader(file))
-                    {
-                        var bitmap = DDSLoader.LoadDDS(reader);
-                        if (bitmap != null)
-                        {
-                            bitmap.Save(@"E:\convert.png", System.Drawing.Imaging.ImageFormat.Png);
-                        }
-                    }
+                    _Bitmap = DDSLoader.LoadDDS(reader);
                 }
             }
+        }
+
+        public override Bitmap ToBitmap(Color[] pal, Rectangle rect)
+        {
+            return _Bitmap.Clone(rect, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+        }
+
+        public override int Width
+        {
+            get { return _Bitmap.Width; }
+        }
+
+        public override int Height
+        {
+            get { return _Bitmap.Height; }
+        }
+
+        public override void Dispose()
+        {
+            _Bitmap.Dispose();
         }
     }
 }

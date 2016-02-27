@@ -261,7 +261,6 @@ namespace GS_PatEditor.Images
         }
         private static Bitmap DecodeDXT1(BinaryReader reader, UInt32 width, UInt32 height)
         {
-            return null;
             var ret = new Bitmap((int)width, (int)height, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
             var locked = ret.LockBits(new Rectangle(0, 0, (int)width, (int)height),
                 ImageLockMode.WriteOnly, PixelFormat.Format32bppArgb);

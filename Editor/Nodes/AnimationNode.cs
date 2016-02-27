@@ -12,8 +12,15 @@ namespace GS_PatEditor.Editor.Nodes
 
         public FrameNode Frame;
 
-        public int SelectedSegmentIndex;
-        public int SelectedFrameIndex;
+        public int SelectedSegmentIndex { get; private set; }
+        public int SelectedFrameIndex { get; private set; }
+
+        public void SetSelectedFrame(int segment, int frame)
+        {
+            SelectedSegmentIndex = segment;
+            SelectedFrameIndex = frame;
+            //TODO refresh node
+        }
 
         public event Action OnReset;
 

@@ -16,12 +16,14 @@ namespace GS_PatEditor.Editor
         //ui
 
         public AnimationFrames AnimationFramesUI { get; private set; }
+        public PreviewWindow PreviewWindowUI { get; private set; }
 
         public Editor(Pat.Project proj)
         {
             Data = proj;
             EditorNode = RootNode.CreateRootNode(proj);
             AnimationFramesUI = new AnimationFrames(this);
+            PreviewWindowUI = new PreviewWindow(this);
         }
     }
 }
