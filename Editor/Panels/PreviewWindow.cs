@@ -59,6 +59,11 @@ namespace GS_PatEditor.Editor.Panels
 
         private void frm_MouseWheel(object sender, MouseEventArgs e)
         {
+            var parentCtrl = _Control.Parent;
+            if (!parentCtrl.ClientRectangle.Contains(parentCtrl.PointToClient(Control.MousePosition)))
+            {
+                return;
+            }
             if (_Control.ClientRectangle.Contains(_Control.PointToClient(Control.MousePosition)))
             {
                 if (e.Delta > 0)

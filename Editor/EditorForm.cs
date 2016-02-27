@@ -26,6 +26,13 @@ namespace GS_PatEditor.Editor
                         editor.PreviewWindowUI.Refresh();
                     };
 
+                    frm.Show();
+                    {
+                        var x = frm.flowLayoutPanel2.ClientSize.Width - 800;
+                        var y = frm.flowLayoutPanel2.ClientSize.Height - 600;
+                        frm.flowLayoutPanel2.AutoScrollPosition = new Point(-x / 2, -y / 2);
+                    }
+
                     Application.Run(frm);
                 }
             }

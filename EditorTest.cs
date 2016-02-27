@@ -14,7 +14,10 @@ namespace GS_PatEditor
         private static void Main()
         {
             var proj = ProjectGenerater.Generate();
-            EditorForm.ShowEditorForm(proj);
+            if (proj != null)
+            {
+                EditorForm.ShowEditorForm(proj);
+            }
         }
     }
 }
