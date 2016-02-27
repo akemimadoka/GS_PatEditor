@@ -46,12 +46,30 @@ namespace GS_PatEditor.Editor.Panels
 
             UpdatePreviewMode();
 
+            //move scene
             var move = new MouseMovable(ctrl, MouseButtons.Middle, X, Y);
             move.OnMoved += delegate(int x, int y)
             {
                 this.X = x;
                 this.Y = y;
             };
+
+            ctrl.FindForm().MouseWheel += frm_MouseWheel;
+        }
+
+        private void frm_MouseWheel(object sender, MouseEventArgs e)
+        {
+            if (_Control.ClientRectangle.Contains(_Control.PointToClient(Control.MousePosition)))
+            {
+                if (e.Delta > 0)
+                {
+                    Render.Transform.Scale *= 0.9f;
+                }
+                else if (e.Delta < 0)
+                {
+                    Render.Transform.Scale /= 0.9f;
+                }
+            }
         }
 
         private void _Render_OnRender()

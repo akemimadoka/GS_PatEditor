@@ -112,6 +112,7 @@
     <Compile Include="ProjectGenerater.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RenderingTest.cs" />
+    <Compile Include="Render\GlobalTransform.cs" />
     <Compile Include="Render\RenderEngine.cs" />
     <Compile Include="Render\RenderExt.cs" />
     <Compile Include="Render\Shader.cs" />

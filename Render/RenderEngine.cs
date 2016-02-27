@@ -20,6 +20,7 @@ namespace GS_PatEditor.Render
         private Effect _Effect;
 
         public Device Device { get { return _Device; } }
+        public readonly GlobalTransform Transform = new GlobalTransform();
 
         public event Action OnRender;
 
@@ -82,6 +83,9 @@ namespace GS_PatEditor.Render
         {
             _Device.BeginScene();
             _Device.Clear(ClearFlags.Target | ClearFlags.ZBuffer, Color.White, 1.0f, 0);
+
+            _Effect.SetValue("vec_Offset", new Vector4(Transform.X, Transform.Y, 0, 0));
+            _Effect.SetValue("f_Scale", Transform.Scale);
 
             _Effect.Begin();
             _Effect.BeginPass(0);

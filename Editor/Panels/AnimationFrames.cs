@@ -150,6 +150,36 @@ namespace GS_PatEditor.Editor.Panels
             ctrl.DoubleClick += ctrl_DoubleClick;
 
             UpdateControlWidth();
+
+            ctrl.FindForm().MouseWheel += frm_MouseWheel;
+        }
+
+        void frm_MouseWheel(object sender, MouseEventArgs e)
+        {
+            if (_Control.ClientRectangle.Contains(_Control.PointToClient(Control.MousePosition)))
+            {
+                FlowLayoutPanel p = _Control.Parent as FlowLayoutPanel;
+                if (p != null)
+                {
+                    var hs = p.HorizontalScroll;
+                    if (hs != null)
+                    {
+                        var delta = e.Delta / -6;
+                        if (hs.Value + delta < hs.Minimum)
+                        {
+                            hs.Value = hs.Minimum;
+                        }
+                        else if (hs.Value + delta > hs.Maximum)
+                        {
+                            hs.Value = hs.Maximum;
+                        }
+                        else
+                        {
+                            hs.Value += delta;
+                        }
+                    }
+                }
+            }
         }
 
         void ctrl_DoubleClick(object sender, EventArgs e)

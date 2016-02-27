@@ -23,10 +23,15 @@ struct PS_IN
 };
 
 float4x4 mat_ViewProj;
+float4 vec_Offset;
+float f_Scale;
 
 sampler2D s_2D = sampler_state
 {
-    Filter = Point;
+    //MIN_MAG_MIP_LINEAR
+    //ANISOTROPIC
+    //POINT
+    Filter = POINT;
 	AddressU = Border;
 	AddressV = Border;
     
@@ -35,7 +40,9 @@ sampler2D s_2D = sampler_state
 PS_IN VS(VS_IN input)
 {
 	PS_IN output = (PS_IN)0;
-	output.pos = mul(input.pos, mat_ViewProj);
+    input.pos.x *= f_Scale;
+    input.pos.y *= f_Scale;
+	output.pos = mul(input.pos + vec_Offset, mat_ViewProj);
 	output.tex = input.tex;
 	return output;
 }

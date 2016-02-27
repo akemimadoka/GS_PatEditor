@@ -23,6 +23,8 @@ namespace GS_PatEditor.Editor.Panels
             ctrl.MouseDown += ctrl_MouseDown;
             ctrl.MouseMove += ctrl_MouseMove;
             ctrl.MouseUp += ctrl_MouseUp;
+            //TODO this event handler is never removed
+            //be careful of memory leakage
 
             _X = x;
             _Y = y;
