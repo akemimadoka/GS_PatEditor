@@ -135,6 +135,11 @@ namespace GS_PatEditor.Editor.Panels
 
         private void SetScale(float newScale)
         {
+            if (newScale < 0.1f || newScale > 10.0f)
+            {
+                return;
+            }
+
             //client position of mouse
             var pClient = _Control.PointToClient(Control.MousePosition);
 

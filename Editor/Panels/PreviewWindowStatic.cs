@@ -56,13 +56,6 @@ namespace GS_PatEditor.Editor.Panels
             _Sprite.ScaleY = frame.ScaleY / 100.0f;
             _Sprite.Rotation = frame.Rotate / 180.0f * 3.1415926f;
 
-            //_Sprite.Left = window.PreviewMovingX;
-            //_Sprite.Top = window.PreviewMovingY;
-            //_SpriteLineV.Left = window.PreviewMovingX;
-            //_SpriteLineV.Top = window.PreviewMovingY;
-            //_SpriteLineH.Left = window.PreviewMovingX;
-            //_SpriteLineH.Top = window.PreviewMovingY;
-
             _Sprite.Render();
             _SpriteLineV.Render();
             _SpriteLineH.Render();

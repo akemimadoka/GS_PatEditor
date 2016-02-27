@@ -36,11 +36,15 @@
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.previewWindow = new System.Windows.Forms.PictureBox();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.toolStripButtonToolCursor = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButtonToolMove = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripCollapseAll = new System.Windows.Forms.ToolStripButton();
             this.toolStripExpandAll = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButtonToolCursor = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonToolMove = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonToolPhysics = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSplitBoxVisible = new System.Windows.Forms.ToolStripSplitButton();
+            this.physicalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.animationFrames)).BeginInit();
             this.flowLayoutPanel2.SuspendLayout();
@@ -103,13 +107,39 @@
             this.toolStripExpandAll,
             this.toolStripSeparator1,
             this.toolStripButtonToolCursor,
-            this.toolStripButtonToolMove});
+            this.toolStripButtonToolMove,
+            this.toolStripButtonToolPhysics,
+            this.toolStripSeparator2,
+            this.toolStripSplitBoxVisible});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
             this.toolStrip1.Size = new System.Drawing.Size(535, 25);
             this.toolStrip1.TabIndex = 4;
             this.toolStrip1.Text = "toolStrip1";
+            // 
+            // toolStripCollapseAll
+            // 
+            this.toolStripCollapseAll.Image = ((System.Drawing.Image)(resources.GetObject("toolStripCollapseAll.Image")));
+            this.toolStripCollapseAll.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripCollapseAll.Name = "toolStripCollapseAll";
+            this.toolStripCollapseAll.Size = new System.Drawing.Size(92, 22);
+            this.toolStripCollapseAll.Text = "CollapseAll";
+            this.toolStripCollapseAll.Click += new System.EventHandler(this.toolStripCollapseAll_Click);
+            // 
+            // toolStripExpandAll
+            // 
+            this.toolStripExpandAll.Image = ((System.Drawing.Image)(resources.GetObject("toolStripExpandAll.Image")));
+            this.toolStripExpandAll.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripExpandAll.Name = "toolStripExpandAll";
+            this.toolStripExpandAll.Size = new System.Drawing.Size(85, 22);
+            this.toolStripExpandAll.Text = "ExpandAll";
+            this.toolStripExpandAll.Click += new System.EventHandler(this.toolStripExpandAll_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
             // 
             // toolStripButtonToolCursor
             // 
@@ -131,28 +161,38 @@
             this.toolStripButtonToolMove.Text = "Move";
             this.toolStripButtonToolMove.Click += new System.EventHandler(this.toolStripButtonToolMove_Click);
             // 
-            // toolStripSeparator1
+            // toolStripButtonToolPhysics
             // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            this.toolStripButtonToolPhysics.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonToolPhysics.Image")));
+            this.toolStripButtonToolPhysics.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonToolPhysics.Name = "toolStripButtonToolPhysics";
+            this.toolStripButtonToolPhysics.Size = new System.Drawing.Size(73, 22);
+            this.toolStripButtonToolPhysics.Text = "Physical";
+            this.toolStripButtonToolPhysics.Click += new System.EventHandler(this.toolStripButtonToolPhysics_Click);
             // 
-            // toolStripCollapseAll
+            // toolStripSeparator2
             // 
-            this.toolStripCollapseAll.Image = ((System.Drawing.Image)(resources.GetObject("toolStripCollapseAll.Image")));
-            this.toolStripCollapseAll.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripCollapseAll.Name = "toolStripCollapseAll";
-            this.toolStripCollapseAll.Size = new System.Drawing.Size(92, 22);
-            this.toolStripCollapseAll.Text = "CollapseAll";
-            this.toolStripCollapseAll.Click += new System.EventHandler(this.toolStripCollapseAll_Click);
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
             // 
-            // toolStripExpandAll
+            // toolStripSplitBoxVisible
             // 
-            this.toolStripExpandAll.Image = ((System.Drawing.Image)(resources.GetObject("toolStripExpandAll.Image")));
-            this.toolStripExpandAll.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripExpandAll.Name = "toolStripExpandAll";
-            this.toolStripExpandAll.Size = new System.Drawing.Size(85, 22);
-            this.toolStripExpandAll.Text = "ExpandAll";
-            this.toolStripExpandAll.Click += new System.EventHandler(this.toolStripExpandAll_Click);
+            this.toolStripSplitBoxVisible.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.physicalToolStripMenuItem});
+            this.toolStripSplitBoxVisible.Image = ((System.Drawing.Image)(resources.GetObject("toolStripSplitBoxVisible.Image")));
+            this.toolStripSplitBoxVisible.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripSplitBoxVisible.Name = "toolStripSplitBoxVisible";
+            this.toolStripSplitBoxVisible.Size = new System.Drawing.Size(78, 22);
+            this.toolStripSplitBoxVisible.Text = "Visible";
+            // 
+            // physicalToolStripMenuItem
+            // 
+            this.physicalToolStripMenuItem.Checked = true;
+            this.physicalToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.physicalToolStripMenuItem.Name = "physicalToolStripMenuItem";
+            this.physicalToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.physicalToolStripMenuItem.Text = "Physical";
+            this.physicalToolStripMenuItem.Click += new System.EventHandler(this.physicalToolStripMenuItem_Click);
             // 
             // EditorForm
             // 
@@ -188,6 +228,10 @@
         private System.Windows.Forms.ToolStripButton toolStripCollapseAll;
         private System.Windows.Forms.ToolStripButton toolStripExpandAll;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripButton toolStripButtonToolPhysics;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripSplitButton toolStripSplitBoxVisible;
+        private System.Windows.Forms.ToolStripMenuItem physicalToolStripMenuItem;
 
     }
 }

@@ -157,6 +157,7 @@ namespace GS_PatEditor.Render
             if (_Dirty)
             {
                 FlushBuffer();
+                _Dirty = false;
             }
 
             _Device.SetTexture(0, _Texture);

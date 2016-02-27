@@ -48,6 +48,16 @@ namespace GS_PatEditor.Editor
             InitializeComponent();
         }
 
+        private void toolStripCollapseAll_Click(object sender, EventArgs e)
+        {
+            _Editor.AnimationFramesUI.CollapseAll();
+        }
+
+        private void toolStripExpandAll_Click(object sender, EventArgs e)
+        {
+            _Editor.AnimationFramesUI.ExpandAll();
+        }
+
         private bool ChangeEditMode(FrameNode.FrameEditMode mode)
         {
             return _Editor.EditorNode.Animation.Frame.ChangeEditMode(mode);
@@ -57,6 +67,7 @@ namespace GS_PatEditor.Editor
         {
             toolStripButtonToolCursor.CheckState = CheckState.Unchecked;
             toolStripButtonToolMove.CheckState = CheckState.Unchecked;
+            toolStripButtonToolPhysics.CheckState = CheckState.Unchecked;
         }
 
         private void toolStripButtonToolCursor_Click(object sender, EventArgs e)
@@ -77,14 +88,19 @@ namespace GS_PatEditor.Editor
             }
         }
 
-        private void toolStripCollapseAll_Click(object sender, EventArgs e)
+        private void toolStripButtonToolPhysics_Click(object sender, EventArgs e)
         {
-            _Editor.AnimationFramesUI.CollapseAll();
+            if (ChangeEditMode(FrameNode.FrameEditMode.Physical))
+            {
+                ClearToolButtonsToolChecked();
+                toolStripButtonToolPhysics.CheckState = CheckState.Checked;
+            }
         }
 
-        private void toolStripExpandAll_Click(object sender, EventArgs e)
+        private void physicalToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            _Editor.AnimationFramesUI.ExpandAll();
+            physicalToolStripMenuItem.Checked = !physicalToolStripMenuItem.Checked;
+            //switch
         }
     }
 }

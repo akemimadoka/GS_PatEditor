@@ -12,6 +12,7 @@ namespace GS_PatEditor.Editor.Nodes
         {
             None,
             Move,
+            Physical,
             Hit,
             Attack,
         }
