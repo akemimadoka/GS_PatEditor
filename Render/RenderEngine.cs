@@ -65,15 +65,15 @@ namespace GS_PatEditor.Render
             _Effect = Effect.FromString(_Device, Shader.Value, ShaderFlags.None);
             _Effect.SetValue("mat_ViewProj", _Device.GetViewProjectionMatrix());
 
-            using (var bitmap = new System.Drawing.Bitmap(1, 1, System.Drawing.Imaging.PixelFormat.Format32bppArgb))
-            {
-                bitmap.SetPixel(0, 0, System.Drawing.Color.Black);
-                _BlackTexture = CreateTextureFromBitmap(bitmap);
-            }
+            _BlackTexture = CreateColorTexture(0);
         }
 
         public void Dispose()
         {
+            SinglePixelBitmap.Dispose();
+
+            DisposeAllSprites();
+
             Utilities.Dispose(ref _Effect);
             Utilities.Dispose(ref _Device);
             Utilities.Dispose(ref _Direct3d);
@@ -102,8 +102,8 @@ namespace GS_PatEditor.Render
             _Device.Present();
         }
 
+        #region Texture
         private MemoryStream _BitmapStream = new MemoryStream(1024 * 1024);
-
         public Texture CreateTextureFromBitmap(System.Drawing.Bitmap bitmap)
         {
             _BitmapStream.Seek(0, SeekOrigin.Begin);
@@ -115,10 +115,92 @@ namespace GS_PatEditor.Render
                 Usage.None, Format.A8R8G8B8, Pool.Managed, Filter.Point, Filter.Point, 0);
         }
 
+        private Texture CreateColorTexture(int color)
+        {
+            SinglePixelBitmap.SetPixel(0, 0, System.Drawing.Color.FromArgb(color | 0xFF << 24));
+            return CreateTextureFromBitmap(SinglePixelBitmap);
+        }
+
+        private System.Drawing.Bitmap SinglePixelBitmap =
+            new System.Drawing.Bitmap(1, 1, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+
+        //TODO merge into _ColorTextureList
         private Texture _BlackTexture;
         public Texture GetBlackTexture()
         {
             return _BlackTexture;
         }
+
+        private readonly Dictionary<int, Texture> _ColorTextureList = new Dictionary<int, Texture>();
+
+        public Texture GetColorTexture(int r, int g, int b)
+        {
+            return GetColorTexture(0xFF << 24 | r << 16 | g << 8 | b);
+        }
+
+        public Texture GetColorTexture(int color)
+        {
+            Texture ret;
+            if (_ColorTextureList.TryGetValue(color, out ret))
+            {
+                return ret;
+            }
+
+            ret = CreateColorTexture(color);
+            _ColorTextureList.Add(color, ret);
+
+            return ret;
+        }
+        #endregion
+
+        #region Sprite
+        private Queue<Sprite> _FreeSpriteList = new Queue<Sprite>();
+        private List<Sprite> _SpriteList = new List<Sprite>();
+
+        private void ExtendSpriteList()
+        {
+            for (int i = 0; i < 10; ++i)
+            {
+                var s = new Sprite(this);
+                _FreeSpriteList.Enqueue(s);
+                _SpriteList.Add(s);
+            }
+        }
+
+        public Sprite GetSprite()
+        {
+            if (_FreeSpriteList.Count == 0)
+            {
+                ExtendSpriteList();
+            }
+            var ret = _FreeSpriteList.Dequeue();
+
+            ret.Left = 0;
+            ret.Top = 0;
+            ret.OriginX = 0;
+            ret.OriginY = 0;
+            ret.ScaleX = 1;
+            ret.ScaleY = 1;
+            ret.Rotation = 0;
+            ret.Texture = null;
+
+            return ret;
+        }
+
+        public void ReturnSprite(Sprite s)
+        {
+            _FreeSpriteList.Enqueue(s);
+        }
+
+        private void DisposeAllSprites()
+        {
+            _FreeSpriteList.Clear();
+            foreach (var s in _SpriteList)
+            {
+                s.Dispose();
+            }
+            _SpriteList.Clear();
+        }
+        #endregion
     }
 }

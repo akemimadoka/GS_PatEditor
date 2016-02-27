@@ -100,7 +100,7 @@ namespace GS_PatEditor.Editor
         private void physicalToolStripMenuItem_Click(object sender, EventArgs e)
         {
             physicalToolStripMenuItem.Checked = !physicalToolStripMenuItem.Checked;
-            //switch
+            _Editor.EditorNode.Animation.Frame.PhysicalBoxVisible = physicalToolStripMenuItem.Checked;
         }
     }
 }

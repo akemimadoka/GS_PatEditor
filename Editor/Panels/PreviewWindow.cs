@@ -20,6 +20,10 @@ namespace GS_PatEditor.Editor.Panels
         private Control _Control;
 
         public RenderEngine Render { get; private set; }
+
+        //share sprites in all AbstractPreviewWindowContent to avoid repeating creating/disposing
+        public readonly List<Sprite> SpriteList = new List<Sprite>();
+
         public AbstractPreviewWindowContent CurrentContent { get; set; }
 
         private int PreviewX, PreviewY;
@@ -198,6 +202,14 @@ namespace GS_PatEditor.Editor.Panels
                 default:
                     CurrentContent = null;
                     break;
+            }
+        }
+
+        public void EnsureSpriteList(int count)
+        {
+            while (SpriteList.Count < count)
+            {
+                SpriteList.Add(Render.GetSprite());
             }
         }
     }

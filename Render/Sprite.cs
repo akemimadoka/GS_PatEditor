@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace GS_PatEditor.Render
 {
-    class Sprite
+    public class Sprite : IDisposable
     {
         private bool _Dirty;
 
@@ -27,6 +27,7 @@ namespace GS_PatEditor.Render
             }
         }
 
+        #region Geometry Properties
         private float _Left;
         public float Left
         {
@@ -124,8 +125,12 @@ namespace GS_PatEditor.Render
                 _Rotation = value;
             }
         }
+        #endregion
 
         private Device _Device;
+
+        private readonly RenderEngine _RenderEngine;
+        public RenderEngine RenderEngine { get { return _RenderEngine; } }
 
         private VertexBuffer _Buffer;
         private VertexDeclaration _Decl;
@@ -143,6 +148,7 @@ namespace GS_PatEditor.Render
 
         public Sprite(RenderEngine re)
         {
+            _RenderEngine = re;
             _Device = re.Device;
             _ScaleX = 1.0f;
             _ScaleY = 1.0f;
@@ -223,6 +229,20 @@ namespace GS_PatEditor.Render
                 x + tx * (float)Math.Cos(r) - ty * (float)Math.Sin(r),
                 y + tx * (float)Math.Sin(r) + ty * (float)Math.Cos(r),
                 0.0f, 1.0f);
+        }
+
+        public void Dispose()
+        {
+            if (_Buffer != null)
+            {
+                _Buffer.Dispose();
+                _Buffer = null;
+            }
+            if (_Decl != null)
+            {
+                _Decl.Dispose();
+                _Decl = null;
+            }
         }
     }
 }

@@ -30,6 +30,8 @@ namespace GS_PatEditor.Editor.Nodes
         public FrameEditMode EditMode { get; private set; }
         public FramePreviewMode PreviewMode { get; private set; }
 
+        public bool PhysicalBoxVisible = true;
+
         public List<int> EditingBoxes = new List<int>();
 
         public event Action OnReset;

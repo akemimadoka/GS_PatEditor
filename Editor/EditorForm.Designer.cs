@@ -43,7 +43,7 @@
             this.toolStripButtonToolMove = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonToolPhysics = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSplitBoxVisible = new System.Windows.Forms.ToolStripSplitButton();
+            this.toolStripSplitBoxVisible = new System.Windows.Forms.ToolStripDropDownButton();
             this.physicalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.animationFrames)).BeginInit();
@@ -182,7 +182,7 @@
             this.toolStripSplitBoxVisible.Image = ((System.Drawing.Image)(resources.GetObject("toolStripSplitBoxVisible.Image")));
             this.toolStripSplitBoxVisible.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripSplitBoxVisible.Name = "toolStripSplitBoxVisible";
-            this.toolStripSplitBoxVisible.Size = new System.Drawing.Size(78, 22);
+            this.toolStripSplitBoxVisible.Size = new System.Drawing.Size(75, 22);
             this.toolStripSplitBoxVisible.Text = "Visible";
             // 
             // physicalToolStripMenuItem
@@ -230,7 +230,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripButton toolStripButtonToolPhysics;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
-        private System.Windows.Forms.ToolStripSplitButton toolStripSplitBoxVisible;
+        private System.Windows.Forms.ToolStripDropDownButton toolStripSplitBoxVisible;
         private System.Windows.Forms.ToolStripMenuItem physicalToolStripMenuItem;
 
     }
