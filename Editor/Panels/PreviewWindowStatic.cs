@@ -20,14 +20,10 @@ namespace GS_PatEditor.Editor.Panels
             var r = parent.PreviewWindowUI.Render;
             _Sprite = new Sprite(r)
             {
-                Left = 100,
-                Top = 100,
             };
             _SpriteLineH = new Sprite(r)
             {
                 Texture = r.GetBlackTexture(),
-                Left = 100,
-                Top = 100,
                 ScaleX = 10000,
                 ScaleY = 1,
                 OriginX = 0.5f,
@@ -37,8 +33,6 @@ namespace GS_PatEditor.Editor.Panels
             _SpriteLineV = new Sprite(r)
             {
                 Texture = r.GetBlackTexture(),
-                Left = 100,
-                Top = 100,
                 ScaleX = 1,
                 ScaleY = 10000,
                 OriginX = 0.5f,
@@ -53,12 +47,20 @@ namespace GS_PatEditor.Editor.Panels
             var frame = _Parent.EditorNode.Animation.Frame.FrameData;
             var id = frame.ImageID;
             var txt = proj.ImageList.GetTexture(id, _Parent.PreviewWindowUI.Render);
+            var window = _Parent.PreviewWindowUI;
 
             _Sprite.Texture = txt;
             _Sprite.OriginX = frame.OriginX;
             _Sprite.OriginY = frame.OriginY;
-            _Sprite.Render();
 
+            _Sprite.Left = window.X;
+            _Sprite.Top = window.Y;
+            _SpriteLineV.Left = window.X;
+            _SpriteLineV.Top = window.Y;
+            _SpriteLineH.Left = window.X;
+            _SpriteLineH.Top = window.Y;
+
+            _Sprite.Render();
             _SpriteLineV.Render();
             _SpriteLineH.Render();
         }

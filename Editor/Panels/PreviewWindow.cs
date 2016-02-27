@@ -22,6 +22,9 @@ namespace GS_PatEditor.Editor.Panels
         public RenderEngine Render { get; private set; }
         public AbstractPreviewWindowContent CurrentContent { get; set; }
 
+        public int X { get; private set; }
+        public int Y { get; private set; }
+
         public PreviewWindow(Editor parent)
         {
             _Parent = parent;
@@ -33,11 +36,22 @@ namespace GS_PatEditor.Editor.Panels
             {
                 throw new Exception();
             }
+
             _Control = ctrl;
             Render = new RenderEngine(ctrl);
             Render.OnRender += _Render_OnRender;
 
+            X = ctrl.Width / 2;
+            Y = ctrl.Height / 2;
+
             UpdatePreviewMode();
+
+            var move = new MouseMovable(ctrl, MouseButtons.Middle, X, Y);
+            move.OnMoved += delegate(int x, int y)
+            {
+                this.X = x;
+                this.Y = y;
+            };
         }
 
         private void _Render_OnRender()
