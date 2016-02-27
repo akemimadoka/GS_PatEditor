@@ -66,6 +66,12 @@
     <Compile Include="Editor\EditorForm.Designer.cs">
       <DependentUpon>EditorForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Editor\Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Editor\Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Editor\Panels\AnimationFrames.cs" />
     <Compile Include="Editor\Editor.cs" />
     <Compile Include="Editor\Nodes\AnimationNode.cs" />
@@ -121,6 +127,9 @@
     <Compile Include="Simulation\World.cs" />
     <EmbeddedResource Include="Editor\EditorForm.resx">
       <DependentUpon>EditorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editor\Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>

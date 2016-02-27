@@ -324,5 +324,31 @@ namespace GS_PatEditor.Editor.Panels
 
             UpdateControlWidth();
         }
+
+        public void CollapseAll()
+        {
+            foreach (var g in _GridList)
+            {
+                if (g is KeyFrameGrid)
+                {
+                    ((KeyFrameGrid)g).IsFolded = true;
+                }
+            }
+            UpdateControlWidth();
+            _Control.Invalidate();
+        }
+
+        public void ExpandAll()
+        {
+            foreach (var g in _GridList)
+            {
+                if (g is KeyFrameGrid)
+                {
+                    ((KeyFrameGrid)g).IsFolded = false;
+                }
+            }
+            UpdateControlWidth();
+            _Control.Invalidate();
+        }
     }
 }

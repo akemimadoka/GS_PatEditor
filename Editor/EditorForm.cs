@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GS_PatEditor.Editor.Nodes;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -18,6 +19,8 @@ namespace GS_PatEditor.Editor
             {
                 using (var editor = new Editor(proj))
                 {
+                    frm._Editor = editor;
+
                     editor.AnimationFramesUI.Init(frm.animationFrames);
                     editor.PreviewWindowUI.Init(frm.previewWindow);
 
@@ -38,9 +41,50 @@ namespace GS_PatEditor.Editor
             }
         }
 
+        private Editor _Editor;
+
         public EditorForm()
         {
             InitializeComponent();
+        }
+
+        private bool ChangeEditMode(FrameNode.FrameEditMode mode)
+        {
+            return _Editor.EditorNode.Animation.Frame.ChangeEditMode(mode);
+        }
+
+        private void ClearToolButtonsToolChecked()
+        {
+            toolStripButtonToolCursor.CheckState = CheckState.Unchecked;
+            toolStripButtonToolMove.CheckState = CheckState.Unchecked;
+        }
+
+        private void toolStripButtonToolCursor_Click(object sender, EventArgs e)
+        {
+            if (ChangeEditMode(FrameNode.FrameEditMode.None))
+            {
+                ClearToolButtonsToolChecked();
+                toolStripButtonToolCursor.CheckState = CheckState.Checked;
+            }
+        }
+
+        private void toolStripButtonToolMove_Click(object sender, EventArgs e)
+        {
+            if (ChangeEditMode(FrameNode.FrameEditMode.Move))
+            {
+                ClearToolButtonsToolChecked();
+                toolStripButtonToolMove.CheckState = CheckState.Checked;
+            }
+        }
+
+        private void toolStripCollapseAll_Click(object sender, EventArgs e)
+        {
+            _Editor.AnimationFramesUI.CollapseAll();
+        }
+
+        private void toolStripExpandAll_Click(object sender, EventArgs e)
+        {
+            _Editor.AnimationFramesUI.ExpandAll();
         }
     }
 }

@@ -9,12 +9,24 @@ namespace GS_PatEditor.Editor.Panels
 {
     class MouseMovable
     {
+        public delegate void MouseDownFilterDelegate(ref bool value);
+
         private MouseButtons _Button;
 
         private int _X, _Y;
         private int _DownMouseX, _DownMouseY, _LastX, _LastY;
+        private bool _IsButtonDown;
 
         public event Action<int, int> OnMoved;
+        public event Action<int, int> OnMovedDiff;
+        public event Action OnMoveFinished;
+        public event MouseDownFilterDelegate FilterMouseDown;
+
+        public void SetPosition(int x, int y)
+        {
+            _X = x;
+            _Y = y;
+        }
 
         public MouseMovable(Control ctrl, MouseButtons button, int x, int y)
         {
@@ -38,15 +50,27 @@ namespace GS_PatEditor.Editor.Panels
             {
                 OnMoved(_X, _Y);
             }
+            if (OnMovedDiff != null)
+            {
+                OnMovedDiff(_X - _LastX, _Y - _LastY);
+            }
         }
 
         void ctrl_MouseUp(object sender, MouseEventArgs e)
         {
+            if (e.Button.HasFlag(_Button) && _IsButtonDown)
+            {
+                _IsButtonDown = false;
+                if (OnMoveFinished != null)
+                {
+                    OnMoveFinished();
+                }
+            }
         }
 
         void ctrl_MouseMove(object sender, MouseEventArgs e)
         {
-            if (e.Button.HasFlag(_Button))
+            if (e.Button.HasFlag(_Button) && _IsButtonDown)
             {
                 _X = _LastX + e.X - _DownMouseX;
                 _Y = _LastY + e.Y - _DownMouseY;
@@ -58,6 +82,19 @@ namespace GS_PatEditor.Editor.Panels
         {
             if (e.Button.HasFlag(_Button))
             {
+                //TODO filter
+                if (FilterMouseDown != null)
+                {
+                    bool success = true;
+                    FilterMouseDown(ref success);
+                    if (!success)
+                    {
+                        return;
+                    }
+                }
+
+                _IsButtonDown = true;
+
                 _LastX = _X;
                 _LastY = _Y;
                 _DownMouseX = e.X;

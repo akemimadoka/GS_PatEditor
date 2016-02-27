@@ -11,6 +11,7 @@ namespace GS_PatEditor.Editor.Nodes
         public enum FrameEditMode
         {
             None,
+            Move,
             Hit,
             Attack,
         }
@@ -42,8 +43,9 @@ namespace GS_PatEditor.Editor.Nodes
             SegmentData = seg;
             FrameData = frame;
 
-            EditMode = FrameEditMode.None;
-            PreviewMode = FramePreviewMode.Pause;
+            //should preserve edit mode
+            //EditMode = FrameEditMode.None;
+            //PreviewMode = FramePreviewMode.Pause;
             if (_Parent.PreviewWindowUI != null)
             {
                 _Parent.PreviewWindowUI.UpdatePreviewMode();
@@ -53,6 +55,12 @@ namespace GS_PatEditor.Editor.Nodes
             {
                 OnReset();
             }
+        }
+
+        public bool ChangeEditMode(FrameEditMode mode)
+        {
+            EditMode = mode;
+            return true;
         }
 
         public void AddHitBox(Pat.Box box)

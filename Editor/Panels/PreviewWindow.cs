@@ -22,8 +22,13 @@ namespace GS_PatEditor.Editor.Panels
         public RenderEngine Render { get; private set; }
         public AbstractPreviewWindowContent CurrentContent { get; set; }
 
-        public int X { get; private set; }
-        public int Y { get; private set; }
+        private int PreviewX, PreviewY;
+        private int PreviewMovingX, PreviewMovingY;
+        private float _PreviewScale = 1.0f;
+
+        public int SpriteMovingX, SpriteMovingY;
+
+        private MouseMovable MovablePreview;
 
         public PreviewWindow(Editor parent)
         {
@@ -41,19 +46,66 @@ namespace GS_PatEditor.Editor.Panels
             Render = new RenderEngine(ctrl);
             Render.OnRender += _Render_OnRender;
 
-            X = ctrl.Width / 2;
-            Y = ctrl.Height / 2;
+            PreviewX = ctrl.Width / 2;
+            PreviewY = ctrl.Height / 2;
+            Render.Transform.X = PreviewX;
+            Render.Transform.Y = PreviewY;
 
             UpdatePreviewMode();
 
             //move scene
-            var move = new MouseMovable(ctrl, MouseButtons.Middle, X, Y);
-            move.OnMoved += delegate(int x, int y)
             {
-                this.X = x;
-                this.Y = y;
-            };
+                //TODO use diff version, calc delta * scale
+                MovablePreview = new MouseMovable(ctrl, MouseButtons.Middle, PreviewMovingX, PreviewMovingY);
+                MovablePreview.OnMovedDiff += delegate(int x, int y)
+                {
+                    PreviewMovingX = x;
+                    PreviewMovingY = y;
 
+                    Render.Transform.X = PreviewX + PreviewMovingX;
+                    Render.Transform.Y = PreviewY + PreviewMovingY;
+                };
+                MovablePreview.OnMoveFinished += delegate()
+                {
+                    PreviewX += PreviewMovingX;
+                    PreviewY += PreviewMovingY;
+                    PreviewMovingX = 0;
+                    PreviewMovingY = 0;
+
+                    Render.Transform.X = PreviewX;
+                    Render.Transform.Y = PreviewY;
+                };
+            }
+
+            //move tool
+            {
+                var move = new MouseMovable(ctrl, MouseButtons.Left, 0, 0);
+                move.FilterMouseDown += delegate(ref bool result)
+                {
+                    var node = _Parent.EditorNode.Animation.Frame;
+                    if (node.PreviewMode != FrameNode.FramePreviewMode.Pause ||
+                        node.EditMode != FrameNode.FrameEditMode.Move)
+                    {
+                        result = false;
+                    }
+                };
+                move.OnMovedDiff += delegate(int x, int y)
+                {
+                    SpriteMovingX = (int)(-x / _PreviewScale);
+                    SpriteMovingY = (int)(-y / _PreviewScale);
+                };
+                move.OnMoveFinished += delegate()
+                {
+                    var node = _Parent.EditorNode.Animation.Frame;
+                    node.FrameData.OriginX += SpriteMovingX;
+                    node.FrameData.OriginY += SpriteMovingY;
+                    SpriteMovingX = 0;
+                    SpriteMovingY = 0;
+                };
+            }
+            
+
+            //mouse wheel zoom in/out
             ctrl.FindForm().MouseWheel += frm_MouseWheel;
         }
 
@@ -66,15 +118,43 @@ namespace GS_PatEditor.Editor.Panels
             }
             if (_Control.ClientRectangle.Contains(_Control.PointToClient(Control.MousePosition)))
             {
-                if (e.Delta > 0)
+                if (e.Delta < 0)
                 {
-                    Render.Transform.Scale *= 0.9f;
+                    //_PreviewScale *= 0.9f;
+                    //Render.Transform.Scale = _PreviewScale;
+                    SetScale(_PreviewScale * 0.9f);
                 }
-                else if (e.Delta < 0)
+                else if (e.Delta > 0)
                 {
-                    Render.Transform.Scale /= 0.9f;
+                    //_PreviewScale /= 0.9f;
+                    //Render.Transform.Scale = _PreviewScale;
+                    SetScale(_PreviewScale / 0.9f);
                 }
             }
+        }
+
+        private void SetScale(float newScale)
+        {
+            //client position of mouse
+            var pClient = _Control.PointToClient(Control.MousePosition);
+
+            //position on scaled scene
+            float pSSx = (pClient.X - PreviewX) / _PreviewScale;
+            float pSSy = (pClient.Y - PreviewY) / _PreviewScale;
+
+            //this point is still on pClient
+            float newX = pClient.X - pSSx * newScale;
+            float newY = pClient.Y - pSSy * newScale;
+
+            PreviewX = (int)newX;
+            PreviewY = (int)newY;
+            _PreviewScale = newScale;
+
+            MovablePreview.SetPosition(PreviewX, PreviewY);
+
+            Render.Transform.Scale = _PreviewScale;
+            Render.Transform.X = PreviewX;
+            Render.Transform.Y = PreviewY;
         }
 
         private void _Render_OnRender()

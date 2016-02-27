@@ -50,15 +50,18 @@ namespace GS_PatEditor.Editor.Panels
             var window = _Parent.PreviewWindowUI;
 
             _Sprite.Texture = txt;
-            _Sprite.OriginX = frame.OriginX;
-            _Sprite.OriginY = frame.OriginY;
+            _Sprite.OriginX = frame.OriginX + window.SpriteMovingX;
+            _Sprite.OriginY = frame.OriginY + window.SpriteMovingY;
+            _Sprite.ScaleX = frame.ScaleX / 100.0f;
+            _Sprite.ScaleY = frame.ScaleY / 100.0f;
+            _Sprite.Rotation = frame.Rotate / 180.0f * 3.1415926f;
 
-            _Sprite.Left = window.X;
-            _Sprite.Top = window.Y;
-            _SpriteLineV.Left = window.X;
-            _SpriteLineV.Top = window.Y;
-            _SpriteLineH.Left = window.X;
-            _SpriteLineH.Top = window.Y;
+            //_Sprite.Left = window.PreviewMovingX;
+            //_Sprite.Top = window.PreviewMovingY;
+            //_SpriteLineV.Left = window.PreviewMovingX;
+            //_SpriteLineV.Top = window.PreviewMovingY;
+            //_SpriteLineH.Left = window.PreviewMovingX;
+            //_SpriteLineH.Top = window.PreviewMovingY;
 
             _Sprite.Render();
             _SpriteLineV.Render();
