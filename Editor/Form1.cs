@@ -16,10 +16,5 @@ namespace GS_PatEditor.Editor
         {
             InitializeComponent();
         }
-
-        private void toolStripSplitButton1_DropDownOpening(object sender, EventArgs e)
-        {
-
-        }
     }
 }

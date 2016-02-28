@@ -37,11 +37,7 @@ namespace GS_PatEditor.Editor
                     };
 
                     frm.Show();
-                    {
-                        var x = frm.flowLayoutPanel2.ClientSize.Width - 800;
-                        var y = frm.flowLayoutPanel2.ClientSize.Height - 600;
-                        frm.flowLayoutPanel2.AutoScrollPosition = new Point(-x / 2, -y / 2);
-                    }
+                    frm.ResetPreviewPosition();
 
                     Application.Run(frm);
                 }
@@ -69,6 +65,15 @@ namespace GS_PatEditor.Editor
         private bool ChangeEditMode(FrameEditMode mode)
         {
             return _Editor.EditorNode.Animation.Frame.ChangeEditMode(mode);
+        }
+
+        private void ResetPreviewPosition()
+        {
+            _Editor.PreviewWindowUI.PreviewMoving.ResetScale();
+
+            var x = flowLayoutPanelFramePreview.ClientSize.Width - 800;
+            var y = flowLayoutPanelFramePreview.ClientSize.Height - 600;
+            flowLayoutPanelFramePreview.AutoScrollPosition = new Point(-x / 2, -y / 2);
         }
 
         private void ClearToolButtonsToolChecked()
@@ -120,6 +125,11 @@ namespace GS_PatEditor.Editor
         private void toolStripSplitEdit_DropDownOpening(object sender, EventArgs e)
         {
             _ClipboardPhysical.UpdateEnable();
+        }
+
+        private void resetScaleToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ResetPreviewPosition();
         }
     }
 }

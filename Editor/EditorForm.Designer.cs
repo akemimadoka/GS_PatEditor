@@ -30,22 +30,22 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EditorForm));
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.flowLayoutPanelFrameList = new System.Windows.Forms.FlowLayoutPanel();
             this.animationFrames = new System.Windows.Forms.PictureBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
+            this.flowLayoutPanelFramePreview = new System.Windows.Forms.FlowLayoutPanel();
             this.previewWindow = new System.Windows.Forms.PictureBox();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.toolStripCollapseAll = new System.Windows.Forms.ToolStripButton();
             this.toolStripExpandAll = new System.Windows.Forms.ToolStripButton();
+            this.toolStripCollapseAll = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButtonToolCursor = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonToolMove = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonToolPhysics = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripSplitBoxVisible = new System.Windows.Forms.ToolStripDropDownButton();
-            this.physicalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.axisToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.physicalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripSplitEdit = new System.Windows.Forms.ToolStripDropDownButton();
             this.physicalToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -53,24 +53,28 @@
             this.copyPhysicalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pastePhysicalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deletePhysicalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.flowLayoutPanel1.SuspendLayout();
+            this.resetScaleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
+            this.flowLayoutPanelAnimationList = new System.Windows.Forms.FlowLayoutPanel();
+            this.toolStripButtonBack = new System.Windows.Forms.ToolStripButton();
+            this.flowLayoutPanelFrameList.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.animationFrames)).BeginInit();
-            this.flowLayoutPanel2.SuspendLayout();
+            this.flowLayoutPanelFramePreview.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.previewWindow)).BeginInit();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // flowLayoutPanel1
+            // flowLayoutPanelFrameList
             // 
-            this.flowLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.flowLayoutPanelFrameList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.flowLayoutPanel1.AutoScroll = true;
-            this.flowLayoutPanel1.BackColor = System.Drawing.Color.White;
-            this.flowLayoutPanel1.Controls.Add(this.animationFrames);
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 28);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(685, 100);
-            this.flowLayoutPanel1.TabIndex = 1;
+            this.flowLayoutPanelFrameList.AutoScroll = true;
+            this.flowLayoutPanelFrameList.BackColor = System.Drawing.Color.White;
+            this.flowLayoutPanelFrameList.Controls.Add(this.animationFrames);
+            this.flowLayoutPanelFrameList.Location = new System.Drawing.Point(0, 28);
+            this.flowLayoutPanelFrameList.Name = "flowLayoutPanelFrameList";
+            this.flowLayoutPanelFrameList.Size = new System.Drawing.Size(612, 100);
+            this.flowLayoutPanelFrameList.TabIndex = 1;
             // 
             // animationFrames
             // 
@@ -86,18 +90,18 @@
             this.timer1.Enabled = true;
             this.timer1.Interval = 16;
             // 
-            // flowLayoutPanel2
+            // flowLayoutPanelFramePreview
             // 
-            this.flowLayoutPanel2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.flowLayoutPanelFramePreview.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.flowLayoutPanel2.AutoScroll = true;
-            this.flowLayoutPanel2.Controls.Add(this.previewWindow);
-            this.flowLayoutPanel2.Location = new System.Drawing.Point(0, 136);
-            this.flowLayoutPanel2.Margin = new System.Windows.Forms.Padding(0);
-            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(685, 274);
-            this.flowLayoutPanel2.TabIndex = 3;
+            this.flowLayoutPanelFramePreview.AutoScroll = true;
+            this.flowLayoutPanelFramePreview.Controls.Add(this.previewWindow);
+            this.flowLayoutPanelFramePreview.Location = new System.Drawing.Point(0, 136);
+            this.flowLayoutPanelFramePreview.Margin = new System.Windows.Forms.Padding(0);
+            this.flowLayoutPanelFramePreview.Name = "flowLayoutPanelFramePreview";
+            this.flowLayoutPanelFramePreview.Size = new System.Drawing.Size(612, 245);
+            this.flowLayoutPanelFramePreview.TabIndex = 3;
             // 
             // previewWindow
             // 
@@ -120,22 +124,14 @@
             this.toolStripSeparator2,
             this.toolStripSplitBoxVisible,
             this.toolStripSeparator3,
-            this.toolStripSplitEdit});
+            this.toolStripSplitEdit,
+            this.toolStripButtonBack});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.toolStrip1.Size = new System.Drawing.Size(684, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(611, 25);
             this.toolStrip1.TabIndex = 4;
             this.toolStrip1.Text = "toolStrip1";
-            // 
-            // toolStripCollapseAll
-            // 
-            this.toolStripCollapseAll.Image = ((System.Drawing.Image)(resources.GetObject("toolStripCollapseAll.Image")));
-            this.toolStripCollapseAll.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripCollapseAll.Name = "toolStripCollapseAll";
-            this.toolStripCollapseAll.Size = new System.Drawing.Size(92, 22);
-            this.toolStripCollapseAll.Text = "CollapseAll";
-            this.toolStripCollapseAll.Click += new System.EventHandler(this.toolStripCollapseAll_Click);
             // 
             // toolStripExpandAll
             // 
@@ -145,6 +141,15 @@
             this.toolStripExpandAll.Size = new System.Drawing.Size(85, 22);
             this.toolStripExpandAll.Text = "ExpandAll";
             this.toolStripExpandAll.Click += new System.EventHandler(this.toolStripExpandAll_Click);
+            // 
+            // toolStripCollapseAll
+            // 
+            this.toolStripCollapseAll.Image = ((System.Drawing.Image)(resources.GetObject("toolStripCollapseAll.Image")));
+            this.toolStripCollapseAll.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripCollapseAll.Name = "toolStripCollapseAll";
+            this.toolStripCollapseAll.Size = new System.Drawing.Size(92, 22);
+            this.toolStripCollapseAll.Text = "CollapseAll";
+            this.toolStripCollapseAll.Click += new System.EventHandler(this.toolStripCollapseAll_Click);
             // 
             // toolStripSeparator1
             // 
@@ -188,6 +193,8 @@
             // toolStripSplitBoxVisible
             // 
             this.toolStripSplitBoxVisible.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.resetScaleToolStripMenuItem,
+            this.toolStripMenuItem1,
             this.axisToolStripMenuItem,
             this.physicalToolStripMenuItem});
             this.toolStripSplitBoxVisible.Image = ((System.Drawing.Image)(resources.GetObject("toolStripSplitBoxVisible.Image")));
@@ -195,15 +202,6 @@
             this.toolStripSplitBoxVisible.Name = "toolStripSplitBoxVisible";
             this.toolStripSplitBoxVisible.Size = new System.Drawing.Size(75, 22);
             this.toolStripSplitBoxVisible.Text = "Visible";
-            // 
-            // physicalToolStripMenuItem
-            // 
-            this.physicalToolStripMenuItem.Checked = true;
-            this.physicalToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.physicalToolStripMenuItem.Name = "physicalToolStripMenuItem";
-            this.physicalToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.physicalToolStripMenuItem.Text = "Physical";
-            this.physicalToolStripMenuItem.Click += new System.EventHandler(this.physicalToolStripMenuItem_Click);
             // 
             // axisToolStripMenuItem
             // 
@@ -213,6 +211,15 @@
             this.axisToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.axisToolStripMenuItem.Text = "Axis";
             this.axisToolStripMenuItem.Click += new System.EventHandler(this.axisToolStripMenuItem_Click);
+            // 
+            // physicalToolStripMenuItem
+            // 
+            this.physicalToolStripMenuItem.Checked = true;
+            this.physicalToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.physicalToolStripMenuItem.Name = "physicalToolStripMenuItem";
+            this.physicalToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.physicalToolStripMenuItem.Text = "Physical";
+            this.physicalToolStripMenuItem.Click += new System.EventHandler(this.physicalToolStripMenuItem_Click);
             // 
             // toolStripSeparator3
             // 
@@ -266,19 +273,52 @@
             this.deletePhysicalToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.deletePhysicalToolStripMenuItem.Text = "Delete";
             // 
+            // resetScaleToolStripMenuItem
+            // 
+            this.resetScaleToolStripMenuItem.Name = "resetScaleToolStripMenuItem";
+            this.resetScaleToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.resetScaleToolStripMenuItem.Text = "Reset scale";
+            this.resetScaleToolStripMenuItem.Click += new System.EventHandler(this.resetScaleToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(149, 6);
+            // 
+            // flowLayoutPanelAnimationList
+            // 
+            this.flowLayoutPanelAnimationList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.flowLayoutPanelAnimationList.Location = new System.Drawing.Point(0, 28);
+            this.flowLayoutPanelAnimationList.Margin = new System.Windows.Forms.Padding(0);
+            this.flowLayoutPanelAnimationList.Name = "flowLayoutPanelAnimationList";
+            this.flowLayoutPanelAnimationList.Size = new System.Drawing.Size(612, 353);
+            this.flowLayoutPanelAnimationList.TabIndex = 5;
+            this.flowLayoutPanelAnimationList.Visible = false;
+            // 
+            // toolStripButtonBack
+            // 
+            this.toolStripButtonBack.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonBack.Image")));
+            this.toolStripButtonBack.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonBack.Name = "toolStripButtonBack";
+            this.toolStripButtonBack.Size = new System.Drawing.Size(56, 22);
+            this.toolStripButtonBack.Text = "Back";
+            // 
             // EditorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(684, 411);
+            this.ClientSize = new System.Drawing.Size(611, 382);
+            this.Controls.Add(this.flowLayoutPanelAnimationList);
             this.Controls.Add(this.toolStrip1);
-            this.Controls.Add(this.flowLayoutPanel2);
-            this.Controls.Add(this.flowLayoutPanel1);
+            this.Controls.Add(this.flowLayoutPanelFramePreview);
+            this.Controls.Add(this.flowLayoutPanelFrameList);
             this.Name = "EditorForm";
-            this.Text = "EditorForm";
-            this.flowLayoutPanel1.ResumeLayout(false);
+            this.Text = "AnimationEditor";
+            this.flowLayoutPanelFrameList.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.animationFrames)).EndInit();
-            this.flowLayoutPanel2.ResumeLayout(false);
+            this.flowLayoutPanelFramePreview.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.previewWindow)).EndInit();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
@@ -289,10 +329,10 @@
 
         #endregion
 
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelFrameList;
         private System.Windows.Forms.PictureBox animationFrames;
         private System.Windows.Forms.Timer timer1;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelFramePreview;
         private System.Windows.Forms.PictureBox previewWindow;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton toolStripButtonToolCursor;
@@ -312,6 +352,10 @@
         private System.Windows.Forms.ToolStripMenuItem copyPhysicalToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem pastePhysicalToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem deletePhysicalToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem resetScaleToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelAnimationList;
+        private System.Windows.Forms.ToolStripButton toolStripButtonBack;
 
     }
 }

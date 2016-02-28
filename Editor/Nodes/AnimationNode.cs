@@ -19,6 +19,12 @@ namespace GS_PatEditor.Editor.Nodes
 
         public void SetSelectedFrame(int segment, int frame)
         {
+            if (Data == null)
+            {
+                Frame.Reset(null, null);
+                return;
+            }
+
             if (segment >= Data.Segments.Count)
             {
                 if (Data.Segments.Count == 0)

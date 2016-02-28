@@ -73,9 +73,9 @@ namespace GS_PatEditor
                 },
             };
 
-            //import animation 0
-            GSPat.Animation animation0 = gspat.Animations[0];
-            ImportSimpleAnimation(proj, gspat, animation0, "walk");
+            //import animations
+            ImportSimpleAnimation(proj, gspat, gspat.Animations[0], "stand");
+            ImportSimpleAnimation(proj, gspat, gspat.Animations[1], "walk");
 
             CheckImageResources(proj, Path.GetDirectoryName(patfile));
 
@@ -134,6 +134,10 @@ namespace GS_PatEditor
                     ImportSegment(proj, pat, animation),
                 },
             };
+            if (patAnimation.Segments.Count > 0 && patAnimation.Segments[0].Frames.Count > 0)
+            {
+                patAnimation.ImageID = patAnimation.Segments[0].Frames[0].ImageID;
+            }
             proj.Animations.Add(patAnimation);
         }
         private static AnimationSegment ImportSegment(Pat.Project proj, GSPat.GSPatFile pat, GSPat.Animation animation)

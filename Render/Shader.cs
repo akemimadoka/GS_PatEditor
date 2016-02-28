@@ -12,14 +12,14 @@ namespace GS_PatEditor.Render
 
 struct VS_IN
 {
-	float4 pos : POSITION;
-	float2 tex : TEXCOORD0;
+    float4 pos : POSITION;
+    float2 tex : TEXCOORD0;
 };
 
 struct PS_IN
 {
-	float4 pos : POSITION;
-	float2 tex : TEXCOORD0;
+    float4 pos : POSITION;
+    float2 tex : TEXCOORD0;
 };
 
 float4x4 mat_ViewProj;
@@ -32,19 +32,19 @@ sampler2D s_2D = sampler_state
     //ANISOTROPIC
     //POINT
     Filter = POINT;
-	AddressU = Border;
-	AddressV = Border;
+    AddressU = Border;
+    AddressV = Border;
     
 };
 
 PS_IN VS(VS_IN input)
 {
-	PS_IN output = (PS_IN)0;
+    PS_IN output = (PS_IN)0;
     input.pos.x *= f_Scale;
     input.pos.y *= f_Scale;
-	output.pos = mul(input.pos + vec_Offset, mat_ViewProj);
-	output.tex = input.tex;
-	return output;
+    output.pos = mul(input.pos + vec_Offset, mat_ViewProj);
+    output.tex = input.tex;
+    return output;
 }
 
 float4 PS(PS_IN input) : COLOR
@@ -53,10 +53,10 @@ float4 PS(PS_IN input) : COLOR
 }
 
 technique Main {
-	pass P0 {
-		VertexShader = compile vs_2_0 VS();
-		PixelShader = compile ps_2_0 PS();
-	}
+    pass P0 {
+        VertexShader = compile vs_2_0 VS();
+        PixelShader = compile ps_2_0 PS();
+    }
 }
 
 ";

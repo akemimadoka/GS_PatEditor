@@ -13,6 +13,9 @@ namespace GS_PatEditor.Pat
         [XmlAttribute]
         public string AnimationID;
 
+        [XmlAttribute]
+        public string ImageID;
+
         [XmlElement(ElementName = "Segment")]
         public List<AnimationSegment> Segments;
     }

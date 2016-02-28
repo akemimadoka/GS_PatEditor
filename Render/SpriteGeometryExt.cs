@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace GS_PatEditor.Render
 {
+    //TODO setup a sprite step by step, to avoid using functions with too many parameters
     static class SpriteGeometryExt
     {
         public static void SetupLine(this Sprite sprite, int color,

@@ -219,7 +219,8 @@ namespace GS_PatEditor.Editor.Panels.Tools.Physical
 
         public bool ClipboardDataAvailable(object data)
         {
-            return data is Pat.PhysicalBox;
+            var frame = _Editor.EditorNode.Animation.Frame.FrameData;
+            return frame != null && data is Pat.PhysicalBox;
         }
 
         public object Copy()

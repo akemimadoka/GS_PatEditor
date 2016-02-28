@@ -157,11 +157,7 @@ namespace GS_PatEditor.Editor.Panels
         void frm_MouseWheel(object sender, MouseEventArgs e)
         {
             var parentCtrl = _Control.Parent;
-            if (!parentCtrl.ClientRectangle.Contains(parentCtrl.PointToClient(Control.MousePosition)))
-            {
-                return;
-            }
-            if (_Control.ClientRectangle.Contains(_Control.PointToClient(Control.MousePosition)))
+            if (parentCtrl.ClientRectangle.Contains(parentCtrl.PointToClient(Control.MousePosition)))
             {
                 FlowLayoutPanel p = _Control.Parent as FlowLayoutPanel;
                 if (p != null)

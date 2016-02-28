@@ -125,6 +125,17 @@ namespace GS_PatEditor.Editor.Panels.Tools.Preview
             OnSceneMoved();
         }
 
+        public void ResetScale()
+        {
+            _PreviewX = _Control.Width / 2;
+            _PreviewY = _Control.Height / 2;
+            _Parent.Render.Transform.X = _PreviewX;
+            _Parent.Render.Transform.Y = _PreviewY;
+
+            _PreviewScale = 1;
+            _Parent.Render.Transform.Scale = _PreviewScale;
+        }
+
         public float TransformXSpriteToClient(float x)
         {
             return (_PreviewX + _PreviewMovingX) + _PreviewScale * x;
