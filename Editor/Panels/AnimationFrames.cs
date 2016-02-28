@@ -262,7 +262,10 @@ namespace GS_PatEditor.Editor.Panels
             }
             _LastSelected = grid;
 
-            _Control.Invalidate();
+            if (_Control != null)
+            {
+                _Control.Invalidate();
+            }
         }
 
         private AbstractGrid GetGridFromPoint(int x)
@@ -323,6 +326,11 @@ namespace GS_PatEditor.Editor.Panels
             }
 
             UpdateControlWidth();
+
+            if (_GridList[0] is KeyFrameGrid)
+            {
+                SelectKeyGrid((KeyFrameGrid)_GridList[0]);
+            }
         }
 
         public void CollapseAll()
@@ -335,7 +343,10 @@ namespace GS_PatEditor.Editor.Panels
                 }
             }
             UpdateControlWidth();
-            _Control.Invalidate();
+            if (_Control != null)
+            {
+                _Control.Invalidate();
+            }
         }
 
         public void ExpandAll()
@@ -348,7 +359,10 @@ namespace GS_PatEditor.Editor.Panels
                 }
             }
             UpdateControlWidth();
-            _Control.Invalidate();
+            if (_Control != null)
+            {
+                _Control.Invalidate();
+            }
         }
     }
 }

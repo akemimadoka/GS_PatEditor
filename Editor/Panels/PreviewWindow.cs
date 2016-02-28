@@ -1,5 +1,6 @@
 ﻿using GS_PatEditor.Editor.Nodes;
 using GS_PatEditor.Editor.Panels.Tools;
+using GS_PatEditor.Editor.Panels.Tools.Move;
 using GS_PatEditor.Editor.Panels.Tools.Physical;
 using GS_PatEditor.Editor.Panels.Tools.Preview;
 using GS_PatEditor.Render;
@@ -31,10 +32,10 @@ namespace GS_PatEditor.Editor.Panels
         //tools
 
         public PreviewMovingHandler PreviewMoving { get; private set; }
+        public SpriteMovingHandler SpriteMoving { get; private set; }
 
-        public int SpriteMovingX, SpriteMovingY;
-
-        private MouseRectEditable EditPhysical;
+        //private MouseRectEditable EditPhysical;
+        public PhysicalEditingHandler PhysicalEditing { get; private set; }
 
         public PreviewWindow(Editor parent)
         {
@@ -47,61 +48,33 @@ namespace GS_PatEditor.Editor.Panels
             {
                 throw new Exception();
             }
-
             _Control = ctrl;
+
+            //global
+
             Render = new RenderEngine(ctrl);
             Render.OnRender += _Render_OnRender;
 
-            PreviewMoving = new PreviewMovingHandler(this, ctrl);
-
-            //sprites
             SpriteManager = new PreviewWindowSpriteManager(this);
 
-            //content
             UpdatePreviewMode();
 
-            //move scene
-            {
-            }
+            //tools
+
+            PreviewMoving = new PreviewMovingHandler(this, ctrl);
+
+            SpriteMoving = new SpriteMovingHandler(_Parent, ctrl);
 
             //move tool
-            {
-                var move = new MouseMovable(ctrl, MouseButtons.Left, 0, 0);
-                move.FilterMouseDown += delegate(ref bool result)
-                {
-                    var node = _Parent.EditorNode.Animation.Frame;
-                    //empty animation (no frame)
-                    if (node.FrameData == null)
-                    {
-                        result = false;
-                    }
-                    if (node.PreviewMode != FrameNode.FramePreviewMode.Pause ||
-                        node.EditMode != FrameEditMode.Move)
-                    {
-                        result = false;
-                    }
-                };
-                move.OnMovedDiff += delegate(int x, int y)
-                {
-                    SpriteMovingX = (int)(-x / PreviewMoving.PreviewScale);
-                    SpriteMovingY = (int)(-y / PreviewMoving.PreviewScale);
-                };
-                move.OnMoveFinished += delegate()
-                {
-                    var node = _Parent.EditorNode.Animation.Frame;
-                    node.FrameData.OriginX += SpriteMovingX;
-                    node.FrameData.OriginY += SpriteMovingY;
-                    SpriteMovingX = 0;
-                    SpriteMovingY = 0;
-                };
-            }
 
-            EditPhysical = new MouseRectEditable(ctrl, new PhysicalDataProvider(_Parent, this));
-            EditPhysical.Filter += GetFilterForEditMode(FrameEditMode.Physical);
-            PreviewMoving.SceneMoved += EditPhysical.UpdateMouseCursor;
+            PhysicalEditing = new PhysicalEditingHandler(_Parent, ctrl);
+            PreviewMoving.SceneMoved += PhysicalEditing.UpdateMouseCursor;
+            //EditPhysical = new MouseRectEditable(ctrl, new PhysicalDataProvider(_Parent, this));
+            //EditPhysical.Filter += GetFilterForEditMode(FrameEditMode.Physical);
+            //PreviewMoving.SceneMoved += EditPhysical.UpdateMouseCursor;
         }
 
-        private EventFilter GetFilterForEditMode(FrameEditMode mode)
+        public EventFilter GetFilterForEditMode(FrameEditMode mode)
         {
             return delegate(ref bool result)
             {

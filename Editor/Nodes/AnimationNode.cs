@@ -19,7 +19,6 @@ namespace GS_PatEditor.Editor.Nodes
 
         public void SetSelectedFrame(int segment, int frame)
         {
-            //TODO handle empty animation
             if (segment >= Data.Segments.Count)
             {
                 if (Data.Segments.Count == 0)

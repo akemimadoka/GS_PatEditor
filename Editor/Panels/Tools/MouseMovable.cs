@@ -5,12 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace GS_PatEditor.Editor.Panels
+namespace GS_PatEditor.Editor.Panels.Tools
 {
     class MouseMovable
     {
-        public delegate void MouseDownFilterDelegate(ref bool value);
-
         private MouseButtons _Button;
 
         private int _X, _Y;
@@ -20,7 +18,7 @@ namespace GS_PatEditor.Editor.Panels
         public event Action<int, int> OnMoved;
         public event Action<int, int> OnMovedDiff;
         public event Action OnMoveFinished;
-        public event MouseDownFilterDelegate FilterMouseDown;
+        public event EventFilter FilterMouseDown;
 
         public void SetPosition(int x, int y)
         {

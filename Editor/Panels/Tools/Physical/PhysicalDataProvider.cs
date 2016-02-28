@@ -11,10 +11,10 @@ namespace GS_PatEditor.Editor.Panels.Tools.Physical
         private readonly Editor _Editor;
         private readonly PreviewWindow _Window;
 
-        public PhysicalDataProvider(Editor editor, PreviewWindow window)
+        public PhysicalDataProvider(Editor editor)
         {
             _Editor = editor;
-            _Window = window;
+            _Window = editor.PreviewWindowUI;
         }
 
         public float Left

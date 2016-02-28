@@ -40,7 +40,7 @@ namespace GS_PatEditor.Editor.Panels
             {
                 var txt = _Parent.Data.ImageList.GetTexture(frame.ImageID, _Parent.PreviewWindowUI.Render);
                 var window = _Parent.PreviewWindowUI;
-                _Sprite.SetupFrame(txt, frame, window);
+                _Sprite.SetupFrame(txt, frame, window.SpriteMoving);
                 _Sprite.Render();
             }
 

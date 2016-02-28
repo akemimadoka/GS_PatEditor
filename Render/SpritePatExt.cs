@@ -1,4 +1,5 @@
 ﻿using GS_PatEditor.Editor.Panels;
+using GS_PatEditor.Editor.Panels.Tools;
 using GS_PatEditor.Pat;
 using SharpDX.Direct3D9;
 using System;
@@ -12,12 +13,11 @@ namespace GS_PatEditor.Render
 {
     static class SpritePatExt
     {
-        //TODO use a class to provide information of a sprite that is being modified
-        public static void SetupFrame(this Sprite sprite, Texture txt, Frame frame, PreviewWindow window)
+        public static void SetupFrame(this Sprite sprite, Texture txt, Frame frame, EditingPoint editing)
         {
             sprite.Setup(txt,
-                OriginX: frame.OriginX + window.SpriteMovingX,
-                OriginY: frame.OriginY + window.SpriteMovingY,
+                OriginX: frame.OriginX + editing.OffsetX,
+                OriginY: frame.OriginY + editing.OffsetY,
                 ScaleX: frame.ScaleX / 100.0f,
                 ScaleY: frame.ScaleY / 100.0f,
                 Rotation: frame.Rotate / 180.0f * 3.1415926f);
