@@ -25,15 +25,22 @@ namespace GS_PatEditor.Editor.Panels.Tools.Physical
         RB,
     }
 
-    class PhysicalEditingHandler
+    class PhysicalEditingHandler : ClipboardHandler
     {
         private const int EditMargin = 3;
         private readonly Editor _Editor;
         private readonly Control _Control;
 
-        private IRectDataProvider _Rect;
+        private PhysicalDataProvider _Rect;
 
         public event EventFilter Filter;
+
+        private RectPoint _EditingPoint = RectPoint.None;
+
+        public EditingPhysicalBox PhysicalBoxData
+        {
+            get { return _Rect; }
+        }
 
         public PhysicalEditingHandler(Editor editor, Control ctrl)
         {
@@ -45,15 +52,84 @@ namespace GS_PatEditor.Editor.Panels.Tools.Physical
             Filter += editor.PreviewWindowUI.GetFilterForEditMode(FrameEditMode.Physical);
 
             _Control.MouseMove += _Control_MouseMove;
+            _Control.MouseDown += _Control_MouseDown;
+            _Control.MouseUp += _Control_MouseUp;
         }
 
-        private void _Control_MouseMove(object sender, MouseEventArgs e)
+        private void _Control_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button.HasFlag(MouseButtons.Left))
+            {
+                FinishMouseEvent();
+            }
+        }
+
+        private void _Control_MouseDown(object sender, MouseEventArgs e)
         {
             if (!CheckFilter())
             {
                 return;
             }
+            if (e.Button == MouseButtons.Left)
+            {
+                var p = FindMovablePoint(e.X, e.Y);
+                if (p == RectPoint.None)
+                {
+                    return;
+                }
+                _EditingPoint = p;
+
+                //start edit mode
+                _Rect.IsEditing = true;
+            }
+        }
+
+        private void _Control_MouseMove(object sender, MouseEventArgs e)
+        {
+            //process editing even if filter return false
+            if (_EditingPoint != RectPoint.None)
+            {
+                switch (_EditingPoint)
+                {
+                    case RectPoint.LT:
+                        _Rect.ScreenLeft = e.X;
+                        _Rect.ScreenTop = e.Y;
+                        break;
+                    case RectPoint.RT:
+                        _Rect.ScreenRight = e.X;
+                        _Rect.ScreenTop = e.Y;
+                        break;
+                    case RectPoint.LB:
+                        _Rect.ScreenLeft = e.X;
+                        _Rect.ScreenBottom = e.Y;
+                        break;
+                    case RectPoint.RB:
+                        _Rect.ScreenRight = e.X;
+                        _Rect.ScreenBottom = e.Y;
+                        break;
+                    default:
+                        break;
+                }
+                
+                _UpdateMouseCursor(e.X, e.Y);
+                return;
+            }
+
+            //then check filter for mouse cursor
+            if (!CheckFilter())
+            {
+                return;
+            }
             _UpdateMouseCursor(e.X, e.Y);
+        }
+
+        private void FinishMouseEvent()
+        {
+            if (_EditingPoint != RectPoint.None)
+            {
+                _EditingPoint = RectPoint.None;
+                _Rect.IsEditing = false;
+            }
         }
 
         private bool CheckFilter()
@@ -76,19 +152,19 @@ namespace GS_PatEditor.Editor.Panels.Tools.Physical
         private RectPoint FindMovablePoint(int x, int y)
         {
             int result = 0;
-            if (CheckMargin(x - _Rect.Left))
+            if (CheckMargin(x - _Rect.ScreenLeft))
             {
                 result += 1;
             }
-            else if (CheckMargin(x - _Rect.Right))
+            else if (CheckMargin(x - _Rect.ScreenRight))
             {
                 result += 2;
             }
-            if (CheckMargin(y - _Rect.Top))
+            if (CheckMargin(y - _Rect.ScreenTop))
             {
                 result += 4;
             }
-            else if (CheckMargin(y - _Rect.Bottom))
+            else if (CheckMargin(y - _Rect.ScreenBottom))
             {
                 result += 8;
             }
@@ -130,5 +206,52 @@ namespace GS_PatEditor.Editor.Panels.Tools.Physical
             var pos = _Control.PointToClient(Control.MousePosition);
             _UpdateMouseCursor(pos.X, pos.Y);
         }
+
+        #region Clipboard
+        public bool SelectedAvailable
+        {
+            get
+            {
+                var frame = _Editor.EditorNode.Animation.Frame.FrameData;
+                return frame != null && frame.PhysicalBox != null;
+            }
+        }
+
+        public bool ClipboardDataAvailable(object data)
+        {
+            return data is Pat.PhysicalBox;
+        }
+
+        public object Copy()
+        {
+            FinishMouseEvent();
+            var frame = _Editor.EditorNode.Animation.Frame.FrameData;
+            return frame != null ? frame.PhysicalBox : null;
+        }
+
+        public void Delete()
+        {
+            var frame = _Editor.EditorNode.Animation.Frame.FrameData;
+            if (frame != null)
+            {
+                frame.PhysicalBox = null;
+            }
+        }
+
+        public void Paste(object data)
+        {
+            var frame = _Editor.EditorNode.Animation.Frame.FrameData;
+            if (data == null && !(data is Pat.PhysicalBox) || frame == null)
+            {
+                return;
+            }
+            frame.PhysicalBox = data as Pat.PhysicalBox;
+        }
+
+        public string DataID
+        {
+            get { return "GSPatEditor_PhysicalBox"; }
+        }
+        #endregion
     }
 }

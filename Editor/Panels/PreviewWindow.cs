@@ -69,9 +69,6 @@ namespace GS_PatEditor.Editor.Panels
 
             PhysicalEditing = new PhysicalEditingHandler(_Parent, ctrl);
             PreviewMoving.SceneMoved += PhysicalEditing.UpdateMouseCursor;
-            //EditPhysical = new MouseRectEditable(ctrl, new PhysicalDataProvider(_Parent, this));
-            //EditPhysical.Filter += GetFilterForEditMode(FrameEditMode.Physical);
-            //PreviewMoving.SceneMoved += EditPhysical.UpdateMouseCursor;
         }
 
         public EventFilter GetFilterForEditMode(FrameEditMode mode)
@@ -79,6 +76,15 @@ namespace GS_PatEditor.Editor.Panels
             return delegate(ref bool result)
             {
                 result = this._Parent.EditorNode.Animation.Frame.EditMode == mode;
+
+                //visible condition
+
+                switch (mode)
+                {
+                    case FrameEditMode.Physical:
+                        result = result && this._Parent.EditorNode.Animation.Frame.PhysicalBoxVisible;
+                        break;
+                }
             };
         }
 

@@ -24,13 +24,16 @@ namespace GS_PatEditor.Render
         }
 
         //TODO editing box
-        public static void SetupPhysical(this Sprite[] rect, int color, PhysicalBox box)
+        public static void SetupPhysical(this Sprite[] rect, int color, EditingPhysicalBox box)
         {
+            var hw = box.Width / 2;
+            var hh = box.Height / 2;
             rect.SetupRect(color,
-                box.X + box.W / 2.0f,
-                box.Y + box.H / 2.0f,
-                box.W / 2.0f,
-                box.H / 2.0f, 0);
+                box.Left + hw,
+                box.Top + hh,
+                hw,
+                hh,
+                0);
         }
     }
 }

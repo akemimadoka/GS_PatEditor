@@ -46,6 +46,13 @@
             this.toolStripSplitBoxVisible = new System.Windows.Forms.ToolStripDropDownButton();
             this.physicalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.axisToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSplitEdit = new System.Windows.Forms.ToolStripDropDownButton();
+            this.physicalToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.cutPhysicalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.copyPhysicalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pastePhysicalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.deletePhysicalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.animationFrames)).BeginInit();
             this.flowLayoutPanel2.SuspendLayout();
@@ -62,7 +69,7 @@
             this.flowLayoutPanel1.Controls.Add(this.animationFrames);
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 28);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(627, 100);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(685, 100);
             this.flowLayoutPanel1.TabIndex = 1;
             // 
             // animationFrames
@@ -89,7 +96,7 @@
             this.flowLayoutPanel2.Location = new System.Drawing.Point(0, 136);
             this.flowLayoutPanel2.Margin = new System.Windows.Forms.Padding(0);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(627, 274);
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(685, 274);
             this.flowLayoutPanel2.TabIndex = 3;
             // 
             // previewWindow
@@ -104,18 +111,20 @@
             // 
             this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripCollapseAll,
             this.toolStripExpandAll,
+            this.toolStripCollapseAll,
             this.toolStripSeparator1,
             this.toolStripButtonToolCursor,
             this.toolStripButtonToolMove,
             this.toolStripButtonToolPhysics,
             this.toolStripSeparator2,
-            this.toolStripSplitBoxVisible});
+            this.toolStripSplitBoxVisible,
+            this.toolStripSeparator3,
+            this.toolStripSplitEdit});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.toolStrip1.Size = new System.Drawing.Size(626, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(684, 25);
             this.toolStrip1.TabIndex = 4;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -205,11 +214,63 @@
             this.axisToolStripMenuItem.Text = "Axis";
             this.axisToolStripMenuItem.Click += new System.EventHandler(this.axisToolStripMenuItem_Click);
             // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
+            // 
+            // toolStripSplitEdit
+            // 
+            this.toolStripSplitEdit.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.physicalToolStripMenuItem1,
+            this.cutPhysicalToolStripMenuItem,
+            this.copyPhysicalToolStripMenuItem,
+            this.pastePhysicalToolStripMenuItem,
+            this.deletePhysicalToolStripMenuItem});
+            this.toolStripSplitEdit.Image = ((System.Drawing.Image)(resources.GetObject("toolStripSplitEdit.Image")));
+            this.toolStripSplitEdit.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripSplitEdit.Name = "toolStripSplitEdit";
+            this.toolStripSplitEdit.Size = new System.Drawing.Size(59, 22);
+            this.toolStripSplitEdit.Text = "Edit";
+            this.toolStripSplitEdit.DropDownOpening += new System.EventHandler(this.toolStripSplitEdit_DropDownOpening);
+            // 
+            // physicalToolStripMenuItem1
+            // 
+            this.physicalToolStripMenuItem1.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.physicalToolStripMenuItem1.Enabled = false;
+            this.physicalToolStripMenuItem1.Name = "physicalToolStripMenuItem1";
+            this.physicalToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.physicalToolStripMenuItem1.Text = "Physical";
+            // 
+            // cutPhysicalToolStripMenuItem
+            // 
+            this.cutPhysicalToolStripMenuItem.Name = "cutPhysicalToolStripMenuItem";
+            this.cutPhysicalToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.cutPhysicalToolStripMenuItem.Text = "Cut";
+            // 
+            // copyPhysicalToolStripMenuItem
+            // 
+            this.copyPhysicalToolStripMenuItem.Name = "copyPhysicalToolStripMenuItem";
+            this.copyPhysicalToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.copyPhysicalToolStripMenuItem.Text = "Copy";
+            // 
+            // pastePhysicalToolStripMenuItem
+            // 
+            this.pastePhysicalToolStripMenuItem.Name = "pastePhysicalToolStripMenuItem";
+            this.pastePhysicalToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.pastePhysicalToolStripMenuItem.Text = "Paste";
+            // 
+            // deletePhysicalToolStripMenuItem
+            // 
+            this.deletePhysicalToolStripMenuItem.Name = "deletePhysicalToolStripMenuItem";
+            this.deletePhysicalToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.deletePhysicalToolStripMenuItem.Text = "Delete";
+            // 
             // EditorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(626, 411);
+            this.ClientSize = new System.Drawing.Size(684, 411);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.flowLayoutPanel2);
             this.Controls.Add(this.flowLayoutPanel1);
@@ -244,6 +305,13 @@
         private System.Windows.Forms.ToolStripDropDownButton toolStripSplitBoxVisible;
         private System.Windows.Forms.ToolStripMenuItem physicalToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem axisToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripDropDownButton toolStripSplitEdit;
+        private System.Windows.Forms.ToolStripMenuItem physicalToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem cutPhysicalToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem copyPhysicalToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem pastePhysicalToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem deletePhysicalToolStripMenuItem;
 
     }
 }

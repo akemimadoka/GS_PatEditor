@@ -28,6 +28,13 @@ namespace GS_PatEditor.Editor
                     {
                         editor.PreviewWindowUI.Refresh();
                     };
+                    frm._ClipboardPhysical = new ClipboardUIProvider(editor.PreviewWindowUI.PhysicalEditing)
+                    {
+                        Cut = new ClipboardUIElementToolstripItem(frm.cutPhysicalToolStripMenuItem),
+                        Copy = new ClipboardUIElementToolstripItem(frm.copyPhysicalToolStripMenuItem),
+                        Paste = new ClipboardUIElementToolstripItem(frm.pastePhysicalToolStripMenuItem),
+                        Delete = new ClipboardUIElementToolstripItem(frm.deletePhysicalToolStripMenuItem),
+                    };
 
                     frm.Show();
                     {
@@ -42,6 +49,7 @@ namespace GS_PatEditor.Editor
         }
 
         private Editor _Editor;
+        private ClipboardUIProvider _ClipboardPhysical;
 
         public EditorForm()
         {
@@ -107,6 +115,11 @@ namespace GS_PatEditor.Editor
         {
             axisToolStripMenuItem.Checked = !axisToolStripMenuItem.Checked;
             _Editor.EditorNode.Animation.Frame.AxisVisible = axisToolStripMenuItem.Checked;
+        }
+
+        private void toolStripSplitEdit_DropDownOpening(object sender, EventArgs e)
+        {
+            _ClipboardPhysical.UpdateEnable();
         }
     }
 }

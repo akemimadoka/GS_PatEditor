@@ -35,11 +35,11 @@ namespace GS_PatEditor.Editor.Panels
         public override void Render()
         {
             var frame = _Parent.EditorNode.Animation.Frame.FrameData;
+            var window = _Parent.PreviewWindowUI;
 
             if (frame != null)
             {
                 var txt = _Parent.Data.ImageList.GetTexture(frame.ImageID, _Parent.PreviewWindowUI.Render);
-                var window = _Parent.PreviewWindowUI;
                 _Sprite.SetupFrame(txt, frame, window.SpriteMoving);
                 _Sprite.Render();
             }
@@ -54,7 +54,7 @@ namespace GS_PatEditor.Editor.Panels
             {
                 if (frame != null && frame.PhysicalBox != null)
                 {
-                    _SpriteListPhysical.SetupPhysical(0x00FF66, frame.PhysicalBox);
+                    _SpriteListPhysical.SetupPhysical(0x00FF66, window.PhysicalEditing.PhysicalBoxData);
                     _SpriteListPhysical.Render();
                 }
             }

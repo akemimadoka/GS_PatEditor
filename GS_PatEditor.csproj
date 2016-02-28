@@ -60,6 +60,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EditorTest.cs" />
+    <Compile Include="Editor\ClipboardUIProvider.cs" />
     <Compile Include="Editor\EditorForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -77,6 +78,8 @@
     <Compile Include="Editor\Nodes\AnimationNode.cs" />
     <Compile Include="Editor\Nodes\FrameNode.cs" />
     <Compile Include="Editor\Nodes\RootNode.cs" />
+    <Compile Include="Editor\ClipboardHandler.cs" />
+    <Compile Include="Editor\Panels\Tools\EditingPhysicalBox.cs" />
     <Compile Include="Editor\Panels\Tools\EditingPoint.cs" />
     <Compile Include="Editor\Panels\Tools\MouseMovable.cs" />
     <Compile Include="Editor\Panels\PreviewWindowSpriteManager.cs" />

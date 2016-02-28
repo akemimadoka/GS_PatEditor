@@ -78,7 +78,7 @@ namespace GS_PatEditor.Editor.Panels.Tools
 
         void ctrl_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button.HasFlag(_Button))
+            if (e.Button == _Button) //only handle single button
             {
                 //TODO filter
                 if (FilterMouseDown != null)
