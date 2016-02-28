@@ -44,6 +44,8 @@
             this.toolStripButtonToolPhysics = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripSplitBoxVisible = new System.Windows.Forms.ToolStripDropDownButton();
+            this.resetScaleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.axisToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.physicalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
@@ -53,15 +55,16 @@
             this.copyPhysicalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pastePhysicalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deletePhysicalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.resetScaleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
-            this.flowLayoutPanelAnimationList = new System.Windows.Forms.FlowLayoutPanel();
             this.toolStripButtonBack = new System.Windows.Forms.ToolStripButton();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.animations = new System.Windows.Forms.PictureBox();
             this.flowLayoutPanelFrameList.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.animationFrames)).BeginInit();
             this.flowLayoutPanelFramePreview.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.previewWindow)).BeginInit();
             this.toolStrip1.SuspendLayout();
+            this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.animations)).BeginInit();
             this.SuspendLayout();
             // 
             // flowLayoutPanelFrameList
@@ -73,7 +76,7 @@
             this.flowLayoutPanelFrameList.Controls.Add(this.animationFrames);
             this.flowLayoutPanelFrameList.Location = new System.Drawing.Point(0, 28);
             this.flowLayoutPanelFrameList.Name = "flowLayoutPanelFrameList";
-            this.flowLayoutPanelFrameList.Size = new System.Drawing.Size(612, 100);
+            this.flowLayoutPanelFrameList.Size = new System.Drawing.Size(641, 100);
             this.flowLayoutPanelFrameList.TabIndex = 1;
             // 
             // animationFrames
@@ -100,7 +103,7 @@
             this.flowLayoutPanelFramePreview.Location = new System.Drawing.Point(0, 136);
             this.flowLayoutPanelFramePreview.Margin = new System.Windows.Forms.Padding(0);
             this.flowLayoutPanelFramePreview.Name = "flowLayoutPanelFramePreview";
-            this.flowLayoutPanelFramePreview.Size = new System.Drawing.Size(612, 245);
+            this.flowLayoutPanelFramePreview.Size = new System.Drawing.Size(641, 211);
             this.flowLayoutPanelFramePreview.TabIndex = 3;
             // 
             // previewWindow
@@ -129,7 +132,7 @@
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.toolStrip1.Size = new System.Drawing.Size(611, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(640, 25);
             this.toolStrip1.TabIndex = 4;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -203,12 +206,24 @@
             this.toolStripSplitBoxVisible.Size = new System.Drawing.Size(75, 22);
             this.toolStripSplitBoxVisible.Text = "Visible";
             // 
+            // resetScaleToolStripMenuItem
+            // 
+            this.resetScaleToolStripMenuItem.Name = "resetScaleToolStripMenuItem";
+            this.resetScaleToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
+            this.resetScaleToolStripMenuItem.Text = "Reset scale";
+            this.resetScaleToolStripMenuItem.Click += new System.EventHandler(this.resetScaleToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(138, 6);
+            // 
             // axisToolStripMenuItem
             // 
             this.axisToolStripMenuItem.Checked = true;
             this.axisToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.axisToolStripMenuItem.Name = "axisToolStripMenuItem";
-            this.axisToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.axisToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
             this.axisToolStripMenuItem.Text = "Axis";
             this.axisToolStripMenuItem.Click += new System.EventHandler(this.axisToolStripMenuItem_Click);
             // 
@@ -217,7 +232,7 @@
             this.physicalToolStripMenuItem.Checked = true;
             this.physicalToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.physicalToolStripMenuItem.Name = "physicalToolStripMenuItem";
-            this.physicalToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.physicalToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
             this.physicalToolStripMenuItem.Text = "Physical";
             this.physicalToolStripMenuItem.Click += new System.EventHandler(this.physicalToolStripMenuItem_Click);
             // 
@@ -246,56 +261,32 @@
             this.physicalToolStripMenuItem1.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.physicalToolStripMenuItem1.Enabled = false;
             this.physicalToolStripMenuItem1.Name = "physicalToolStripMenuItem1";
-            this.physicalToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.physicalToolStripMenuItem1.Size = new System.Drawing.Size(121, 22);
             this.physicalToolStripMenuItem1.Text = "Physical";
             // 
             // cutPhysicalToolStripMenuItem
             // 
             this.cutPhysicalToolStripMenuItem.Name = "cutPhysicalToolStripMenuItem";
-            this.cutPhysicalToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.cutPhysicalToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
             this.cutPhysicalToolStripMenuItem.Text = "Cut";
             // 
             // copyPhysicalToolStripMenuItem
             // 
             this.copyPhysicalToolStripMenuItem.Name = "copyPhysicalToolStripMenuItem";
-            this.copyPhysicalToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.copyPhysicalToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
             this.copyPhysicalToolStripMenuItem.Text = "Copy";
             // 
             // pastePhysicalToolStripMenuItem
             // 
             this.pastePhysicalToolStripMenuItem.Name = "pastePhysicalToolStripMenuItem";
-            this.pastePhysicalToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.pastePhysicalToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
             this.pastePhysicalToolStripMenuItem.Text = "Paste";
             // 
             // deletePhysicalToolStripMenuItem
             // 
             this.deletePhysicalToolStripMenuItem.Name = "deletePhysicalToolStripMenuItem";
-            this.deletePhysicalToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.deletePhysicalToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
             this.deletePhysicalToolStripMenuItem.Text = "Delete";
-            // 
-            // resetScaleToolStripMenuItem
-            // 
-            this.resetScaleToolStripMenuItem.Name = "resetScaleToolStripMenuItem";
-            this.resetScaleToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.resetScaleToolStripMenuItem.Text = "Reset scale";
-            this.resetScaleToolStripMenuItem.Click += new System.EventHandler(this.resetScaleToolStripMenuItem_Click);
-            // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(149, 6);
-            // 
-            // flowLayoutPanelAnimationList
-            // 
-            this.flowLayoutPanelAnimationList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.flowLayoutPanelAnimationList.Location = new System.Drawing.Point(0, 28);
-            this.flowLayoutPanelAnimationList.Margin = new System.Windows.Forms.Padding(0);
-            this.flowLayoutPanelAnimationList.Name = "flowLayoutPanelAnimationList";
-            this.flowLayoutPanelAnimationList.Size = new System.Drawing.Size(612, 353);
-            this.flowLayoutPanelAnimationList.TabIndex = 5;
-            this.flowLayoutPanelAnimationList.Visible = false;
             // 
             // toolStripButtonBack
             // 
@@ -305,15 +296,35 @@
             this.toolStripButtonBack.Size = new System.Drawing.Size(56, 22);
             this.toolStripButtonBack.Text = "Back";
             // 
+            // panel1
+            // 
+            this.panel1.AutoScroll = true;
+            this.panel1.Controls.Add(this.animations);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(0, 25);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(640, 323);
+            this.panel1.TabIndex = 5;
+            // 
+            // animations
+            // 
+            this.animations.Dock = System.Windows.Forms.DockStyle.Top;
+            this.animations.Location = new System.Drawing.Point(0, 0);
+            this.animations.Name = "animations";
+            this.animations.Size = new System.Drawing.Size(640, 50);
+            this.animations.TabIndex = 0;
+            this.animations.TabStop = false;
+            // 
             // EditorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(611, 382);
-            this.Controls.Add(this.flowLayoutPanelAnimationList);
+            this.ClientSize = new System.Drawing.Size(640, 348);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.flowLayoutPanelFramePreview);
             this.Controls.Add(this.flowLayoutPanelFrameList);
+            this.MinimumSize = new System.Drawing.Size(600, 0);
             this.Name = "EditorForm";
             this.Text = "AnimationEditor";
             this.flowLayoutPanelFrameList.ResumeLayout(false);
@@ -322,6 +333,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.previewWindow)).EndInit();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.animations)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -354,8 +367,9 @@
         private System.Windows.Forms.ToolStripMenuItem deletePhysicalToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem resetScaleToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelAnimationList;
         private System.Windows.Forms.ToolStripButton toolStripButtonBack;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.PictureBox animations;
 
     }
 }

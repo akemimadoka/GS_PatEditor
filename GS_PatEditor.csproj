@@ -80,6 +80,7 @@
     <Compile Include="Editor\Nodes\RootNode.cs" />
     <Compile Include="Editor\ClipboardHandler.cs" />
     <Compile Include="Editor\Panels\AnimationList.cs" />
+    <Compile Include="Editor\Panels\AnimationListItem.cs" />
     <Compile Include="Editor\Panels\Tools\EditingPhysicalBox.cs" />
     <Compile Include="Editor\Panels\Tools\EditingPoint.cs" />
     <Compile Include="Editor\Panels\Tools\MouseMovable.cs" />

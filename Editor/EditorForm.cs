@@ -11,6 +11,8 @@ using System.Windows.Forms;
 
 namespace GS_PatEditor.Editor
 {
+    //TODO use Panel instead of FlowLayout (should update AnimationFrames.frm_MouseWheel)
+    //TODO use dock to arrange panels
     public partial class EditorForm : Form
     {
         public static void ShowEditorForm(Pat.Project proj)
@@ -23,6 +25,7 @@ namespace GS_PatEditor.Editor
 
                     editor.AnimationFramesUI.Init(frm.animationFrames);
                     editor.PreviewWindowUI.Init(frm.previewWindow);
+                    editor.AnimationListUI.Init(frm.animations);
 
                     frm.timer1.Tick += delegate(object sender, EventArgs e)
                     {

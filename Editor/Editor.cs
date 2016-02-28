@@ -17,6 +17,7 @@ namespace GS_PatEditor.Editor
 
         public AnimationFrames AnimationFramesUI { get; private set; }
         public PreviewWindow PreviewWindowUI { get; private set; }
+        public AnimationList AnimationListUI { get; private set; }
 
         public Editor(Pat.Project proj)
         {
@@ -24,6 +25,7 @@ namespace GS_PatEditor.Editor
             EditorNode = RootNode.CreateRootNode(proj, this);
             AnimationFramesUI = new AnimationFrames(this);
             PreviewWindowUI = new PreviewWindow(this);
+            AnimationListUI = new AnimationList(this);
         }
 
         public void Dispose()
