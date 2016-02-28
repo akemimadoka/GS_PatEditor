@@ -38,7 +38,6 @@ namespace GS_PatEditor.Editor.Panels.Tools.Preview
             parent.Render.Transform.X = _PreviewX;
             parent.Render.Transform.Y = _PreviewY;
 
-            //TODO use diff version, calc delta * scale
             MovablePreview = new MouseMovable(ctrl, MouseButtons.Middle, _PreviewMovingX, _PreviewMovingY);
             MovablePreview.OnMovedDiff += delegate(int x, int y)
             {

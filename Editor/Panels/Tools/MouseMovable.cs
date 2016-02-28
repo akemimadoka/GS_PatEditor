@@ -76,19 +76,13 @@ namespace GS_PatEditor.Editor.Panels.Tools
             }
         }
 
-        void ctrl_MouseDown(object sender, MouseEventArgs e)
+        private void ctrl_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == _Button) //only handle single button
             {
-                //TODO filter
-                if (FilterMouseDown != null)
+                if (!CheckFilter())
                 {
-                    bool success = true;
-                    FilterMouseDown(ref success);
-                    if (!success)
-                    {
-                        return;
-                    }
+                    return;
                 }
 
                 _IsButtonDown = true;
@@ -98,6 +92,19 @@ namespace GS_PatEditor.Editor.Panels.Tools
                 _DownMouseX = e.X;
                 _DownMouseY = e.Y;
             }
+        }
+
+        private bool CheckFilter()
+        {
+            if (FilterMouseDown == null)
+            {
+                return true;
+            }
+
+            bool ret = true;
+            FilterMouseDown(ref ret);
+
+            return ret;
         }
     }
 }

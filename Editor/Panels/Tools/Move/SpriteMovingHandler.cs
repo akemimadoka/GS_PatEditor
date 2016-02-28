@@ -26,8 +26,11 @@ namespace GS_PatEditor.Editor.Panels.Tools.Move
             move.OnMoveFinished += delegate()
             {
                 var node = editor.EditorNode.Animation.Frame;
-                node.FrameData.OriginX += SpriteMovingX;
-                node.FrameData.OriginY += SpriteMovingY;
+                if (node.FrameData != null)
+                {
+                    node.FrameData.OriginX += SpriteMovingX;
+                    node.FrameData.OriginY += SpriteMovingY;
+                }
                 SpriteMovingX = 0;
                 SpriteMovingY = 0;
             };

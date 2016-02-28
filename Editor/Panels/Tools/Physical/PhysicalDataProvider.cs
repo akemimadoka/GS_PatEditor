@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace GS_PatEditor.Editor.Panels.Tools.Physical
 {
-    //TODO merge physical box check logic
     class PhysicalDataProvider : EditingPhysicalBox
     {
         private readonly Editor _Editor;
@@ -14,6 +13,8 @@ namespace GS_PatEditor.Editor.Panels.Tools.Physical
 
         private bool _IsEditing;
         private float _NewLeft, _NewRight, _NewTop, _NewBottom;
+
+        private static readonly Pat.PhysicalBox NullBox = new Pat.PhysicalBox();
 
         public PhysicalDataProvider(Editor editor)
         {
@@ -76,38 +77,43 @@ namespace GS_PatEditor.Editor.Panels.Tools.Physical
             frame.PhysicalBox.H = (int)Math.Round(_NewBottom - _NewTop);
         }
 
+        private Pat.PhysicalBox GetPhysicalBox()
+        {
+            var frame = _Editor.EditorNode.Animation.Frame.FrameData;
+            if (frame == null || frame.PhysicalBox == null)
+            {
+                NullBox.X = 0;
+                NullBox.Y = 0;
+                NullBox.W = 0;
+                NullBox.H = 0;
+
+                return NullBox;
+            }
+            return frame.PhysicalBox;
+        }
+
         public float ScreenLeft
         {
             get
             {
-                var frame = _Editor.EditorNode.Animation.Frame.FrameData;
-                if (frame == null || frame.PhysicalBox == null)
-                {
-                    return 0;
-                }
                 if (_IsEditing)
                 {
                     return _Window.PreviewMoving.TransformXSpriteToClient(_NewLeft);
                 }
                 else
                 {
-                    return _Window.PreviewMoving.TransformXSpriteToClient(frame.PhysicalBox.X);
+                    return _Window.PreviewMoving.TransformXSpriteToClient(GetPhysicalBox().X);
                 }
             }
             set
             {
-                var frame = _Editor.EditorNode.Animation.Frame.FrameData;
-                if (frame == null || frame.PhysicalBox == null)
-                {
-                    return;
-                }
                 if (_IsEditing)
                 {
                     _NewLeft = _Window.PreviewMoving.TransformXClientToSprite(value);
                 }
                 else
                 {
-                    frame.PhysicalBox.X = (int)_Window.PreviewMoving.TransformXClientToSprite(value);
+                    GetPhysicalBox().X = (int)_Window.PreviewMoving.TransformXClientToSprite(value);
                 }
             }
         }
@@ -116,34 +122,24 @@ namespace GS_PatEditor.Editor.Panels.Tools.Physical
         {
             get
             {
-                var frame = _Editor.EditorNode.Animation.Frame.FrameData;
-                if (frame == null || frame.PhysicalBox == null)
-                {
-                    return 0;
-                }
                 if (_IsEditing)
                 {
                     return _Window.PreviewMoving.TransformYSpriteToClient(_NewTop);
                 }
                 else
                 {
-                    return _Window.PreviewMoving.TransformYSpriteToClient(frame.PhysicalBox.Y);
+                    return _Window.PreviewMoving.TransformYSpriteToClient(GetPhysicalBox().Y);
                 }
             }
             set
             {
-                var frame = _Editor.EditorNode.Animation.Frame.FrameData;
-                if (frame == null || frame.PhysicalBox == null)
-                {
-                    return;
-                }
                 if (_IsEditing)
                 {
                     _NewTop = _Window.PreviewMoving.TransformYClientToSprite(value);
                 }
                 else
                 {
-                    frame.PhysicalBox.Y = (int)_Window.PreviewMoving.TransformYClientToSprite(value);
+                    GetPhysicalBox().Y = (int)_Window.PreviewMoving.TransformYClientToSprite(value);
                 }
             }
         }
@@ -152,34 +148,26 @@ namespace GS_PatEditor.Editor.Panels.Tools.Physical
         {
             get
             {
-                var frame = _Editor.EditorNode.Animation.Frame.FrameData;
-                if (frame == null || frame.PhysicalBox == null)
-                {
-                    return 0;
-                }
                 if (_IsEditing)
                 {
                     return _Window.PreviewMoving.TransformXSpriteToClient(_NewRight);
                 }
                 else
                 {
-                    return _Window.PreviewMoving.TransformXSpriteToClient(frame.PhysicalBox.X + frame.PhysicalBox.W);
+                    var box = GetPhysicalBox();
+                    return _Window.PreviewMoving.TransformXSpriteToClient(box.X + box.W);
                 }
             }
             set
             {
-                var frame = _Editor.EditorNode.Animation.Frame.FrameData;
-                if (frame == null || frame.PhysicalBox == null)
-                {
-                    return;
-                }
                 if (_IsEditing)
                 {
                     _NewRight = _Window.PreviewMoving.TransformXClientToSprite(value);
                 }
                 else
                 {
-                    frame.PhysicalBox.W = (int)_Window.PreviewMoving.TransformXClientToSprite(value) - frame.PhysicalBox.X;
+                    var box = GetPhysicalBox();
+                    box.W = (int)_Window.PreviewMoving.TransformXClientToSprite(value) - box.X;
                 }
             }
         }
@@ -188,34 +176,26 @@ namespace GS_PatEditor.Editor.Panels.Tools.Physical
         {
             get
             {
-                var frame = _Editor.EditorNode.Animation.Frame.FrameData;
-                if (frame == null || frame.PhysicalBox == null)
-                {
-                    return 0;
-                }
                 if (_IsEditing)
                 {
                     return _Window.PreviewMoving.TransformYSpriteToClient(_NewBottom);
                 }
                 else
                 {
-                    return _Window.PreviewMoving.TransformYSpriteToClient(frame.PhysicalBox.Y + frame.PhysicalBox.H);
+                    var box = GetPhysicalBox();
+                    return _Window.PreviewMoving.TransformYSpriteToClient(box.Y + box.H);
                 }
             }
             set
             {
-                var frame = _Editor.EditorNode.Animation.Frame.FrameData;
-                if (frame == null || frame.PhysicalBox == null)
-                {
-                    return;
-                }
                 if (_IsEditing)
                 {
                     _NewBottom = _Window.PreviewMoving.TransformYClientToSprite(value);
                 }
                 else
                 {
-                    frame.PhysicalBox.H = (int)_Window.PreviewMoving.TransformYClientToSprite(value) - frame.PhysicalBox.Y;
+                    var box = GetPhysicalBox();
+                    box.H = (int)_Window.PreviewMoving.TransformYClientToSprite(value) - box.Y;
                 }
             }
         }
@@ -224,12 +204,7 @@ namespace GS_PatEditor.Editor.Panels.Tools.Physical
         {
             get
             {
-                var frame = _Editor.EditorNode.Animation.Frame.FrameData;
-                if (frame == null || frame.PhysicalBox == null)
-                {
-                    return 0;
-                }
-                return _IsEditing ? _NewLeft : frame.PhysicalBox.X;
+                return _IsEditing ? _NewLeft : GetPhysicalBox().X;
             }
         }
 
@@ -237,12 +212,7 @@ namespace GS_PatEditor.Editor.Panels.Tools.Physical
         {
             get
             {
-                var frame = _Editor.EditorNode.Animation.Frame.FrameData;
-                if (frame == null || frame.PhysicalBox == null)
-                {
-                    return 0;
-                }
-                return _IsEditing ? _NewTop : frame.PhysicalBox.Y;
+                return _IsEditing ? _NewTop : GetPhysicalBox().Y;
             }
         }
 
@@ -250,12 +220,7 @@ namespace GS_PatEditor.Editor.Panels.Tools.Physical
         {
             get
             {
-                var frame = _Editor.EditorNode.Animation.Frame.FrameData;
-                if (frame == null || frame.PhysicalBox == null)
-                {
-                    return 0;
-                }
-                return _IsEditing ? _NewRight - _NewLeft : frame.PhysicalBox.W;
+                return _IsEditing ? _NewRight - _NewLeft : GetPhysicalBox().W;
             }
         }
 
@@ -263,12 +228,7 @@ namespace GS_PatEditor.Editor.Panels.Tools.Physical
         {
             get
             {
-                var frame = _Editor.EditorNode.Animation.Frame.FrameData;
-                if (frame == null || frame.PhysicalBox == null)
-                {
-                    return 0;
-                }
-                return _IsEditing ? _NewBottom - _NewTop : frame.PhysicalBox.H;
+                return _IsEditing ? _NewBottom - _NewTop : GetPhysicalBox().H;
             }
         }
     }

@@ -64,8 +64,6 @@ namespace GS_PatEditor.Render
 
             _Effect = Effect.FromString(_Device, Shader.Value, ShaderFlags.None);
             _Effect.SetValue("mat_ViewProj", _Device.GetViewProjectionMatrix());
-
-            _BlackTexture = CreateColorTexture(0);
         }
 
         public void Dispose()
@@ -123,13 +121,6 @@ namespace GS_PatEditor.Render
 
         private System.Drawing.Bitmap SinglePixelBitmap =
             new System.Drawing.Bitmap(1, 1, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
-
-        //TODO merge into _ColorTextureList
-        private Texture _BlackTexture;
-        public Texture GetBlackTexture()
-        {
-            return _BlackTexture;
-        }
 
         private readonly Dictionary<int, Texture> _ColorTextureList = new Dictionary<int, Texture>();
 

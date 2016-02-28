@@ -23,7 +23,6 @@ namespace GS_PatEditor.Render
                 Rotation: frame.Rotate / 180.0f * 3.1415926f);
         }
 
-        //TODO editing box
         public static void SetupPhysical(this Sprite[] rect, int color, EditingPhysicalBox box)
         {
             var hw = box.Width / 2;

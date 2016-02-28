@@ -327,7 +327,7 @@ namespace GS_PatEditor.Editor.Panels
 
             UpdateControlWidth();
 
-            if (_GridList[0] is KeyFrameGrid)
+            if (_GridList.Count > 0 && _GridList[0] is KeyFrameGrid)
             {
                 SelectKeyGrid((KeyFrameGrid)_GridList[0]);
             }
