@@ -20,10 +20,38 @@ namespace GS_PatEditor.Editor.Nodes
         public void SetSelectedFrame(int segment, int frame)
         {
             //TODO handle empty animation
-            SelectedSegmentIndex = segment;
-            SelectedFrameIndex = frame;
+            if (segment >= Data.Segments.Count)
+            {
+                if (Data.Segments.Count == 0)
+                {
+                    SelectedSegmentIndex = -1;
+                    SelectedFrameIndex = -1;
+                    Frame.Reset(null, null);
+                    return;
+                }
+                else
+                {
+                    segment = 0;
+                }
+            }
 
-            var seg = Data.Segments[SelectedSegmentIndex];
+            SelectedSegmentIndex = segment;
+            var seg = Data.Segments[segment];
+
+            if (frame >= seg.Frames.Count)
+            {
+                if (seg.Frames.Count == 0)
+                {
+                    SelectedFrameIndex = -1;
+                    Frame.Reset(seg, null);
+                    return;
+                }
+                else
+                {
+                    frame = 0;
+                }
+            }
+            SelectedFrameIndex = frame;
             Frame.Reset(seg, seg.Frames[SelectedFrameIndex]);
         }
 

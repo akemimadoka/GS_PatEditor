@@ -61,7 +61,7 @@
             this.flowLayoutPanel1.Controls.Add(this.animationFrames);
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 28);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(536, 100);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(627, 100);
             this.flowLayoutPanel1.TabIndex = 1;
             // 
             // animationFrames
@@ -88,7 +88,7 @@
             this.flowLayoutPanel2.Location = new System.Drawing.Point(0, 136);
             this.flowLayoutPanel2.Margin = new System.Windows.Forms.Padding(0);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(536, 278);
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(627, 274);
             this.flowLayoutPanel2.TabIndex = 3;
             // 
             // previewWindow
@@ -114,7 +114,7 @@
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.toolStrip1.Size = new System.Drawing.Size(535, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(626, 25);
             this.toolStrip1.TabIndex = 4;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -190,7 +190,7 @@
             this.physicalToolStripMenuItem.Checked = true;
             this.physicalToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.physicalToolStripMenuItem.Name = "physicalToolStripMenuItem";
-            this.physicalToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.physicalToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
             this.physicalToolStripMenuItem.Text = "Physical";
             this.physicalToolStripMenuItem.Click += new System.EventHandler(this.physicalToolStripMenuItem_Click);
             // 
@@ -198,7 +198,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(535, 415);
+            this.ClientSize = new System.Drawing.Size(626, 411);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.flowLayoutPanel2);
             this.Controls.Add(this.flowLayoutPanel1);

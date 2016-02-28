@@ -40,8 +40,16 @@ namespace GS_PatEditor.Editor.Panels
 
         public override void Render()
         {
-            var proj = _Parent.Data;
             var frame = _Parent.EditorNode.Animation.Frame.FrameData;
+            //handle empty animation (no frame is selected)
+            if (frame == null)
+            {
+                _SpriteLineV.Render();
+                _SpriteLineH.Render();
+                return;
+            }
+
+            var proj = _Parent.Data;
             var id = frame.ImageID;
             var txt = proj.ImageList.GetTexture(id, _Parent.PreviewWindowUI.Render);
             var window = _Parent.PreviewWindowUI;

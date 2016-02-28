@@ -37,10 +37,10 @@ namespace GS_PatEditor.Render
         public static void SetupRect(int color, Sprite[] spriteArray,
             float x, float y, float halfWidth, float halfHeight, float rotation)
         {
-            SetupLineDistance(color, spriteArray[0], x, y, 0, halfHeight, halfWidth, 0.5f, rotation);
-            SetupLineDistance(color, spriteArray[1], x, y, halfWidth, 0, 0.5f, halfHeight, rotation);
-            SetupLineDistance(color, spriteArray[2], x, y, 0, -halfHeight, halfWidth, 0.5f, rotation);
-            SetupLineDistance(color, spriteArray[3], x, y, -halfWidth, 0, 0.5f, halfHeight, rotation);
+            SetupLineDistance(color, spriteArray[0], x, y, 0, halfHeight, halfWidth + 0.5f, 0.5f, rotation);
+            SetupLineDistance(color, spriteArray[1], x, y, halfWidth, 0, 0.5f, halfHeight + 0.5f, rotation);
+            SetupLineDistance(color, spriteArray[2], x, y, 0, -halfHeight, halfWidth + 0.5f, 0.5f, rotation);
+            SetupLineDistance(color, spriteArray[3], x, y, -halfWidth, 0, 0.5f, halfHeight + 0.5f, rotation);
         }
     }
 }

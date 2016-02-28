@@ -87,6 +87,11 @@ namespace GS_PatEditor.Editor.Panels
                 move.FilterMouseDown += delegate(ref bool result)
                 {
                     var node = _Parent.EditorNode.Animation.Frame;
+                    //empty animation (no frame)
+                    if (node.FrameData == null)
+                    {
+                        result = false;
+                    }
                     if (node.PreviewMode != FrameNode.FramePreviewMode.Pause ||
                         node.EditMode != FrameNode.FrameEditMode.Move)
                     {
