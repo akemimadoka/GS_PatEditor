@@ -20,7 +20,20 @@ namespace GS_PatEditor.Editor.Panels
 
         public void ResetAll()
         {
+            foreach (var s in _SpriteList)
+            {
+                _Window.Render.ReturnSprite(s);
+            }
+            _SpriteList.Clear();
 
+            foreach (var ss in _RectangleList)
+            {
+                _Window.Render.ReturnSprite(ss[0]);
+                _Window.Render.ReturnSprite(ss[1]);
+                _Window.Render.ReturnSprite(ss[2]);
+                _Window.Render.ReturnSprite(ss[3]);
+            }
+            _RectangleList.Clear();
         }
 
         public Sprite GetSprite(int index)

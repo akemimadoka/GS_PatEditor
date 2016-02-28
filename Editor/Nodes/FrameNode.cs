@@ -47,17 +47,20 @@ namespace GS_PatEditor.Editor.Nodes
             SegmentData = seg;
             FrameData = frame;
 
-            //should preserve edit mode
-            //EditMode = FrameEditMode.None;
-            //PreviewMode = FramePreviewMode.Pause;
-            if (_Parent.PreviewWindowUI != null)
-            {
-                _Parent.PreviewWindowUI.UpdatePreviewMode();
-            }
-
             if (OnReset != null)
             {
                 OnReset();
+            }
+        }
+
+        public void ResetAnimation()
+        {
+            EditMode = FrameEditMode.None;
+            PreviewMode = FramePreviewMode.Pause;
+
+            if (_Parent.PreviewWindowUI != null)
+            {
+                _Parent.PreviewWindowUI.UpdatePreviewMode();
             }
         }
 

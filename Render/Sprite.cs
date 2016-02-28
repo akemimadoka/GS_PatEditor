@@ -193,7 +193,8 @@ namespace GS_PatEditor.Render
                 var desc = surface.Description;
                 t_r = desc.Width;
                 t_b = desc.Height;
-                t_l = t_t = 0;
+                t_l = 0;
+                t_t = 0;
             }
             //apply origin
             {

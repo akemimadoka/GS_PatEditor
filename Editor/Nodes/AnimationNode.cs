@@ -67,6 +67,7 @@ namespace GS_PatEditor.Editor.Nodes
         {
             Data = data;
 
+            Frame.ResetAnimation();
             SetSelectedFrame(0, 0);
 
             if (OnReset != null)

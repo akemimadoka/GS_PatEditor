@@ -43,7 +43,10 @@ namespace GS_PatEditor.Pat
                 }
                 else
                 {
-                    if (JumpCancellable == null) JumpCancellable = new AnimationCancellableInfo();
+                    if (JumpCancellable == null)
+                    {
+                        JumpCancellable = new AnimationCancellableInfo();
+                    }
                     JumpCancellable.StartFrom = Int32.Parse(value);
                 }
             }
@@ -68,7 +71,10 @@ namespace GS_PatEditor.Pat
                 }
                 else
                 {
-                    if (SkillCancellable == null) SkillCancellable = new AnimationCancellableInfo();
+                    if (SkillCancellable == null)
+                    {
+                        SkillCancellable = new AnimationCancellableInfo();
+                    }
                     SkillCancellable.StartFrom = Int32.Parse(value);
                 }
             }

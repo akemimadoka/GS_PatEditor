@@ -34,7 +34,6 @@ namespace GS_PatEditor.Editor.Panels
         public PreviewMovingHandler PreviewMoving { get; private set; }
         public SpriteMovingHandler SpriteMoving { get; private set; }
 
-        //private MouseRectEditable EditPhysical;
         public PhysicalEditingHandler PhysicalEditing { get; private set; }
 
         public PreviewWindow(Editor parent)
@@ -108,6 +107,8 @@ namespace GS_PatEditor.Editor.Panels
         {
             if (Render != null)
             {
+                SpriteManager.ResetAll();
+
                 Render.Dispose();
                 Render = null;
             }
@@ -116,6 +117,8 @@ namespace GS_PatEditor.Editor.Panels
         //called by FrameNode, when update mode is changed
         public void UpdatePreviewMode()
         {
+            SpriteManager.ResetAll();
+
             switch (_Parent.EditorNode.Animation.Frame.PreviewMode)
             {
                 case FrameNode.FramePreviewMode.Pause:
@@ -126,13 +129,5 @@ namespace GS_PatEditor.Editor.Panels
                     break;
             }
         }
-
-        //public void EnsureSpriteList(int count)
-        //{
-        //    while (SpriteList.Count < count)
-        //    {
-        //        SpriteList.Add(Render.GetSprite());
-        //    }
-        //}
     }
 }

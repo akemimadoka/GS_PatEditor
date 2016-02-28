@@ -159,6 +159,23 @@ namespace GS_PatEditor.Images
             header.array_size = reader.ReadUInt32();
             header.misc_flags2 = reader.ReadUInt32();
         }
+        private static bool ReadAllHeader(BinaryReader reader, ref DdsHeader header)
+        {
+            if (!magic.Equals(reader.ReadBytes(magic.Length)))
+            {
+                return false;
+            }
+
+            ReadHeader(reader, ref header);
+            if (magic_dx10.Equals(header.pixel_format.four_cc))
+            {
+                var header10 = new DdsHeaderDx10();
+                ReadHeaderDx10(reader, ref header10);
+            }
+
+            return true;
+        }
+
         #endregion
         #region Decoder
         private static UInt32 ColorBGR565ToBGRA(UInt16 c, UInt32 alpha)
@@ -307,44 +324,53 @@ namespace GS_PatEditor.Images
         }
         #endregion
 
+        private static Bitmap ReadCompressed(BinaryReader reader, DdsHeader header)
+        {
+            if (magic_dxt1.Equals(header.pixel_format.four_cc))
+            {
+                return DecodeDXT1(reader, header.width, header.height);
+            }
+            else if (magic_dxt5.Equals(header.pixel_format.four_cc))
+            {
+                return DecodeDXT5(reader, header.width, header.height);
+            }
+            else
+            {
+                return null;
+            }
+        }
+        private static Bitmap ReadRGBBitmap(BinaryReader reader, DdsHeader header)
+        {
+            if (header.pixel_format.rgb_bit_count == 32)
+            {
+                //TODO read BGRA8888
+                return null;
+            }
+            else
+            {
+                return null;
+            }
+        }
         public static Bitmap LoadDDS(BinaryReader reader)
         {
-            if (!magic.Equals(reader.ReadBytes(magic.Length)))
+            var header = new DdsHeader();
+            if (!ReadAllHeader(reader, ref header))
             {
                 return null;
             }
 
-            var header = new DdsHeader();
-            ReadHeader(reader, ref header);
-            if (magic_dx10.Equals(header.pixel_format.four_cc))
-            {
-                var header10 = new DdsHeaderDx10();
-                ReadHeaderDx10(reader, ref header10);
-            }
-
-            var width = header.width;
-            var height = header.height;
-
             if (header.pixel_format.flags.HasFlag(DdsPixelFormatFlags.DDPF_FOURCC))
             {
-                if (magic_dxt1.Equals(header.pixel_format.four_cc))
-                    return DecodeDXT1(reader, width, height);
-                else if (magic_dxt5.Equals(header.pixel_format.four_cc))
-                    return DecodeDXT5(reader, width, height);
-                else
-                {
-                    return null;
-                }
+                return ReadCompressed(reader, header);
             }
             else if (header.pixel_format.flags.HasFlag(DdsPixelFormatFlags.DDPF_RGB))
             {
-                if (header.pixel_format.rgb_bit_count == 32)
-                {
-                    //TODO read BGRA8888
-                    return null;
-                }
+                return ReadRGBBitmap(reader, header);
             }
-            return null;
+            else
+            {
+                return null;
+            }
         }
         
     }

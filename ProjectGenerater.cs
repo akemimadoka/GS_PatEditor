@@ -141,16 +141,24 @@ namespace GS_PatEditor
             return new AnimationSegment()
             {
                 Damage = ImportDamageInfo(animation),
-                CancelLevel = animation.CancelLevel == 0 ? CancelLevel.Free :
-                                animation.CancelLevel == 10 ? CancelLevel.Light :
-                                animation.CancelLevel == 30 ? CancelLevel.Long :
-                                animation.CancelLevel == 31 ? CancelLevel.Heavy :
-                                animation.CancelLevel == 50 ? CancelLevel.Magic : CancelLevel.None,
+                CancelLevel = ImportCancelLevelEnum(animation.CancelLevel),
                 IsLoop = animation.IsLoop,
                 JumpCancellable = ImportCancellable(animation, 0x200000),
                 SkillCancellable = ImportCancellable(animation, 0x20),
                 Frames = animation.Frames.Select(f => ImportFrame(proj, pat, f)).ToList(),
             };
+        }
+        private static CancelLevel ImportCancelLevelEnum(short number)
+        {
+            switch (number)
+            {
+                case 0: return CancelLevel.Free;
+                case 10: return CancelLevel.Light;
+                case 30: return CancelLevel.Long;
+                case 31: return CancelLevel.Heavy;
+                case 50: return CancelLevel.Magic;
+                default: return CancelLevel.None;
+            }
         }
         private static Pat.Frame ImportFrame(Pat.Project proj, GSPat.GSPatFile pat, GSPat.Frame frame)
         {
@@ -234,16 +242,24 @@ namespace GS_PatEditor
                 .Sum(f => f.DisplayTime);
             return new AnimationDamageInfo()
             {
-                AttackType = atk.AttackType == 0 ? AttackType.None :
-                                atk.AttackType == 1 ? AttackType.Light :
-                                atk.AttackType == 2 ? AttackType.Heavy :
-                                atk.AttackType == 3 ? AttackType.Smash : AttackType.None,
+                AttackType = ImportAttackTypeEnum(atk.AttackType),
                 BaseDamage = atk.Damage,
                 HitStop = new HitStop { Self = atk.HitstopSelf, Opponent = atk.HitstopOpponent },
                 Knockback = new HitKnockback { SpeedX = atk.HitVX, SpeedY = atk.HitVY, Gravity = atk.HitG },
                 SoundEffect = atk.HitSoundEffect,
                 Duration = atkLength,
             };
+        }
+        private static AttackType ImportAttackTypeEnum(short number)
+        {
+            switch (number)
+            {
+                case 0: return AttackType.None;
+                case 1: return AttackType.Light;
+                case 2: return AttackType.Heavy;
+                case 3: return AttackType.Smash;
+                default: return AttackType.None;
+            }
         }
         private static Pat.FrameImage AddImageToProject(Project proj, string filename, GSPat.Frame frame)
         {

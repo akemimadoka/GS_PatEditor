@@ -19,7 +19,7 @@ namespace GS_PatEditor.Pat
 
         [XmlElement]
         public bool AlphaBlendMode;
-        public bool ShouldSerializeAlphaBlendMode() { return AlphaBlendMode == true; }
+        public bool ShouldSerializeAlphaBlendMode() { return AlphaBlendMode /* == true */; }
 
         [XmlElement]
         public int X;
