@@ -1,6 +1,7 @@
 ﻿using GS_PatEditor.Editor.Nodes;
 using GS_PatEditor.Editor.Panels.Tools;
 using GS_PatEditor.Editor.Panels.Tools.Physical;
+using GS_PatEditor.Editor.Panels.Tools.Preview;
 using GS_PatEditor.Render;
 using System;
 using System.Collections.Generic;
@@ -21,17 +22,18 @@ namespace GS_PatEditor.Editor.Panels
         private readonly Editor _Parent;
         private Control _Control;
 
+        //global
+
         public RenderEngine Render { get; private set; }
         public PreviewWindowSpriteManager SpriteManager { get; private set; }
         public AbstractPreviewWindowContent CurrentContent { get; private set; }
 
-        private int PreviewX, PreviewY;
-        private int PreviewMovingX, PreviewMovingY;
-        private float _PreviewScale = 1.0f;
+        //tools
+
+        public PreviewMovingHandler PreviewMoving { get; private set; }
 
         public int SpriteMovingX, SpriteMovingY;
 
-        private MouseMovable MovablePreview;
         private MouseRectEditable EditPhysical;
 
         public PreviewWindow(Editor parent)
@@ -50,10 +52,7 @@ namespace GS_PatEditor.Editor.Panels
             Render = new RenderEngine(ctrl);
             Render.OnRender += _Render_OnRender;
 
-            PreviewX = ctrl.Width / 2;
-            PreviewY = ctrl.Height / 2;
-            Render.Transform.X = PreviewX;
-            Render.Transform.Y = PreviewY;
+            PreviewMoving = new PreviewMovingHandler(this, ctrl);
 
             //sprites
             SpriteManager = new PreviewWindowSpriteManager(this);
@@ -63,26 +62,6 @@ namespace GS_PatEditor.Editor.Panels
 
             //move scene
             {
-                //TODO use diff version, calc delta * scale
-                MovablePreview = new MouseMovable(ctrl, MouseButtons.Middle, PreviewMovingX, PreviewMovingY);
-                MovablePreview.OnMovedDiff += delegate(int x, int y)
-                {
-                    PreviewMovingX = x;
-                    PreviewMovingY = y;
-
-                    Render.Transform.X = PreviewX + PreviewMovingX;
-                    Render.Transform.Y = PreviewY + PreviewMovingY;
-                };
-                MovablePreview.OnMoveFinished += delegate()
-                {
-                    PreviewX += PreviewMovingX;
-                    PreviewY += PreviewMovingY;
-                    PreviewMovingX = 0;
-                    PreviewMovingY = 0;
-
-                    Render.Transform.X = PreviewX;
-                    Render.Transform.Y = PreviewY;
-                };
             }
 
             //move tool
@@ -104,8 +83,8 @@ namespace GS_PatEditor.Editor.Panels
                 };
                 move.OnMovedDiff += delegate(int x, int y)
                 {
-                    SpriteMovingX = (int)(-x / _PreviewScale);
-                    SpriteMovingY = (int)(-y / _PreviewScale);
+                    SpriteMovingX = (int)(-x / PreviewMoving.PreviewScale);
+                    SpriteMovingY = (int)(-y / PreviewMoving.PreviewScale);
                 };
                 move.OnMoveFinished += delegate()
                 {
@@ -119,9 +98,7 @@ namespace GS_PatEditor.Editor.Panels
 
             EditPhysical = new MouseRectEditable(ctrl, new PhysicalDataProvider(_Parent, this));
             EditPhysical.Filter += GetFilterForEditMode(FrameEditMode.Physical);
-
-            //mouse wheel zoom in/out
-            ctrl.FindForm().MouseWheel += frm_MouseWheel;
+            PreviewMoving.SceneMoved += EditPhysical.UpdateMouseCursor;
         }
 
         private EventFilter GetFilterForEditMode(FrameEditMode mode)
@@ -130,58 +107,6 @@ namespace GS_PatEditor.Editor.Panels
             {
                 result = this._Parent.EditorNode.Animation.Frame.EditMode == mode;
             };
-        }
-
-        private void frm_MouseWheel(object sender, MouseEventArgs e)
-        {
-            var parentCtrl = _Control.Parent;
-            if (!parentCtrl.ClientRectangle.Contains(parentCtrl.PointToClient(Control.MousePosition)))
-            {
-                return;
-            }
-            if (_Control.ClientRectangle.Contains(_Control.PointToClient(Control.MousePosition)))
-            {
-                if (e.Delta < 0)
-                {
-                    SetScale(_PreviewScale * 0.9f);
-                }
-                else if (e.Delta > 0)
-                {
-                    SetScale(_PreviewScale / 0.9f);
-                }
-            }
-        }
-
-        private void SetScale(float newScale)
-        {
-            if (newScale < 0.1f || newScale > 10.0f)
-            {
-                return;
-            }
-
-            //client position of mouse
-            var pClient = _Control.PointToClient(Control.MousePosition);
-
-            //position on scaled scene
-            float pSSx = (pClient.X - PreviewX) / _PreviewScale;
-            float pSSy = (pClient.Y - PreviewY) / _PreviewScale;
-
-            //this point is still on pClient
-            float newX = pClient.X - pSSx * newScale;
-            float newY = pClient.Y - pSSy * newScale;
-
-            PreviewX = (int)newX;
-            PreviewY = (int)newY;
-            _PreviewScale = newScale;
-
-            MovablePreview.SetPosition(PreviewX, PreviewY);
-
-            Render.Transform.Scale = _PreviewScale;
-            Render.Transform.X = PreviewX;
-            Render.Transform.Y = PreviewY;
-
-            //TODO update rect editors
-            EditPhysical.UpdateMouseCursor();
         }
 
         private void _Render_OnRender()
@@ -230,27 +155,5 @@ namespace GS_PatEditor.Editor.Panels
         //        SpriteList.Add(Render.GetSprite());
         //    }
         //}
-
-        #region transformations, used by rect editing
-        public float TransformXSpriteToClient(float x)
-        {
-            return (PreviewX + PreviewMovingX) + _PreviewScale * x;
-        }
-
-        public float TransformYSpriteToClient(float y)
-        {
-            return (PreviewY + PreviewMovingY) + _PreviewScale * y;
-        }
-
-        public float TransformXClientToSprite(float x)
-        {
-            return (x - PreviewX - PreviewMovingX) / _PreviewScale;
-        }
-
-        public float TransformYClientToSprite(float y)
-        {
-            return (y - PreviewY - PreviewMovingY) / _PreviewScale;
-        }
-        #endregion
     }
 }

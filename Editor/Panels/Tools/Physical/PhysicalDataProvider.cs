@@ -26,7 +26,7 @@ namespace GS_PatEditor.Editor.Panels.Tools.Physical
                 {
                     return 0;
                 }
-                return _Window.TransformXSpriteToClient(frame.PhysicalBox.X);
+                return _Window.PreviewMoving.TransformXSpriteToClient(frame.PhysicalBox.X);
             }
             set
             {
@@ -35,7 +35,7 @@ namespace GS_PatEditor.Editor.Panels.Tools.Physical
                 {
                     return;
                 }
-                frame.PhysicalBox.X = (int)_Window.TransformXClientToSprite(value);
+                frame.PhysicalBox.X = (int)_Window.PreviewMoving.TransformXClientToSprite(value);
             }
         }
 
@@ -48,7 +48,7 @@ namespace GS_PatEditor.Editor.Panels.Tools.Physical
                 {
                     return 0;
                 }
-                return _Window.TransformYSpriteToClient(frame.PhysicalBox.Y);
+                return _Window.PreviewMoving.TransformYSpriteToClient(frame.PhysicalBox.Y);
             }
             set
             {
@@ -57,7 +57,7 @@ namespace GS_PatEditor.Editor.Panels.Tools.Physical
                 {
                     return;
                 }
-                frame.PhysicalBox.Y = (int)_Window.TransformYClientToSprite(value);
+                frame.PhysicalBox.Y = (int)_Window.PreviewMoving.TransformYClientToSprite(value);
             }
         }
 
@@ -70,7 +70,7 @@ namespace GS_PatEditor.Editor.Panels.Tools.Physical
                 {
                     return 0;
                 }
-                return _Window.TransformXSpriteToClient(frame.PhysicalBox.X + frame.PhysicalBox.W);
+                return _Window.PreviewMoving.TransformXSpriteToClient(frame.PhysicalBox.X + frame.PhysicalBox.W);
             }
             set
             {
@@ -79,7 +79,7 @@ namespace GS_PatEditor.Editor.Panels.Tools.Physical
                 {
                     return;
                 }
-                frame.PhysicalBox.W = (int)_Window.TransformXClientToSprite(value) - frame.PhysicalBox.X;
+                frame.PhysicalBox.W = (int)_Window.PreviewMoving.TransformXClientToSprite(value) - frame.PhysicalBox.X;
             }
         }
 
@@ -92,7 +92,7 @@ namespace GS_PatEditor.Editor.Panels.Tools.Physical
                 {
                     return 0;
                 }
-                return _Window.TransformYSpriteToClient(frame.PhysicalBox.Y + frame.PhysicalBox.H);
+                return _Window.PreviewMoving.TransformYSpriteToClient(frame.PhysicalBox.Y + frame.PhysicalBox.H);
             }
             set
             {
@@ -101,7 +101,7 @@ namespace GS_PatEditor.Editor.Panels.Tools.Physical
                 {
                     return;
                 }
-                frame.PhysicalBox.H = (int)_Window.TransformYClientToSprite(value) - frame.PhysicalBox.Y;
+                frame.PhysicalBox.H = (int)_Window.PreviewMoving.TransformYClientToSprite(value) - frame.PhysicalBox.Y;
             }
         }
     }

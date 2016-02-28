@@ -84,6 +84,7 @@
     <Compile Include="Editor\Panels\PreviewWindow.cs" />
     <Compile Include="Editor\Panels\PreviewWindowStatic.cs" />
     <Compile Include="Editor\Panels\Tools\Physical\PhysicalDataProvider.cs" />
+    <Compile Include="Editor\Panels\Tools\Preview\PreviewMovingHandler.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
