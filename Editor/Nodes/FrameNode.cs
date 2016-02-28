@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 
 namespace GS_PatEditor.Editor.Nodes
 {
+    enum FrameEditMode
+    {
+        None,
+        Move,
+        Physical,
+        Hit,
+        Attack,
+    }
     class FrameNode
     {
-        public enum FrameEditMode
-        {
-            None,
-            Move,
-            Physical,
-            Hit,
-            Attack,
-        }
         public enum FramePreviewMode
         {
             Pause,
@@ -30,6 +30,7 @@ namespace GS_PatEditor.Editor.Nodes
         public FrameEditMode EditMode { get; private set; }
         public FramePreviewMode PreviewMode { get; private set; }
 
+        public bool AxisVisible = true;
         public bool PhysicalBoxVisible = true;
 
         public List<int> EditingBoxes = new List<int>();

@@ -1,4 +1,6 @@
 ﻿using GS_PatEditor.Editor.Nodes;
+using GS_PatEditor.Editor.Panels.Tools;
+using GS_PatEditor.Editor.Panels.Tools.Physical;
 using GS_PatEditor.Render;
 using System;
 using System.Collections.Generic;
@@ -20,11 +22,8 @@ namespace GS_PatEditor.Editor.Panels
         private Control _Control;
 
         public RenderEngine Render { get; private set; }
-
-        //share sprites in all AbstractPreviewWindowContent to avoid repeating creating/disposing
-        public readonly List<Sprite> SpriteList = new List<Sprite>();
-
-        public AbstractPreviewWindowContent CurrentContent { get; set; }
+        public PreviewWindowSpriteManager SpriteManager { get; private set; }
+        public AbstractPreviewWindowContent CurrentContent { get; private set; }
 
         private int PreviewX, PreviewY;
         private int PreviewMovingX, PreviewMovingY;
@@ -33,6 +32,7 @@ namespace GS_PatEditor.Editor.Panels
         public int SpriteMovingX, SpriteMovingY;
 
         private MouseMovable MovablePreview;
+        private MouseRectEditable EditPhysical;
 
         public PreviewWindow(Editor parent)
         {
@@ -55,6 +55,10 @@ namespace GS_PatEditor.Editor.Panels
             Render.Transform.X = PreviewX;
             Render.Transform.Y = PreviewY;
 
+            //sprites
+            SpriteManager = new PreviewWindowSpriteManager(this);
+
+            //content
             UpdatePreviewMode();
 
             //move scene
@@ -93,7 +97,7 @@ namespace GS_PatEditor.Editor.Panels
                         result = false;
                     }
                     if (node.PreviewMode != FrameNode.FramePreviewMode.Pause ||
-                        node.EditMode != FrameNode.FrameEditMode.Move)
+                        node.EditMode != FrameEditMode.Move)
                     {
                         result = false;
                     }
@@ -112,10 +116,20 @@ namespace GS_PatEditor.Editor.Panels
                     SpriteMovingY = 0;
                 };
             }
-            
+
+            EditPhysical = new MouseRectEditable(ctrl, new PhysicalDataProvider(_Parent, this));
+            EditPhysical.Filter += GetFilterForEditMode(FrameEditMode.Physical);
 
             //mouse wheel zoom in/out
             ctrl.FindForm().MouseWheel += frm_MouseWheel;
+        }
+
+        private EventFilter GetFilterForEditMode(FrameEditMode mode)
+        {
+            return delegate(ref bool result)
+            {
+                result = this._Parent.EditorNode.Animation.Frame.EditMode == mode;
+            };
         }
 
         private void frm_MouseWheel(object sender, MouseEventArgs e)
@@ -129,14 +143,10 @@ namespace GS_PatEditor.Editor.Panels
             {
                 if (e.Delta < 0)
                 {
-                    //_PreviewScale *= 0.9f;
-                    //Render.Transform.Scale = _PreviewScale;
                     SetScale(_PreviewScale * 0.9f);
                 }
                 else if (e.Delta > 0)
                 {
-                    //_PreviewScale /= 0.9f;
-                    //Render.Transform.Scale = _PreviewScale;
                     SetScale(_PreviewScale / 0.9f);
                 }
             }
@@ -169,6 +179,9 @@ namespace GS_PatEditor.Editor.Panels
             Render.Transform.Scale = _PreviewScale;
             Render.Transform.X = PreviewX;
             Render.Transform.Y = PreviewY;
+
+            //TODO update rect editors
+            EditPhysical.UpdateMouseCursor();
         }
 
         private void _Render_OnRender()
@@ -210,12 +223,34 @@ namespace GS_PatEditor.Editor.Panels
             }
         }
 
-        public void EnsureSpriteList(int count)
+        //public void EnsureSpriteList(int count)
+        //{
+        //    while (SpriteList.Count < count)
+        //    {
+        //        SpriteList.Add(Render.GetSprite());
+        //    }
+        //}
+
+        #region transformations, used by rect editing
+        public float TransformXSpriteToClient(float x)
         {
-            while (SpriteList.Count < count)
-            {
-                SpriteList.Add(Render.GetSprite());
-            }
+            return (PreviewX + PreviewMovingX) + _PreviewScale * x;
         }
+
+        public float TransformYSpriteToClient(float y)
+        {
+            return (PreviewY + PreviewMovingY) + _PreviewScale * y;
+        }
+
+        public float TransformXClientToSprite(float x)
+        {
+            return (x - PreviewX - PreviewMovingX) / _PreviewScale;
+        }
+
+        public float TransformYClientToSprite(float y)
+        {
+            return (y - PreviewY - PreviewMovingY) / _PreviewScale;
+        }
+        #endregion
     }
 }

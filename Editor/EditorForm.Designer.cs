@@ -45,6 +45,7 @@
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripSplitBoxVisible = new System.Windows.Forms.ToolStripDropDownButton();
             this.physicalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.axisToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.animationFrames)).BeginInit();
             this.flowLayoutPanel2.SuspendLayout();
@@ -178,6 +179,7 @@
             // toolStripSplitBoxVisible
             // 
             this.toolStripSplitBoxVisible.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.axisToolStripMenuItem,
             this.physicalToolStripMenuItem});
             this.toolStripSplitBoxVisible.Image = ((System.Drawing.Image)(resources.GetObject("toolStripSplitBoxVisible.Image")));
             this.toolStripSplitBoxVisible.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -190,9 +192,18 @@
             this.physicalToolStripMenuItem.Checked = true;
             this.physicalToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.physicalToolStripMenuItem.Name = "physicalToolStripMenuItem";
-            this.physicalToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
+            this.physicalToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.physicalToolStripMenuItem.Text = "Physical";
             this.physicalToolStripMenuItem.Click += new System.EventHandler(this.physicalToolStripMenuItem_Click);
+            // 
+            // axisToolStripMenuItem
+            // 
+            this.axisToolStripMenuItem.Checked = true;
+            this.axisToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.axisToolStripMenuItem.Name = "axisToolStripMenuItem";
+            this.axisToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.axisToolStripMenuItem.Text = "Axis";
+            this.axisToolStripMenuItem.Click += new System.EventHandler(this.axisToolStripMenuItem_Click);
             // 
             // EditorForm
             // 
@@ -232,6 +243,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripDropDownButton toolStripSplitBoxVisible;
         private System.Windows.Forms.ToolStripMenuItem physicalToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem axisToolStripMenuItem;
 
     }
 }

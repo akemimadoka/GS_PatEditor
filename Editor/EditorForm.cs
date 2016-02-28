@@ -58,7 +58,7 @@ namespace GS_PatEditor.Editor
             _Editor.AnimationFramesUI.ExpandAll();
         }
 
-        private bool ChangeEditMode(FrameNode.FrameEditMode mode)
+        private bool ChangeEditMode(FrameEditMode mode)
         {
             return _Editor.EditorNode.Animation.Frame.ChangeEditMode(mode);
         }
@@ -72,7 +72,7 @@ namespace GS_PatEditor.Editor
 
         private void toolStripButtonToolCursor_Click(object sender, EventArgs e)
         {
-            if (ChangeEditMode(FrameNode.FrameEditMode.None))
+            if (ChangeEditMode(FrameEditMode.None))
             {
                 ClearToolButtonsToolChecked();
                 toolStripButtonToolCursor.CheckState = CheckState.Checked;
@@ -81,7 +81,7 @@ namespace GS_PatEditor.Editor
 
         private void toolStripButtonToolMove_Click(object sender, EventArgs e)
         {
-            if (ChangeEditMode(FrameNode.FrameEditMode.Move))
+            if (ChangeEditMode(FrameEditMode.Move))
             {
                 ClearToolButtonsToolChecked();
                 toolStripButtonToolMove.CheckState = CheckState.Checked;
@@ -90,7 +90,7 @@ namespace GS_PatEditor.Editor
 
         private void toolStripButtonToolPhysics_Click(object sender, EventArgs e)
         {
-            if (ChangeEditMode(FrameNode.FrameEditMode.Physical))
+            if (ChangeEditMode(FrameEditMode.Physical))
             {
                 ClearToolButtonsToolChecked();
                 toolStripButtonToolPhysics.CheckState = CheckState.Checked;
@@ -101,6 +101,12 @@ namespace GS_PatEditor.Editor
         {
             physicalToolStripMenuItem.Checked = !physicalToolStripMenuItem.Checked;
             _Editor.EditorNode.Animation.Frame.PhysicalBoxVisible = physicalToolStripMenuItem.Checked;
+        }
+
+        private void axisToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            axisToolStripMenuItem.Checked = !axisToolStripMenuItem.Checked;
+            _Editor.EditorNode.Animation.Frame.AxisVisible = axisToolStripMenuItem.Checked;
         }
     }
 }

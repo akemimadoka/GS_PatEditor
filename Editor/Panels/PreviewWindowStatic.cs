@@ -17,68 +17,45 @@ namespace GS_PatEditor.Editor.Panels
         public PreviewWindowStatic(Editor parent)
         {
             _Parent = parent;
+
             var r = parent.PreviewWindowUI.Render;
+            var sprites = parent.PreviewWindowUI.SpriteManager;
 
-            parent.PreviewWindowUI.EnsureSpriteList(3 + 4);
+            _Sprite = sprites.GetSprite(0);
 
-            _Sprite = parent.PreviewWindowUI.SpriteList[0];
+            _SpriteLineH = sprites.GetSprite(1);
+            _SpriteLineH.SetupLine(0x000000, 0, 0, 10000, 0);
 
-            _SpriteLineH = parent.PreviewWindowUI.SpriteList[1];
-            SpriteGeometry.SetupLine(0, _SpriteLineH, 0, 0, 10000, 0);
+            _SpriteLineV = sprites.GetSprite(2);
+            _SpriteLineV.SetupLine(0x000000, 0, 0, 10000, 3.1415926f / 2);
 
-            _SpriteLineV = parent.PreviewWindowUI.SpriteList[2];
-            SpriteGeometry.SetupLine(0, _SpriteLineV, 0, 0, 10000, 3.1415926f / 2);
-
-            _SpriteListPhysical = new[]
-            {
-                parent.PreviewWindowUI.SpriteList[3],
-                parent.PreviewWindowUI.SpriteList[4],
-                parent.PreviewWindowUI.SpriteList[5],
-                parent.PreviewWindowUI.SpriteList[6],
-            };
+            _SpriteListPhysical = sprites.GetRectangle(0);
         }
 
         public override void Render()
         {
             var frame = _Parent.EditorNode.Animation.Frame.FrameData;
-            //handle empty animation (no frame is selected)
-            if (frame == null)
+
+            if (frame != null)
+            {
+                var txt = _Parent.Data.ImageList.GetTexture(frame.ImageID, _Parent.PreviewWindowUI.Render);
+                var window = _Parent.PreviewWindowUI;
+                _Sprite.SetupFrame(txt, frame, window);
+                _Sprite.Render();
+            }
+
+            if (_Parent.EditorNode.Animation.Frame.AxisVisible)
             {
                 _SpriteLineV.Render();
                 _SpriteLineH.Render();
-                return;
             }
-
-            var proj = _Parent.Data;
-            var id = frame.ImageID;
-            var txt = proj.ImageList.GetTexture(id, _Parent.PreviewWindowUI.Render);
-            var window = _Parent.PreviewWindowUI;
-
-            _Sprite.Texture = txt;
-            _Sprite.OriginX = frame.OriginX + window.SpriteMovingX;
-            _Sprite.OriginY = frame.OriginY + window.SpriteMovingY;
-            _Sprite.ScaleX = frame.ScaleX / 100.0f;
-            _Sprite.ScaleY = frame.ScaleY / 100.0f;
-            _Sprite.Rotation = frame.Rotate / 180.0f * 3.1415926f;
-
-            _Sprite.Render();
-            _SpriteLineV.Render();
-            _SpriteLineH.Render();
 
             if (_Parent.EditorNode.Animation.Frame.PhysicalBoxVisible)
             {
-                var physicalBox = frame.PhysicalBox;
-                if (physicalBox != null)
+                if (frame != null && frame.PhysicalBox != null)
                 {
-                    SpriteGeometry.SetupRect(0x00FF66, _SpriteListPhysical,
-                        physicalBox.X + physicalBox.W / 2.0f,
-                        physicalBox.Y + physicalBox.H / 2.0f,
-                        physicalBox.W / 2.0f,
-                        physicalBox.H / 2.0f, 0);
-                    foreach (var s in _SpriteListPhysical)
-                    {
-                        s.Render();
-                    }
+                    _SpriteListPhysical.SetupPhysical(0x00FF66, frame.PhysicalBox);
+                    _SpriteListPhysical.Render();
                 }
             }
         }
