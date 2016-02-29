@@ -30,11 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EditorForm));
-            this.flowLayoutPanelFrameList = new System.Windows.Forms.FlowLayoutPanel();
-            this.animationFrames = new System.Windows.Forms.PictureBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.flowLayoutPanelFramePreview = new System.Windows.Forms.FlowLayoutPanel();
-            this.previewWindow = new System.Windows.Forms.PictureBox();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripExpandAll = new System.Windows.Forms.ToolStripButton();
             this.toolStripCollapseAll = new System.Windows.Forms.ToolStripButton();
@@ -56,63 +52,27 @@
             this.pastePhysicalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deletePhysicalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripButtonBack = new System.Windows.Forms.ToolStripButton();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.panelAnimations = new System.Windows.Forms.Panel();
             this.animations = new System.Windows.Forms.PictureBox();
-            this.flowLayoutPanelFrameList.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.animationFrames)).BeginInit();
-            this.flowLayoutPanelFramePreview.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.previewWindow)).BeginInit();
+            this.panelAnimationEdit = new System.Windows.Forms.Panel();
+            this.panelAnimationFramesScroll = new System.Windows.Forms.Panel();
+            this.animationFrames = new System.Windows.Forms.PictureBox();
+            this.panelFramePreviewScroll = new System.Windows.Forms.Panel();
+            this.previewWindow = new System.Windows.Forms.PictureBox();
             this.toolStrip1.SuspendLayout();
-            this.panel1.SuspendLayout();
+            this.panelAnimations.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.animations)).BeginInit();
+            this.panelAnimationEdit.SuspendLayout();
+            this.panelAnimationFramesScroll.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.animationFrames)).BeginInit();
+            this.panelFramePreviewScroll.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.previewWindow)).BeginInit();
             this.SuspendLayout();
-            // 
-            // flowLayoutPanelFrameList
-            // 
-            this.flowLayoutPanelFrameList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.flowLayoutPanelFrameList.AutoScroll = true;
-            this.flowLayoutPanelFrameList.BackColor = System.Drawing.Color.White;
-            this.flowLayoutPanelFrameList.Controls.Add(this.animationFrames);
-            this.flowLayoutPanelFrameList.Location = new System.Drawing.Point(0, 28);
-            this.flowLayoutPanelFrameList.Name = "flowLayoutPanelFrameList";
-            this.flowLayoutPanelFrameList.Size = new System.Drawing.Size(641, 100);
-            this.flowLayoutPanelFrameList.TabIndex = 1;
-            // 
-            // animationFrames
-            // 
-            this.animationFrames.Location = new System.Drawing.Point(0, 0);
-            this.animationFrames.Margin = new System.Windows.Forms.Padding(0);
-            this.animationFrames.Name = "animationFrames";
-            this.animationFrames.Size = new System.Drawing.Size(433, 69);
-            this.animationFrames.TabIndex = 1;
-            this.animationFrames.TabStop = false;
             // 
             // timer1
             // 
             this.timer1.Enabled = true;
             this.timer1.Interval = 16;
-            // 
-            // flowLayoutPanelFramePreview
-            // 
-            this.flowLayoutPanelFramePreview.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.flowLayoutPanelFramePreview.AutoScroll = true;
-            this.flowLayoutPanelFramePreview.Controls.Add(this.previewWindow);
-            this.flowLayoutPanelFramePreview.Location = new System.Drawing.Point(0, 136);
-            this.flowLayoutPanelFramePreview.Margin = new System.Windows.Forms.Padding(0);
-            this.flowLayoutPanelFramePreview.Name = "flowLayoutPanelFramePreview";
-            this.flowLayoutPanelFramePreview.Size = new System.Drawing.Size(641, 211);
-            this.flowLayoutPanelFramePreview.TabIndex = 3;
-            // 
-            // previewWindow
-            // 
-            this.previewWindow.Location = new System.Drawing.Point(3, 3);
-            this.previewWindow.Name = "previewWindow";
-            this.previewWindow.Size = new System.Drawing.Size(800, 600);
-            this.previewWindow.TabIndex = 3;
-            this.previewWindow.TabStop = false;
             // 
             // toolStrip1
             // 
@@ -132,7 +92,7 @@
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.toolStrip1.Size = new System.Drawing.Size(640, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(611, 25);
             this.toolStrip1.TabIndex = 4;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -295,47 +255,95 @@
             this.toolStripButtonBack.Name = "toolStripButtonBack";
             this.toolStripButtonBack.Size = new System.Drawing.Size(56, 22);
             this.toolStripButtonBack.Text = "Back";
+            this.toolStripButtonBack.Click += new System.EventHandler(this.toolStripButtonBack_Click);
             // 
-            // panel1
+            // panelAnimations
             // 
-            this.panel1.AutoScroll = true;
-            this.panel1.Controls.Add(this.animations);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(0, 25);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(640, 323);
-            this.panel1.TabIndex = 5;
-            this.panel1.Visible = false;
+            this.panelAnimations.AutoScroll = true;
+            this.panelAnimations.Controls.Add(this.animations);
+            this.panelAnimations.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelAnimations.Location = new System.Drawing.Point(0, 25);
+            this.panelAnimations.Name = "panelAnimations";
+            this.panelAnimations.Size = new System.Drawing.Size(611, 330);
+            this.panelAnimations.TabIndex = 6;
+            this.panelAnimations.Visible = false;
             // 
             // animations
             // 
             this.animations.Dock = System.Windows.Forms.DockStyle.Top;
             this.animations.Location = new System.Drawing.Point(0, 0);
             this.animations.Name = "animations";
-            this.animations.Size = new System.Drawing.Size(640, 50);
+            this.animations.Size = new System.Drawing.Size(611, 50);
             this.animations.TabIndex = 0;
             this.animations.TabStop = false;
+            // 
+            // panelAnimationEdit
+            // 
+            this.panelAnimationEdit.Controls.Add(this.panelFramePreviewScroll);
+            this.panelAnimationEdit.Controls.Add(this.panelAnimationFramesScroll);
+            this.panelAnimationEdit.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelAnimationEdit.Location = new System.Drawing.Point(0, 25);
+            this.panelAnimationEdit.Name = "panelAnimationEdit";
+            this.panelAnimationEdit.Size = new System.Drawing.Size(611, 330);
+            this.panelAnimationEdit.TabIndex = 7;
+            // 
+            // panelAnimationFramesScroll
+            // 
+            this.panelAnimationFramesScroll.AutoScroll = true;
+            this.panelAnimationFramesScroll.Controls.Add(this.animationFrames);
+            this.panelAnimationFramesScroll.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelAnimationFramesScroll.Location = new System.Drawing.Point(0, 0);
+            this.panelAnimationFramesScroll.Name = "panelAnimationFramesScroll";
+            this.panelAnimationFramesScroll.Size = new System.Drawing.Size(611, 100);
+            this.panelAnimationFramesScroll.TabIndex = 15;
+            // 
+            // animationFrames
+            // 
+            this.animationFrames.Dock = System.Windows.Forms.DockStyle.Left;
+            this.animationFrames.Location = new System.Drawing.Point(0, 0);
+            this.animationFrames.Name = "animationFrames";
+            this.animationFrames.Size = new System.Drawing.Size(356, 100);
+            this.animationFrames.TabIndex = 5;
+            this.animationFrames.TabStop = false;
+            // 
+            // panelFramePreviewScroll
+            // 
+            this.panelFramePreviewScroll.AutoScroll = true;
+            this.panelFramePreviewScroll.Controls.Add(this.previewWindow);
+            this.panelFramePreviewScroll.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelFramePreviewScroll.Location = new System.Drawing.Point(0, 100);
+            this.panelFramePreviewScroll.Name = "panelFramePreviewScroll";
+            this.panelFramePreviewScroll.Size = new System.Drawing.Size(611, 230);
+            this.panelFramePreviewScroll.TabIndex = 17;
+            // 
+            // previewWindow
+            // 
+            this.previewWindow.Location = new System.Drawing.Point(0, 0);
+            this.previewWindow.Name = "previewWindow";
+            this.previewWindow.Size = new System.Drawing.Size(800, 600);
+            this.previewWindow.TabIndex = 7;
+            this.previewWindow.TabStop = false;
             // 
             // EditorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(640, 348);
-            this.Controls.Add(this.panel1);
+            this.ClientSize = new System.Drawing.Size(611, 355);
+            this.Controls.Add(this.panelAnimations);
+            this.Controls.Add(this.panelAnimationEdit);
             this.Controls.Add(this.toolStrip1);
-            this.Controls.Add(this.flowLayoutPanelFramePreview);
-            this.Controls.Add(this.flowLayoutPanelFrameList);
             this.MinimumSize = new System.Drawing.Size(600, 38);
             this.Name = "EditorForm";
             this.Text = "AnimationEditor";
-            this.flowLayoutPanelFrameList.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.animationFrames)).EndInit();
-            this.flowLayoutPanelFramePreview.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.previewWindow)).EndInit();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
-            this.panel1.ResumeLayout(false);
+            this.panelAnimations.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.animations)).EndInit();
+            this.panelAnimationEdit.ResumeLayout(false);
+            this.panelAnimationFramesScroll.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.animationFrames)).EndInit();
+            this.panelFramePreviewScroll.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.previewWindow)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -343,11 +351,7 @@
 
         #endregion
 
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelFrameList;
-        private System.Windows.Forms.PictureBox animationFrames;
         private System.Windows.Forms.Timer timer1;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelFramePreview;
-        private System.Windows.Forms.PictureBox previewWindow;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton toolStripButtonToolCursor;
         private System.Windows.Forms.ToolStripButton toolStripButtonToolMove;
@@ -369,8 +373,13 @@
         private System.Windows.Forms.ToolStripMenuItem resetScaleToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
         private System.Windows.Forms.ToolStripButton toolStripButtonBack;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel panelAnimations;
         private System.Windows.Forms.PictureBox animations;
+        private System.Windows.Forms.Panel panelAnimationEdit;
+        private System.Windows.Forms.Panel panelAnimationFramesScroll;
+        private System.Windows.Forms.PictureBox animationFrames;
+        private System.Windows.Forms.Panel panelFramePreviewScroll;
+        private System.Windows.Forms.PictureBox previewWindow;
 
     }
 }

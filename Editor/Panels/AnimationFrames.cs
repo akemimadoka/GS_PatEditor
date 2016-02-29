@@ -159,7 +159,7 @@ namespace GS_PatEditor.Editor.Panels
             var parentCtrl = _Control.Parent;
             if (parentCtrl.ClientRectangle.Contains(parentCtrl.PointToClient(Control.MousePosition)))
             {
-                FlowLayoutPanel p = _Control.Parent as FlowLayoutPanel;
+                ScrollableControl p = _Control.Parent as ScrollableControl;
                 if (p != null)
                 {
                     var hs = p.HorizontalScroll;

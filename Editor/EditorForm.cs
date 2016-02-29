@@ -74,9 +74,9 @@ namespace GS_PatEditor.Editor
         {
             _Editor.PreviewWindowUI.PreviewMoving.ResetScale();
 
-            var x = flowLayoutPanelFramePreview.ClientSize.Width - 800;
-            var y = flowLayoutPanelFramePreview.ClientSize.Height - 600;
-            flowLayoutPanelFramePreview.AutoScrollPosition = new Point(-x / 2, -y / 2);
+            var x = panelFramePreviewScroll.ClientSize.Width - 800;
+            var y = panelFramePreviewScroll.ClientSize.Height - 600;
+            panelFramePreviewScroll.AutoScrollPosition = new Point(-x / 2, -y / 2);
         }
 
         private void ClearToolButtonsToolChecked()
@@ -133,6 +133,11 @@ namespace GS_PatEditor.Editor
         private void resetScaleToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ResetPreviewPosition();
+        }
+
+        private void toolStripButtonBack_Click(object sender, EventArgs e)
+        {
+            panelAnimations.Visible = !panelAnimations.Visible;
         }
     }
 }
