@@ -305,6 +305,7 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(640, 323);
             this.panel1.TabIndex = 5;
+            this.panel1.Visible = false;
             // 
             // animations
             // 
@@ -324,7 +325,7 @@
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.flowLayoutPanelFramePreview);
             this.Controls.Add(this.flowLayoutPanelFrameList);
-            this.MinimumSize = new System.Drawing.Size(600, 0);
+            this.MinimumSize = new System.Drawing.Size(600, 38);
             this.Name = "EditorForm";
             this.Text = "AnimationEditor";
             this.flowLayoutPanelFrameList.ResumeLayout(false);

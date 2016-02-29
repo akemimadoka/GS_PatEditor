@@ -19,20 +19,16 @@ namespace GS_PatEditor.Render
                 OriginX: frame.OriginX + editing.OffsetX,
                 OriginY: frame.OriginY + editing.OffsetY,
                 ScaleX: frame.ScaleX / 100.0f,
-                ScaleY: frame.ScaleY / 100.0f,
-                Rotation: frame.Rotate / 180.0f * 3.1415926f);
+                ScaleY: frame.ScaleY / 100.0f);
+            sprite.SetupPosition(0, 0, frame.Rotate / 180.0f * 3.1415926f);
         }
 
         public static void SetupPhysical(this Sprite[] rect, int color, EditingPhysicalBox box)
         {
             var hw = box.Width / 2;
             var hh = box.Height / 2;
-            rect.SetupRect(color,
-                box.Left + hw,
-                box.Top + hh,
-                hw,
-                hh,
-                0);
+            rect.SetupRect(color, hw, hh);
+            rect.SetupPosition(box.Left + hw, box.Top + hh, 0);
         }
     }
 }

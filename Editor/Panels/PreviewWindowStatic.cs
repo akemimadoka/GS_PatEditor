@@ -24,10 +24,12 @@ namespace GS_PatEditor.Editor.Panels
             _Sprite = sprites.GetSprite(0);
 
             _SpriteLineH = sprites.GetSprite(1);
-            _SpriteLineH.SetupLine(0x000000, 0, 0, 10000, 0);
+            _SpriteLineH.SetupLine(0x000000, 10000);
+            _SpriteLineH.SetupPosition(0, 0, 0);
 
             _SpriteLineV = sprites.GetSprite(2);
-            _SpriteLineV.SetupLine(0x000000, 0, 0, 10000, 3.1415926f / 2);
+            _SpriteLineV.SetupLine(0x000000, 10000);
+            _SpriteLineH.SetupPosition(0, 0, 3.1415926f / 2);
 
             _SpriteListPhysical = sprites.GetRectangle(0);
         }

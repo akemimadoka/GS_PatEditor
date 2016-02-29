@@ -7,42 +7,53 @@ using System.Threading.Tasks;
 
 namespace GS_PatEditor.Render
 {
-    //TODO setup a sprite step by step, to avoid using functions with too many parameters
     static class SpriteGeometryExt
     {
-        public static void SetupLine(this Sprite sprite, int color,
-            float x, float y, float halfLen, float rotation)
+        public static void SetupPosition(this Sprite sprite, float x, float y, float rotation)
+        {
+            sprite.Left = x;
+            sprite.Top = y;
+            sprite.Rotation = rotation;
+        }
+
+        public static void SetupLine(this Sprite sprite, int color, float halfLen)
         {
             sprite.Texture = sprite.RenderEngine.GetColorTexture(color);
             sprite.OriginX = 0.5f;
             sprite.OriginY = 0.5f;
-            sprite.Left = x;
-            sprite.Top = y;
             sprite.ScaleX = halfLen * 2;
             sprite.ScaleY = 1;
-            sprite.Rotation = rotation;
         }
 
         private static void SetupLineDistance(this Sprite sprite, int color,
-            float x, float y, float distanceX, float distanceY, float halfLenX, float halfLenY, float rotation)
+            float distanceX, float distanceY, float halfLenX, float halfLenY)
         {
             sprite.Texture = sprite.RenderEngine.GetColorTexture(color);
             sprite.OriginX = 0.5f + distanceX;
             sprite.OriginY = 0.5f + distanceY;
-            sprite.Left = x;
-            sprite.Top = y;
             sprite.ScaleX = halfLenX * 2;
             sprite.ScaleY = halfLenY * 2;
-            sprite.Rotation = rotation;
         }
 
-        public static void SetupRect(this Sprite[] spriteArray, int color,
-            float x, float y, float halfWidth, float halfHeight, float rotation)
+        public static void SetupRect(this Sprite[] spriteArray, int color, float halfWidth, float halfHeight)
         {
-            spriteArray[0].SetupLineDistance(color, x, y, 0, halfHeight, halfWidth + 0.5f, 0.5f, rotation);
-            spriteArray[1].SetupLineDistance(color, x, y, halfWidth, 0, 0.5f, halfHeight + 0.5f, rotation);
-            spriteArray[2].SetupLineDistance(color, x, y, 0, -halfHeight, halfWidth + 0.5f, 0.5f, rotation);
-            spriteArray[3].SetupLineDistance(color, x, y, -halfWidth, 0, 0.5f, halfHeight + 0.5f, rotation);
+            spriteArray[0].SetupLineDistance(color, 0, halfHeight, halfWidth + 0.5f, 0.5f);
+            spriteArray[1].SetupLineDistance(color, halfWidth, 0, 0.5f, halfHeight + 0.5f);
+            spriteArray[2].SetupLineDistance(color, 0, -halfHeight, halfWidth + 0.5f, 0.5f);
+            spriteArray[3].SetupLineDistance(color, -halfWidth, 0, 0.5f, halfHeight + 0.5f);
+        }
+
+        public static void Setup(this Sprite sprite,
+            Texture texture,
+            float OriginX = 0, float OriginY = 0,
+            float ScaleX = 1, float ScaleY = 1
+            )
+        {
+            sprite.Texture = texture;
+            sprite.OriginX = OriginX;
+            sprite.OriginY = OriginY;
+            sprite.ScaleX = ScaleX;
+            sprite.ScaleY = ScaleY;
         }
 
         public static void Render(this Sprite[] sprites)
@@ -53,22 +64,12 @@ namespace GS_PatEditor.Render
             }
         }
 
-        public static void Setup(this Sprite sprite,
-            Texture texture,
-            float Left = 0, float Top = 0,
-            float OriginX = 0, float OriginY = 0,
-            float Rotation = 0,
-            float ScaleX = 1, float ScaleY = 1
-            )
+        public static void SetupPosition(this Sprite[] sprites, float x, float y, float rotation)
         {
-            sprite.Texture = texture;
-            sprite.Left = Left;
-            sprite.Top = Top;
-            sprite.OriginX = OriginX;
-            sprite.OriginY = OriginY;
-            sprite.Rotation = Rotation;
-            sprite.ScaleX = ScaleX;
-            sprite.ScaleY = ScaleY;
+            foreach (var s in sprites)
+            {
+                s.SetupPosition(x, y, rotation);
+            }
         }
     }
 }
