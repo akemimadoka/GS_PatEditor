@@ -290,6 +290,12 @@ namespace GS_PatEditor.Images
             var buffer = new int[stride * 4]; //four lines
             var pal = new UInt32[4];
 
+            //fill buffer with -1 to give an alpha to each pixel
+            for (int i = 0; i < buffer.Length; ++i)
+            {
+                buffer[i] = -1; //0xFFFFFF
+            }
+
             for (int y = 0; y < height; y += 4)
             {
                 for (int x = 0; x < width; x += 4)
