@@ -9,11 +9,12 @@ namespace GS_PatEditor.Render
 {
     static class SpriteGeometryExt
     {
-        public static void SetupPosition(this Sprite sprite, float x, float y, float rotation)
+        public static void SetupPosition(this Sprite sprite, float x, float y, float rotation, float rotation0 = 0)
         {
             sprite.Left = x;
             sprite.Top = y;
             sprite.Rotation = rotation;
+            sprite.Rotation0 = rotation0;
         }
 
         public static void SetupLine(this Sprite sprite, int color, float halfLen)
@@ -64,11 +65,11 @@ namespace GS_PatEditor.Render
             }
         }
 
-        public static void SetupPosition(this Sprite[] sprites, float x, float y, float rotation)
+        public static void SetupPosition(this Sprite[] sprites, float x, float y, float rotation, float rotation0 = 0)
         {
             foreach (var s in sprites)
             {
-                s.SetupPosition(x, y, rotation);
+                s.SetupPosition(x, y, rotation, rotation0);
             }
         }
     }

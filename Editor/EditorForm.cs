@@ -11,8 +11,6 @@ using System.Windows.Forms;
 
 namespace GS_PatEditor.Editor
 {
-    //TODO use Panel instead of FlowLayout (should update AnimationFrames.frm_MouseWheel)
-    //TODO use dock to arrange panels
     public partial class EditorForm : Form
     {
         public static void ShowEditorForm(Pat.Project proj)

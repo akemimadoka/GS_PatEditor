@@ -290,6 +290,7 @@
             // panelAnimationFramesScroll
             // 
             this.panelAnimationFramesScroll.AutoScroll = true;
+            this.panelAnimationFramesScroll.BackColor = System.Drawing.Color.White;
             this.panelAnimationFramesScroll.Controls.Add(this.animationFrames);
             this.panelAnimationFramesScroll.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelAnimationFramesScroll.Location = new System.Drawing.Point(0, 0);

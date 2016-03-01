@@ -125,6 +125,20 @@ namespace GS_PatEditor.Render
                 _Rotation = value;
             }
         }
+
+        private float _Rotation0;
+        public float Rotation0
+        {
+            get
+            {
+                return _Rotation0;
+            }
+            set
+            {
+                _Dirty = true;
+                _Rotation0 = value;
+            }
+        }
         #endregion
 
         private Device _Device;
@@ -215,20 +229,24 @@ namespace GS_PatEditor.Render
 
             //apply rotation
 
-            stream.Write(new Vertex { pos = MakePosition(x, y, r, t_l, t_t), tex = new Vector4(0.0f, 0.0f, 0.0f, 0.0f) });
-            stream.Write(new Vertex { pos = MakePosition(x, y, r, t_r, t_t), tex = new Vector4(1.0f, 0.0f, 0.0f, 0.0f) });
-            stream.Write(new Vertex { pos = MakePosition(x, y, r, t_l, t_b), tex = new Vector4(0.0f, 1.0f, 0.0f, 0.0f) });
-            stream.Write(new Vertex { pos = MakePosition(x, y, r, t_r, t_b), tex = new Vector4(1.0f, 1.0f, 0.0f, 0.0f) });
+            stream.Write(new Vertex { pos = MakePosition(x, y, t_l, t_t), tex = new Vector4(0.0f, 0.0f, 0.0f, 0.0f) });
+            stream.Write(new Vertex { pos = MakePosition(x, y, t_r, t_t), tex = new Vector4(1.0f, 0.0f, 0.0f, 0.0f) });
+            stream.Write(new Vertex { pos = MakePosition(x, y, t_l, t_b), tex = new Vector4(0.0f, 1.0f, 0.0f, 0.0f) });
+            stream.Write(new Vertex { pos = MakePosition(x, y, t_r, t_b), tex = new Vector4(1.0f, 1.0f, 0.0f, 0.0f) });
             stream.Dispose();
 
             _Buffer.Unlock();
         }
 
-        private static Vector4 MakePosition(float x, float y, float r, float tx, float ty)
+        private Vector4 MakePosition(float x, float y, float tx, float ty)
         {
+            var r = _Rotation;
+            var r0 = _Rotation0;
+            var px = x + tx * (float)Math.Cos(r) - ty * (float)Math.Sin(r);
+            var py = y + tx * (float)Math.Sin(r) + ty * (float)Math.Cos(r);
             return new Vector4(
-                x + tx * (float)Math.Cos(r) - ty * (float)Math.Sin(r),
-                y + tx * (float)Math.Sin(r) + ty * (float)Math.Cos(r),
+                px * (float)Math.Cos(r0) - py * (float)Math.Sin(r0),
+                px * (float)Math.Sin(r0) + py * (float)Math.Cos(r0),
                 0.0f, 1.0f);
         }
 

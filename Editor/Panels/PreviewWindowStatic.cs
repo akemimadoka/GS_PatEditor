@@ -60,6 +60,21 @@ namespace GS_PatEditor.Editor.Panels
                     _SpriteListPhysical.Render();
                 }
             }
+
+            var sprites = _Parent.PreviewWindowUI.SpriteManager;
+            int rectIndex = 1;
+            if (true)
+            {
+                if (frame != null)
+                {
+                    foreach (var box in frame.HitBoxes)
+                    {
+                        var s = sprites.GetRectangle(rectIndex++);
+                        s.SetupHit(0x00A2E8, box);
+                        s.Render();
+                    }
+                }
+            }
         }
     }
 }

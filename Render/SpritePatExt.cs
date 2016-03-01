@@ -30,5 +30,13 @@ namespace GS_PatEditor.Render
             rect.SetupRect(color, hw, hh);
             rect.SetupPosition(box.Left + hw, box.Top + hh, 0);
         }
+
+        public static void SetupHit(this Sprite[] rect, int color, Pat.Box box)
+        {
+            var hw = box.W / 2;
+            var hh = box.H / 2;
+            rect.SetupRect(color, hw, hh);
+            rect.SetupPosition(box.X + hw, box.Y + hh, 0, box.R);
+        }
     }
 }

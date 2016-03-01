@@ -74,7 +74,7 @@ namespace GS_PatEditor
             };
 
             //import animations
-            ImportSimpleAnimation(proj, gspat, gspat.Animations[0], "stand");
+            //ImportSimpleAnimation(proj, gspat, gspat.Animations[0], "stand");
             ImportSimpleAnimation(proj, gspat, gspat.Animations[1], "walk");
 
             CheckImageResources(proj, Path.GetDirectoryName(patfile));
