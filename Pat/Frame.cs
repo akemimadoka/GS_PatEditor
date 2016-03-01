@@ -60,8 +60,8 @@ namespace GS_PatEditor.Pat
         public bool ShouldSerializeScaleY() { return ScaleY != 100; }
 
         [XmlElement]
-        public int Rotate;
-        public bool ShouldSerializeRotate() { return Rotate != 0; }
+        public int Rotation;
+        public bool ShouldSerializeRotation() { return Rotation != 0; }
 
         [XmlElement]
         public int OriginX;

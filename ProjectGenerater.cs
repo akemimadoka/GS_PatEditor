@@ -174,7 +174,8 @@ namespace GS_PatEditor
                 ScaleX = frame.ImageManipulation != null ? frame.ImageManipulation.ScaleX : 100,
                 ScaleY = frame.ImageManipulation != null ? frame.ImageManipulation.ScaleY : 100,
                 Duration = frame.DisplayTime,
-                Rotate = frame.ImageManipulation != null ? frame.ImageManipulation.Rotation : 0,
+                //TODO check if rotation should be inversed
+                Rotation = frame.ImageManipulation != null ? frame.ImageManipulation.Rotation : 0,
                 PhysicalBox = ImportPhysicalBox(frame.PhysicsBox),
                 HitBoxes = frame.HitBoxes.Select(ImportBox).ToList(),
                 AttackBoxes = frame.AttackBoxes.Select(ImportBox).ToList(),
@@ -206,7 +207,7 @@ namespace GS_PatEditor
                 Y = Math.Min(box.Y1, box.Y2),
                 W = Math.Abs(box.X1 - box.X2),
                 H = Math.Abs(box.Y1 - box.Y2),
-                R = box.Rotation,
+                R = -box.Rotation,
             };
         }
         private static Pat.PhysicalBox ImportPhysicalBox(GSPat.PhysicsBox box)

@@ -35,6 +35,7 @@ namespace GS_PatEditor.Editor.Nodes
 
         public List<int> EditingBoxes = new List<int>();
 
+        //TODO event name should not use OnXxx
         public event Action OnReset;
 
         public FrameNode(Editor parent)

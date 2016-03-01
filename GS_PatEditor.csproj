@@ -82,10 +82,12 @@
     <Compile Include="Editor\Panels\AnimationList.cs" />
     <Compile Include="Editor\Panels\AnimationListItem.cs" />
     <Compile Include="Editor\Panels\Tools\EditingHitAttackBox.cs" />
+    <Compile Include="Editor\Panels\Tools\EditingList.cs" />
     <Compile Include="Editor\Panels\Tools\EditingPhysicalBox.cs" />
     <Compile Include="Editor\Panels\Tools\EditingPoint.cs" />
     <Compile Include="Editor\Panels\Tools\Hit\HitBoxDataProvider.cs" />
     <Compile Include="Editor\Panels\Tools\Hit\HitBoxesEditingHandler.cs" />
+    <Compile Include="Editor\Panels\Tools\Hit\HitBoxListDataProvider.cs" />
     <Compile Include="Editor\Panels\Tools\MouseMovable.cs" />
     <Compile Include="Editor\Panels\PreviewWindowSpriteManager.cs" />
     <Compile Include="Editor\Panels\Tools\EventFilter.cs" />

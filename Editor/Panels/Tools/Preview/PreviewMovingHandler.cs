@@ -136,6 +136,8 @@ namespace GS_PatEditor.Editor.Panels.Tools.Preview
             _Parent.Render.Transform.Scale = _PreviewScale;
         }
 
+        //TODO transform in point
+
         public float TransformXSpriteToClient(float x)
         {
             return (_PreviewX + _PreviewMovingX) + _PreviewScale * x;
