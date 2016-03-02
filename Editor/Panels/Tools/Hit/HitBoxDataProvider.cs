@@ -382,5 +382,12 @@ namespace GS_PatEditor.Editor.Panels.Tools.Hit
         #endregion
 
         #endregion
+
+        //this property only controls the rendering style
+        public bool IsSelected
+        {
+            get;
+            set;
+        }
     }
 }

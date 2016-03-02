@@ -68,7 +68,7 @@ namespace GS_PatEditor.Editor.Panels
             PhysicalEditing = new PhysicalEditingHandler(_Parent, ctrl);
             PreviewMoving.SceneMoved += PhysicalEditing.UpdateMouseCursor;
 
-            HitEditing = new HitBoxesEditingHandler(_Parent);
+            HitEditing = new HitBoxesEditingHandler(_Parent, ctrl);
         }
 
         public EventFilter GetFilterForEditMode(FrameEditMode mode)

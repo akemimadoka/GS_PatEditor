@@ -13,5 +13,6 @@ namespace GS_PatEditor.Editor.Panels.Tools
         float Width { get; }
         float Height { get; }
         float Rotation { get; }
+        bool IsSelected { get; }
     }
 }

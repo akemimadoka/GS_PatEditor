@@ -36,7 +36,14 @@ namespace GS_PatEditor.Render
         {
             var hw = box.Width / 2;
             var hh = box.Height / 2;
-            rect.SetupDashRect(color, hw, hh, 3);
+            if (box.IsSelected)
+            {
+                rect.SetupDashRect(color, hw, hh, 3);
+            }
+            else
+            {
+                rect.SetupRect(color, hw, hh);
+            }
             rect.SetupPosition(box.Left + hw, box.Top + hh, 0, box.Rotation);
         }
     }
