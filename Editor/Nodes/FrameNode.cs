@@ -37,6 +37,7 @@ namespace GS_PatEditor.Editor.Nodes
 
         //TODO event name should not use OnXxx
         public event Action OnReset;
+        public event Action EditModeChanged;
 
         public FrameNode(Editor parent)
         {
@@ -68,6 +69,10 @@ namespace GS_PatEditor.Editor.Nodes
         public bool ChangeEditMode(FrameEditMode mode)
         {
             EditMode = mode;
+            if (EditModeChanged != null)
+            {
+                EditModeChanged();
+            }
             return true;
         }
 

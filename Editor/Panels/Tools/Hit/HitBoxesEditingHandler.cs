@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GS_PatEditor.Editor.Nodes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -33,19 +34,30 @@ namespace GS_PatEditor.Editor.Panels.Tools.Hit
             _Editor = editor;
             _Control = ctrl;
 
+            Filter += editor.PreviewWindowUI.GetFilterForEditMode(FrameEditMode.Hit);
+
             HitBoxData = new HitBoxListDataProvider(editor);
 
+            editor.EditorNode.Animation.Frame.EditModeChanged += ToolSwitched;
+
             _Control.MouseMove += _Control_MouseMove;
+            _Control.MouseDown += _Control_MouseDown;
         }
 
         //called when tool is closed
-        public void Finish()
+        public void ToolSwitched()
         {
             ClearSelected();
         }
 
         private void ClearSelected()
         {
+            //clear previous selected
+            foreach (var prev in _SelectedMultiple)
+            {
+                prev.IsSelected = false;
+            }
+
             _SelectedSingle = null;
             _SelectedMultiple.Clear();
         }
@@ -123,7 +135,11 @@ namespace GS_PatEditor.Editor.Panels.Tools.Hit
             }
             else if (_SelectedSingle != null && _SelectedMultiple.Count == 1)
             {
-                if (FindPointAt(_SelectedSingle, x, y) != RectPoint.None)
+                if (Control.ModifierKeys.HasFlag(Keys.Control) && FindBoxAt(x, y) != null)
+                {
+                    _Control.Cursor = Cursors.Hand;
+                }
+                else if (FindPointAt(_SelectedSingle, x, y) != RectPoint.None)
                 {
                     _Control.Cursor = Cursors.SizeAll;
                 }
@@ -134,7 +150,7 @@ namespace GS_PatEditor.Editor.Panels.Tools.Hit
             }
             else
             {
-                if (Control.ModifierKeys.HasFlag(Keys.Control))
+                if (Control.ModifierKeys.HasFlag(Keys.Control) && FindBoxAt(x, y) != null)
                 {
                     _Control.Cursor = Cursors.Hand;
                 }
@@ -142,6 +158,36 @@ namespace GS_PatEditor.Editor.Panels.Tools.Hit
                 {
                     _Control.Cursor = Cursors.Arrow;
                 }
+            }
+        }
+
+        private void SetSingleSelected(HitBoxDataProvider box)
+        {
+            ClearSelected();
+
+            _SelectedSingle = box;
+
+            _SelectedMultiple.Clear();
+            _SelectedMultiple.Add(box);
+
+            box.IsSelected = true;
+        }
+
+        private void AppendSelected(HitBoxDataProvider box)
+        {
+            if (box.IsSelected)
+            {
+                //remove
+                box.IsSelected = false;
+                _SelectedMultiple.Remove(box);
+                _SelectedSingle = _SelectedMultiple.LastOrDefault();
+            }
+            else
+            {
+                //add
+                box.IsSelected = true;
+                _SelectedMultiple.Add(box);
+                _SelectedSingle = box;
             }
         }
 
@@ -157,6 +203,60 @@ namespace GS_PatEditor.Editor.Panels.Tools.Hit
 
             //update cursor
             UpdateMouseCursor(e.X, e.Y);
+        }
+
+        void _Control_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (!CheckFilter())
+            {
+                return;
+            }
+            
+            if (Control.ModifierKeys.HasFlag(Keys.Control))
+            {
+                var box = FindBoxAt(e.X, e.Y);
+                if (box != null)
+                {
+                    AppendSelected(box);
+                }
+                return;
+            }
+
+            if (_SelectedSingle == null && _SelectedMultiple.Count == 0)
+            {
+                var box = FindBoxAt(e.X, e.Y);
+                if (box != null)
+                {
+                    SetSingleSelected(box);
+                }
+            }
+            else if (_SelectedSingle != null && _SelectedMultiple.Count == 1)
+            {
+                var box = _SelectedSingle;
+                switch (FindPointAt(box, e.X, e.Y))
+                {
+                    case RectPoint.None:
+                        ClearSelected();
+                        break;
+                    //TODO set down state
+                }
+            }
+            else
+            {
+                var box = FindBoxAt(e.X, e.Y);
+                if (box == null)
+                {
+                    ClearSelected();
+                }
+                else if (box.IsSelected)
+                {
+                    //TODO begin move
+                }
+                else
+                {
+                    SetSingleSelected(box);
+                }
+            }
         }
     }
 }

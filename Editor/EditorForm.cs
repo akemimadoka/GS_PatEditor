@@ -82,6 +82,7 @@ namespace GS_PatEditor.Editor
             toolStripButtonToolCursor.CheckState = CheckState.Unchecked;
             toolStripButtonToolMove.CheckState = CheckState.Unchecked;
             toolStripButtonToolPhysics.CheckState = CheckState.Unchecked;
+            toolStripButtonToolHit.CheckState = CheckState.Unchecked;
         }
 
         private void toolStripButtonToolCursor_Click(object sender, EventArgs e)
@@ -108,6 +109,15 @@ namespace GS_PatEditor.Editor
             {
                 ClearToolButtonsToolChecked();
                 toolStripButtonToolPhysics.CheckState = CheckState.Checked;
+            }
+        }
+
+        private void toolStripButtonToolHit_Click(object sender, EventArgs e)
+        {
+            if (ChangeEditMode(FrameEditMode.Hit))
+            {
+                ClearToolButtonsToolChecked();
+                toolStripButtonToolHit.CheckState = CheckState.Checked;
             }
         }
 

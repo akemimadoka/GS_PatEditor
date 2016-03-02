@@ -41,6 +41,8 @@
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripSplitBoxVisible = new System.Windows.Forms.ToolStripDropDownButton();
             this.resetScaleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.scale200ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.scale300ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.axisToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.physicalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -59,8 +61,7 @@
             this.previewWindow = new System.Windows.Forms.PictureBox();
             this.panelAnimationFramesScroll = new System.Windows.Forms.Panel();
             this.animationFrames = new System.Windows.Forms.PictureBox();
-            this.scale200ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.scale300ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripButtonToolHit = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
             this.panelAnimations.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.animations)).BeginInit();
@@ -86,6 +87,7 @@
             this.toolStripButtonToolCursor,
             this.toolStripButtonToolMove,
             this.toolStripButtonToolPhysics,
+            this.toolStripButtonToolHit,
             this.toolStripSeparator2,
             this.toolStripSplitBoxVisible,
             this.toolStripSeparator3,
@@ -94,7 +96,7 @@
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.toolStrip1.Size = new System.Drawing.Size(611, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(667, 25);
             this.toolStrip1.TabIndex = 4;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -173,21 +175,35 @@
             // resetScaleToolStripMenuItem
             // 
             this.resetScaleToolStripMenuItem.Name = "resetScaleToolStripMenuItem";
-            this.resetScaleToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.resetScaleToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
             this.resetScaleToolStripMenuItem.Text = "100%";
             this.resetScaleToolStripMenuItem.Click += new System.EventHandler(this.resetScaleToolStripMenuItem_Click);
+            // 
+            // scale200ToolStripMenuItem
+            // 
+            this.scale200ToolStripMenuItem.Name = "scale200ToolStripMenuItem";
+            this.scale200ToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
+            this.scale200ToolStripMenuItem.Text = "200%";
+            this.scale200ToolStripMenuItem.Click += new System.EventHandler(this.scale200ToolStripMenuItem_Click);
+            // 
+            // scale300ToolStripMenuItem
+            // 
+            this.scale300ToolStripMenuItem.Name = "scale300ToolStripMenuItem";
+            this.scale300ToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
+            this.scale300ToolStripMenuItem.Text = "300%";
+            this.scale300ToolStripMenuItem.Click += new System.EventHandler(this.scale300ToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(149, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(118, 6);
             // 
             // axisToolStripMenuItem
             // 
             this.axisToolStripMenuItem.Checked = true;
             this.axisToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.axisToolStripMenuItem.Name = "axisToolStripMenuItem";
-            this.axisToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.axisToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
             this.axisToolStripMenuItem.Text = "Axis";
             this.axisToolStripMenuItem.Click += new System.EventHandler(this.axisToolStripMenuItem_Click);
             // 
@@ -196,7 +212,7 @@
             this.physicalToolStripMenuItem.Checked = true;
             this.physicalToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.physicalToolStripMenuItem.Name = "physicalToolStripMenuItem";
-            this.physicalToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.physicalToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
             this.physicalToolStripMenuItem.Text = "Physical";
             this.physicalToolStripMenuItem.Click += new System.EventHandler(this.physicalToolStripMenuItem_Click);
             // 
@@ -268,7 +284,7 @@
             this.panelAnimations.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelAnimations.Location = new System.Drawing.Point(0, 25);
             this.panelAnimations.Name = "panelAnimations";
-            this.panelAnimations.Size = new System.Drawing.Size(611, 330);
+            this.panelAnimations.Size = new System.Drawing.Size(667, 354);
             this.panelAnimations.TabIndex = 6;
             this.panelAnimations.Visible = false;
             // 
@@ -277,7 +293,7 @@
             this.animations.Dock = System.Windows.Forms.DockStyle.Top;
             this.animations.Location = new System.Drawing.Point(0, 0);
             this.animations.Name = "animations";
-            this.animations.Size = new System.Drawing.Size(611, 50);
+            this.animations.Size = new System.Drawing.Size(667, 50);
             this.animations.TabIndex = 0;
             this.animations.TabStop = false;
             // 
@@ -288,7 +304,7 @@
             this.panelAnimationEdit.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelAnimationEdit.Location = new System.Drawing.Point(0, 25);
             this.panelAnimationEdit.Name = "panelAnimationEdit";
-            this.panelAnimationEdit.Size = new System.Drawing.Size(611, 330);
+            this.panelAnimationEdit.Size = new System.Drawing.Size(667, 354);
             this.panelAnimationEdit.TabIndex = 7;
             // 
             // panelFramePreviewScroll
@@ -298,7 +314,7 @@
             this.panelFramePreviewScroll.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelFramePreviewScroll.Location = new System.Drawing.Point(0, 100);
             this.panelFramePreviewScroll.Name = "panelFramePreviewScroll";
-            this.panelFramePreviewScroll.Size = new System.Drawing.Size(611, 230);
+            this.panelFramePreviewScroll.Size = new System.Drawing.Size(667, 254);
             this.panelFramePreviewScroll.TabIndex = 17;
             // 
             // previewWindow
@@ -317,7 +333,7 @@
             this.panelAnimationFramesScroll.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelAnimationFramesScroll.Location = new System.Drawing.Point(0, 0);
             this.panelAnimationFramesScroll.Name = "panelAnimationFramesScroll";
-            this.panelAnimationFramesScroll.Size = new System.Drawing.Size(611, 100);
+            this.panelAnimationFramesScroll.Size = new System.Drawing.Size(667, 100);
             this.panelAnimationFramesScroll.TabIndex = 15;
             // 
             // animationFrames
@@ -329,25 +345,20 @@
             this.animationFrames.TabIndex = 5;
             this.animationFrames.TabStop = false;
             // 
-            // scale200ToolStripMenuItem
+            // toolStripButtonToolHit
             // 
-            this.scale200ToolStripMenuItem.Name = "scale200ToolStripMenuItem";
-            this.scale200ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.scale200ToolStripMenuItem.Text = "200%";
-            this.scale200ToolStripMenuItem.Click += new System.EventHandler(this.scale200ToolStripMenuItem_Click);
-            // 
-            // scale300ToolStripMenuItem
-            // 
-            this.scale300ToolStripMenuItem.Name = "scale300ToolStripMenuItem";
-            this.scale300ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.scale300ToolStripMenuItem.Text = "300%";
-            this.scale300ToolStripMenuItem.Click += new System.EventHandler(this.scale300ToolStripMenuItem_Click);
+            this.toolStripButtonToolHit.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonToolHit.Image")));
+            this.toolStripButtonToolHit.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonToolHit.Name = "toolStripButtonToolHit";
+            this.toolStripButtonToolHit.Size = new System.Drawing.Size(44, 22);
+            this.toolStripButtonToolHit.Text = "Hit";
+            this.toolStripButtonToolHit.Click += new System.EventHandler(this.toolStripButtonToolHit_Click);
             // 
             // EditorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(611, 355);
+            this.ClientSize = new System.Drawing.Size(667, 379);
             this.Controls.Add(this.panelAnimations);
             this.Controls.Add(this.panelAnimationEdit);
             this.Controls.Add(this.toolStrip1);
@@ -401,6 +412,7 @@
         private System.Windows.Forms.PictureBox previewWindow;
         private System.Windows.Forms.ToolStripMenuItem scale200ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem scale300ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripButton toolStripButtonToolHit;
 
     }
 }
