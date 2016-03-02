@@ -69,6 +69,18 @@ namespace GS_PatEditor.Render
         public void Dispose()
         {
             SinglePixelBitmap.Dispose();
+            DoublePixelBitmap.Dispose();
+
+            foreach (var t in _SingleColorTextureList.Values)
+            {
+                t.Dispose();
+            }
+            _SingleColorTextureList.Clear();
+            foreach (var t in _DoubleColorTextureList.Values)
+            {
+                t.Dispose();
+            }
+            _DoubleColorTextureList.Clear();
 
             DisposeAllSprites();
 
@@ -113,33 +125,51 @@ namespace GS_PatEditor.Render
                 Usage.None, Format.A8R8G8B8, Pool.Managed, Filter.Point, Filter.Point, 0);
         }
 
-        private Texture CreateColorTexture(int color)
+        private Texture CreateColorTexture(uint color1, uint color2)
         {
-            SinglePixelBitmap.SetPixel(0, 0, System.Drawing.Color.FromArgb(color | 0xFF << 24));
+            DoublePixelBitmap.SetPixel(0, 0, System.Drawing.Color.FromArgb(((int)color1) | 0xFF << 24));
+            DoublePixelBitmap.SetPixel(1, 0, System.Drawing.Color.FromArgb(((int)color2) | 0xFF << 24));
+            return CreateTextureFromBitmap(DoublePixelBitmap);
+        }
+        private Texture CreateColorTexture(uint color)
+        {
+            SinglePixelBitmap.SetPixel(0, 0, System.Drawing.Color.FromArgb(((int)color) | 0xFF << 24));
             return CreateTextureFromBitmap(SinglePixelBitmap);
         }
 
         private System.Drawing.Bitmap SinglePixelBitmap =
             new System.Drawing.Bitmap(1, 1, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+        private System.Drawing.Bitmap DoublePixelBitmap =
+            new System.Drawing.Bitmap(2, 1, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
 
-        private readonly Dictionary<int, Texture> _ColorTextureList = new Dictionary<int, Texture>();
+        private readonly Dictionary<uint, Texture> _SingleColorTextureList = new Dictionary<uint, Texture>();
+        private readonly Dictionary<ulong, Texture> _DoubleColorTextureList = new Dictionary<ulong, Texture>();
 
-        public Texture GetColorTexture(int r, int g, int b)
-        {
-            return GetColorTexture(0xFF << 24 | r << 16 | g << 8 | b);
-        }
-
-        public Texture GetColorTexture(int color)
+        public Texture GetColorTexture(uint color)
         {
             Texture ret;
-            if (_ColorTextureList.TryGetValue(color, out ret))
+            if (_SingleColorTextureList.TryGetValue(color, out ret))
+            {
+                return ret;
+            }
+            
+            ret = CreateColorTexture(color);
+            _SingleColorTextureList.Add(color, ret);
+            
+            return ret;
+        }
+
+        public Texture GetColorTexture(uint color1, uint color2)
+        {
+            ulong combined = color1 << 32 | color2;
+            Texture ret;
+            if (_DoubleColorTextureList.TryGetValue(combined, out ret))
             {
                 return ret;
             }
 
-            ret = CreateColorTexture(color);
-            _ColorTextureList.Add(color, ret);
-
+            ret = CreateColorTexture(color1, color2);
+            _DoubleColorTextureList.Add(combined, ret);
             return ret;
         }
         #endregion

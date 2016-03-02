@@ -17,7 +17,7 @@ namespace GS_PatEditor.Render
             sprite.Rotation0 = rotation0;
         }
 
-        public static void SetupLine(this Sprite sprite, int color, float halfLen)
+        public static void SetupLine(this Sprite sprite, uint color, float halfLen)
         {
             sprite.Texture = sprite.RenderEngine.GetColorTexture(color);
             sprite.OriginX = 0.5f;
@@ -26,7 +26,7 @@ namespace GS_PatEditor.Render
             sprite.ScaleY = 1;
         }
 
-        private static void SetupLineDistance(this Sprite sprite, int color,
+        private static void SetupLineDistance(this Sprite sprite, uint color,
             float distanceX, float distanceY, float halfLenX, float halfLenY)
         {
             sprite.Texture = sprite.RenderEngine.GetColorTexture(color);
@@ -36,7 +36,7 @@ namespace GS_PatEditor.Render
             sprite.ScaleY = halfLenY * 2;
         }
 
-        public static void SetupRect(this Sprite[] spriteArray, int color, float halfWidth, float halfHeight)
+        public static void SetupRect(this Sprite[] spriteArray, uint color, float halfWidth, float halfHeight)
         {
             spriteArray[0].SetupLineDistance(color, 0, halfHeight, halfWidth + 0.5f, 0.5f);
             spriteArray[1].SetupLineDistance(color, halfWidth, 0, 0.5f, halfHeight + 0.5f);

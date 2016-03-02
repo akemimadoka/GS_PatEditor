@@ -23,7 +23,7 @@ namespace GS_PatEditor.Render
             sprite.SetupPosition(0, 0, frame.Rotation / 180.0f * 3.1415926f);
         }
 
-        public static void SetupPhysical(this Sprite[] rect, int color, EditingPhysicalBox box)
+        public static void SetupPhysical(this Sprite[] rect, uint color, EditingPhysicalBox box)
         {
             var hw = box.Width / 2;
             var hh = box.Height / 2;
@@ -31,7 +31,7 @@ namespace GS_PatEditor.Render
             rect.SetupPosition(box.Left + hw, box.Top + hh, 0);
         }
 
-        public static void SetupHit(this Sprite[] rect, int color, EditingHitAttackBox box)
+        public static void SetupHit(this Sprite[] rect, uint color, EditingHitAttackBox box)
         {
             var hw = box.Width / 2;
             var hh = box.Height / 2;
