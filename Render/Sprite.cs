@@ -203,6 +203,9 @@ namespace GS_PatEditor.Render
         }
         #endregion
 
+        //only used in sprite setup functions
+        public float RotationOffset { get; set; }
+
         private Device _Device;
 
         private readonly RenderEngine _RenderEngine;
@@ -263,7 +266,7 @@ namespace GS_PatEditor.Render
         {
             float t_l, t_t, t_r, t_b;
 
-            float x = Left, y = Top, r = -Rotation;//left-hand -> right-hand
+            float x = Left, y = Top;
             float sx = ScaleX, sy = ScaleY;
 
             //get image size
@@ -311,7 +314,7 @@ namespace GS_PatEditor.Render
 
         private Vector4 MakePosition(float x, float y, float tx, float ty)
         {
-            var r = _Rotation;
+            var r = _Rotation; //TODO should reverse? (also check import)
             var r0 = _Rotation0;
             var px = x + tx * (float)Math.Cos(r) - ty * (float)Math.Sin(r);
             var py = y + tx * (float)Math.Sin(r) + ty * (float)Math.Cos(r);

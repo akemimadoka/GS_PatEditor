@@ -204,6 +204,10 @@ namespace GS_PatEditor.Render
             ret.ScaleY = 1;
             ret.Rotation = 0;
             ret.Texture = null;
+            ret.RepeatX = 1;
+            ret.RepeatY = 1;
+            ret.Rotation0 = 0;
+            ret.RotationOffset = 0;
 
             return ret;
         }

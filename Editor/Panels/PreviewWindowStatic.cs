@@ -24,14 +24,14 @@ namespace GS_PatEditor.Editor.Panels
             _Sprite = sprites.GetSprite(0);
 
             _SpriteLineH = sprites.GetSprite(1);
-            _SpriteLineH.SetupLine(0x000000, 0xFF000000, 10000);
+            _SpriteLineH.SetupDashLine(0x000000, 10000, 10);
+            _SpriteLineH.SetRotationOffset(0);
             _SpriteLineH.SetupPosition(0, 0, 0);
-            _SpriteLineH.RepeatX = 10000 / 10;
 
             _SpriteLineV = sprites.GetSprite(2);
-            _SpriteLineV.SetupLine(0x000000, 0xFF000000, 10000);
-            _SpriteLineV.SetupPosition(0, 0, 3.1415926f / 2);
-            _SpriteLineV.RepeatX = 10000 / 10;
+            _SpriteLineV.SetupDashLine(0x000000, 10000, 10);
+            _SpriteLineV.SetRotationOffset(1);
+            _SpriteLineV.SetupPosition(0, 0, 0);
 
             _SpriteListPhysical = sprites.GetRectangle(0);
         }
@@ -74,7 +74,7 @@ namespace GS_PatEditor.Editor.Panels
                     {
                         var s = sprites.GetRectangle(rectIndex++);
                         s.SetupHit(0x00A2E8, box);
-                        s.Render();
+                        //s.Render();
                     }
                 }
             }
