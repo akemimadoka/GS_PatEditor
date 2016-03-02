@@ -84,6 +84,34 @@ namespace GS_PatEditor.Render
             }
         }
 
+        private float _RepeatX;
+        public float RepeatX
+        {
+            get
+            {
+                return _RepeatX;
+            }
+            set
+            {
+                _Dirty = true;
+                _RepeatX = value;
+            }
+        }
+
+        private float _RepeatY;
+        public float RepeatY
+        {
+            get
+            {
+                return _RepeatY;
+            }
+            set
+            {
+                _Dirty = true;
+                _RepeatY = value;
+            }
+        }
+
         private bool _UseSize;
 
         private float _ScaleX;
@@ -200,6 +228,8 @@ namespace GS_PatEditor.Render
             _Device = re.Device;
             _ScaleX = 1.0f;
             _ScaleY = 1.0f;
+            _RepeatX = 1.0f;
+            _RepeatY = 1.0f;
         }
 
         public void Render()
@@ -271,9 +301,9 @@ namespace GS_PatEditor.Render
             //apply rotation
 
             stream.Write(new Vertex { pos = MakePosition(x, y, t_l, t_t), tex = new Vector4(0.0f, 0.0f, 0.0f, 0.0f) });
-            stream.Write(new Vertex { pos = MakePosition(x, y, t_r, t_t), tex = new Vector4(1.0f, 0.0f, 0.0f, 0.0f) });
-            stream.Write(new Vertex { pos = MakePosition(x, y, t_l, t_b), tex = new Vector4(0.0f, 1.0f, 0.0f, 0.0f) });
-            stream.Write(new Vertex { pos = MakePosition(x, y, t_r, t_b), tex = new Vector4(1.0f, 1.0f, 0.0f, 0.0f) });
+            stream.Write(new Vertex { pos = MakePosition(x, y, t_r, t_t), tex = new Vector4(_RepeatX, 0.0f, 0.0f, 0.0f) });
+            stream.Write(new Vertex { pos = MakePosition(x, y, t_l, t_b), tex = new Vector4(0.0f, _RepeatY, 0.0f, 0.0f) });
+            stream.Write(new Vertex { pos = MakePosition(x, y, t_r, t_b), tex = new Vector4(_RepeatX, _RepeatY, 0.0f, 0.0f) });
             stream.Dispose();
 
             _Buffer.Unlock();

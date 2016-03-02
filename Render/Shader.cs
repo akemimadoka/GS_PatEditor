@@ -32,8 +32,8 @@ sampler2D s_2D = sampler_state
     //ANISOTROPIC
     //POINT
     Filter = POINT;
-    AddressU = Border;
-    AddressV = Border;
+    AddressU = WRAP;
+    AddressV = WRAP;
     
 };
 

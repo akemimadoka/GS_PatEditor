@@ -127,8 +127,8 @@ namespace GS_PatEditor.Render
 
         private Texture CreateColorTexture(uint color1, uint color2)
         {
-            DoublePixelBitmap.SetPixel(0, 0, System.Drawing.Color.FromArgb(((int)color1) | 0xFF << 24));
-            DoublePixelBitmap.SetPixel(1, 0, System.Drawing.Color.FromArgb(((int)color2) | 0xFF << 24));
+            DoublePixelBitmap.SetPixel(0, 0, System.Drawing.Color.FromArgb(((int)color1) ^ 0xFF << 24));
+            DoublePixelBitmap.SetPixel(1, 0, System.Drawing.Color.FromArgb(((int)color2) ^ 0xFF << 24));
             return CreateTextureFromBitmap(DoublePixelBitmap);
         }
         private Texture CreateColorTexture(uint color)

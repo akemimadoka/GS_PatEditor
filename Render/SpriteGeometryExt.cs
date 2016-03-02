@@ -26,6 +26,15 @@ namespace GS_PatEditor.Render
             sprite.SizeY = 1;
         }
 
+        public static void SetupLine(this Sprite sprite, uint color1, uint color2, float halfLen)
+        {
+            sprite.Texture = sprite.RenderEngine.GetColorTexture(color1, color2);
+            sprite.OriginX = 1.0f;
+            sprite.OriginY = 0.5f;
+            sprite.SizeX = halfLen;
+            sprite.SizeY = 1;
+        }
+
         private static void SetupLineDistance(this Sprite sprite, uint color,
             float distanceX, float distanceY, float halfLenX, float halfLenY)
         {
