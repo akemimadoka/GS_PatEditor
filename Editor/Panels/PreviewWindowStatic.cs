@@ -74,7 +74,7 @@ namespace GS_PatEditor.Editor.Panels
                     {
                         var s = sprites.GetRectangle(rectIndex++);
                         s.SetupHit(0x00A2E8, box);
-                        //s.Render();
+                        s.Render();
                     }
                 }
             }

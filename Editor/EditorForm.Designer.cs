@@ -55,18 +55,20 @@
             this.panelAnimations = new System.Windows.Forms.Panel();
             this.animations = new System.Windows.Forms.PictureBox();
             this.panelAnimationEdit = new System.Windows.Forms.Panel();
-            this.panelAnimationFramesScroll = new System.Windows.Forms.Panel();
-            this.animationFrames = new System.Windows.Forms.PictureBox();
             this.panelFramePreviewScroll = new System.Windows.Forms.Panel();
             this.previewWindow = new System.Windows.Forms.PictureBox();
+            this.panelAnimationFramesScroll = new System.Windows.Forms.Panel();
+            this.animationFrames = new System.Windows.Forms.PictureBox();
+            this.scale200ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.scale300ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1.SuspendLayout();
             this.panelAnimations.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.animations)).BeginInit();
             this.panelAnimationEdit.SuspendLayout();
-            this.panelAnimationFramesScroll.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.animationFrames)).BeginInit();
             this.panelFramePreviewScroll.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.previewWindow)).BeginInit();
+            this.panelAnimationFramesScroll.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.animationFrames)).BeginInit();
             this.SuspendLayout();
             // 
             // timer1
@@ -157,6 +159,8 @@
             // 
             this.toolStripSplitBoxVisible.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.resetScaleToolStripMenuItem,
+            this.scale200ToolStripMenuItem,
+            this.scale300ToolStripMenuItem,
             this.toolStripMenuItem1,
             this.axisToolStripMenuItem,
             this.physicalToolStripMenuItem});
@@ -169,21 +173,21 @@
             // resetScaleToolStripMenuItem
             // 
             this.resetScaleToolStripMenuItem.Name = "resetScaleToolStripMenuItem";
-            this.resetScaleToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
-            this.resetScaleToolStripMenuItem.Text = "Reset scale";
+            this.resetScaleToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.resetScaleToolStripMenuItem.Text = "100%";
             this.resetScaleToolStripMenuItem.Click += new System.EventHandler(this.resetScaleToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(138, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(149, 6);
             // 
             // axisToolStripMenuItem
             // 
             this.axisToolStripMenuItem.Checked = true;
             this.axisToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.axisToolStripMenuItem.Name = "axisToolStripMenuItem";
-            this.axisToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
+            this.axisToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.axisToolStripMenuItem.Text = "Axis";
             this.axisToolStripMenuItem.Click += new System.EventHandler(this.axisToolStripMenuItem_Click);
             // 
@@ -192,7 +196,7 @@
             this.physicalToolStripMenuItem.Checked = true;
             this.physicalToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.physicalToolStripMenuItem.Name = "physicalToolStripMenuItem";
-            this.physicalToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
+            this.physicalToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.physicalToolStripMenuItem.Text = "Physical";
             this.physicalToolStripMenuItem.Click += new System.EventHandler(this.physicalToolStripMenuItem_Click);
             // 
@@ -287,6 +291,24 @@
             this.panelAnimationEdit.Size = new System.Drawing.Size(611, 330);
             this.panelAnimationEdit.TabIndex = 7;
             // 
+            // panelFramePreviewScroll
+            // 
+            this.panelFramePreviewScroll.AutoScroll = true;
+            this.panelFramePreviewScroll.Controls.Add(this.previewWindow);
+            this.panelFramePreviewScroll.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelFramePreviewScroll.Location = new System.Drawing.Point(0, 100);
+            this.panelFramePreviewScroll.Name = "panelFramePreviewScroll";
+            this.panelFramePreviewScroll.Size = new System.Drawing.Size(611, 230);
+            this.panelFramePreviewScroll.TabIndex = 17;
+            // 
+            // previewWindow
+            // 
+            this.previewWindow.Location = new System.Drawing.Point(0, 0);
+            this.previewWindow.Name = "previewWindow";
+            this.previewWindow.Size = new System.Drawing.Size(800, 600);
+            this.previewWindow.TabIndex = 7;
+            this.previewWindow.TabStop = false;
+            // 
             // panelAnimationFramesScroll
             // 
             this.panelAnimationFramesScroll.AutoScroll = true;
@@ -307,23 +329,19 @@
             this.animationFrames.TabIndex = 5;
             this.animationFrames.TabStop = false;
             // 
-            // panelFramePreviewScroll
+            // scale200ToolStripMenuItem
             // 
-            this.panelFramePreviewScroll.AutoScroll = true;
-            this.panelFramePreviewScroll.Controls.Add(this.previewWindow);
-            this.panelFramePreviewScroll.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelFramePreviewScroll.Location = new System.Drawing.Point(0, 100);
-            this.panelFramePreviewScroll.Name = "panelFramePreviewScroll";
-            this.panelFramePreviewScroll.Size = new System.Drawing.Size(611, 230);
-            this.panelFramePreviewScroll.TabIndex = 17;
+            this.scale200ToolStripMenuItem.Name = "scale200ToolStripMenuItem";
+            this.scale200ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.scale200ToolStripMenuItem.Text = "200%";
+            this.scale200ToolStripMenuItem.Click += new System.EventHandler(this.scale200ToolStripMenuItem_Click);
             // 
-            // previewWindow
+            // scale300ToolStripMenuItem
             // 
-            this.previewWindow.Location = new System.Drawing.Point(0, 0);
-            this.previewWindow.Name = "previewWindow";
-            this.previewWindow.Size = new System.Drawing.Size(800, 600);
-            this.previewWindow.TabIndex = 7;
-            this.previewWindow.TabStop = false;
+            this.scale300ToolStripMenuItem.Name = "scale300ToolStripMenuItem";
+            this.scale300ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.scale300ToolStripMenuItem.Text = "300%";
+            this.scale300ToolStripMenuItem.Click += new System.EventHandler(this.scale300ToolStripMenuItem_Click);
             // 
             // EditorForm
             // 
@@ -341,10 +359,10 @@
             this.panelAnimations.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.animations)).EndInit();
             this.panelAnimationEdit.ResumeLayout(false);
-            this.panelAnimationFramesScroll.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.animationFrames)).EndInit();
             this.panelFramePreviewScroll.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.previewWindow)).EndInit();
+            this.panelAnimationFramesScroll.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.animationFrames)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -381,6 +399,8 @@
         private System.Windows.Forms.PictureBox animationFrames;
         private System.Windows.Forms.Panel panelFramePreviewScroll;
         private System.Windows.Forms.PictureBox previewWindow;
+        private System.Windows.Forms.ToolStripMenuItem scale200ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem scale300ToolStripMenuItem;
 
     }
 }

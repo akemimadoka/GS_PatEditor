@@ -125,14 +125,14 @@ namespace GS_PatEditor.Editor.Panels.Tools.Preview
             OnSceneMoved();
         }
 
-        public void ResetScale()
+        public void ResetScale(float scale)
         {
             _PreviewX = _Control.Width / 2;
             _PreviewY = _Control.Height / 2;
             _Parent.Render.Transform.X = _PreviewX;
             _Parent.Render.Transform.Y = _PreviewY;
 
-            _PreviewScale = 1;
+            _PreviewScale = scale;
             _Parent.Render.Transform.Scale = _PreviewScale;
         }
 

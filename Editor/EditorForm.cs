@@ -38,7 +38,7 @@ namespace GS_PatEditor.Editor
                     };
 
                     frm.Show();
-                    frm.ResetPreviewPosition();
+                    frm.ResetPreviewPosition(1.0f);
 
                     Application.Run(frm);
                 }
@@ -68,9 +68,9 @@ namespace GS_PatEditor.Editor
             return _Editor.EditorNode.Animation.Frame.ChangeEditMode(mode);
         }
 
-        private void ResetPreviewPosition()
+        private void ResetPreviewPosition(float scale)
         {
-            _Editor.PreviewWindowUI.PreviewMoving.ResetScale();
+            _Editor.PreviewWindowUI.PreviewMoving.ResetScale(scale);
 
             var x = panelFramePreviewScroll.ClientSize.Width - 800;
             var y = panelFramePreviewScroll.ClientSize.Height - 600;
@@ -130,7 +130,17 @@ namespace GS_PatEditor.Editor
 
         private void resetScaleToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ResetPreviewPosition();
+            ResetPreviewPosition(1.0f);
+        }
+
+        private void scale200ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ResetPreviewPosition(2.0f);
+        }
+
+        private void scale300ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ResetPreviewPosition(3.0f);
         }
 
         private void toolStripButtonBack_Click(object sender, EventArgs e)
