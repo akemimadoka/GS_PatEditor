@@ -22,8 +22,8 @@ namespace GS_PatEditor.Render
             sprite.Texture = sprite.RenderEngine.GetColorTexture(color);
             sprite.OriginX = 0.5f;
             sprite.OriginY = 0.5f;
-            sprite.ScaleX = halfLen * 2;
-            sprite.ScaleY = 1;
+            sprite.SizeX = halfLen;
+            sprite.SizeY = 1;
         }
 
         private static void SetupLineDistance(this Sprite sprite, uint color,
@@ -32,8 +32,8 @@ namespace GS_PatEditor.Render
             sprite.Texture = sprite.RenderEngine.GetColorTexture(color);
             sprite.OriginX = 0.5f + distanceX;
             sprite.OriginY = 0.5f + distanceY;
-            sprite.ScaleX = halfLenX * 2;
-            sprite.ScaleY = halfLenY * 2;
+            sprite.SizeX = halfLenX * 2;
+            sprite.SizeY = halfLenY * 2;
         }
 
         public static void SetupRect(this Sprite[] spriteArray, uint color, float halfWidth, float halfHeight)

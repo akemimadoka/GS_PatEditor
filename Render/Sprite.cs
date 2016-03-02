@@ -84,6 +84,8 @@ namespace GS_PatEditor.Render
             }
         }
 
+        private bool _UseSize;
+
         private float _ScaleX;
         public float ScaleX
         {
@@ -95,6 +97,7 @@ namespace GS_PatEditor.Render
             {
                 _Dirty = true;
                 _ScaleX = value;
+                _UseSize = false;
             }
         }
 
@@ -109,6 +112,37 @@ namespace GS_PatEditor.Render
             {
                 _Dirty = true;
                 _ScaleY = value;
+                _UseSize = false;
+            }
+        }
+
+        private float _SizeX;
+        public float SizeX
+        {
+            get
+            {
+                return _SizeX;
+            }
+            set
+            {
+                _Dirty = true;
+                _SizeX = value;
+                _UseSize = true;
+            }
+        }
+
+        private float _SizeY;
+        public float SizeY
+        {
+            get
+            {
+                return _SizeY;
+            }
+            set
+            {
+                _Dirty = true;
+                _SizeY = value;
+                _UseSize = true;
             }
         }
 
@@ -200,6 +234,7 @@ namespace GS_PatEditor.Render
             float t_l, t_t, t_r, t_b;
 
             float x = Left, y = Top, r = -Rotation;//left-hand -> right-hand
+            float sx = ScaleX, sy = ScaleY;
 
             //get image size
             {
@@ -209,6 +244,12 @@ namespace GS_PatEditor.Render
                 t_b = desc.Height;
                 t_l = 0;
                 t_t = 0;
+
+                if (_UseSize)
+                {
+                    sx = SizeX / t_r;
+                    sy = SizeY / t_b;
+                }
             }
             //apply origin
             {
@@ -219,10 +260,10 @@ namespace GS_PatEditor.Render
             }
             //apply scale
             {
-                t_l *= ScaleX;
-                t_r *= ScaleX;
-                t_t *= ScaleY;
-                t_b *= ScaleY;
+                t_l *= sx;
+                t_r *= sx;
+                t_t *= sy;
+                t_b *= sy;
             }
 
             var stream = _Buffer.Lock(0, 0, LockFlags.Discard);

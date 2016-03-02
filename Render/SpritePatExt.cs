@@ -15,6 +15,7 @@ namespace GS_PatEditor.Render
     {
         public static void SetupFrame(this Sprite sprite, Texture txt, Frame frame, EditingPoint editing)
         {
+            //TODO do not use Setup (which only supports Scale but not Size)
             sprite.Setup(txt,
                 OriginX: frame.OriginX + editing.OffsetX,
                 OriginY: frame.OriginY + editing.OffsetY,
