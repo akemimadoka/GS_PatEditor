@@ -30,6 +30,8 @@ namespace GS_PatEditor.Editor.Panels.Tools.Hit
         private List<HitBoxDataProvider> _SelectedMultiple = new List<HitBoxDataProvider>();
 
         private RectPoint _EditingSingleRectPoint = RectPoint.None;
+        private Point _MovingStart;
+        private bool _IsMoving;
 
         public HitBoxesEditingHandler(Editor editor, Control ctrl)
         {
@@ -283,6 +285,13 @@ namespace GS_PatEditor.Editor.Panels.Tools.Hit
                 }
                 return;
             }
+            if (_IsMoving)
+            {
+                foreach (var b in _SelectedMultiple)
+                {
+                    b.MovingOffset = new Point(e.X, e.Y).Relative(_MovingStart);
+                }
+            }
 
             //check filter
             if (!CheckFilter())
@@ -325,7 +334,10 @@ namespace GS_PatEditor.Editor.Panels.Tools.Hit
                 var boxpoint = FindPointAt(_SelectedSingle, e.X, e.Y);
                 if (box == _SelectedSingle && boxpoint == RectPoint.None)
                 {
-                    //begin move
+                    _SelectedSingle.IsMoving = true;
+                    _IsMoving = true;
+                    _MovingStart = new Point(e.X, e.Y);
+                    return;
                 }
                 switch (boxpoint)
                 {
@@ -347,7 +359,12 @@ namespace GS_PatEditor.Editor.Panels.Tools.Hit
                 }
                 else if (box != null && box.IsSelected)
                 {
-                    //TODO begin move
+                    foreach (var b in _SelectedMultiple)
+                    {
+                        b.IsMoving = true;
+                    }
+                    _IsMoving = true;
+                    _MovingStart = new Point(e.X, e.Y);
                 }
                 else
                 {
@@ -365,6 +382,14 @@ namespace GS_PatEditor.Editor.Panels.Tools.Hit
                 {
                     _EditingSingleRectPoint = RectPoint.None;
                     _SelectedSingle.IsEditing = false;
+                }
+                if (_IsMoving)
+                {
+                    _IsMoving = false;
+                    foreach (var b in _SelectedMultiple)
+                    {
+                        b.IsMoving = false;
+                    }
                 }
             }
         }

@@ -23,6 +23,16 @@ namespace GS_PatEditor.Editor.Panels.Tools.Hit
                 X * (float)Math.Sin(r) + X * (float)Math.Cos(r)
             );
         }
+
+        public Point Offset(Point p)
+        {
+            return new Point(X + p.X, Y + p.Y);
+        }
+
+        public Point Relative(Point p)
+        {
+            return new Point(X - p.X, Y - p.Y);
+        }
     }
 
     class HitBoxDataProvider : EditingHitAttackBox
@@ -35,6 +45,12 @@ namespace GS_PatEditor.Editor.Panels.Tools.Hit
         private float _EditingTop;
         private float _EditingBottom;
         private float _EditingRotation;
+
+        private Point _MovingBaseLeftTop;
+        private Point _MovingBaseLeftBottom;
+        private Point _MovingBaseRightTop;
+        private Point _MovingBaseRightBottom;
+        private Point _MovingOffset;
 
         public HitBoxDataProvider(Editor editor, Pat.Box box)
         {
@@ -113,34 +129,60 @@ namespace GS_PatEditor.Editor.Panels.Tools.Hit
                 if (value && _IsEditing)
                 {
                     //this should not happen
-                    throw new Exception();
+                    return;
                 }
 
-                _IsMoving = value;
                 if (value)
                 {
-
+                    BeginMoving();
                 }
                 else
                 {
-
+                    FinishMoving();
                 }
+                _IsMoving = value;
             }
         }
 
         private void BeginMoving()
         {
-            //TODO
+            _MovingBaseLeftTop = LeftTop;
+            _MovingBaseLeftBottom = LeftBottom;
+            _MovingBaseRightTop = RightTop;
+            _MovingBaseRightBottom = RightBottom;
+            _MovingOffset = new Point();
         }
 
         private void FinishMoving()
         {
-            //TODO
+            Point p;
+            float l, t, r, b;
+            p = PointScreenToSprite(_MovingBaseLeftTop.Offset(_MovingOffset));
+            l = p.X;
+            t = p.Y;
+            p = PointScreenToSprite(_MovingBaseRightBottom.Offset(_MovingOffset));
+            r = p.X;
+            b = p.Y;
+            _Box.X = (int)Math.Round(l);
+            _Box.Y = (int)Math.Round(t);
+            _Box.W = (int)Math.Round(r - l);
+            _Box.H = (int)Math.Round(b - t);
         }
 
         #endregion
 
-        #region Screen data access (editing only)
+        #region Screen data access (editing/moving only)
+
+        public Point MovingOffset
+        {
+            set
+            {
+                if (_IsMoving)
+                {
+                    _MovingOffset = value;
+                }
+            }
+        }
 
         public Point LeftTop
         {
@@ -152,7 +194,7 @@ namespace GS_PatEditor.Editor.Panels.Tools.Hit
                 }
                 else if (_IsMoving)
                 {
-                    throw new Exception();
+                    return _MovingBaseLeftTop.Offset(_MovingOffset);
                 }
                 else
                 {
@@ -179,7 +221,7 @@ namespace GS_PatEditor.Editor.Panels.Tools.Hit
                 }
                 else if (_IsMoving)
                 {
-                    throw new Exception();
+                    return _MovingBaseLeftBottom.Offset(_MovingOffset);
                 }
                 else
                 {
@@ -206,7 +248,7 @@ namespace GS_PatEditor.Editor.Panels.Tools.Hit
                 }
                 else if (_IsMoving)
                 {
-                    throw new Exception();
+                    return _MovingBaseRightTop.Offset(_MovingOffset);
                 }
                 else
                 {
@@ -233,7 +275,7 @@ namespace GS_PatEditor.Editor.Panels.Tools.Hit
                 }
                 else if (_IsMoving)
                 {
-                    throw new Exception();
+                    return _MovingBaseRightBottom.Offset(_MovingOffset);
                 }
                 else
                 {
@@ -265,7 +307,7 @@ namespace GS_PatEditor.Editor.Panels.Tools.Hit
                 }
                 else if (_IsMoving)
                 {
-                    throw new Exception();
+                    return PointScreenToSprite(_MovingBaseLeftTop.Offset(_MovingOffset)).X;
                 }
                 else
                 {
@@ -284,7 +326,7 @@ namespace GS_PatEditor.Editor.Panels.Tools.Hit
                 }
                 else if (_IsMoving)
                 {
-                    throw new Exception();
+                    return PointScreenToSprite(_MovingBaseLeftTop.Offset(_MovingOffset)).Y;
                 }
                 else
                 {
@@ -303,7 +345,9 @@ namespace GS_PatEditor.Editor.Panels.Tools.Hit
                 }
                 else if (_IsMoving)
                 {
-                    throw new Exception();
+                    var p1 = PointScreenToSprite(_MovingBaseLeftTop.Offset(_MovingOffset)).X;
+                    var p2 = PointScreenToSprite(_MovingBaseRightBottom.Offset(_MovingOffset)).X;
+                    return p2 - p1;
                 }
                 else
                 {
@@ -322,7 +366,9 @@ namespace GS_PatEditor.Editor.Panels.Tools.Hit
                 }
                 else if (_IsMoving)
                 {
-                    throw new Exception();
+                    var p1 = PointScreenToSprite(_MovingBaseLeftTop.Offset(_MovingOffset)).Y;
+                    var p2 = PointScreenToSprite(_MovingBaseRightBottom.Offset(_MovingOffset)).Y;
+                    return p2 - p1;
                 }
                 else
                 {
@@ -341,7 +387,7 @@ namespace GS_PatEditor.Editor.Panels.Tools.Hit
                 }
                 else if (_IsMoving)
                 {
-                    throw new Exception();
+                    return _Box.R;
                 }
                 else
                 {
