@@ -33,6 +33,11 @@ namespace GS_PatEditor.Editor.Panels.Tools.Hit
         {
             return new Point(X - p.X, Y - p.Y);
         }
+
+        public static Point Center(Point p1, Point p2)
+        {
+            return new Point((p1.X + p2.X) / 2, (p1.Y + p2.Y) / 2);
+        }
     }
 
     class HitBoxDataProvider : EditingHitAttackBox
@@ -103,7 +108,7 @@ namespace GS_PatEditor.Editor.Panels.Tools.Hit
             _EditingRight = _Box.X + _Box.W;
             _EditingTop = _Box.Y;
             _EditingBottom = _Box.Y + _Box.H;
-            _EditingRotation = _Box.R;
+            _EditingRotation = _Box.R / 180.0f * 3.1415926f;
         }
 
         private void FinishEditing()
@@ -112,7 +117,7 @@ namespace GS_PatEditor.Editor.Panels.Tools.Hit
             _Box.Y = (int)Math.Round(_EditingTop);
             _Box.W = (int)Math.Round(_EditingRight - _EditingLeft);
             _Box.H = (int)Math.Round(_EditingBottom - _EditingTop);
-            _Box.R = (int)Math.Round(_EditingRotation);
+            _Box.R = (int)Math.Round(_EditingRotation * 180.0f / 3.1415926f);
         }
 
         private bool _IsMoving;
@@ -296,6 +301,14 @@ namespace GS_PatEditor.Editor.Panels.Tools.Hit
             }
         }
 
+        public Point CenterPoint
+        {
+            get
+            {
+                return Point.Center(LeftTop, RightBottom);
+            }
+        }
+
         #endregion
 
         #region Box data access
@@ -380,6 +393,7 @@ namespace GS_PatEditor.Editor.Panels.Tools.Hit
             }
         }
 
+        //convert degree
         public float Rotation
         {
             get
@@ -390,11 +404,19 @@ namespace GS_PatEditor.Editor.Panels.Tools.Hit
                 }
                 else if (_IsMoving)
                 {
-                    return _Box.R;
+                    return _Box.R / 180.0f * 3.1415926f;
                 }
                 else
                 {
-                    return _Box.R;
+                    return _Box.R / 180.0f * 3.1415926f;
+                }
+            }
+            set
+            {
+                //TODO a better rotation
+                if (_IsEditing)
+                {
+                    _EditingRotation = value;
                 }
             }
         }

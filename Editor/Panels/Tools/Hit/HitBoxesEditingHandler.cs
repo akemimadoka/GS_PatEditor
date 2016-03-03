@@ -33,6 +33,10 @@ namespace GS_PatEditor.Editor.Panels.Tools.Hit
         private Point _MovingStart;
         private bool _IsMoving;
 
+        private bool _IsRotating;
+        private Point _RotateStart;
+        private float _RotationBase;
+
         public HitBoxesEditingHandler(Editor editor, Control ctrl)
         {
             _Editor = editor;
@@ -292,6 +296,13 @@ namespace GS_PatEditor.Editor.Panels.Tools.Hit
                     b.MovingOffset = new Point(e.X, e.Y).Relative(_MovingStart);
                 }
             }
+            if (_IsRotating)
+            {
+                var x0 = _Editor.PreviewWindowUI.PreviewMoving.TransformXSpriteToClient(0);
+                var y0 = _Editor.PreviewWindowUI.PreviewMoving.TransformYSpriteToClient(0);
+                _SelectedSingle.Rotation = (float)Math.Atan2(e.Y - y0, e.X - x0) -
+                    (float)Math.Atan2(_RotateStart.Y - y0, _RotateStart.X - x0) + _RotationBase;
+            }
 
             //check filter
             if (!CheckFilter())
@@ -330,6 +341,15 @@ namespace GS_PatEditor.Editor.Panels.Tools.Hit
             }
             else if (_SelectedSingle != null && _SelectedMultiple.Count == 1)
             {
+                if (Control.ModifierKeys.HasFlag(Keys.Alt))
+                {
+                    _IsRotating = true;
+                    _RotateStart = new Point(e.X, e.Y);
+                    _SelectedSingle.IsEditing = true;
+                    _RotationBase = _SelectedSingle.Rotation;
+                    return;
+                }
+
                 var box = FindBoxAtEdge(e.X, e.Y);
                 var boxpoint = FindPointAt(_SelectedSingle, e.X, e.Y);
                 if (box == _SelectedSingle && boxpoint == RectPoint.None)
@@ -397,7 +417,14 @@ namespace GS_PatEditor.Editor.Panels.Tools.Hit
                     b.IsMoving = false;
                 }
             }
+            if (_IsRotating)
+            {
+                _IsRotating = false;
+                _SelectedSingle.IsEditing = false;
+            }
         }
+
+        #region clipboard
 
         public string DataID
         {
@@ -473,5 +500,7 @@ namespace GS_PatEditor.Editor.Panels.Tools.Hit
         {
             Paste(new List<Pat.Box>() { new Pat.Box() { X = -10, Y = -10, W = 20, H = 20 } });
         }
+
+        #endregion
     }
 }
