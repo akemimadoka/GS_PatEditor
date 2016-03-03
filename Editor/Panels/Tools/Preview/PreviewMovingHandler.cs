@@ -63,7 +63,8 @@ namespace GS_PatEditor.Editor.Panels.Tools.Preview
             };
 
             //mouse wheel zoom in/out
-            ctrl.FindForm().MouseWheel += frm_MouseWheel;
+            //ctrl.FindForm().MouseWheel += frm_MouseWheel;
+            ctrl.MouseWheel += _Control_MouseWheel;
         }
 
         private void OnSceneMoved()
@@ -74,14 +75,14 @@ namespace GS_PatEditor.Editor.Panels.Tools.Preview
             }
         }
 
-        private void frm_MouseWheel(object sender, MouseEventArgs e)
+        private void _Control_MouseWheel(object sender, MouseEventArgs e)
         {
             var parentCtrl = _Control.Parent;
-            if (!parentCtrl.ClientRectangle.Contains(parentCtrl.PointToClient(Control.MousePosition)))
-            {
-                return;
-            }
-            if (_Control.ClientRectangle.Contains(_Control.PointToClient(Control.MousePosition)))
+            //if (!parentCtrl.ClientRectangle.Contains(parentCtrl.PointToClient(Control.MousePosition)))
+            //{
+                //return;
+            //}
+            //if (_Control.ClientRectangle.Contains(_Control.PointToClient(Control.MousePosition)))
             {
                 if (e.Delta < 0)
                 {
@@ -91,6 +92,7 @@ namespace GS_PatEditor.Editor.Panels.Tools.Preview
                 {
                     SetScale(_PreviewScale / 0.9f);
                 }
+                ((HandledMouseEventArgs)e).Handled = true;
             }
         }
 

@@ -151,13 +151,13 @@ namespace GS_PatEditor.Editor.Panels
 
             UpdateControlWidth();
 
-            ctrl.FindForm().MouseWheel += frm_MouseWheel;
+            ctrl.MouseWheel += _Control_MouseWheel;
         }
 
-        void frm_MouseWheel(object sender, MouseEventArgs e)
+        private void _Control_MouseWheel(object sender, MouseEventArgs e)
         {
             var parentCtrl = _Control.Parent;
-            if (parentCtrl.ClientRectangle.Contains(parentCtrl.PointToClient(Control.MousePosition)))
+            //if (parentCtrl.ClientRectangle.Contains(parentCtrl.PointToClient(Control.MousePosition)))
             {
                 ScrollableControl p = _Control.Parent as ScrollableControl;
                 if (p != null)
@@ -178,6 +178,7 @@ namespace GS_PatEditor.Editor.Panels
                         {
                             hs.Value += delta;
                         }
+                        ((HandledMouseEventArgs)e).Handled = true;
                     }
                 }
             }
