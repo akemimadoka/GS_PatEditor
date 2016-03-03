@@ -4,18 +4,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GS_PatEditor.Editor.Panels.Tools.Hit
+namespace GS_PatEditor.Editor.Panels.Tools.HitAttack
 {
-    class HitBoxListDataProvider : EditingList<EditingHitAttackBox>
+    class HitAtackBoxListDataProvider : EditingList<EditingHitAttackBox>
     {
         //TODO check readonly fields
         private readonly Editor _Editor;
+        private readonly Func<Pat.Frame, List<Pat.Box>> _BoxList;
 
-        public HitBoxListDataProvider(Editor editor)
+        public HitAtackBoxListDataProvider(Editor editor, Func<Pat.Frame, List<Pat.Box>> boxList)
         {
             editor.EditorNode.Animation.Frame.OnReset += ResetDataList;
 
             _Editor = editor;
+            _BoxList = boxList;
 
             ResetDataList();
         }
@@ -28,14 +30,15 @@ namespace GS_PatEditor.Editor.Panels.Tools.Hit
             var frame = _Editor.EditorNode.Animation.Frame.FrameData;
             if (frame != null)
             {
-                for (int i = 0; i < frame.HitBoxes.Count; ++i)
+                var boxList = _BoxList(frame);
+                for (int i = 0; i < boxList.Count; ++i)
                 {
-                    DataList.Add(new HitBoxDataProvider(_Editor, frame.HitBoxes[i], i));
+                    DataList.Add(new HitAttackBoxDataProvider(_Editor, boxList[i], i));
                 }
             }
         }
 
-        public readonly List<HitBoxDataProvider> DataList = new List<HitBoxDataProvider>();
+        public readonly List<HitAttackBoxDataProvider> DataList = new List<HitAttackBoxDataProvider>();
 
         public IEnumerable<EditingHitAttackBox> Data
         {

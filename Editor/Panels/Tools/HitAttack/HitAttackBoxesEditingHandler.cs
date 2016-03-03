@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace GS_PatEditor.Editor.Panels.Tools.Hit
+namespace GS_PatEditor.Editor.Panels.Tools.HitAttack
 {
     enum RectPoint
     {
@@ -17,17 +17,17 @@ namespace GS_PatEditor.Editor.Panels.Tools.Hit
         RB,
     }
 
-    class HitBoxesEditingHandler : ClipboardHandler
+    abstract class HitAttackBoxesEditingHandler : ClipboardHandler
     {
         private Editor _Editor;
         private Control _Control;
 
         public event EventFilter Filter;
 
-        public HitBoxListDataProvider HitBoxData { get; private set; }
+        public HitAtackBoxListDataProvider BoxData { get; private set; }
 
-        private HitBoxDataProvider _SelectedSingle;
-        private List<HitBoxDataProvider> _SelectedMultiple = new List<HitBoxDataProvider>();
+        private HitAttackBoxDataProvider _SelectedSingle;
+        private List<HitAttackBoxDataProvider> _SelectedMultiple = new List<HitAttackBoxDataProvider>();
 
         private RectPoint _EditingSingleRectPoint = RectPoint.None;
         private Point _MovingStart;
@@ -37,14 +37,17 @@ namespace GS_PatEditor.Editor.Panels.Tools.Hit
         private Point _RotateStart;
         private float _RotationBase;
 
-        public HitBoxesEditingHandler(Editor editor, Control ctrl)
+        protected abstract List<Pat.Box> GetBoxListFromFrame(Pat.Frame frame);
+        protected abstract FrameEditMode GetEditMode();
+
+        public HitAttackBoxesEditingHandler(Editor editor, Control ctrl)
         {
             _Editor = editor;
             _Control = ctrl;
 
-            Filter += editor.PreviewWindowUI.GetFilterForEditMode(FrameEditMode.Hit);
+            Filter += editor.PreviewWindowUI.GetFilterForEditMode(GetEditMode());
 
-            HitBoxData = new HitBoxListDataProvider(editor);
+            BoxData = new HitAtackBoxListDataProvider(editor, GetBoxListFromFrame);
 
             editor.EditorNode.Animation.Frame.EditModeChanged += ToolSwitched;
 
@@ -126,9 +129,9 @@ namespace GS_PatEditor.Editor.Panels.Tools.Hit
             return Math.Abs(y0 - y) < MaxDistance;
         }
 
-        private HitBoxDataProvider FindBoxAt(int x, int y)
+        private HitAttackBoxDataProvider FindBoxAt(int x, int y)
         {
-            foreach (var box in HitBoxData.DataList)
+            foreach (var box in BoxData.DataList)
             {
                 if (IsInPointRange(box.LeftTop, x, y) ||
                     IsInPointRange(box.LeftBottom, x, y) ||
@@ -141,9 +144,9 @@ namespace GS_PatEditor.Editor.Panels.Tools.Hit
             return null;
         }
 
-        private HitBoxDataProvider FindBoxAtEdge(int x, int y)
+        private HitAttackBoxDataProvider FindBoxAtEdge(int x, int y)
         {
-            foreach (var box in HitBoxData.DataList)
+            foreach (var box in BoxData.DataList)
             {
                 if (IsInBorderRange(box.LeftTop, box.RightTop, x, y) ||
                     IsInBorderRange(box.RightBottom, box.RightTop, x, y) ||
@@ -156,7 +159,7 @@ namespace GS_PatEditor.Editor.Panels.Tools.Hit
             return null;
         }
 
-        private RectPoint FindPointAt(HitBoxDataProvider box, int x, int y)
+        private RectPoint FindPointAt(HitAttackBoxDataProvider box, int x, int y)
         {
             if (IsInPointRange(box.LeftTop, x, y))
             {
@@ -234,7 +237,7 @@ namespace GS_PatEditor.Editor.Panels.Tools.Hit
             }
         }
 
-        private void SetSingleSelected(HitBoxDataProvider box)
+        private void SetSingleSelected(HitAttackBoxDataProvider box)
         {
             ClearSelected();
 
@@ -246,7 +249,7 @@ namespace GS_PatEditor.Editor.Panels.Tools.Hit
             box.IsSelected = true;
         }
 
-        private void AppendSelected(HitBoxDataProvider box)
+        private void AppendSelected(HitAttackBoxDataProvider box)
         {
             if (box.IsSelected)
             {
@@ -454,7 +457,7 @@ namespace GS_PatEditor.Editor.Panels.Tools.Hit
             {
                 return null;
             }
-            return _SelectedMultiple.Select(b => frame.HitBoxes[b.Index]).ToList();
+            return _SelectedMultiple.Select(b => GetBoxListFromFrame(frame)[b.Index]).ToList();
         }
 
         public void Delete()
@@ -467,11 +470,11 @@ namespace GS_PatEditor.Editor.Panels.Tools.Hit
                 //remove in reversed order
                 foreach (var i in list)
                 {
-                    frame.HitBoxes.RemoveAt(i);
+                    GetBoxListFromFrame(frame).RemoveAt(i);
                 }
             }
             ClearSelected();
-            HitBoxData.ResetDataList();
+            BoxData.ResetDataList();
         }
 
         public void Paste(object data)
@@ -486,12 +489,13 @@ namespace GS_PatEditor.Editor.Panels.Tools.Hit
             var frame = _Editor.EditorNode.Animation.Frame.FrameData;
             if (frame != null)
             {
-                int startIndex = frame.HitBoxes.Count;
-                frame.HitBoxes.AddRange(list);
-                HitBoxData.ResetDataList();
-                for (int i = startIndex; i < frame.HitBoxes.Count; ++i)
+                var boxList = GetBoxListFromFrame(frame);
+                int startIndex = boxList.Count;
+                boxList.AddRange(list);
+                BoxData.ResetDataList();
+                for (int i = startIndex; i < boxList.Count; ++i)
                 {
-                    AppendSelected(HitBoxData.DataList[i]);
+                    AppendSelected(BoxData.DataList[i]);
                 }
             }
         }

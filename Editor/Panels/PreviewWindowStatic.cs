@@ -67,15 +67,20 @@ namespace GS_PatEditor.Editor.Panels
             int rectIndex = 1;
             if (true)
             {
-                //if (frame != null)
+                foreach (var box in _Parent.PreviewWindowUI.HitEditing.BoxData.Data)
                 {
-                    //foreach (var box in frame.HitBoxes)
-                    foreach (var box in _Parent.PreviewWindowUI.HitEditing.HitBoxData.Data)
-                    {
-                        var s = sprites.GetRectangle(rectIndex++);
-                        s.SetupHit(0x00A2E8, box);
-                        s.Render();
-                    }
+                    var s = sprites.GetRectangle(rectIndex++);
+                    s.SetupHit(0x00A2E8, box);
+                    s.Render();
+                }
+            }
+            if (true)
+            {
+                foreach (var box in _Parent.PreviewWindowUI.AttackEditing.BoxData.Data)
+                {
+                    var s = sprites.GetRectangle(rectIndex++);
+                    s.SetupHit(0xE8A200, box);
+                    s.Render();
                 }
             }
         }

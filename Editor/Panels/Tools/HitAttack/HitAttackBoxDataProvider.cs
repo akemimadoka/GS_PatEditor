@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GS_PatEditor.Editor.Panels.Tools.Hit
+namespace GS_PatEditor.Editor.Panels.Tools.HitAttack
 {
     struct Point
     {
@@ -40,7 +40,7 @@ namespace GS_PatEditor.Editor.Panels.Tools.Hit
         }
     }
 
-    class HitBoxDataProvider : EditingHitAttackBox
+    class HitAttackBoxDataProvider : EditingHitAttackBox
     {
         private Editor _Editor;
         private Pat.Box _Box;
@@ -51,6 +51,7 @@ namespace GS_PatEditor.Editor.Panels.Tools.Hit
         private float _EditingRight;
         private float _EditingTop;
         private float _EditingBottom;
+
         private float _EditingRotation;
 
         private Point _MovingBaseLeftTop;
@@ -59,7 +60,7 @@ namespace GS_PatEditor.Editor.Panels.Tools.Hit
         private Point _MovingBaseRightBottom;
         private Point _MovingOffset;
 
-        public HitBoxDataProvider(Editor editor, Pat.Box box, int index)
+        public HitAttackBoxDataProvider(Editor editor, Pat.Box box, int index)
         {
             _Editor = editor;
             _Box = box;
@@ -435,14 +436,14 @@ namespace GS_PatEditor.Editor.Panels.Tools.Hit
             var sy = _Editor.PreviewWindowUI.PreviewMoving.TransformYClientToSprite(p.Y);
 
             return new Point(
-                sx * (float)Math.Cos(-_EditingRotation) - sy * (float)Math.Sin(-_EditingRotation),
-                sx * (float)Math.Sin(-_EditingRotation) + sy * (float)Math.Cos(-_EditingRotation)
+                sx * (float)Math.Cos(-Rotation) - sy * (float)Math.Sin(-Rotation),
+                sx * (float)Math.Sin(-Rotation) + sy * (float)Math.Cos(-Rotation)
             );
         }
         private Point PointSpriteToScreen(Point p)
         {
-            var sx = p.X * (float)Math.Cos(_EditingRotation) - p.Y * (float)Math.Sin(_EditingRotation);
-            var sy = p.X * (float)Math.Sin(_EditingRotation) + p.Y * (float)Math.Cos(_EditingRotation);
+            var sx = p.X * (float)Math.Cos(Rotation) - p.Y * (float)Math.Sin(Rotation);
+            var sy = p.X * (float)Math.Sin(Rotation) + p.Y * (float)Math.Cos(Rotation);
 
             return new Point(
                 _Editor.PreviewWindowUI.PreviewMoving.TransformXSpriteToClient(sx),

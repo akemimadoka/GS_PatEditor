@@ -43,6 +43,13 @@ namespace GS_PatEditor.Editor
                         Paste = new ClipboardUIElementToolstripItem(frm.pasteHitToolStripMenuItem),
                         Delete = new ClipboardUIElementToolstripItem(frm.deleteHitToolStripMenuItem),
                     };
+                    frm._ClipboardAttack = new ClipboardUIProvider(editor.PreviewWindowUI.AttackEditing)
+                    {
+                        Cut = new ClipboardUIElementToolstripItem(frm.cutAttackToolStripMenuItem),
+                        Copy = new ClipboardUIElementToolstripItem(frm.copyAttackToolStripMenuItem),
+                        Paste = new ClipboardUIElementToolstripItem(frm.pasteAttackToolStripMenuItem),
+                        Delete = new ClipboardUIElementToolstripItem(frm.deleteAttackToolStripMenuItem),
+                    };
 
                     frm.Show();
                     frm.ResetPreviewPosition(1.0f);
@@ -55,6 +62,7 @@ namespace GS_PatEditor.Editor
         private Editor _Editor;
         private ClipboardUIProvider _ClipboardPhysical;
         private ClipboardUIProvider _ClipboardHit;
+        private ClipboardUIProvider _ClipboardAttack;
 
         public EditorForm()
         {
@@ -91,6 +99,7 @@ namespace GS_PatEditor.Editor
             toolStripButtonToolMove.CheckState = CheckState.Unchecked;
             toolStripButtonToolPhysics.CheckState = CheckState.Unchecked;
             toolStripButtonToolHit.CheckState = CheckState.Unchecked;
+            toolStripButtonToolAttack.CheckState = CheckState.Unchecked;
         }
 
         private void toolStripButtonToolCursor_Click(object sender, EventArgs e)
@@ -129,6 +138,15 @@ namespace GS_PatEditor.Editor
             }
         }
 
+        private void toolStripButtonToolAttack_Click(object sender, EventArgs e)
+        {
+            if (ChangeEditMode(FrameEditMode.Attack))
+            {
+                ClearToolButtonsToolChecked();
+                toolStripButtonToolAttack.CheckState = CheckState.Checked;
+            }
+        }
+
         private void physicalToolStripMenuItem_Click(object sender, EventArgs e)
         {
             physicalToolStripMenuItem.Checked = !physicalToolStripMenuItem.Checked;
@@ -145,6 +163,7 @@ namespace GS_PatEditor.Editor
         {
             _ClipboardPhysical.UpdateEnable();
             _ClipboardHit.UpdateEnable();
+            _ClipboardAttack.UpdateEnable();
         }
 
         private void resetScaleToolStripMenuItem_Click(object sender, EventArgs e)
@@ -170,6 +189,11 @@ namespace GS_PatEditor.Editor
         private void newHitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _Editor.PreviewWindowUI.HitEditing.New();
+        }
+
+        private void newAttackToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _Editor.PreviewWindowUI.AttackEditing.New();
         }
     }
 }

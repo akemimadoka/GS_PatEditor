@@ -1,6 +1,6 @@
 ﻿using GS_PatEditor.Editor.Nodes;
 using GS_PatEditor.Editor.Panels.Tools;
-using GS_PatEditor.Editor.Panels.Tools.Hit;
+using GS_PatEditor.Editor.Panels.Tools.HitAttack;
 using GS_PatEditor.Editor.Panels.Tools.Move;
 using GS_PatEditor.Editor.Panels.Tools.Physical;
 using GS_PatEditor.Editor.Panels.Tools.Preview;
@@ -36,7 +36,8 @@ namespace GS_PatEditor.Editor.Panels
         public SpriteMovingHandler SpriteMoving { get; private set; }
 
         public PhysicalEditingHandler PhysicalEditing { get; private set; }
-        public HitBoxesEditingHandler HitEditing { get; private set; }
+        public HitAttackBoxesEditingHandler HitEditing { get; private set; }
+        public HitAttackBoxesEditingHandler AttackEditing { get; private set; }
 
         public PreviewWindow(Editor parent)
         {
@@ -69,6 +70,7 @@ namespace GS_PatEditor.Editor.Panels
             PreviewMoving.SceneMoved += PhysicalEditing.UpdateMouseCursor;
 
             HitEditing = new HitBoxesEditingHandler(_Parent, ctrl);
+            AttackEditing = new AttackBoxesEditingHandler(_Parent, ctrl);
         }
 
         public EventFilter GetFilterForEditMode(FrameEditMode mode)
