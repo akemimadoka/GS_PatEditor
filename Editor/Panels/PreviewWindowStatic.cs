@@ -65,7 +65,7 @@ namespace GS_PatEditor.Editor.Panels
 
             var sprites = _Parent.PreviewWindowUI.SpriteManager;
             int rectIndex = 1;
-            if (true)
+            if (_Parent.EditorNode.Animation.Frame.HitBoxVisible)
             {
                 foreach (var box in _Parent.PreviewWindowUI.HitEditing.BoxData.Data)
                 {
@@ -74,7 +74,7 @@ namespace GS_PatEditor.Editor.Panels
                     s.Render();
                 }
             }
-            if (true)
+            if (_Parent.EditorNode.Animation.Frame.AttackBoxVisible)
             {
                 foreach (var box in _Parent.PreviewWindowUI.AttackEditing.BoxData.Data)
                 {

@@ -259,16 +259,18 @@
             this.hitToolStripMenuItem1.Checked = true;
             this.hitToolStripMenuItem1.CheckState = System.Windows.Forms.CheckState.Checked;
             this.hitToolStripMenuItem1.Name = "hitToolStripMenuItem1";
-            this.hitToolStripMenuItem1.Size = new System.Drawing.Size(121, 22);
+            this.hitToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
             this.hitToolStripMenuItem1.Text = "Hit";
+            this.hitToolStripMenuItem1.Click += new System.EventHandler(this.hitToolStripMenuItem1_Click);
             // 
             // attackToolStripMenuItem
             // 
             this.attackToolStripMenuItem.Checked = true;
             this.attackToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.attackToolStripMenuItem.Name = "attackToolStripMenuItem";
-            this.attackToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
+            this.attackToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.attackToolStripMenuItem.Text = "Attack";
+            this.attackToolStripMenuItem.Click += new System.EventHandler(this.attackToolStripMenuItem_Click);
             // 
             // toolStripSeparator3
             // 

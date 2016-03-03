@@ -32,6 +32,8 @@ namespace GS_PatEditor.Editor.Nodes
 
         public bool AxisVisible = true;
         public bool PhysicalBoxVisible = true;
+        public bool HitBoxVisible = true;
+        public bool AttackBoxVisible = true;
 
         public List<int> EditingBoxes = new List<int>();
 

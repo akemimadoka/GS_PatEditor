@@ -222,6 +222,18 @@ namespace GS_PatEditor.Editor
             _Editor.EditorNode.Animation.Frame.AxisVisible = axisToolStripMenuItem.Checked;
         }
 
+        private void hitToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            hitToolStripMenuItem1.Checked = !hitToolStripMenuItem1.Checked;
+            _Editor.EditorNode.Animation.Frame.HitBoxVisible = hitToolStripMenuItem1.Checked;
+        }
+
+        private void attackToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            attackToolStripMenuItem.Checked = !attackToolStripMenuItem.Checked;
+            _Editor.EditorNode.Animation.Frame.AttackBoxVisible = attackToolStripMenuItem.Checked;
+        }
+
         private void toolStripSplitEdit_DropDownOpening(object sender, EventArgs e)
         {
             _ClipboardPhysical.UpdateEnable();
