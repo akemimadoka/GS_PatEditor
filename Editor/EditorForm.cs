@@ -50,6 +50,31 @@ namespace GS_PatEditor.Editor
                         Paste = new ClipboardUIElementToolstripItem(frm.pasteAttackToolStripMenuItem),
                         Delete = new ClipboardUIElementToolstripItem(frm.deleteAttackToolStripMenuItem),
                     };
+                    frm._GroupEditPhysical = new VisibleGroup(
+                        frm.physicalToolStripMenuItem1,
+                        frm.cutPhysicalToolStripMenuItem,
+                        frm.copyPhysicalToolStripMenuItem,
+                        frm.pastePhysicalToolStripMenuItem,
+                        frm.deletePhysicalToolStripMenuItem
+                        );
+                    frm._GroupEditHit = new VisibleGroup(
+                        frm.hitToolStripMenuItem,
+                        frm.newHitToolStripMenuItem,
+                        frm.cutHitToolStripMenuItem,
+                        frm.copyHitToolStripMenuItem,
+                        frm.pasteHitToolStripMenuItem,
+                        frm.deleteHitToolStripMenuItem
+                        );
+                    frm._GroupEditAttack = new VisibleGroup(
+                        frm.attackToolStripMenuItem2,
+                        frm.newAttackToolStripMenuItem,
+                        frm.cutAttackToolStripMenuItem,
+                        frm.copyAttackToolStripMenuItem,
+                        frm.pasteAttackToolStripMenuItem,
+                        frm.deleteAttackToolStripMenuItem
+                        );
+
+                    frm.ChangeEditMode(FrameEditMode.None);
 
                     frm.Show();
                     frm.ResetPreviewPosition(1.0f);
@@ -59,10 +84,33 @@ namespace GS_PatEditor.Editor
             }
         }
 
+        private class VisibleGroup
+        {
+            private readonly ToolStripItem[] _Controls;
+
+            public VisibleGroup(params ToolStripItem[] ctrls)
+            {
+                _Controls = ctrls;
+            }
+
+            public bool Visible
+            {
+                set
+                {
+                    foreach (var c in _Controls)
+                    {
+                        c.Visible = value;
+                    }
+                }
+            }
+        }
+
         private Editor _Editor;
         private ClipboardUIProvider _ClipboardPhysical;
         private ClipboardUIProvider _ClipboardHit;
         private ClipboardUIProvider _ClipboardAttack;
+
+        private VisibleGroup _GroupEditPhysical, _GroupEditHit, _GroupEditAttack;
 
         public EditorForm()
         {
@@ -81,6 +129,21 @@ namespace GS_PatEditor.Editor
 
         private bool ChangeEditMode(FrameEditMode mode)
         {
+            _GroupEditPhysical.Visible = false;
+            _GroupEditHit.Visible = false;
+            _GroupEditAttack.Visible = false;
+            switch (mode)
+            {
+                case FrameEditMode.Physical:
+                    _GroupEditPhysical.Visible = true;
+                    break;
+                case FrameEditMode.Hit:
+                    _GroupEditHit.Visible = true;
+                    break;
+                case FrameEditMode.Attack:
+                    _GroupEditAttack.Visible = true;
+                    break;
+            }
             return _Editor.EditorNode.Animation.Frame.ChangeEditMode(mode);
         }
 

@@ -65,7 +65,7 @@
             this.pasteHitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteHitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.attackToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.newAttackToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cutAttackToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.copyAttackToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -291,7 +291,7 @@
             this.pasteHitToolStripMenuItem,
             this.deleteHitToolStripMenuItem,
             this.toolStripSeparator5,
-            this.toolStripMenuItem2,
+            this.attackToolStripMenuItem2,
             this.newAttackToolStripMenuItem,
             this.cutAttackToolStripMenuItem,
             this.copyAttackToolStripMenuItem,
@@ -311,30 +311,35 @@
             this.physicalToolStripMenuItem1.Name = "physicalToolStripMenuItem1";
             this.physicalToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
             this.physicalToolStripMenuItem1.Text = "Physical";
+            this.physicalToolStripMenuItem1.Visible = false;
             // 
             // cutPhysicalToolStripMenuItem
             // 
             this.cutPhysicalToolStripMenuItem.Name = "cutPhysicalToolStripMenuItem";
             this.cutPhysicalToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.cutPhysicalToolStripMenuItem.Text = "Cut";
+            this.cutPhysicalToolStripMenuItem.Visible = false;
             // 
             // copyPhysicalToolStripMenuItem
             // 
             this.copyPhysicalToolStripMenuItem.Name = "copyPhysicalToolStripMenuItem";
             this.copyPhysicalToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.copyPhysicalToolStripMenuItem.Text = "Copy";
+            this.copyPhysicalToolStripMenuItem.Visible = false;
             // 
             // pastePhysicalToolStripMenuItem
             // 
             this.pastePhysicalToolStripMenuItem.Name = "pastePhysicalToolStripMenuItem";
             this.pastePhysicalToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.pastePhysicalToolStripMenuItem.Text = "Paste";
+            this.pastePhysicalToolStripMenuItem.Visible = false;
             // 
             // deletePhysicalToolStripMenuItem
             // 
             this.deletePhysicalToolStripMenuItem.Name = "deletePhysicalToolStripMenuItem";
             this.deletePhysicalToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.deletePhysicalToolStripMenuItem.Text = "Delete";
+            this.deletePhysicalToolStripMenuItem.Visible = false;
             // 
             // toolStripSeparator4
             // 
@@ -385,14 +390,15 @@
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
             this.toolStripSeparator5.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator5.Visible = false;
             // 
-            // toolStripMenuItem2
+            // attackToolStripMenuItem2
             // 
-            this.toolStripMenuItem2.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.toolStripMenuItem2.Enabled = false;
-            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(152, 22);
-            this.toolStripMenuItem2.Text = "Attack";
+            this.attackToolStripMenuItem2.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.attackToolStripMenuItem2.Enabled = false;
+            this.attackToolStripMenuItem2.Name = "attackToolStripMenuItem2";
+            this.attackToolStripMenuItem2.Size = new System.Drawing.Size(152, 22);
+            this.attackToolStripMenuItem2.Text = "Attack";
             // 
             // newAttackToolStripMenuItem
             // 
@@ -572,7 +578,7 @@
         private System.Windows.Forms.ToolStripMenuItem hitToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem attackToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem attackToolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem newAttackToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cutAttackToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem copyAttackToolStripMenuItem;
