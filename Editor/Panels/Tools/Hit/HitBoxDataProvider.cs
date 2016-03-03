@@ -90,7 +90,7 @@ namespace GS_PatEditor.Editor.Panels.Tools.Hit
         private void FinishEditing()
         {
             _Box.X = (int)Math.Round(_EditingLeft);
-            _Box.Y = (int)Math.Round(_EditingLeft);
+            _Box.Y = (int)Math.Round(_EditingTop);
             _Box.W = (int)Math.Round(_EditingRight - _EditingLeft);
             _Box.H = (int)Math.Round(_EditingBottom - _EditingTop);
             _Box.R = (int)Math.Round(_EditingRotation);
