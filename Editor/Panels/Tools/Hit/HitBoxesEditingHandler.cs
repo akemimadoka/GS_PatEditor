@@ -17,7 +17,7 @@ namespace GS_PatEditor.Editor.Panels.Tools.Hit
         RB,
     }
 
-    class HitBoxesEditingHandler
+    class HitBoxesEditingHandler : ClipboardHandler
     {
         private Editor _Editor;
         private Control _Control;
@@ -374,24 +374,104 @@ namespace GS_PatEditor.Editor.Panels.Tools.Hit
             }
         }
 
-        void _Control_MouseUp(object sender, MouseEventArgs e)
+        private void _Control_MouseUp(object sender, MouseEventArgs e)
         {
             if (e.Button.HasFlag(MouseButtons.Left))
             {
-                if (_EditingSingleRectPoint != RectPoint.None)
+                FinishMouseEvent();
+            }
+        }
+
+        private void FinishMouseEvent()
+        {
+            if (_EditingSingleRectPoint != RectPoint.None)
+            {
+                _EditingSingleRectPoint = RectPoint.None;
+                _SelectedSingle.IsEditing = false;
+            }
+            if (_IsMoving)
+            {
+                _IsMoving = false;
+                foreach (var b in _SelectedMultiple)
                 {
-                    _EditingSingleRectPoint = RectPoint.None;
-                    _SelectedSingle.IsEditing = false;
-                }
-                if (_IsMoving)
-                {
-                    _IsMoving = false;
-                    foreach (var b in _SelectedMultiple)
-                    {
-                        b.IsMoving = false;
-                    }
+                    b.IsMoving = false;
                 }
             }
+        }
+
+        public string DataID
+        {
+            get { return "GSPatEditor_HitBoxList"; }
+        }
+
+        public bool SelectedAvailable
+        {
+            get
+            {
+                var frame = _Editor.EditorNode.Animation.Frame.FrameData;
+                return frame != null && _SelectedMultiple.Count > 0;
+            }
+        }
+
+        public bool ClipboardDataAvailable(object data)
+        {
+            var frame = _Editor.EditorNode.Animation.Frame.FrameData;
+            return frame != null && data is List<Pat.Box>;
+        }
+
+        public object Copy()
+        {
+            FinishMouseEvent();
+            var frame = _Editor.EditorNode.Animation.Frame.FrameData;
+            if (frame == null)
+            {
+                return null;
+            }
+            return _SelectedMultiple.Select(b => frame.HitBoxes[b.Index]).ToList();
+        }
+
+        public void Delete()
+        {
+            FinishMouseEvent();
+            var frame = _Editor.EditorNode.Animation.Frame.FrameData;
+            if (frame != null)
+            {
+                var list = _SelectedMultiple.Select(b => b.Index).OrderBy(i => -i).ToArray();
+                //remove in reversed order
+                foreach (var i in list)
+                {
+                    frame.HitBoxes.RemoveAt(i);
+                }
+            }
+            ClearSelected();
+            HitBoxData.ResetDataList();
+        }
+
+        public void Paste(object data)
+        {
+            FinishMouseEvent();
+            var list = data as List<Pat.Box>;
+            if (list == null)
+            {
+                return;
+            }
+            ClearSelected();
+            var frame = _Editor.EditorNode.Animation.Frame.FrameData;
+            if (frame != null)
+            {
+                int startIndex = frame.HitBoxes.Count;
+                frame.HitBoxes.AddRange(list);
+                HitBoxData.ResetDataList();
+                for (int i = startIndex; i < frame.HitBoxes.Count; ++i)
+                {
+                    AppendSelected(HitBoxData.DataList[i]);
+                }
+            }
+        }
+
+        public void New()
+        {
+            Paste(new List<Pat.Box>() { new Pat.Box() { X = -10, Y = -10, W = 20, H = 20 } });
         }
     }
 }

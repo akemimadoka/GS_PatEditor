@@ -232,6 +232,7 @@ namespace GS_PatEditor.Editor.Panels.Tools.Physical
 
         public void Delete()
         {
+            FinishMouseEvent();
             var frame = _Editor.EditorNode.Animation.Frame.FrameData;
             if (frame != null)
             {
@@ -241,6 +242,7 @@ namespace GS_PatEditor.Editor.Panels.Tools.Physical
 
         public void Paste(object data)
         {
+            FinishMouseEvent();
             var frame = _Editor.EditorNode.Animation.Frame.FrameData;
             if (data == null && !(data is Pat.PhysicalBox) || frame == null)
             {

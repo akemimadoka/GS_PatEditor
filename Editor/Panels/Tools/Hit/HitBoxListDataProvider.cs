@@ -20,7 +20,7 @@ namespace GS_PatEditor.Editor.Panels.Tools.Hit
             ResetDataList();
         }
 
-        private void ResetDataList()
+        public void ResetDataList()
         {
             //TODO reuse items in the list
             DataList.Clear();
@@ -28,9 +28,9 @@ namespace GS_PatEditor.Editor.Panels.Tools.Hit
             var frame = _Editor.EditorNode.Animation.Frame.FrameData;
             if (frame != null)
             {
-                foreach (var box in frame.HitBoxes)
+                for (int i = 0; i < frame.HitBoxes.Count; ++i)
                 {
-                    DataList.Add(new HitBoxDataProvider(_Editor, box));
+                    DataList.Add(new HitBoxDataProvider(_Editor, frame.HitBoxes[i], i));
                 }
             }
         }

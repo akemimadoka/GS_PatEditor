@@ -36,6 +36,13 @@ namespace GS_PatEditor.Editor
                         Paste = new ClipboardUIElementToolstripItem(frm.pastePhysicalToolStripMenuItem),
                         Delete = new ClipboardUIElementToolstripItem(frm.deletePhysicalToolStripMenuItem),
                     };
+                    frm._ClipboardHit = new ClipboardUIProvider(editor.PreviewWindowUI.HitEditing)
+                    {
+                        Cut = new ClipboardUIElementToolstripItem(frm.cutHitToolStripMenuItem),
+                        Copy = new ClipboardUIElementToolstripItem(frm.copyHitToolStripMenuItem),
+                        Paste = new ClipboardUIElementToolstripItem(frm.pasteHitToolStripMenuItem),
+                        Delete = new ClipboardUIElementToolstripItem(frm.deleteHitToolStripMenuItem),
+                    };
 
                     frm.Show();
                     frm.ResetPreviewPosition(1.0f);
@@ -47,6 +54,7 @@ namespace GS_PatEditor.Editor
 
         private Editor _Editor;
         private ClipboardUIProvider _ClipboardPhysical;
+        private ClipboardUIProvider _ClipboardHit;
 
         public EditorForm()
         {
@@ -136,6 +144,7 @@ namespace GS_PatEditor.Editor
         private void toolStripSplitEdit_DropDownOpening(object sender, EventArgs e)
         {
             _ClipboardPhysical.UpdateEnable();
+            _ClipboardHit.UpdateEnable();
         }
 
         private void resetScaleToolStripMenuItem_Click(object sender, EventArgs e)
@@ -156,6 +165,11 @@ namespace GS_PatEditor.Editor
         private void toolStripButtonBack_Click(object sender, EventArgs e)
         {
             panelAnimations.Visible = !panelAnimations.Visible;
+        }
+
+        private void newHitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _Editor.PreviewWindowUI.HitEditing.New();
         }
     }
 }

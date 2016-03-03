@@ -40,6 +40,8 @@ namespace GS_PatEditor.Editor.Panels.Tools.Hit
         private Editor _Editor;
         private Pat.Box _Box;
 
+        public readonly int Index;
+
         private float _EditingLeft;
         private float _EditingRight;
         private float _EditingTop;
@@ -52,10 +54,11 @@ namespace GS_PatEditor.Editor.Panels.Tools.Hit
         private Point _MovingBaseRightBottom;
         private Point _MovingOffset;
 
-        public HitBoxDataProvider(Editor editor, Pat.Box box)
+        public HitBoxDataProvider(Editor editor, Pat.Box box, int index)
         {
             _Editor = editor;
             _Box = box;
+            Index = index;
         }
 
         #region State access
