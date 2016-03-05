@@ -29,6 +29,8 @@ namespace GS_PatEditor.Editor
                     {
                         editor.PreviewWindowUI.Refresh();
                     };
+
+                    #region init clipboards
                     frm._ClipboardPhysical = new ClipboardUIProvider(editor.PreviewWindowUI.PhysicalEditing)
                     {
                         Cut = new ClipboardUIElementToolstripItem(frm.cutPhysicalToolStripMenuItem),
@@ -50,6 +52,9 @@ namespace GS_PatEditor.Editor
                         Paste = new ClipboardUIElementToolstripItem(frm.pasteAttackToolStripMenuItem),
                         Delete = new ClipboardUIElementToolstripItem(frm.deleteAttackToolStripMenuItem),
                     };
+                    #endregion
+
+                    #region init edit menu visible groups
                     frm._GroupEditPhysical = new VisibleGroup(
                         frm.physicalToolStripMenuItem1,
                         frm.cutPhysicalToolStripMenuItem,
@@ -73,7 +78,25 @@ namespace GS_PatEditor.Editor
                         frm.pasteAttackToolStripMenuItem,
                         frm.deleteAttackToolStripMenuItem
                         );
+                    #endregion
 
+                    frm._GroupToolAnimationList = new VisibleGroup(new ToolStripButton[0]);
+                    frm._GroupToolAnimation = new VisibleGroup(
+                        frm.toolStripExpandAll, frm.toolStripCollapseAll,
+                        frm.toolStripSeparator1,
+                        frm.toolStripButtonToolCursor, frm.toolStripButtonToolMove,
+                        frm.toolStripButtonToolPhysics, frm.toolStripButtonToolHit,
+                        frm.toolStripButtonToolAttack,
+                        frm.toolStripSeparator2,
+                        frm.toolStripSplitBoxVisible,
+                        frm.toolStripSeparator3,
+                        frm.toolStripSplitEdit,
+                        frm.toolStripSeparator6,
+                        frm.toolStripButtonBack
+                    );
+                    frm._GroupToolImageList = new VisibleGroup(new ToolStripButton[0]);
+
+                    frm.ChangeActivePanel(0);
                     frm.ChangeEditMode(FrameEditMode.None);
 
                     frm.Show();
@@ -86,18 +109,30 @@ namespace GS_PatEditor.Editor
 
         private class VisibleGroup
         {
-            private readonly ToolStripItem[] _Controls;
+            private readonly ToolStripItem[] _Items;
+            private readonly ToolStripButton[] _Buttons;
 
             public VisibleGroup(params ToolStripItem[] ctrls)
             {
-                _Controls = ctrls;
+                _Items = ctrls;
+                _Buttons = new ToolStripButton[0];
+            }
+
+            public VisibleGroup(params ToolStripButton[] ctrls)
+            {
+                _Items = new ToolStripItem[0];
+                _Buttons = ctrls;
             }
 
             public bool Visible
             {
                 set
                 {
-                    foreach (var c in _Controls)
+                    foreach (var c in _Items)
+                    {
+                        c.Visible = value;
+                    }
+                    foreach (var c in _Buttons)
                     {
                         c.Visible = value;
                     }
@@ -111,6 +146,7 @@ namespace GS_PatEditor.Editor
         private ClipboardUIProvider _ClipboardAttack;
 
         private VisibleGroup _GroupEditPhysical, _GroupEditHit, _GroupEditAttack;
+        private VisibleGroup _GroupToolAnimationList, _GroupToolAnimation, _GroupToolImageList;
 
         public EditorForm()
         {
@@ -145,6 +181,19 @@ namespace GS_PatEditor.Editor
                     break;
             }
             return _Editor.EditorNode.Animation.Frame.ChangeEditMode(mode);
+        }
+
+        private void ChangeActivePanel(int panel)
+        {
+            switch (panel)
+            {
+                case 0:
+                    _GroupToolAnimationList.Visible = true;
+                    _GroupToolAnimation.Visible = false;
+                    _GroupToolImageList.Visible = false;
+                    panelAnimationEdit.Visible = false;
+                    break;
+            }
         }
 
         private void ResetPreviewPosition(float scale)
@@ -258,7 +307,7 @@ namespace GS_PatEditor.Editor
 
         private void toolStripButtonBack_Click(object sender, EventArgs e)
         {
-            panelAnimations.Visible = !panelAnimations.Visible;
+            panelAnimationEdit.Visible = false;
         }
 
         private void newHitToolStripMenuItem_Click(object sender, EventArgs e)
