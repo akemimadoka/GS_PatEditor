@@ -240,9 +240,9 @@ namespace GS_PatEditor.Editor
         {
             _Editor.PreviewWindowUI.PreviewMoving.ResetScale(scale);
 
-            var x = panelFramePreviewScroll.ClientSize.Width - 800;
-            var y = panelFramePreviewScroll.ClientSize.Height - 600;
-            panelFramePreviewScroll.AutoScrollPosition = new Point(-x / 2, -y / 2);
+            var x = previewWindow.Width - panelFramePreviewScroll.ClientSize.Width;
+            var y = previewWindow.Height - panelFramePreviewScroll.ClientSize.Height;
+            panelFramePreviewScroll.AutoScrollPosition = new Point(x / 2, y / 2);
         }
 
         private void ClearToolButtonsToolChecked()

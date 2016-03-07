@@ -151,36 +151,22 @@ namespace GS_PatEditor.Editor.Panels
 
             UpdateControlWidth();
 
+            ctrl.FindForm().MouseWheel += _Control_MouseWheel;
             ctrl.MouseWheel += _Control_MouseWheel;
         }
 
         private void _Control_MouseWheel(object sender, MouseEventArgs e)
         {
-            var parentCtrl = _Control.Parent;
-            //if (parentCtrl.ClientRectangle.Contains(parentCtrl.PointToClient(Control.MousePosition)))
+            if (!_Control.IsMouseInRange())
             {
-                ScrollableControl p = _Control.Parent as ScrollableControl;
-                if (p != null)
-                {
-                    var hs = p.HorizontalScroll;
-                    if (hs != null)
-                    {
-                        var delta = e.Delta / -6;
-                        if (hs.Value + delta < hs.Minimum)
-                        {
-                            hs.Value = hs.Minimum;
-                        }
-                        else if (hs.Value + delta > hs.Maximum)
-                        {
-                            hs.Value = hs.Maximum;
-                        }
-                        else
-                        {
-                            hs.Value += delta;
-                        }
-                        ((HandledMouseEventArgs)e).Handled = true;
-                    }
-                }
+                return;
+            }
+            ScrollableControl p = _Control.Parent as ScrollableControl;
+            if (p != null)
+            {
+                var point = p.AutoScrollPosition;
+                point.X = -point.X + (e.Delta / -6);
+                p.AutoScrollPosition = point;
             }
         }
 

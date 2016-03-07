@@ -87,6 +87,7 @@
     <Compile Include="Editor\ClipboardHandler.cs" />
     <Compile Include="Editor\Panels\AnimationList.cs" />
     <Compile Include="Editor\Panels\AnimationListItem.cs" />
+    <Compile Include="Editor\Panels\ControlExt.cs" />
     <Compile Include="Editor\Panels\Tools\EditingHitAttackBox.cs" />
     <Compile Include="Editor\Panels\Tools\EditingList.cs" />
     <Compile Include="Editor\Panels\Tools\EditingPhysicalBox.cs" />
