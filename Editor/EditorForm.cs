@@ -33,6 +33,7 @@ namespace GS_PatEditor.Editor
                     #region init clipboards
                     frm._ClipboardPhysical = new ClipboardUIProvider(editor.PreviewWindowUI.PhysicalEditing)
                     {
+                        New = new ClipboardUIElementToolstripItem(frm.newPhysicalToolStripMenuItem),
                         Cut = new ClipboardUIElementToolstripItem(frm.cutPhysicalToolStripMenuItem),
                         Copy = new ClipboardUIElementToolstripItem(frm.copyPhysicalToolStripMenuItem),
                         Paste = new ClipboardUIElementToolstripItem(frm.pastePhysicalToolStripMenuItem),
@@ -40,6 +41,7 @@ namespace GS_PatEditor.Editor
                     };
                     frm._ClipboardHit = new ClipboardUIProvider(editor.PreviewWindowUI.HitEditing)
                     {
+                        New = new ClipboardUIElementToolstripItem(frm.newHitToolStripMenuItem),
                         Cut = new ClipboardUIElementToolstripItem(frm.cutHitToolStripMenuItem),
                         Copy = new ClipboardUIElementToolstripItem(frm.copyHitToolStripMenuItem),
                         Paste = new ClipboardUIElementToolstripItem(frm.pasteHitToolStripMenuItem),
@@ -47,6 +49,7 @@ namespace GS_PatEditor.Editor
                     };
                     frm._ClipboardAttack = new ClipboardUIProvider(editor.PreviewWindowUI.AttackEditing)
                     {
+                        New = new ClipboardUIElementToolstripItem(frm.newAttackToolStripMenuItem),
                         Cut = new ClipboardUIElementToolstripItem(frm.cutAttackToolStripMenuItem),
                         Copy = new ClipboardUIElementToolstripItem(frm.copyAttackToolStripMenuItem),
                         Paste = new ClipboardUIElementToolstripItem(frm.pasteAttackToolStripMenuItem),
@@ -57,6 +60,7 @@ namespace GS_PatEditor.Editor
                     #region init edit menu visible groups
                     frm._GroupEditPhysical = new VisibleGroup(
                         frm.physicalToolStripMenuItem1,
+                        frm.newPhysicalToolStripMenuItem,
                         frm.cutPhysicalToolStripMenuItem,
                         frm.copyPhysicalToolStripMenuItem,
                         frm.pastePhysicalToolStripMenuItem,
@@ -348,16 +352,6 @@ namespace GS_PatEditor.Editor
         private void toolStripButtonBack_Click(object sender, EventArgs e)
         {
             _Editor.ShowAnimationListUI();
-        }
-
-        private void newHitToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            _Editor.PreviewWindowUI.HitEditing.New();
-        }
-
-        private void newAttackToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            _Editor.PreviewWindowUI.AttackEditing.New();
         }
 
         private void toolStripButtonEditAnimation_Click(object sender, EventArgs e)

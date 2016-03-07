@@ -193,15 +193,15 @@
   <data name="toolStripExpandAll.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAA7SURBVDhPYxguYNGL71gxIbn5T3+DabgAMoCJ4ZMbbgZg
-        w4Tk4AbQCVDFNqINASnEh8kGA6cZB2BgAAA8on7nYKeL9AAAAABJRU5ErkJggg==
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAA7SURBVDhPYxguYNGL71gxIbn5j3+DabgAMoCJ4ZMbbgZg
+        w4Tk4AbQCVDFNqINASnEh8kGA6cZB2BgAAAfmH7bJpUG7AAAAABJRU5ErkJggg==
 </value>
   </data>
   <data name="toolStripCollapseAll.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAA6SURBVDhPYxguYNGL71gxCMx/+hsrjQJgipHBSDQAGwYB
-        ogygA6DIVoo148NEAaIV4gNUMQQLYGAAAGZ3asdSIbWsAAAAAElFTkSuQmCC
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAA6SURBVDhPYxguYNGL71gxCMx//BsrjQJgipHBSDQAGwYB
+        ogygA6DIVoo148NEAaIV4gNUMQQLYGAAAAyJaqMPz8gcAAAAAElFTkSuQmCC
 </value>
   </data>
   <data name="toolStripButtonToolCursor.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
@@ -216,8 +216,8 @@
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
         YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABpSURBVDhPYxiy4DeUhoJFL75jYNwApBmGgQCXYsKGQMH8
-        p2jOgQJMA5DVkWwASA0OjG4AjA8zACGPrA6JjWwTsmG4xCEAjQ9SDMMgxZgakAFIDobRAC6NBF1ANUC8
-        C/AAmGJ0epACBgYAKMJiF4OQhV0AAAAASUVORK5CYII=
+        x2jOgQJMA5DVkWwASA0OjG4AjA8zACGPrA6JjWwTsmG4xCEAjQ9SDMMgxZgakAFIDobRAC6NBF1ANUC8
+        C/AAmGJ0epACBgYA9RVh99TZ/XsAAAAASUVORK5CYII=
 </value>
   </data>
   <data name="toolStripButtonToolPhysics.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">

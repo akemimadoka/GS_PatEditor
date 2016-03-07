@@ -445,8 +445,7 @@ namespace GS_PatEditor.Editor.Panels.Tools.HitAttack
 
         public bool ClipboardDataAvailable(object data)
         {
-            var frame = _Editor.EditorNode.Animation.Frame.FrameData;
-            return frame != null && data is List<Pat.Box>;
+            return data is List<Pat.Box>;
         }
 
         public object Copy()
@@ -503,6 +502,15 @@ namespace GS_PatEditor.Editor.Panels.Tools.HitAttack
         public void New()
         {
             Paste(new List<Pat.Box>() { new Pat.Box() { X = -10, Y = -10, W = 20, H = 20 } });
+        }
+
+        public bool NewItemAvailabel
+        {
+            get
+            {
+                var frame = _Editor.EditorNode.Animation.Frame.FrameData;
+                return frame != null;
+            }
         }
 
         #endregion

@@ -45,6 +45,27 @@ namespace GS_PatEditor.Editor
             _Handler = handler;
         }
 
+        private IClipboardUIElement _New;
+        public IClipboardUIElement New
+        {
+            get
+            {
+                return _New;
+            }
+            set
+            {
+                if (_New != null)
+                {
+                    _New.Click -= New_Click;
+                }
+                if (value != null)
+                {
+                    value.Click += New_Click;
+                }
+                _New = value;
+            }
+        }
+
         private IClipboardUIElement _Cut;
         public IClipboardUIElement Cut
         {
@@ -132,23 +153,38 @@ namespace GS_PatEditor.Editor
         public void UpdateEnable()
         {
             var s = _Handler.SelectedAvailable;
-            var c = Clipboard.ContainsData(_Handler.DataID) &&
+            var c = _Handler.NewItemAvailabel &&
+                Clipboard.ContainsData(_Handler.DataID) &&
                 _Handler.ClipboardDataAvailable(Clipboard.GetData(_Handler.DataID));
+            New.Enabled = _Handler.NewItemAvailabel;
             Cut.Enabled = s;
             Copy.Enabled = s;
             Paste.Enabled = c;
             Delete.Enabled = s;
         }
 
+        private void New_Click(object sender, EventArgs e)
+        {
+            _Handler.New();
+        }
+
         private void Cut_Click(object sender, EventArgs e)
         {
-            Clipboard.SetData(_Handler.DataID, _Handler.Copy());
-            _Handler.Delete();
+            var data = _Handler.Copy();
+            if (data != null)
+            {
+                Clipboard.SetData(_Handler.DataID, data);
+                _Handler.Delete();
+            }
         }
 
         private void Copy_Click(object sender, EventArgs e)
         {
-            Clipboard.SetData(_Handler.DataID, _Handler.Copy());
+            var data = _Handler.Copy();
+            if (data != null)
+            {
+                Clipboard.SetData(_Handler.DataID, data);
+            }
         }
 
         private void Paste_Click(object sender, EventArgs e)

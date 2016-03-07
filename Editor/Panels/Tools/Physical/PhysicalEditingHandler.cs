@@ -255,6 +255,31 @@ namespace GS_PatEditor.Editor.Panels.Tools.Physical
         {
             get { return "GSPatEditor_PhysicalBox"; }
         }
+
+        public bool NewItemAvailabel
+        {
+            get
+            {
+                var frame = _Editor.EditorNode.Animation.Frame.FrameData;
+                return frame != null && frame.PhysicalBox == null;
+            }
+        }
+
+        public void New()
+        {
+            var frame = _Editor.EditorNode.Animation.Frame.FrameData;
+            if (frame != null)
+            {
+                frame.PhysicalBox = new Pat.PhysicalBox
+                {
+                    X = -10,
+                    Y = -10,
+                    H = 20,
+                    W = 20,
+                };
+            }
+        }
+
         #endregion
     }
 }
