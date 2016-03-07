@@ -80,7 +80,18 @@ namespace GS_PatEditor.Editor
                         );
                     #endregion
 
-                    frm._GroupToolAnimationList = new VisibleGroup(new ToolStripButton[0]);
+                    frm._GroupToolAnimationList = new VisibleGroup(
+                        frm.toolStripButtonNew,
+                        frm.toolStripButtonOpen,
+                        frm.toolStripButtonSave,
+                        frm.toolStripButtonSaveAs,
+                        frm.toolStripButtonExport,
+                        frm.toolStripSeparator7,
+                        frm.toolStripButtonNewAnimation,
+                        frm.toolStripButtonRemoveAnimation,
+                        frm.toolStripButtonEditAnimation,
+                        frm.toolStripButtonAnimationProperty
+                        );
                     frm._GroupToolAnimation = new VisibleGroup(
                         frm.toolStripExpandAll, frm.toolStripCollapseAll,
                         frm.toolStripSeparator1,
@@ -96,11 +107,32 @@ namespace GS_PatEditor.Editor
                     );
                     frm._GroupToolImageList = new VisibleGroup(new ToolStripButton[0]);
 
-                    frm.ChangeActivePanel(0);
-                    frm.ChangeEditMode(FrameEditMode.None);
+                    editor.AnimationListUI.SelectedChange += delegate()
+                    {
+                        var enabled = editor.AnimationListUI.HasSelected;
+                        frm.toolStripButtonRemoveAnimation.Enabled = enabled;
+                        frm.toolStripButtonEditAnimation.Enabled = enabled;
+                        frm.toolStripButtonAnimationProperty.Enabled = enabled;
+                    };
+
+                    editor.UISwitched += delegate()
+                    {
+                        switch (editor.CurrentUI)
+                        {
+                            case EditorUI.AnimationList:
+                                frm.ChangeActivePanel(0);
+                                break;
+                            case EditorUI.Animation:
+                                frm.ChangeActivePanel(1);
+                                frm.ChangeEditMode(FrameEditMode.None);
+                                frm.ResetPreviewPosition(1.0f);
+                                break;
+                        }
+                    };
+                    editor.ShowAnimationListUI();
 
                     frm.Show();
-                    frm.ResetPreviewPosition(1.0f);
+
 
                     Application.Run(frm);
                 }
@@ -191,7 +223,15 @@ namespace GS_PatEditor.Editor
                     _GroupToolAnimationList.Visible = true;
                     _GroupToolAnimation.Visible = false;
                     _GroupToolImageList.Visible = false;
+                    panelAnimations.Visible = true;
                     panelAnimationEdit.Visible = false;
+                    break;
+                case 1:
+                    _GroupToolAnimationList.Visible = false;
+                    _GroupToolAnimation.Visible = true;
+                    _GroupToolImageList.Visible = false;
+                    panelAnimations.Visible = false;
+                    panelAnimationEdit.Visible = true;
                     break;
             }
         }
@@ -307,7 +347,7 @@ namespace GS_PatEditor.Editor
 
         private void toolStripButtonBack_Click(object sender, EventArgs e)
         {
-            panelAnimationEdit.Visible = false;
+            _Editor.ShowAnimationListUI();
         }
 
         private void newHitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -318,6 +358,26 @@ namespace GS_PatEditor.Editor
         private void newAttackToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _Editor.PreviewWindowUI.AttackEditing.New();
+        }
+
+        private void toolStripButtonEditAnimation_Click(object sender, EventArgs e)
+        {
+            _Editor.AnimationListUI.EditCurrent();
+        }
+
+        private void toolStripButtonRemoveAnimation_Click(object sender, EventArgs e)
+        {
+            _Editor.AnimationListUI.RemoveCurrent();
+        }
+
+        private void toolStripButtonNewAnimation_Click(object sender, EventArgs e)
+        {
+            _Editor.AnimationListUI.AddNew();
+        }
+
+        private void toolStripButtonAnimationProperty_Click(object sender, EventArgs e)
+        {
+            _Editor.AnimationListUI.EditProperty();
         }
     }
 }

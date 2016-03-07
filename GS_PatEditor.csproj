@@ -60,6 +60,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EditorTest.cs" />
+    <Compile Include="Editor\AnimationPropertyFrom.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Editor\AnimationPropertyFrom.Designer.cs">
+      <DependentUpon>AnimationPropertyFrom.cs</DependentUpon>
+    </Compile>
     <Compile Include="Editor\ClipboardUIProvider.cs" />
     <Compile Include="Editor\EditorForm.cs">
       <SubType>Form</SubType>
@@ -146,6 +152,9 @@
     <Compile Include="Render\SpritePatExt.cs" />
     <Compile Include="Render\VertexReflection.cs" />
     <Compile Include="Simulation\World.cs" />
+    <EmbeddedResource Include="Editor\AnimationPropertyFrom.resx">
+      <DependentUpon>AnimationPropertyFrom.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Editor\EditorForm.resx">
       <DependentUpon>EditorForm.cs</DependentUpon>
     </EmbeddedResource>

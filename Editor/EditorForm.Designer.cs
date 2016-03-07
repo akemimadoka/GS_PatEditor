@@ -32,6 +32,15 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EditorForm));
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.toolStripButtonNew = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonOpen = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonSave = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonSaveAs = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonExport = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButtonNewAnimation = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonRemoveAnimation = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonEditAnimation = new System.Windows.Forms.ToolStripButton();
             this.toolStripExpandAll = new System.Windows.Forms.ToolStripButton();
             this.toolStripCollapseAll = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -80,15 +89,7 @@
             this.previewWindow = new System.Windows.Forms.PictureBox();
             this.panelAnimationFramesScroll = new System.Windows.Forms.Panel();
             this.animationFrames = new System.Windows.Forms.PictureBox();
-            this.toolStripButtonOpen = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButtonSave = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButtonNew = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButtonSaveAs = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButtonExport = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripButtonNewAnimation = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButtonRemoveAnimation = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButtonEditAnimation = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonAnimationProperty = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
             this.panelAnimations.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.animations)).BeginInit();
@@ -117,6 +118,7 @@
             this.toolStripButtonNewAnimation,
             this.toolStripButtonRemoveAnimation,
             this.toolStripButtonEditAnimation,
+            this.toolStripButtonAnimationProperty,
             this.toolStripExpandAll,
             this.toolStripCollapseAll,
             this.toolStripSeparator1,
@@ -137,6 +139,85 @@
             this.toolStrip1.Size = new System.Drawing.Size(667, 25);
             this.toolStrip1.TabIndex = 4;
             this.toolStrip1.Text = "toolStrip1";
+            // 
+            // toolStripButtonNew
+            // 
+            this.toolStripButtonNew.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonNew.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonNew.Image")));
+            this.toolStripButtonNew.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonNew.Name = "toolStripButtonNew";
+            this.toolStripButtonNew.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonNew.Text = "New";
+            // 
+            // toolStripButtonOpen
+            // 
+            this.toolStripButtonOpen.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonOpen.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonOpen.Image")));
+            this.toolStripButtonOpen.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonOpen.Name = "toolStripButtonOpen";
+            this.toolStripButtonOpen.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonOpen.Text = "Open";
+            // 
+            // toolStripButtonSave
+            // 
+            this.toolStripButtonSave.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonSave.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonSave.Image")));
+            this.toolStripButtonSave.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonSave.Name = "toolStripButtonSave";
+            this.toolStripButtonSave.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonSave.Text = "Save";
+            // 
+            // toolStripButtonSaveAs
+            // 
+            this.toolStripButtonSaveAs.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonSaveAs.Image")));
+            this.toolStripButtonSaveAs.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonSaveAs.Name = "toolStripButtonSaveAs";
+            this.toolStripButtonSaveAs.Size = new System.Drawing.Size(69, 22);
+            this.toolStripButtonSaveAs.Text = "SaveAs";
+            // 
+            // toolStripButtonExport
+            // 
+            this.toolStripButtonExport.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonExport.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonExport.Image")));
+            this.toolStripButtonExport.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonExport.Name = "toolStripButtonExport";
+            this.toolStripButtonExport.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonExport.Text = "Export";
+            // 
+            // toolStripSeparator7
+            // 
+            this.toolStripSeparator7.Name = "toolStripSeparator7";
+            this.toolStripSeparator7.Size = new System.Drawing.Size(6, 25);
+            // 
+            // toolStripButtonNewAnimation
+            // 
+            this.toolStripButtonNewAnimation.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonNewAnimation.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonNewAnimation.Image")));
+            this.toolStripButtonNewAnimation.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonNewAnimation.Name = "toolStripButtonNewAnimation";
+            this.toolStripButtonNewAnimation.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonNewAnimation.Text = "New animation";
+            this.toolStripButtonNewAnimation.Click += new System.EventHandler(this.toolStripButtonNewAnimation_Click);
+            // 
+            // toolStripButtonRemoveAnimation
+            // 
+            this.toolStripButtonRemoveAnimation.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonRemoveAnimation.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonRemoveAnimation.Image")));
+            this.toolStripButtonRemoveAnimation.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonRemoveAnimation.Name = "toolStripButtonRemoveAnimation";
+            this.toolStripButtonRemoveAnimation.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonRemoveAnimation.Text = "Remove animation";
+            this.toolStripButtonRemoveAnimation.Click += new System.EventHandler(this.toolStripButtonRemoveAnimation_Click);
+            // 
+            // toolStripButtonEditAnimation
+            // 
+            this.toolStripButtonEditAnimation.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonEditAnimation.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonEditAnimation.Image")));
+            this.toolStripButtonEditAnimation.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonEditAnimation.Name = "toolStripButtonEditAnimation";
+            this.toolStripButtonEditAnimation.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonEditAnimation.Text = "Edit animation";
+            this.toolStripButtonEditAnimation.Click += new System.EventHandler(this.toolStripButtonEditAnimation_Click);
             // 
             // toolStripExpandAll
             // 
@@ -544,81 +625,15 @@
             this.animationFrames.TabIndex = 5;
             this.animationFrames.TabStop = false;
             // 
-            // toolStripButtonOpen
+            // toolStripButtonAnimationProperty
             // 
-            this.toolStripButtonOpen.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonOpen.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonOpen.Image")));
-            this.toolStripButtonOpen.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonOpen.Name = "toolStripButtonOpen";
-            this.toolStripButtonOpen.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButtonOpen.Text = "Open";
-            // 
-            // toolStripButtonSave
-            // 
-            this.toolStripButtonSave.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonSave.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonSave.Image")));
-            this.toolStripButtonSave.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonSave.Name = "toolStripButtonSave";
-            this.toolStripButtonSave.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButtonSave.Text = "Save";
-            // 
-            // toolStripButtonNew
-            // 
-            this.toolStripButtonNew.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonNew.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonNew.Image")));
-            this.toolStripButtonNew.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonNew.Name = "toolStripButtonNew";
-            this.toolStripButtonNew.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButtonNew.Text = "New";
-            // 
-            // toolStripButtonSaveAs
-            // 
-            this.toolStripButtonSaveAs.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonSaveAs.Image")));
-            this.toolStripButtonSaveAs.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonSaveAs.Name = "toolStripButtonSaveAs";
-            this.toolStripButtonSaveAs.Size = new System.Drawing.Size(69, 22);
-            this.toolStripButtonSaveAs.Text = "SaveAs";
-            // 
-            // toolStripButtonExport
-            // 
-            this.toolStripButtonExport.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonExport.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonExport.Image")));
-            this.toolStripButtonExport.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonExport.Name = "toolStripButtonExport";
-            this.toolStripButtonExport.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButtonExport.Text = "Export";
-            // 
-            // toolStripSeparator7
-            // 
-            this.toolStripSeparator7.Name = "toolStripSeparator7";
-            this.toolStripSeparator7.Size = new System.Drawing.Size(6, 25);
-            // 
-            // toolStripButtonNewAnimation
-            // 
-            this.toolStripButtonNewAnimation.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonNewAnimation.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonNewAnimation.Image")));
-            this.toolStripButtonNewAnimation.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonNewAnimation.Name = "toolStripButtonNewAnimation";
-            this.toolStripButtonNewAnimation.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButtonNewAnimation.Text = "New animation";
-            // 
-            // toolStripButtonRemoveAnimation
-            // 
-            this.toolStripButtonRemoveAnimation.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonRemoveAnimation.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonRemoveAnimation.Image")));
-            this.toolStripButtonRemoveAnimation.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonRemoveAnimation.Name = "toolStripButtonRemoveAnimation";
-            this.toolStripButtonRemoveAnimation.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButtonRemoveAnimation.Text = "Remove animation";
-            // 
-            // toolStripButtonEditAnimation
-            // 
-            this.toolStripButtonEditAnimation.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonEditAnimation.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonEditAnimation.Image")));
-            this.toolStripButtonEditAnimation.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonEditAnimation.Name = "toolStripButtonEditAnimation";
-            this.toolStripButtonEditAnimation.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButtonEditAnimation.Text = "Edit animation";
+            this.toolStripButtonAnimationProperty.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonAnimationProperty.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonAnimationProperty.Image")));
+            this.toolStripButtonAnimationProperty.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonAnimationProperty.Name = "toolStripButtonAnimationProperty";
+            this.toolStripButtonAnimationProperty.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonAnimationProperty.Text = "toolStripButton1";
+            this.toolStripButtonAnimationProperty.Click += new System.EventHandler(this.toolStripButtonAnimationProperty_Click);
             // 
             // EditorForm
             // 
@@ -706,5 +721,6 @@
         private System.Windows.Forms.ToolStripButton toolStripButtonNewAnimation;
         private System.Windows.Forms.ToolStripButton toolStripButtonRemoveAnimation;
         private System.Windows.Forms.ToolStripButton toolStripButtonEditAnimation;
+        private System.Windows.Forms.ToolStripButton toolStripButtonAnimationProperty;
     }
 }

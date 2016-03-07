@@ -8,6 +8,13 @@ using System.Threading.Tasks;
 
 namespace GS_PatEditor.Editor
 {
+    enum EditorUI
+    {
+        AnimationList,
+        Animation,
+        ImageList,
+    }
+
     class Editor : IDisposable
     {
         public Pat.Project Data { get; private set; }
@@ -17,6 +24,7 @@ namespace GS_PatEditor.Editor
 
         public AnimationFrames AnimationFramesUI { get; private set; }
         public PreviewWindow PreviewWindowUI { get; private set; }
+
         public AnimationList AnimationListUI { get; private set; }
 
         public Editor(Pat.Project proj)
@@ -26,6 +34,33 @@ namespace GS_PatEditor.Editor
             AnimationFramesUI = new AnimationFrames(this);
             PreviewWindowUI = new PreviewWindow(this);
             AnimationListUI = new AnimationList(this);
+        }
+
+        public EditorUI CurrentUI
+        {
+            get;
+            private set;
+        }
+
+        public event Action UISwitched;
+
+        public void ShowAnimationListUI()
+        {
+            CurrentUI = EditorUI.AnimationList;
+            AnimationListUI.Activate();
+            if (UISwitched != null)
+            {
+                UISwitched();
+            }
+        }
+
+        public void ShowAnimationUI()
+        {
+            CurrentUI = EditorUI.Animation;
+            if (UISwitched != null)
+            {
+                UISwitched();
+            }
         }
 
         public void Dispose()
