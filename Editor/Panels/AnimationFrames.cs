@@ -13,6 +13,14 @@ namespace GS_PatEditor.Editor.Panels
         #region Frame Grid
         private const int FrameGridSize = 64;
 
+        [Flags]
+        enum KeyFrameFlags
+        {
+            IsKeyFrame = 1,
+            HasDamage = 2,
+            HasCancellable = 4,
+        }
+
         abstract class AbstractGrid
         {
             public abstract void Render(Graphics g);
@@ -68,13 +76,19 @@ namespace GS_PatEditor.Editor.Panels
             private Pen pen = new Pen(Color.Black);
             private Brush brush = new SolidBrush(Color.FromArgb(180, 180, 180));
             private Brush brushSelected = new SolidBrush(Color.FromArgb(120, 120, 120));
+            private Brush brushKey = new SolidBrush(Color.FromArgb(222, 222, 222));
+            private Brush brushDamage = new SolidBrush(Color.FromArgb(222, 36, 18));
             public readonly int Segment, Frame;
+            private readonly KeyFrameFlags _Flags;
 
-            public KeyFrameGrid(Bitmap bitmap, int index, int segIndex, int frameIndex)
+            public KeyFrameGrid(Bitmap bitmap, int index, int segIndex, int frameIndex, KeyFrameFlags flags)
                 : base(bitmap, index)
             {
                 Segment = segIndex;
                 Frame = frameIndex;
+                _Flags = flags;
+
+                IsFolded = true;
             }
 
             public override void Render(Graphics g)
@@ -82,6 +96,18 @@ namespace GS_PatEditor.Editor.Panels
                 g.FillRectangle(IsSelected ? brushSelected : brush, 0, 0, FrameGridSize, FrameGridSize);
                 g.DrawRectangle(pen, 0, 0, FrameGridSize, FrameGridSize);
                 DrawImage(g);
+                if (_Flags.HasFlag(KeyFrameFlags.IsKeyFrame))
+                {
+                    g.FillEllipse(brushKey,
+                        FrameGridSize * 0.02f, FrameGridSize * 0.25f,
+                        FrameGridSize * 0.10f, FrameGridSize * 0.10f);
+                }
+                if (_Flags.HasFlag(KeyFrameFlags.HasDamage))
+                {
+                    g.FillEllipse(brushDamage,
+                        FrameGridSize * 0.02f, FrameGridSize * 0.40f,
+                        FrameGridSize * 0.10f, FrameGridSize * 0.10f);
+                }
             }
 
             public bool IsSelected { get; set; }
@@ -241,7 +267,8 @@ namespace GS_PatEditor.Editor.Panels
             }
             else
             {
-                //clear selected in node?
+                //clear selected
+                _Parent.EditorNode.Animation.SetSelectedFrame(-1, -1);
             }
             _LastSelected = grid;
 
@@ -288,6 +315,8 @@ namespace GS_PatEditor.Editor.Panels
             var data = _Parent.EditorNode.Animation.Data;
             if (data == null)
             {
+                UpdateControlWidth();
+                SelectKeyGrid(null);
                 return;
             }
 
@@ -299,7 +328,16 @@ namespace GS_PatEditor.Editor.Panels
                 {
                     var frame = seg.Frames[j];
                     var image = imageList.GetImage(frame.ImageID);
-                    var keyFrame = new KeyFrameGrid(image, _GridList.Count, i, j);
+                    KeyFrameFlags flags = 0;
+                    if (j == 0)
+                    {
+                        flags |= KeyFrameFlags.IsKeyFrame;
+                    }
+                    if (seg.Damage != null)
+                    {
+                        flags |= KeyFrameFlags.HasDamage;
+                    }
+                    var keyFrame = new KeyFrameGrid(image, _GridList.Count, i, j, flags);
                     _GridList.Add(keyFrame);
                     for (int k = 0; k < frame.Duration; ++k)
                     {
@@ -313,6 +351,10 @@ namespace GS_PatEditor.Editor.Panels
             if (_GridList.Count > 0 && _GridList[0] is KeyFrameGrid)
             {
                 SelectKeyGrid((KeyFrameGrid)_GridList[0]);
+            }
+            else
+            {
+                SelectKeyGrid(null);
             }
         }
 
@@ -347,5 +389,107 @@ namespace GS_PatEditor.Editor.Panels
                 _Control.Invalidate();
             }
         }
+
+        #region ui event
+
+        public void SetCurrentToKeyFrame()
+        {
+            if (_LastSelected != null && _LastSelected is KeyFrameGrid)
+            {
+                var grid = (KeyFrameGrid)_LastSelected;
+                var segmentIndex = grid.Segment;
+                var frameIndex = grid.Frame;
+                if (frameIndex == 0)
+                {
+                    //already a key frame
+                    return;
+                }
+
+                var animation = _Parent.EditorNode.Animation.Data;
+                if (animation == null)
+                {
+                    return;
+                }
+
+                //split a segment
+                var oldSegment = animation.Segments[segmentIndex];
+                var newSegment = new Pat.AnimationSegment()
+                {
+                    IsLoop = oldSegment.IsLoop,
+                    Frames = oldSegment.Frames.Skip(frameIndex).ToList(),
+                };
+                oldSegment.Frames = oldSegment.Frames.Take(frameIndex).ToList();
+
+                //TODO check cancellable data in oldSegment
+
+                animation.Segments.Insert(segmentIndex + 1, newSegment);
+
+                RefreshList();
+            }
+        }
+
+        public void SetCurrentToNormalFrame()
+        {
+            if (_LastSelected != null && _LastSelected is KeyFrameGrid)
+            {
+                var grid = (KeyFrameGrid)_LastSelected;
+                var segmentIndex = grid.Segment;
+                if (grid.Frame != 0)
+                {
+                    //not a key frame
+                    return;
+                }
+                if (segmentIndex == 0)
+                {
+                    MessageBox.Show("The first frame must be key frame.", "AnimationEditor", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return;
+                }
+
+                var animation = _Parent.EditorNode.Animation.Data;
+                if (animation == null)
+                {
+                    return;
+                }
+
+                //split a segment
+                var lastSegment = animation.Segments[segmentIndex - 1];
+                var theSegment = animation.Segments[segmentIndex];
+                lastSegment.Frames.AddRange(theSegment.Frames);
+
+                //TODO check cancellable data in oldSegment
+
+                animation.Segments.RemoveAt(segmentIndex);
+
+                RefreshList();
+            }
+        }
+
+        public void SwitchCurrentLoop()
+        {
+            if (_LastSelected != null && _LastSelected is KeyFrameGrid)
+            {
+                var grid = (KeyFrameGrid)_LastSelected;
+                var segmentIndex = grid.Segment;
+                if (grid.Frame != 0)
+                {
+                    //not a key frame
+                    return;
+                }
+
+                var animation = _Parent.EditorNode.Animation.Data;
+                if (animation == null)
+                {
+                    return;
+                }
+
+                //split a segment
+                var theSegment = animation.Segments[segmentIndex];
+                theSegment.IsLoop = !theSegment.IsLoop;
+
+                RefreshList();
+            }
+        }
+
+        #endregion
     }
 }

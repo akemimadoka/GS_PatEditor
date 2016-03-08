@@ -40,8 +40,6 @@ namespace GS_PatEditor.Pat
         [XmlElement]
         public AttackType AttackType;
         [XmlElement]
-        public int Duration;
-        [XmlElement]
         public int BaseDamage;
 
         [XmlElement]

@@ -25,6 +25,12 @@ namespace GS_PatEditor.Editor.Nodes
                 return;
             }
 
+            if (segment == -1 || frame == -1)
+            {
+                Frame.Reset(null, null);
+                return;
+            }
+            
             if (segment >= Data.Segments.Count)
             {
                 if (Data.Segments.Count == 0)

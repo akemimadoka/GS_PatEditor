@@ -241,10 +241,6 @@ namespace GS_PatEditor
                 return null;
             }
             var atk = animation.Frames[atkIndex];
-            var atkLength = animation.Frames
-                .Skip(atkIndex)
-                .TakeWhile(f => f.AttackBoxes == null || f.AttackBoxes.Count == 0)
-                .Sum(f => f.DisplayTime);
             return new AnimationDamageInfo()
             {
                 AttackType = ImportAttackTypeEnum(atk.AttackType),
@@ -252,7 +248,6 @@ namespace GS_PatEditor
                 HitStop = new HitStop { Self = atk.HitstopSelf, Opponent = atk.HitstopOpponent },
                 Knockback = new HitKnockback { SpeedX = atk.HitVX, SpeedY = atk.HitVY, Gravity = atk.HitG },
                 SoundEffect = atk.HitSoundEffect,
-                Duration = atkLength,
             };
         }
         private static AttackType ImportAttackTypeEnum(short number)

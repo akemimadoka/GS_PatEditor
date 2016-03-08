@@ -84,6 +84,7 @@ namespace GS_PatEditor.Editor
                         );
                     #endregion
 
+                    #region init tool bar groups
                     frm._GroupToolAnimationList = new VisibleGroup(
                         frm.toolStripButtonNew,
                         frm.toolStripButtonOpen,
@@ -107,9 +108,11 @@ namespace GS_PatEditor.Editor
                         frm.toolStripSeparator3,
                         frm.toolStripSplitEdit,
                         frm.toolStripSeparator6,
-                        frm.toolStripButtonBack
+                        frm.toolStripButtonBack,
+                        frm.toolStripSplitButtonKeyFrame
                     );
                     frm._GroupToolImageList = new VisibleGroup(new ToolStripButton[0]);
+                    #endregion
 
                     editor.AnimationListUI.SelectedChange += delegate()
                     {
@@ -117,6 +120,35 @@ namespace GS_PatEditor.Editor
                         frm.toolStripButtonRemoveAnimation.Enabled = enabled;
                         frm.toolStripButtonEditAnimation.Enabled = enabled;
                         frm.toolStripButtonAnimationProperty.Enabled = enabled;
+                    };
+                    editor.EditorNode.Animation.Frame.OnReset += delegate()
+                    {
+                        var animation = editor.EditorNode.Animation.Data;
+                        var seg = editor.EditorNode.Animation.Frame.SegmentData;
+                        if (animation != null && seg != null && seg.Frames.Count > 0)
+                        {
+                            var isKeyFrame = editor.EditorNode.Animation.Frame.FrameData ==
+                                seg.Frames[0];
+                            var isLoop = isKeyFrame ?
+                                editor.EditorNode.Animation.Frame.SegmentData.IsLoop : false;
+                            frm.keyFrameToolStripMenuItem.Enabled = true;
+                            frm.keyFrameToolStripMenuItem.Checked = isKeyFrame;
+
+                            frm.editDamageToolStripMenuItem.Enabled = isKeyFrame;
+                            frm.editCancellableToolStripMenuItem.Enabled = isKeyFrame;
+                            frm.loopToolStripMenuItem.Enabled = isKeyFrame;
+                            frm.loopToolStripMenuItem.Checked = isLoop;
+                        }
+                        else
+                        {
+                            frm.keyFrameToolStripMenuItem.Enabled = false;
+                            frm.keyFrameToolStripMenuItem.Checked = false;
+
+                            frm.editDamageToolStripMenuItem.Enabled = false;
+                            frm.editCancellableToolStripMenuItem.Enabled = false;
+                            frm.loopToolStripMenuItem.Enabled = false;
+                            frm.loopToolStripMenuItem.Checked = false;
+                        }
                     };
 
                     editor.UISwitched += delegate()
@@ -372,6 +404,34 @@ namespace GS_PatEditor.Editor
         private void toolStripButtonAnimationProperty_Click(object sender, EventArgs e)
         {
             _Editor.AnimationListUI.EditProperty();
+        }
+
+        private void keyFrameToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (keyFrameToolStripMenuItem.Checked)
+            {
+                if (MessageBox.Show(
+                        "Remove this key frame? The damage and cancellable data will be lost.",
+                        "AnimationEditor",
+                        MessageBoxButtons.YesNo,
+                        MessageBoxIcon.Exclamation) == DialogResult.Yes)
+                {
+                    _Editor.AnimationFramesUI.SetCurrentToNormalFrame();
+                }
+            }
+            else
+            {
+                if (MessageBox.Show("Create a new key frame?", "AnimationEditor",
+                        MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    _Editor.AnimationFramesUI.SetCurrentToKeyFrame();
+                }
+            }
+        }
+
+        private void loopToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _Editor.AnimationFramesUI.SwitchCurrentLoop();
         }
     }
 }
