@@ -508,10 +508,21 @@ namespace GS_PatEditor.Editor.Panels
                 {
                     UseImage = frame.ImageID == animation.ImageID,
                     FrameCount = frame.Duration,
+                    SetDuationForAllEnabled = grid.Frame == 0,
                 };
                 if (dialog.ShowDialog() == DialogResult.OK)
                 {
-                    frame.Duration = dialog.FrameCount;
+                    if (dialog.SetDurationForAll)
+                    {
+                        foreach (var f in animation.Segments[grid.Segment].Frames)
+                        {
+                            f.Duration = dialog.FrameCount;
+                        }
+                    }
+                    else
+                    {
+                        frame.Duration = dialog.FrameCount;
+                    }
                     if (frame.ImageID == animation.ImageID && !dialog.UseImage)
                     {
                         animation.ImageID = null;

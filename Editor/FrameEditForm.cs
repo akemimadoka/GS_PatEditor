@@ -46,6 +46,30 @@ namespace GS_PatEditor.Editor
             }
         }
 
+        public bool SetDuationForAllEnabled
+        {
+            get
+            {
+                return checkBox2.Enabled;
+            }
+            set
+            {
+                checkBox2.Enabled = value;
+            }
+        }
+
+        public bool SetDurationForAll
+        {
+            get
+            {
+                return checkBox2.Checked;
+            }
+            set
+            {
+                checkBox2.Checked = value;
+            }
+        }
+
         private void buttonOK_Click(object sender, EventArgs e)
         {
             this.Close();
