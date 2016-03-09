@@ -10,14 +10,14 @@ using System.Windows.Forms;
 
 namespace GS_PatEditor.Editor
 {
-    public partial class AnimationPropertyFrom : Form
+    public partial class CreateImageDirectoryForm : Form
     {
-        public AnimationPropertyFrom()
+        public CreateImageDirectoryForm()
         {
             InitializeComponent();
         }
 
-        public string AnimationID
+        public string DirectoryName
         {
             get
             {

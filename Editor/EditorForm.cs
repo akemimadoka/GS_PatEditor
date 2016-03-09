@@ -438,5 +438,15 @@ namespace GS_PatEditor.Editor
         {
             _Editor.AnimationFramesUI.ShowEditFrameForm();
         }
+
+        private void toolStripMenuItemSelectImage_Click(object sender, EventArgs e)
+        {
+            _Editor.AnimationFramesUI.ShowSelectImageForm();
+        }
+
+        private void toolStripMenuItemAddFrame_Click(object sender, EventArgs e)
+        {
+            _Editor.AnimationFramesUI.InsertNewFrameBefore();
+        }
     }
 }

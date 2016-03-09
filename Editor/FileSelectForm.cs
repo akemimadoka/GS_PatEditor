@@ -10,23 +10,11 @@ using System.Windows.Forms;
 
 namespace GS_PatEditor.Editor
 {
-    public partial class AnimationPropertyFrom : Form
+    public partial class FileSelectForm : Form
     {
-        public AnimationPropertyFrom()
+        public FileSelectForm()
         {
             InitializeComponent();
-        }
-
-        public string AnimationID
-        {
-            get
-            {
-                return textBox1.Text;
-            }
-            set
-            {
-                textBox1.Text = value;
-            }
         }
     }
 }

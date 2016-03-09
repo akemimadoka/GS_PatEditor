@@ -44,17 +44,19 @@ namespace GS_PatEditor.Editor.Panels
 
             public ImageGrid(Bitmap image, int? index)
             {
-                float ratio = 1.0f * image.Width / image.Height;
-
-                if (ratio > 1.0f)
+                if (image != null)
                 {
-                    _Image = image.GetThumbnailImage(FrameGridSize, (int)(FrameGridSize / ratio), null, IntPtr.Zero);
-                    _Position = new PointF(0, (FrameGridSize - (FrameGridSize / ratio)) / 2);
-                }
-                else
-                {
-                    _Image = image.GetThumbnailImage((int)(FrameGridSize * ratio), FrameGridSize, null, IntPtr.Zero);
-                    _Position = new PointF((FrameGridSize - (FrameGridSize * ratio)) / 2, 0);
+                    float ratio = 1.0f * image.Width / image.Height;
+                    if (ratio > 1.0f)
+                    {
+                        _Image = image.GetThumbnailImage(FrameGridSize, (int)(FrameGridSize / ratio), null, IntPtr.Zero);
+                        _Position = new PointF(0, (FrameGridSize - (FrameGridSize / ratio)) / 2);
+                    }
+                    else
+                    {
+                        _Image = image.GetThumbnailImage((int)(FrameGridSize * ratio), FrameGridSize, null, IntPtr.Zero);
+                        _Position = new PointF((FrameGridSize - (FrameGridSize * ratio)) / 2, 0);
+                    }
                 }
 
                 _Index = index.HasValue ? index.ToString() : null;
@@ -248,6 +250,10 @@ namespace GS_PatEditor.Editor.Panels
                 var normalGrid = (NormalFrameGrid)grid;
                 SelectKeyGrid(normalGrid.KeyFrame);
             }
+            else if (grid is EmptyGrid)
+            {
+                SelectKeyGrid(null);
+            }
         }
 
         private void SelectKeyGrid(KeyFrameGrid grid)
@@ -327,7 +333,7 @@ namespace GS_PatEditor.Editor.Panels
                 for (int j = 0; j < seg.Frames.Count; ++j)
                 {
                     var frame = seg.Frames[j];
-                    var image = imageList.GetImage(frame.ImageID);
+                    var image = frame.ImageID == null ? null : imageList.GetImage(frame.ImageID);
                     KeyFrameFlags flags = 0;
                     if (j == 0)
                     {
@@ -345,6 +351,8 @@ namespace GS_PatEditor.Editor.Panels
                     }
                 }
             }
+
+            _GridList.Add(new EmptyGrid());
 
             UpdateControlWidth();
 
@@ -394,7 +402,7 @@ namespace GS_PatEditor.Editor.Panels
 
         public void SetCurrentToKeyFrame()
         {
-            if (_LastSelected != null && _LastSelected is KeyFrameGrid)
+            if (_LastSelected != null)
             {
                 var grid = (KeyFrameGrid)_LastSelected;
                 var segmentIndex = grid.Segment;
@@ -430,7 +438,7 @@ namespace GS_PatEditor.Editor.Panels
 
         public void SetCurrentToNormalFrame()
         {
-            if (_LastSelected != null && _LastSelected is KeyFrameGrid)
+            if (_LastSelected != null)
             {
                 var grid = (KeyFrameGrid)_LastSelected;
                 var segmentIndex = grid.Segment;
@@ -466,7 +474,7 @@ namespace GS_PatEditor.Editor.Panels
 
         public void SwitchCurrentLoop()
         {
-            if (_LastSelected != null && _LastSelected is KeyFrameGrid)
+            if (_LastSelected != null)
             {
                 var grid = (KeyFrameGrid)_LastSelected;
                 var segmentIndex = grid.Segment;
@@ -492,7 +500,7 @@ namespace GS_PatEditor.Editor.Panels
 
         public void ShowEditFrameForm()
         {
-            if (_LastSelected != null && _LastSelected is KeyFrameGrid)
+            if (_LastSelected != null)
             {
                 var grid = (KeyFrameGrid)_LastSelected;
 
@@ -536,6 +544,117 @@ namespace GS_PatEditor.Editor.Panels
                 RefreshList();
             }
         }
+
+        public void ShowSelectImageForm()
+        {
+            if (_LastSelected != null)
+            {
+                var grid = (KeyFrameGrid)_LastSelected;
+
+                var animation = _Parent.EditorNode.Animation.Data;
+                if (animation == null)
+                {
+                    return;
+                }
+                
+                var frame = animation.Segments[grid.Segment].Frames[grid.Frame];
+
+                var dialog = new ImageSelectForm(_Parent.Data)
+                {
+                    SelectedImage = frame.ImageID,
+                };
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    frame.ImageID = dialog.SelectedImage;
+                    RefreshList();
+                }
+            }
+            else
+            {
+                var dialog = new ImageSelectForm(_Parent.Data)
+                {
+                    SelectedImage = null,
+                };
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    //create a new frame
+                    var animation = _Parent.EditorNode.Animation.Data;
+                    if (animation == null)
+                    {
+                        return;
+                    }
+
+                    if (animation.Segments.Count == 0)
+                    {
+                        animation.Segments.Add(new Pat.AnimationSegment()
+                        {
+                            Frames = new List<Pat.Frame>(),
+                        });
+                    }
+                    var segment = animation.Segments.Last();
+
+                    int duration = 1;
+                    if (segment.Frames.Count > 0)
+                    {
+                        duration = segment.Frames.Last().Duration;
+                    }
+
+                    var frame = new Pat.Frame()
+                    {
+                        Duration = duration,
+                        ImageID = dialog.SelectedImage,
+                        AttackBoxes = new List<Pat.Box>(),
+                        HitBoxes = new List<Pat.Box>(),
+                        Points = new List<Pat.FramePoint>(),
+                        ScaleX = 100,
+                        ScaleY = 100,
+                    };
+                    segment.Frames.Add(frame);
+
+                    RefreshList();
+                }
+
+            }
+        }
+
+        public void InsertNewFrameBefore()
+        {
+            if (_LastSelected != null)
+            {
+                var grid = (KeyFrameGrid)_LastSelected;
+                var segmentIndex = grid.Segment;
+                var frameIndex = grid.Frame;
+
+                var animation = _Parent.EditorNode.Animation.Data;
+                if (animation == null)
+                {
+                    return;
+                }
+
+                var frame = new Pat.Frame()
+                {
+                    Duration = animation.Segments[segmentIndex].Frames[frameIndex].Duration,
+                    ImageID = null,
+                    AttackBoxes = new List<Pat.Box>(),
+                    HitBoxes = new List<Pat.Box>(),
+                    Points = new List<Pat.FramePoint>(),
+                    ScaleX = 100,
+                    ScaleY = 100,
+                };
+
+                if (frameIndex == 0 && segmentIndex > 0)
+                {
+                    animation.Segments[segmentIndex - 1].Frames.Add(frame);
+                }
+                else
+                {
+                    animation.Segments[segmentIndex].Frames.Insert(frameIndex, frame);
+                }
+
+                RefreshList();
+            }
+        }
+
         #endregion
     }
 }

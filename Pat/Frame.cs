@@ -49,6 +49,7 @@ namespace GS_PatEditor.Pat
     {
         [XmlElement]
         public string ImageID;
+        public bool ShouldSerializeImageID() { return ImageID != null; }
         //TODO cache LoadedFrameImage
 
         [XmlElement]

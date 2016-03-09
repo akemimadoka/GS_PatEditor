@@ -69,15 +69,5 @@ namespace GS_PatEditor.Editor
                 checkBox2.Checked = value;
             }
         }
-
-        private void buttonOK_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
-        private void buttonCancel_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
     }
 }

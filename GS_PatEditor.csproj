@@ -67,11 +67,23 @@
       <DependentUpon>AnimationPropertyFrom.cs</DependentUpon>
     </Compile>
     <Compile Include="Editor\ClipboardUIProvider.cs" />
+    <Compile Include="Editor\CreateImageDirectoryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Editor\CreateImageDirectoryForm.Designer.cs">
+      <DependentUpon>CreateImageDirectoryForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Editor\EditorForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Editor\EditorForm.Designer.cs">
       <DependentUpon>EditorForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Editor\FileSelectForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Editor\FileSelectForm.Designer.cs">
+      <DependentUpon>FileSelectForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Editor\Form1.cs">
       <SubType>Form</SubType>
@@ -84,6 +96,12 @@
     </Compile>
     <Compile Include="Editor\FrameEditForm.Designer.cs">
       <DependentUpon>FrameEditForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Editor\ImageSelectForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Editor\ImageSelectForm.Designer.cs">
+      <DependentUpon>ImageSelectForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Editor\Panels\AnimationFrames.cs" />
     <Compile Include="Editor\Editor.cs" />
@@ -162,14 +180,23 @@
     <EmbeddedResource Include="Editor\AnimationPropertyFrom.resx">
       <DependentUpon>AnimationPropertyFrom.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Editor\CreateImageDirectoryForm.resx">
+      <DependentUpon>CreateImageDirectoryForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Editor\EditorForm.resx">
       <DependentUpon>EditorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editor\FileSelectForm.resx">
+      <DependentUpon>FileSelectForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Editor\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Editor\FrameEditForm.resx">
       <DependentUpon>FrameEditForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editor\ImageSelectForm.resx">
+      <DependentUpon>ImageSelectForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
