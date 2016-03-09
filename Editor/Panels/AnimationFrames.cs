@@ -339,7 +339,7 @@ namespace GS_PatEditor.Editor.Panels
                     }
                     var keyFrame = new KeyFrameGrid(image, _GridList.Count, i, j, flags);
                     _GridList.Add(keyFrame);
-                    for (int k = 0; k < frame.Duration; ++k)
+                    for (int k = 0; k < frame.Duration - 1; ++k)
                     {
                         _GridList.Add(new NormalFrameGrid(keyFrame, image, _GridList.Count));
                     }
@@ -490,6 +490,41 @@ namespace GS_PatEditor.Editor.Panels
             }
         }
 
+        public void ShowEditFrameForm()
+        {
+            if (_LastSelected != null && _LastSelected is KeyFrameGrid)
+            {
+                var grid = (KeyFrameGrid)_LastSelected;
+
+                var animation = _Parent.EditorNode.Animation.Data;
+                if (animation == null)
+                {
+                    return;
+                }
+
+                var frame = animation.Segments[grid.Segment].Frames[grid.Frame];
+
+                var dialog = new FrameEditForm()
+                {
+                    UseImage = frame.ImageID == animation.ImageID,
+                    FrameCount = frame.Duration,
+                };
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    frame.Duration = dialog.FrameCount;
+                    if (frame.ImageID == animation.ImageID && !dialog.UseImage)
+                    {
+                        animation.ImageID = null;
+                    }
+                    else if (dialog.UseImage)
+                    {
+                        animation.ImageID = frame.ImageID;
+                    }
+                }
+
+                RefreshList();
+            }
+        }
         #endregion
     }
 }

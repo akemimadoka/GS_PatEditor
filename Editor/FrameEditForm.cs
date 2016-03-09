@@ -10,22 +10,39 @@ using System.Windows.Forms;
 
 namespace GS_PatEditor.Editor
 {
-    public partial class AnimationPropertyFrom : Form
+    public partial class FrameEditForm : Form
     {
-        public AnimationPropertyFrom()
+        public FrameEditForm()
         {
             InitializeComponent();
         }
 
-        public string AnimationID
+        public int FrameCount
         {
             get
             {
-                return textBox1.Text;
+                int ret;
+                if (Int32.TryParse(textBox1.Text, out ret))
+                {
+                    return ret;
+                }
+                return 0;
             }
             set
             {
-                textBox1.Text = value;
+                textBox1.Text = value.ToString();
+            }
+        }
+
+        public bool UseImage
+        {
+            get
+            {
+                return checkBox1.Checked;
+            }
+            set
+            {
+                checkBox1.Checked = value;
             }
         }
 

@@ -128,10 +128,12 @@ namespace GS_PatEditor.Editor.Panels
 
         public void Activate()
         {
-            if (SelectedChange != null)
-            {
-                SelectedChange();
-            }
+            //if (SelectedChange != null)
+            //{
+            //    SelectedChange();
+            //}
+            //animation information might be modified, refresh
+            RefreshList();
         }
 
         #region toolbar events

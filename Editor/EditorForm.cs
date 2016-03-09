@@ -433,5 +433,10 @@ namespace GS_PatEditor.Editor
         {
             _Editor.AnimationFramesUI.SwitchCurrentLoop();
         }
+
+        private void toolStripMenuItemEditFrame_Click(object sender, EventArgs e)
+        {
+            _Editor.AnimationFramesUI.ShowEditFrameForm();
+        }
     }
 }
