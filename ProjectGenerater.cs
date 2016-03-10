@@ -278,7 +278,8 @@ namespace GS_PatEditor
                 default: return AttackType.None;
             }
         }
-        private static Pat.FrameImage AddImageToProject(Project proj, string filename, GSPat.Frame frame)
+        //TODO move to image list
+        public static Pat.FrameImage AddImageToProject(Project proj, string filename, GSPat.Frame frame)
         {
             var find = proj.Images.FirstOrDefault(
                 img => 
