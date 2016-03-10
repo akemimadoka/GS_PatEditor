@@ -156,11 +156,26 @@ namespace GS_PatEditor.Editor
             var c = _Handler.NewItemAvailabel &&
                 Clipboard.ContainsData(_Handler.DataID) &&
                 _Handler.ClipboardDataAvailable(Clipboard.GetData(_Handler.DataID));
-            New.Enabled = _Handler.NewItemAvailabel;
-            Cut.Enabled = s;
-            Copy.Enabled = s;
-            Paste.Enabled = c;
-            Delete.Enabled = s;
+            if (New != null)
+            {
+                New.Enabled = _Handler.NewItemAvailabel;
+            }
+            if (Cut != null)
+            {
+                Cut.Enabled = s;
+            }
+            if (Copy != null)
+            {
+                Copy.Enabled = s;
+            }
+            if (Paste != null)
+            {
+                Paste.Enabled = c;
+            }
+            if (Delete != null)
+            {
+                Delete.Enabled = s;
+            }
         }
 
         private void New_Click(object sender, EventArgs e)

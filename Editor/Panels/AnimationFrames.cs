@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace GS_PatEditor.Editor.Panels
 {
-    class AnimationFrames
+    class AnimationFrames : ClipboardHandler
     {
         #region Frame Grid
         private const int FrameGridSize = 64;
@@ -82,13 +83,15 @@ namespace GS_PatEditor.Editor.Panels
             private Brush brushDamage = new SolidBrush(Color.FromArgb(222, 36, 18));
             public readonly int Segment, Frame;
             private readonly KeyFrameFlags _Flags;
+            public readonly Pat.Frame FrameObject;
 
-            public KeyFrameGrid(Bitmap bitmap, int index, int segIndex, int frameIndex, KeyFrameFlags flags)
+            public KeyFrameGrid(Bitmap bitmap, int index, int segIndex, int frameIndex, KeyFrameFlags flags, Pat.Frame frameObj)
                 : base(bitmap, index)
             {
                 Segment = segIndex;
                 Frame = frameIndex;
                 _Flags = flags;
+                FrameObject = frameObj;
 
                 IsFolded = true;
             }
@@ -164,7 +167,7 @@ namespace GS_PatEditor.Editor.Panels
         {
             _Parent = parent;
 
-            parent.EditorNode.Animation.OnReset += Animation_OnReset;
+            parent.EditorNode.Animation.OnReset += RefreshList;
 
             RefreshList();
         }
@@ -309,13 +312,13 @@ namespace GS_PatEditor.Editor.Panels
             }
         }
 
-        private void Animation_OnReset()
-        {
-            RefreshList();
-        }
-
         private void RefreshList()
         {
+            //save the list
+            var lastList = _GridList
+                .Where(g => g is KeyFrameGrid)
+                .Cast<KeyFrameGrid>().ToArray();
+
             _GridList.Clear();
 
             var data = _Parent.EditorNode.Animation.Data;
@@ -327,6 +330,7 @@ namespace GS_PatEditor.Editor.Panels
             }
 
             var imageList = _Parent.Data.ImageList;
+            KeyFrameGrid newSelected = null;
             for (int i = 0; i < data.Segments.Count; ++i)
             {
                 var seg = data.Segments[i];
@@ -343,7 +347,21 @@ namespace GS_PatEditor.Editor.Panels
                     {
                         flags |= KeyFrameFlags.HasDamage;
                     }
-                    var keyFrame = new KeyFrameGrid(image, _GridList.Count, i, j, flags);
+                    var keyFrame = new KeyFrameGrid(image, _GridList.Count, i, j, flags, frame);
+
+                    //restore status
+                    //selected
+                    if (_LastSelected != null && frame == _LastSelected.FrameObject)
+                    {
+                        keyFrame.IsSelected = true;
+                        newSelected = keyFrame;
+                    }
+                    var lastItem = lastList.Where(g => g.FrameObject == frame).FirstOrDefault();
+                    if (lastItem != null && !lastItem.IsFolded)
+                    {
+                        keyFrame.IsFolded = false;
+                    }
+
                     _GridList.Add(keyFrame);
                     for (int k = 0; k < frame.Duration - 1; ++k)
                     {
@@ -356,14 +374,11 @@ namespace GS_PatEditor.Editor.Panels
 
             UpdateControlWidth();
 
-            if (_GridList.Count > 0 && _GridList[0] is KeyFrameGrid)
+            if (_GridList.Count > 0 && _GridList[0] is KeyFrameGrid && newSelected == null)
             {
-                SelectKeyGrid((KeyFrameGrid)_GridList[0]);
+                newSelected = (KeyFrameGrid)_GridList[0];
             }
-            else
-            {
-                SelectKeyGrid(null);
-            }
+            SelectKeyGrid(newSelected);
         }
 
         public void CollapseAll()
@@ -656,5 +671,103 @@ namespace GS_PatEditor.Editor.Panels
         }
 
         #endregion
+
+        public string DataID
+        {
+            get { return "GSPatEditor_Frame"; }
+        }
+
+        public bool SelectedAvailable
+        {
+            get
+            {
+                //first frame in segment is not allowed to be modified
+                return _LastSelected != null && _LastSelected.Frame != 0;
+            }
+        }
+
+        public bool NewItemAvailabel
+        {
+            get
+            {
+                //can not insert (only paste is supported) at the beginning
+                return _Parent.EditorNode.Animation.Data != null &&
+                    (_LastSelected == null || _LastSelected.Segment != 0 || _LastSelected.Frame != 0);
+            }
+        }
+
+        public bool ClipboardDataAvailable(object data)
+        {
+            return data is Pat.Frame;
+        }
+
+        public void New()
+        {
+            //this method is not used
+            throw new NotImplementedException();
+        }
+
+        public object Copy()
+        {
+            return _LastSelected.FrameObject;
+        }
+
+        public void Delete()
+        {
+            if (MessageBox.Show("Remove this frame?", "AnimationEditor",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Warning) != DialogResult.Yes)
+            {
+                return;
+            }
+
+            if (_LastSelected == null || _LastSelected.Frame == 0)
+            {
+                return;
+            }
+            var animation = _Parent.EditorNode.Animation.Data;
+            if (animation == null)
+            {
+                return;
+            }
+            animation.Segments[_LastSelected.Segment].Frames.RemoveAt(_LastSelected.Frame);
+
+            RefreshList();
+        }
+
+        public void Paste(object data)
+        {
+            var fdata = data as Pat.Frame;
+            if (fdata == null)
+            {
+                return;
+            }
+
+            if (_LastSelected == null)
+            {
+                return;
+            }
+
+            var animation = _Parent.EditorNode.Animation.Data;
+            if (animation == null)
+            {
+                return;
+            }
+
+            if (_LastSelected.Frame == 0)
+            {
+                if (_LastSelected.Segment == 0)
+                {
+                    return;
+                }
+                //add to last segment
+                animation.Segments[_LastSelected.Segment - 1].Frames.Add(fdata);
+            }
+            else
+            {
+                animation.Segments[_LastSelected.Segment].Frames.Insert(_LastSelected.Frame, fdata);
+            }
+
+            RefreshList();
+        }
     }
 }

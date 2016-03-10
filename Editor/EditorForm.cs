@@ -55,6 +55,13 @@ namespace GS_PatEditor.Editor
                         Paste = new ClipboardUIElementToolstripItem(frm.pasteAttackToolStripMenuItem),
                         Delete = new ClipboardUIElementToolstripItem(frm.deleteAttackToolStripMenuItem),
                     };
+                    frm._ClipboardFrame = new ClipboardUIProvider(editor.AnimationFramesUI)
+                    {
+                        Cut = new ClipboardUIElementToolstripItem(frm.toolStripMenuItemCutFrame),
+                        Copy = new ClipboardUIElementToolstripItem(frm.toolStripMenuItemCopyFrame),
+                        Paste = new ClipboardUIElementToolstripItem(frm.toolStripMenuItemPasteFrame),
+                        Delete = new ClipboardUIElementToolstripItem(frm.toolStripMenuItemDeleteFrame),
+                    };
                     #endregion
 
                     #region init edit menu visible groups
@@ -212,6 +219,7 @@ namespace GS_PatEditor.Editor
         private ClipboardUIProvider _ClipboardPhysical;
         private ClipboardUIProvider _ClipboardHit;
         private ClipboardUIProvider _ClipboardAttack;
+        private ClipboardUIProvider _ClipboardFrame;
 
         private VisibleGroup _GroupEditPhysical, _GroupEditHit, _GroupEditAttack;
         private VisibleGroup _GroupToolAnimationList, _GroupToolAnimation, _GroupToolImageList;
@@ -447,6 +455,11 @@ namespace GS_PatEditor.Editor
         private void toolStripMenuItemAddFrame_Click(object sender, EventArgs e)
         {
             _Editor.AnimationFramesUI.InsertNewFrameBefore();
+        }
+
+        private void toolStripSplitButtonKeyFrame_DropDownOpening(object sender, EventArgs e)
+        {
+            _ClipboardFrame.UpdateEnable();
         }
     }
 }
