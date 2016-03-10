@@ -86,7 +86,7 @@
             this.MinimizeBox = false;
             this.Name = "AnimationPropertyFrom";
             this.ShowIcon = false;
-            this.Text = "AnimationProperty";
+            this.Text = "Animation";
             this.ResumeLayout(false);
             this.PerformLayout();
 

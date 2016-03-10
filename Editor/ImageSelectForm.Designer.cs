@@ -161,7 +161,7 @@
             this.MinimumSize = new System.Drawing.Size(500, 300);
             this.Name = "ImageSelectForm";
             this.ShowIcon = false;
-            this.Text = "ImageSelectForm";
+            this.Text = "Image";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

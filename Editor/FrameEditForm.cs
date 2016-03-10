@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -15,18 +16,14 @@ namespace GS_PatEditor.Editor
         public FrameEditForm()
         {
             InitializeComponent();
+            textBox1.SetIntegerMode(1);
         }
 
         public int FrameCount
         {
             get
             {
-                int ret;
-                if (Int32.TryParse(textBox1.Text, out ret))
-                {
-                    return ret;
-                }
-                return 0;
+                return textBox1.GetIntegerValue(1);
             }
             set
             {

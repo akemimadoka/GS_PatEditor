@@ -38,9 +38,9 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(101, 6);
+            this.textBox1.Location = new System.Drawing.Point(77, 6);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(247, 21);
+            this.textBox1.Size = new System.Drawing.Size(271, 21);
             this.textBox1.TabIndex = 3;
             // 
             // label1
@@ -48,9 +48,9 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(12, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(83, 12);
+            this.label1.Size = new System.Drawing.Size(59, 12);
             this.label1.TabIndex = 2;
-            this.label1.Text = "Animation ID:";
+            this.label1.Text = "Duration:";
             // 
             // buttonCancel
             // 
@@ -109,7 +109,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FrameEditForm";
-            this.Text = "FrameEditForm";
+            this.Text = "Frame";
             this.ResumeLayout(false);
             this.PerformLayout();
 

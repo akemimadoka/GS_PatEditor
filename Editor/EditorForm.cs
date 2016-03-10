@@ -142,7 +142,6 @@ namespace GS_PatEditor.Editor
                             frm.keyFrameToolStripMenuItem.Checked = isKeyFrame;
 
                             frm.editDamageToolStripMenuItem.Enabled = isKeyFrame;
-                            frm.editCancellableToolStripMenuItem.Enabled = isKeyFrame;
                             frm.loopToolStripMenuItem.Enabled = isKeyFrame;
                             frm.loopToolStripMenuItem.Checked = isLoop;
                         }
@@ -152,7 +151,6 @@ namespace GS_PatEditor.Editor
                             frm.keyFrameToolStripMenuItem.Checked = false;
 
                             frm.editDamageToolStripMenuItem.Enabled = false;
-                            frm.editCancellableToolStripMenuItem.Enabled = false;
                             frm.loopToolStripMenuItem.Enabled = false;
                             frm.loopToolStripMenuItem.Checked = false;
                         }
@@ -460,6 +458,37 @@ namespace GS_PatEditor.Editor
         private void toolStripSplitButtonKeyFrame_DropDownOpening(object sender, EventArgs e)
         {
             _ClipboardFrame.UpdateEnable();
+
+            //update cancellable selected
+            //TODO make it clean
+
+            var cancelLevel = _Editor.AnimationFramesUI.CancelLevel;
+            toolStripComboBoxCancelLevel.SelectedIndex = cancelLevel;
+            toolStripComboBoxCancelLevel.Enabled = cancelLevel != -1;
+
+            var enabled = _Editor.AnimationFramesUI.CancellableEnabled;
+            jumpCancellableStripMenuItem.Enabled = enabled;
+            skillCancellableToolStripMenuItem.Enabled = enabled;
+
+            jumpCancellableStripMenuItem.Checked = _Editor.AnimationFramesUI.JumpCancellable;
+            skillCancellableToolStripMenuItem.Checked = _Editor.AnimationFramesUI.SkillCancellable;
+        }
+
+        private void editDamageToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _Editor.AnimationFramesUI.ShowEditDamageForm();
+        }
+
+        private void jumpCancellableStripMenuItem_Click(object sender, EventArgs e)
+        {
+            jumpCancellableStripMenuItem.Checked = !jumpCancellableStripMenuItem.Checked;
+            _Editor.AnimationFramesUI.JumpCancellable = jumpCancellableStripMenuItem.Checked;
+        }
+
+        private void skillCancellableToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            skillCancellableToolStripMenuItem.Checked = !skillCancellableToolStripMenuItem.Checked;
+            _Editor.AnimationFramesUI.SkillCancellable = skillCancellableToolStripMenuItem.Checked;
         }
     }
 }

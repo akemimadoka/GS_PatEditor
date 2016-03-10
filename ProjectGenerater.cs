@@ -27,7 +27,7 @@ namespace GS_PatEditor
         }
         public static Project Generate()
         {
-            var patfile = OpenHomuraPat();
+            var patfile = OpenKyoukoPat();
             if (patfile == null)
             {
                 return null;
@@ -76,6 +76,7 @@ namespace GS_PatEditor
             //import animations
             ImportSimpleAnimation(proj, gspat, gspat.Animations[0], "stand");
             ImportSimpleAnimation(proj, gspat, gspat.Animations[1], "walk");
+            ImportAnimationSegments(proj, gspat, gspat.Animations.FindIndex(a => a.AnimationID == 220), "attack");
 
             CheckImageResources(proj, Path.GetDirectoryName(patfile));
 
@@ -106,12 +107,12 @@ namespace GS_PatEditor
                 //TODO warning
             }
         }
-        private static string OpenHomuraPat()
+        private static string OpenKyoukoPat()
         {
-            var defaultPath = @"E:\Games\[game]GRIEFSYNDROME\griefsyndrome\gs00\data\actor\homura\homura.pat";
+            var defaultPath = @"E:\Games\[game]GRIEFSYNDROME\griefsyndrome\gs00\data\actor\kyouko\kyouko.pat";
             OpenFileDialog dialog = new OpenFileDialog()
             {
-                Filter = "homura.pat|homura.pat",
+                Filter = "kyouko.pat|kyouko.pat",
 
             };
             if (File.Exists(defaultPath))
@@ -123,6 +124,22 @@ namespace GS_PatEditor
                 return null;
             }
             return dialog.FileName;
+        }
+        private static void ImportAnimationSegments(Pat.Project proj, GSPat.GSPatFile pat, int start, string id)
+        {
+            var patAnimation = new Pat.Animation
+            {
+                AnimationID = id,
+                Segments = pat.Animations
+                        .Skip(start).Take(1)
+                        .Concat(pat.Animations.Skip(start + 1).TakeWhile(a => a.AnimationID == -2))
+                        .Select(a => ImportSegment(proj, pat, a)).ToList(),
+            };
+            if (patAnimation.Segments.Count > 0 && patAnimation.Segments[0].Frames.Count > 0)
+            {
+                patAnimation.ImageID = patAnimation.Segments[0].Frames[0].ImageID;
+            }
+            proj.Animations.Add(patAnimation);
         }
         private static void ImportSimpleAnimation(Pat.Project proj, GSPat.GSPatFile pat, GSPat.Animation animation, string id)
         {

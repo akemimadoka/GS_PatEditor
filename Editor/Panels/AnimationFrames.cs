@@ -19,7 +19,8 @@ namespace GS_PatEditor.Editor.Panels
         {
             IsKeyFrame = 1,
             HasDamage = 2,
-            HasCancellable = 4,
+            SkillCancellable = 4,
+            JumpCancellable = 8,
         }
 
         abstract class AbstractGrid
@@ -77,12 +78,14 @@ namespace GS_PatEditor.Editor.Panels
         class KeyFrameGrid : ImageGrid
         {
             private Pen pen = new Pen(Color.Black);
-            private Brush brush = new SolidBrush(Color.FromArgb(180, 180, 180));
+            private Brush brush = new SolidBrush(Color.FromArgb(200, 200, 200));
             private Brush brushSelected = new SolidBrush(Color.FromArgb(120, 120, 120));
-            private Brush brushKey = new SolidBrush(Color.FromArgb(222, 222, 222));
+            private Brush brushKey = new SolidBrush(Color.FromArgb(100, 140, 255));
             private Brush brushDamage = new SolidBrush(Color.FromArgb(222, 36, 18));
+            private Brush brushSkillC = new SolidBrush(Color.FromArgb(90, 250, 4));
+            private Brush brushJumpC = new SolidBrush(Color.FromArgb(255, 240, 100));
             public readonly int Segment, Frame;
-            private readonly KeyFrameFlags _Flags;
+            public readonly KeyFrameFlags Flags;
             public readonly Pat.Frame FrameObject;
 
             public KeyFrameGrid(Bitmap bitmap, int index, int segIndex, int frameIndex, KeyFrameFlags flags, Pat.Frame frameObj)
@@ -90,7 +93,7 @@ namespace GS_PatEditor.Editor.Panels
             {
                 Segment = segIndex;
                 Frame = frameIndex;
-                _Flags = flags;
+                Flags = flags;
                 FrameObject = frameObj;
 
                 IsFolded = true;
@@ -101,16 +104,28 @@ namespace GS_PatEditor.Editor.Panels
                 g.FillRectangle(IsSelected ? brushSelected : brush, 0, 0, FrameGridSize, FrameGridSize);
                 g.DrawRectangle(pen, 0, 0, FrameGridSize, FrameGridSize);
                 DrawImage(g);
-                if (_Flags.HasFlag(KeyFrameFlags.IsKeyFrame))
+                if (Flags.HasFlag(KeyFrameFlags.IsKeyFrame))
                 {
                     g.FillEllipse(brushKey,
                         FrameGridSize * 0.02f, FrameGridSize * 0.25f,
                         FrameGridSize * 0.10f, FrameGridSize * 0.10f);
                 }
-                if (_Flags.HasFlag(KeyFrameFlags.HasDamage))
+                if (Flags.HasFlag(KeyFrameFlags.HasDamage))
                 {
                     g.FillEllipse(brushDamage,
                         FrameGridSize * 0.02f, FrameGridSize * 0.40f,
+                        FrameGridSize * 0.10f, FrameGridSize * 0.10f);
+                }
+                if (Flags.HasFlag(KeyFrameFlags.JumpCancellable))
+                {
+                    g.FillEllipse(brushJumpC,
+                        FrameGridSize * 0.02f, FrameGridSize * 0.55f,
+                        FrameGridSize * 0.10f, FrameGridSize * 0.10f);
+                }
+                if (Flags.HasFlag(KeyFrameFlags.SkillCancellable))
+                {
+                    g.FillEllipse(brushSkillC,
+                        FrameGridSize * 0.02f, FrameGridSize * 0.70f,
                         FrameGridSize * 0.10f, FrameGridSize * 0.10f);
                 }
             }
@@ -334,19 +349,60 @@ namespace GS_PatEditor.Editor.Panels
             for (int i = 0; i < data.Segments.Count; ++i)
             {
                 var seg = data.Segments[i];
+
+                //calculate cancellable frame
+                int cancellableJump = -1, cancellableSkill = -1;
+                if (seg.JumpCancellable != null)
+                {
+                    int sum = 0;
+                    for (int fi = 0; fi < seg.Frames.Count; ++fi)
+                    {
+                        if (sum >= seg.JumpCancellable.StartFrom)
+                        {
+                            cancellableJump = fi;
+                            break;
+                        }
+                        sum += seg.Frames[fi].Duration;
+                    }
+                }
+                if (seg.SkillCancellable != null)
+                {
+                    int sum = 0;
+                    for (int fi = 0; fi < seg.Frames.Count; ++fi)
+                    {
+                        if (sum >= seg.SkillCancellable.StartFrom)
+                        {
+                            cancellableSkill = fi;
+                            break;
+                        }
+                        sum += seg.Frames[fi].Duration;
+                    }
+                }
                 for (int j = 0; j < seg.Frames.Count; ++j)
                 {
                     var frame = seg.Frames[j];
                     var image = frame.ImageID == null ? null : imageList.GetImage(frame.ImageID);
+
+                    //flags
                     KeyFrameFlags flags = 0;
                     if (j == 0)
                     {
                         flags |= KeyFrameFlags.IsKeyFrame;
                     }
-                    if (seg.Damage != null)
+                    if (j == 0 && seg.Damage != null)
                     {
                         flags |= KeyFrameFlags.HasDamage;
                     }
+                    if (j == cancellableJump)
+                    {
+                        flags |= KeyFrameFlags.JumpCancellable;
+                    }
+                    if (j == cancellableSkill)
+                    {
+                        flags |= KeyFrameFlags.SkillCancellable;
+                    }
+
+                    //create
                     var keyFrame = new KeyFrameGrid(image, _GridList.Count, i, j, flags, frame);
 
                     //restore status
@@ -670,7 +726,39 @@ namespace GS_PatEditor.Editor.Panels
             }
         }
 
+        public void ShowEditDamageForm()
+        {
+            if (_LastSelected != null)
+            {
+                var grid = (KeyFrameGrid)_LastSelected;
+                var segmentIndex = grid.Segment;
+                var frameIndex = grid.Frame;
+
+                var animation = _Parent.EditorNode.Animation.Data;
+                if (animation == null)
+                {
+                    return;
+                }
+
+                if (frameIndex != 0)
+                {
+                    return;
+                }
+
+                var damage = animation.Segments[segmentIndex].Damage;
+                var dialog = new DamageEditForm(damage);
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    animation.Segments[segmentIndex].Damage = dialog.GetData();
+                }
+
+                RefreshList();
+            }
+        }
+
         #endregion
+
+        #region clipboard
 
         public string DataID
         {
@@ -769,5 +857,125 @@ namespace GS_PatEditor.Editor.Panels
 
             RefreshList();
         }
+
+        #endregion
+
+        #region cancel level access
+
+        public bool CancellableEnabled
+        {
+            get
+            {
+                return _Parent.EditorNode.Animation.Data != null && _LastSelected != null;
+            }
+        }
+
+        public int CancelLevel
+        {
+            get
+            {
+                var animation = _Parent.EditorNode.Animation.Data;
+                if (animation == null || _LastSelected == null)
+                {
+                    return -1;
+                }
+                var grid = _LastSelected;
+                if (grid.Frame != 0)
+                {
+                    return -1;
+                }
+
+                var seg = grid.Segment;
+                var ret = (int)animation.Segments[seg].CancelLevel - 1;
+                
+                if (ret == -1)
+                {
+                    return 0;
+                }
+                return ret;
+            }
+        }
+
+        public bool SkillCancellable
+        {
+            get
+            {
+                if (!CancellableEnabled)
+                {
+                    return false;
+                }
+
+                return _LastSelected.Flags.HasFlag(KeyFrameFlags.SkillCancellable);
+            }
+            set
+            {
+                if (!CancellableEnabled)
+                {
+                    return;
+                }
+
+                var animation = _Parent.EditorNode.Animation.Data;
+                var segment = animation.Segments[_LastSelected.Segment];
+                var time = segment.Frames.Take(_LastSelected.Frame)
+                            .Sum(f => f.Duration);
+                if (value)
+                {
+                    //set to this frame
+                    segment.SkillCancellable = new Pat.AnimationCancellableInfo
+                    {
+                        StartFrom = time,
+                    };
+                }
+                else if (segment.SkillCancellable != null && segment.SkillCancellable.StartFrom == time)
+                {
+                    //remove cancellable
+                    segment.SkillCancellable = null;
+                }
+
+                RefreshList();
+            }
+        }
+
+        public bool JumpCancellable
+        {
+            get
+            {
+                if (!CancellableEnabled)
+                {
+                    return false;
+                }
+
+                return _LastSelected.Flags.HasFlag(KeyFrameFlags.JumpCancellable);
+            }
+            set
+            {
+                if (!CancellableEnabled)
+                {
+                    return;
+                }
+
+                var animation = _Parent.EditorNode.Animation.Data;
+                var segment = animation.Segments[_LastSelected.Segment];
+                var time = segment.Frames.Take(_LastSelected.Frame)
+                            .Sum(f => f.Duration);
+                if (value)
+                {
+                    //set to this frame
+                    segment.JumpCancellable = new Pat.AnimationCancellableInfo
+                    {
+                        StartFrom = time,
+                    };
+                }
+                else if (segment.JumpCancellable != null && segment.JumpCancellable.StartFrom == time)
+                {
+                    //remove cancellable
+                    segment.JumpCancellable = null;
+                }
+
+                RefreshList();
+            }
+        }
+
+        #endregion
     }
 }

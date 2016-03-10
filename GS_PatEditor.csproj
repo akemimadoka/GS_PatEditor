@@ -67,11 +67,18 @@
       <DependentUpon>AnimationPropertyFrom.cs</DependentUpon>
     </Compile>
     <Compile Include="Editor\ClipboardUIProvider.cs" />
+    <Compile Include="Editor\ControlExt.cs" />
     <Compile Include="Editor\CreateImageDirectoryForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Editor\CreateImageDirectoryForm.Designer.cs">
       <DependentUpon>CreateImageDirectoryForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Editor\DamageEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Editor\DamageEditForm.Designer.cs">
+      <DependentUpon>DamageEditForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Editor\EditorForm.cs">
       <SubType>Form</SubType>
@@ -182,6 +189,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Editor\CreateImageDirectoryForm.resx">
       <DependentUpon>CreateImageDirectoryForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editor\DamageEditForm.resx">
+      <DependentUpon>DamageEditForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Editor\EditorForm.resx">
       <DependentUpon>EditorForm.cs</DependentUpon>

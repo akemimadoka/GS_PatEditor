@@ -9,7 +9,9 @@ namespace GS_PatEditor.Pat
 {
     public enum CancelLevel
     {
+        //for invalid value/not available
         None,
+        //zero value in original pat file
         Free,
         Light,
         Long,
