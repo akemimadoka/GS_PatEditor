@@ -36,6 +36,12 @@ namespace GS_PatEditor.Editor
             AnimationListUI = new AnimationList(this);
         }
 
+        public void SwitchProject(Pat.Project proj)
+        {
+            Data = proj;
+            EditorNode.Reset(proj);
+        }
+
         public EditorUI CurrentUI
         {
             get;

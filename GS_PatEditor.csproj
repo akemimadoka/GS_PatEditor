@@ -59,6 +59,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GSPat\GSPatWriter.cs" />
+    <Compile Include="ProjectExporter.cs" />
+    <Compile Include="ProjectSerializer.cs" />
     <Compile Include="EditorTest.cs" />
     <Compile Include="Editor\AnimationPropertyFrom.cs">
       <SubType>Form</SubType>
@@ -73,6 +76,12 @@
     </Compile>
     <Compile Include="Editor\CreateImageDirectoryForm.Designer.cs">
       <DependentUpon>CreateImageDirectoryForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Editor\CreateProjectForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Editor\CreateProjectForm.Designer.cs">
+      <DependentUpon>CreateProjectForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Editor\DamageEditForm.cs">
       <SubType>Form</SubType>
@@ -189,6 +198,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Editor\CreateImageDirectoryForm.resx">
       <DependentUpon>CreateImageDirectoryForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editor\CreateProjectForm.resx">
+      <DependentUpon>CreateProjectForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Editor\DamageEditForm.resx">
       <DependentUpon>DamageEditForm.cs</DependentUpon>

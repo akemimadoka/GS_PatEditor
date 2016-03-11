@@ -96,7 +96,7 @@ namespace GS_PatEditor.Editor
                         frm.toolStripButtonNew,
                         frm.toolStripButtonOpen,
                         frm.toolStripButtonSave,
-                        frm.toolStripButtonSaveAs,
+                        //frm.toolStripButtonSaveAs,
                         frm.toolStripButtonExport,
                         frm.toolStripSeparator7,
                         frm.toolStripButtonNewAnimation,
@@ -489,6 +489,79 @@ namespace GS_PatEditor.Editor
         {
             skillCancellableToolStripMenuItem.Checked = !skillCancellableToolStripMenuItem.Checked;
             _Editor.AnimationFramesUI.SkillCancellable = skillCancellableToolStripMenuItem.Checked;
+        }
+
+        private void toolStripButtonNew_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Create a new act project?", "AnimationEditor",
+                MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                var dialog = new CreateProjectForm();
+                if (dialog.ShowDialog() != DialogResult.OK)
+                {
+                    return;
+                }
+                var palList = System.IO.Directory.EnumerateFiles(dialog.ImagePath,
+                    "*.pal", System.IO.SearchOption.TopDirectoryOnly)
+                    .Select(file => System.IO.Path.GetFileName(file)).ToList();
+                palList.Sort();
+
+                _Editor.SwitchProject(ProjectGenerater.GenerateEmpty(dialog.ImagePath, palList));
+            }
+        }
+
+        private void toolStripButtonOpen_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Open a act project?", "AnimationEditor",
+                MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                if (openFileDialog1.ShowDialog(this) == DialogResult.OK)
+                {
+                    var file = openFileDialog1.FileName;
+                    if (System.IO.Path.GetExtension(file) == ".pat")
+                    {
+                        var proj = ProjectGenerater.Generate(file);
+                        _Editor.SwitchProject(proj);
+                    }
+                    else if (System.IO.Path.GetExtension(file) == ".patproj")
+                    {
+                        var proj = ProjectSerializer.OpenProject(file);
+                        _Editor.SwitchProject(proj);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Unknown file extension.");
+                    }
+                }
+            }
+        }
+
+        private void toolStripButtonSave_Click(object sender, EventArgs e)
+        {
+            if (saveFileDialog1.ShowDialog(this) == DialogResult.OK)
+            {
+                ProjectSerializer.SaveProject(_Editor.Data, saveFileDialog1.FileName);
+            }
+        }
+
+        private void toolStripButtonExport_Click(object sender, EventArgs e)
+        {
+            if (saveFileDialog2.ShowDialog(this) == DialogResult.OK)
+            {
+                var file = saveFileDialog2.FileName;
+                var gspat = ProjectExporter.Export(_Editor.Data);
+                if (System.IO.File.Exists(file))
+                {
+                    System.IO.File.Delete(file);
+                }
+                using (var stream = System.IO.File.Open(file, System.IO.FileMode.CreateNew))
+                {
+                    using (var writer = new System.IO.BinaryWriter(stream))
+                    {
+                        GSPat.GSPatWriter.Write(gspat, writer);
+                    }
+                }
+            }
         }
     }
 }

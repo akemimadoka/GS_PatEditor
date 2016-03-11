@@ -17,7 +17,7 @@ namespace GS_PatEditor
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            var proj = ProjectGenerater.Generate();
+            var proj = ProjectGenerater.GenerateEmpty("", new List<string>());
             if (proj != null)
             {
                 EditorForm.ShowEditorForm(proj);

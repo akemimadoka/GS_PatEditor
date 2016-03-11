@@ -48,9 +48,9 @@ namespace GS_PatEditor.Editor.Panels
         private Brush _BrushDesc = Brushes.Gray;
         private static Font _Font = new Font("Times New Roman", FrameGridSize / 5);
 
-        public void Render(Graphics g)
+        public void Render(Graphics g, float w)
         {
-            var width = g.ClipBounds.Width + 10;
+            var width = w + 10;
 
             if (IsSelected)
             {

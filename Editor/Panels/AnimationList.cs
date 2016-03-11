@@ -21,6 +21,7 @@ namespace GS_PatEditor.Editor.Panels
             _Parent = parent;
 
             RefreshList();
+            _Parent.EditorNode.OnReset += RefreshList;
         }
 
         public void Init(Control ctrl)
@@ -88,7 +89,7 @@ namespace GS_PatEditor.Editor.Panels
 
             foreach (var a in _Items)
             {
-                a.Render(e.Graphics);
+                a.Render(e.Graphics, _Control.ClientSize.Width);
                 e.Graphics.TranslateTransform(0, a.Height);
             }
         }
@@ -109,6 +110,10 @@ namespace GS_PatEditor.Editor.Panels
                 _Control.Height = _Items.Sum(item => (int)item.Height) + 1;
                 _Control.Invalidate();
             }
+
+            //TODO reserve selected
+            _SelectedItem = null;
+
             if (SelectedChange != null)
             {
                 SelectedChange();

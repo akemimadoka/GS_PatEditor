@@ -147,7 +147,7 @@ namespace GS_PatEditor.Editor
             pictureBox1.Invalidate();
         }
 
-        private void MakeNewImageFromFile(string str)
+        private Pat.FrameImage MakeNewImageFromFile(string str)
         {
             //TODO implement this in ImageList
             Images.AbstractImage img;
@@ -162,8 +162,14 @@ namespace GS_PatEditor.Editor
             else
             {
                 //error
-                return;
+                return null;
             }
+
+            if (img == null)
+            {
+                return null;
+            }
+
             var frame = new GSPat.Frame()
             {
                 ViewOffsetX = 0,
@@ -178,6 +184,7 @@ namespace GS_PatEditor.Editor
             listView1.SelectedItems.Clear();
             item.Selected = true;
             item.EnsureVisible();
+            return image;
         }
 
         private void textBox1_Enter(object sender, EventArgs e)
@@ -192,7 +199,12 @@ namespace GS_PatEditor.Editor
                 if (MessageBox.Show("Create a new image?", "Image",
                     MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes)
                 {
-                    MakeNewImageFromFile(str);
+                    var img = MakeNewImageFromFile(str);
+                    if (img == null)
+                    {
+                        return;
+                    }
+                    textBox1.Text = img.ImageID;
                     textBox1.ReadOnly = false;
                 }
             }
@@ -270,6 +282,11 @@ namespace GS_PatEditor.Editor
                 {
                     var image = (Pat.FrameImage)listView1.SelectedItems[0].Tag;
                     var img = _Project.ImageList.GetImageUnclipped(image.ImageID);
+                    if (img == null)
+                    {
+                        return;
+                    }
+
                     var p0 = PointClientToSprite(e.Location);
                     p0.X += img.Width / 2;
                     p0.Y += img.Height / 2;
@@ -330,6 +347,11 @@ namespace GS_PatEditor.Editor
                 {
                     var image = (Pat.FrameImage)listView1.SelectedItems[0].Tag;
                     var img = _Project.ImageList.GetImageUnclipped(image.ImageID);
+                    if (img == null)
+                    {
+                        return;
+                    }
+
                     var p0 = PointClientToSprite(e.Location);
                     p0.X += img.Width / 2;
                     p0.Y += img.Height / 2;
@@ -361,6 +383,10 @@ namespace GS_PatEditor.Editor
             {
                 var image = (Pat.FrameImage)listView1.SelectedItems[0].Tag;
                 var img = _Project.ImageList.GetImageUnclipped(image.ImageID);
+                if (img == null)
+                {
+                    return;
+                }
 
                 var p0 = PointSpriteToClient(new Point(-img.Width / 2, -img.Height / 2));
                 var p1 = PointSpriteToClient(new Point(img.Width / 2, img.Height / 2));

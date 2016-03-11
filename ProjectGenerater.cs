@@ -25,6 +25,44 @@ namespace GS_PatEditor
                 Pat.PatSerialization.LocalSerializer.Serialize(f, proj.LocalInformation);
             }
         }
+
+        public static Project GenerateEmpty(string path, List<string> palList)
+        {
+            var proj = new Pat.Project()
+            {
+                Actions = new List<Pat.Action>(),
+                Actors = new List<Pat.Actor>(),
+                Animations = new List<Pat.Animation>(),
+                Images = new List<Pat.FrameImage>(),
+                LocalInformation = new Pat.ProjectLocalInfo
+                {
+                    Directories = new List<Pat.ProjectDirectoryPath>()
+                        {
+                            new Pat.ProjectDirectoryPath()
+                            {
+                                Name = "image",
+                                Path = path,
+                            }
+                        },
+                },
+                Settings = new Pat.ProjectSettings
+                {
+                    ProjectName = "Untitled",
+                    Directories = new List<Pat.ProjectDirectoryDesc>()
+                        {
+                            new Pat.ProjectDirectoryDesc()
+                            {
+                                Name = "image",
+                                Usage = Pat.ProjectDirectoryUsage.Image,
+                            }
+                        },
+                    Palettes = palList,
+                },
+            };
+            proj.ImageList.SelectedPalette = 0;
+            return proj;
+        }
+
         public static Project Generate()
         {
             var patfile = OpenKyoukoPat();
@@ -33,6 +71,10 @@ namespace GS_PatEditor
                 return null;
             }
 
+            return Generate(patfile);
+        }
+        public static Project Generate(string patfile)
+        {
             GSPatFile gspat;
             using (var file = File.OpenRead(patfile))
             {
@@ -76,7 +118,8 @@ namespace GS_PatEditor
             //import animations
             ImportSimpleAnimation(proj, gspat, gspat.Animations[0], "stand");
             ImportSimpleAnimation(proj, gspat, gspat.Animations[1], "walk");
-            ImportAnimationSegments(proj, gspat, gspat.Animations.FindIndex(a => a.AnimationID == 220), "attack");
+            var indexAttack = gspat.Animations.FindLastIndex(a => a.AnimationID == 20 + gspat.Animations[0].AnimationID);
+            ImportAnimationSegments(proj, gspat, indexAttack, "attack");
 
             CheckImageResources(proj, Path.GetDirectoryName(patfile));
 

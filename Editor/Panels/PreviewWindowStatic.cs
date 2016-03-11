@@ -44,8 +44,11 @@ namespace GS_PatEditor.Editor.Panels
             if (frame != null && frame.ImageID != null)
             {
                 var txt = _Parent.Data.ImageList.GetTexture(frame.ImageID, _Parent.PreviewWindowUI.Render);
-                _Sprite.SetupFrame(txt, frame, window.SpriteMoving);
-                _Sprite.Render();
+                if (txt != null)
+                {
+                    _Sprite.SetupFrame(txt, frame, window.SpriteMoving);
+                    _Sprite.Render();
+                }
             }
 
             if (_Parent.EditorNode.Animation.Frame.AxisVisible)

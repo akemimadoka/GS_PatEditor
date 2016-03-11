@@ -17,8 +17,8 @@ namespace GS_PatEditor.Render
         {
             //TODO do not use Setup (which only supports Scale but not Size)
             sprite.Setup(txt,
-                OriginX: frame.OriginX + editing.OffsetX,
-                OriginY: frame.OriginY + editing.OffsetY,
+                OriginX: frame.OriginX + editing.OffsetX + 0.5f,
+                OriginY: frame.OriginY + editing.OffsetY + 0.5f,
                 ScaleX: frame.ScaleX / 100.0f,
                 ScaleY: frame.ScaleY / 100.0f);
             sprite.SetupPosition(0, 0, frame.Rotation / 180.0f * 3.1415926f);

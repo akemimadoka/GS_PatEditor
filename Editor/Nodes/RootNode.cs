@@ -34,13 +34,14 @@ namespace GS_PatEditor.Editor.Nodes
 
         public event Action OnReset;
 
-        public void Reset()
+        public void Reset(Pat.Project proj)
         {
+            Data = proj;
+            SelectedAnimationIndex = proj.Animations.Count == 0 ? -1 : 0;
             if (OnReset != null)
             {
                 OnReset();
             }
-            Animation.Reset(null);
         }
 
         public static RootNode CreateRootNode(Pat.Project proj, Editor parent)
