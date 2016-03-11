@@ -34,6 +34,12 @@ namespace GS_PatEditor.Pat
         [XmlIgnore]
         public readonly ProjectImageFileList ImageList;
 
+        [XmlIgnore]
+        public string FilePath;
+
+        [XmlIgnore]
+        public bool IsEmptyProject;
+
         public Project()
         {
             ImageList = new ProjectImageFileList(this);

@@ -18,6 +18,8 @@ namespace GS_PatEditor
             Application.SetCompatibleTextRenderingDefault(false);
 
             var proj = ProjectGenerater.GenerateEmpty("", new List<string>());
+            proj.IsEmptyProject = true;
+
             if (proj != null)
             {
                 EditorForm.ShowEditorForm(proj);

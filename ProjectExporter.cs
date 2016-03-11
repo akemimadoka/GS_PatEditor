@@ -8,8 +8,9 @@ namespace GS_PatEditor
 {
     class ProjectExporter
     {
-        public static GSPat.GSPatFile Export(Pat.Project proj)
+        public static GSPat.GSPatFile Export(Pat.Project proj, int startID)
         {
+
             var ret = new GSPat.GSPatFile();
 
             //first export images
@@ -24,8 +25,8 @@ namespace GS_PatEditor
             }
 
             //export animations
+            int nextAnimationID = startID;
             ret.Animations = new List<GSPat.Animation>();
-            int nextAnimationID = 0;
             foreach (var animation in proj.Animations)
             {
                 if (animation.Segments.Count == 0)

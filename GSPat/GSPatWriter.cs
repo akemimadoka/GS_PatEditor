@@ -104,7 +104,7 @@ namespace GS_PatEditor.GSPat
 
         private static void WriteIM(BinaryWriter bw, ImageManipulation im)
         {
-            bw.Write((byte)(im != null ? 2 : 0));
+            bw.Write((byte)(im != null ? 2 : 1));
             if (im != null)
             {
                 bw.Write((short)im.AlphaBlend);

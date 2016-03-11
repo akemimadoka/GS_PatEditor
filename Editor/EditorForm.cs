@@ -96,7 +96,7 @@ namespace GS_PatEditor.Editor
                         frm.toolStripButtonNew,
                         frm.toolStripButtonOpen,
                         frm.toolStripButtonSave,
-                        //frm.toolStripButtonSaveAs,
+                        frm.toolStripButtonSaveAs,
                         frm.toolStripButtonExport,
                         frm.toolStripSeparator7,
                         frm.toolStripButtonNewAnimation,
@@ -119,15 +119,11 @@ namespace GS_PatEditor.Editor
                         frm.toolStripSplitButtonKeyFrame
                     );
                     frm._GroupToolImageList = new VisibleGroup(new ToolStripButton[0]);
+
+                    frm.SetupToolbarEnabled();
                     #endregion
 
-                    editor.AnimationListUI.SelectedChange += delegate()
-                    {
-                        var enabled = editor.AnimationListUI.HasSelected;
-                        frm.toolStripButtonRemoveAnimation.Enabled = enabled;
-                        frm.toolStripButtonEditAnimation.Enabled = enabled;
-                        frm.toolStripButtonAnimationProperty.Enabled = enabled;
-                    };
+                    editor.AnimationListUI.SelectedChange += frm.SetupToolbarEnabled;
                     editor.EditorNode.Animation.Frame.OnReset += delegate()
                     {
                         var animation = editor.EditorNode.Animation.Data;
@@ -257,6 +253,38 @@ namespace GS_PatEditor.Editor
             return _Editor.EditorNode.Animation.Frame.ChangeEditMode(mode);
         }
 
+        private void SetupToolbarEnabled()
+        {
+            if (_Editor.Data.IsEmptyProject)
+            {
+                foreach (var item in toolStrip1.Items)
+                {
+                    if (item is ToolStripItem)
+                    {
+                        ((ToolStripItem)item).Enabled = false;
+                    }
+                }
+
+                toolStripButtonNew.Enabled = true;
+                toolStripButtonOpen.Enabled = true;
+            }
+            else
+            {
+                foreach (var item in toolStrip1.Items)
+                {
+                    if (item is ToolStripItem)
+                    {
+                        ((ToolStripItem)item).Enabled = true;
+                    }
+                }
+
+                var enabled = _Editor.AnimationListUI.HasSelected;
+                toolStripButtonRemoveAnimation.Enabled = enabled;
+                toolStripButtonEditAnimation.Enabled = enabled;
+                toolStripButtonAnimationProperty.Enabled = enabled;
+            }
+        }
+
         private void ChangeActivePanel(int panel)
         {
             switch (panel)
@@ -276,6 +304,8 @@ namespace GS_PatEditor.Editor
                     panelAnimationEdit.Visible = true;
                     break;
             }
+
+            SetupToolbarEnabled();
         }
 
         private void CenterPreview()
@@ -500,7 +530,7 @@ namespace GS_PatEditor.Editor
 
         private void toolStripButtonNew_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Create a new act project?", "AnimationEditor",
+            if (_Editor.Data.IsEmptyProject || MessageBox.Show("Create a new act project?", "AnimationEditor",
                 MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
                 var dialog = new CreateProjectForm();
@@ -514,15 +544,17 @@ namespace GS_PatEditor.Editor
                 palList.Sort();
 
                 _Editor.SwitchProject(ProjectGenerater.GenerateEmpty(dialog.ImagePath, palList));
+
+                SetupToolbarEnabled();
             }
         }
 
         private void toolStripButtonOpen_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Open a act project?", "AnimationEditor",
+            if (_Editor.Data.IsEmptyProject || MessageBox.Show("Open a act project?", "AnimationEditor",
                 MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
-                if (openFileDialog1.ShowDialog(this) == DialogResult.OK)
+                if (openFileDialog1.ShowDialog() == DialogResult.OK)
                 {
                     var file = openFileDialog1.FileName;
                     if (System.IO.Path.GetExtension(file) == ".pat")
@@ -539,24 +571,45 @@ namespace GS_PatEditor.Editor
                     {
                         MessageBox.Show("Unknown file extension.");
                     }
+                    SetupToolbarEnabled();
+
+                    openFileDialog1.FileName = "";
                 }
             }
         }
 
         private void toolStripButtonSave_Click(object sender, EventArgs e)
         {
-            if (saveFileDialogSave.ShowDialog(this) == DialogResult.OK)
+            if (_Editor.Data.FilePath != null)
+            {
+                ProjectSerializer.SaveProject(_Editor.Data, _Editor.Data.FilePath);
+            }
+            else if (saveFileDialogSave.ShowDialog() == DialogResult.OK)
             {
                 ProjectSerializer.SaveProject(_Editor.Data, saveFileDialogSave.FileName);
+                _Editor.Data.FilePath = saveFileDialogSave.FileName;
+
+                saveFileDialogSave.FileName = "";
             }
         }
 
         private void toolStripButtonExport_Click(object sender, EventArgs e)
         {
-            if (saveFileDialogExport.ShowDialog(this) == DialogResult.OK)
+            if (saveFileDialogExport.ShowDialog() == DialogResult.OK)
             {
                 var file = saveFileDialogExport.FileName;
-                var gspat = ProjectExporter.Export(_Editor.Data);
+
+                int startID;
+                {
+                    var dialog = new GS_PatEditor.Editor.ExportForm();
+                    if (dialog.ShowDialog() != System.Windows.Forms.DialogResult.OK)
+                    {
+                        return;
+                    }
+                    startID = dialog.StartID;
+                }
+
+                var gspat = ProjectExporter.Export(_Editor.Data, startID);
                 if (System.IO.File.Exists(file))
                 {
                     System.IO.File.Delete(file);
@@ -568,12 +621,25 @@ namespace GS_PatEditor.Editor
                         GSPat.GSPatWriter.Write(gspat, writer);
                     }
                 }
+
+                saveFileDialogExport.FileName = "";
             }
         }
 
         private void panelFramePreviewScroll_Resize(object sender, EventArgs e)
         {
             CenterPreview();
+        }
+
+        private void toolStripButtonSaveAs_Click(object sender, EventArgs e)
+        {
+            if (saveFileDialogSave.ShowDialog() == DialogResult.OK)
+            {
+                ProjectSerializer.SaveProject(_Editor.Data, saveFileDialogSave.FileName);
+                _Editor.Data.FilePath = saveFileDialogSave.FileName;
+
+                saveFileDialogSave.FileName = "";
+            }
         }
     }
 }

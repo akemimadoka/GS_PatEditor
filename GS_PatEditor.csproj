@@ -59,6 +59,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Editor\ExportForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Editor\ExportForm.Designer.cs">
+      <DependentUpon>ExportForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="GSPat\GSPatWriter.cs" />
     <Compile Include="ProjectExporter.cs" />
     <Compile Include="ProjectSerializer.cs" />
@@ -207,6 +213,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Editor\EditorForm.resx">
       <DependentUpon>EditorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editor\ExportForm.resx">
+      <DependentUpon>ExportForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Editor\FileSelectForm.resx">
       <DependentUpon>FileSelectForm.cs</DependentUpon>

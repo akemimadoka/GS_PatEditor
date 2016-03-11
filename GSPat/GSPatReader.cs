@@ -156,7 +156,8 @@ namespace GS_PatEditor.GSPat
 
         private static ImageManipulation ReadIM(BinaryReader br)
         {
-            if (br.ReadByte() != 2)
+            var flag = br.ReadByte();
+            if (flag != 2)
             {
                 return null;
             }

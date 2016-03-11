@@ -198,7 +198,7 @@
             this.toolStripButtonSaveAs.Name = "toolStripButtonSaveAs";
             this.toolStripButtonSaveAs.Size = new System.Drawing.Size(69, 22);
             this.toolStripButtonSaveAs.Text = "SaveAs";
-            this.toolStripButtonSaveAs.Visible = false;
+            this.toolStripButtonSaveAs.Click += new System.EventHandler(this.toolStripButtonSaveAs_Click);
             // 
             // toolStripButtonExport
             // 
