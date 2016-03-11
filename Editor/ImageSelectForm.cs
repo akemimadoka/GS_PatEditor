@@ -144,6 +144,7 @@ namespace GS_PatEditor.Editor
         private void SetupImage(Pat.FrameImage img)
         {
             textBox1.Text = img.ImageID;
+            pictureBox1.Invalidate();
         }
 
         private void MakeNewImageFromFile(string str)
@@ -237,6 +238,146 @@ namespace GS_PatEditor.Editor
             {
                 listView1.SelectedItems[0].EnsureVisible();
             }
+        }
+
+        private float _ViewOffsetX = 0, _ViewOffsetY = 0, _ViewScale = 1;
+
+        private Point PointSpriteToClient(Point p)
+        {
+            var size = pictureBox1.ClientRectangle.Size;
+            return new Point(
+                size.Width / 2 + (int)((_ViewOffsetX + p.X) * _ViewScale),
+                size.Height / 2 + (int)((_ViewOffsetY + p.Y) * _ViewScale));
+        }
+
+        private Point PointClientToSprite(Point p)
+        {
+            var size = pictureBox1.ClientRectangle.Size;
+            var pp = new Point(p.X - size.Width / 2, p.Y - size.Height / 2);
+            return new Point((int)(pp.X / _ViewScale - _ViewOffsetX), (int)(pp.Y / _ViewScale - _ViewOffsetY));
+        }
+
+        private bool _IsMouseDownDraw, _IsMouseDownMove;
+        private float _ViewMoveStartX, _ViewMoveStartY;
+
+        private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                _IsMouseDownDraw = true;
+
+                if (listView1.SelectedItems.Count != 0 && listView1.SelectedItems[0].Tag is Pat.FrameImage)
+                {
+                    var image = (Pat.FrameImage)listView1.SelectedItems[0].Tag;
+                    var img = _Project.ImageList.GetImageUnclipped(image.ImageID);
+                    var p0 = PointClientToSprite(e.Location);
+                    p0.X += img.Width / 2;
+                    p0.Y += img.Height / 2;
+                    if (p0.X < 0)
+                    {
+                        p0.X = 0;
+                    }
+                    if (p0.Y < 0)
+                    {
+                        p0.Y = 0;
+                    }
+                    image.X = p0.X;
+                    image.Y = p0.Y;
+                    image.W = 1;
+                    image.H = 1;
+
+                    pictureBox1.Invalidate();
+                }
+            }
+            if (e.Button == MouseButtons.Middle)
+            {
+                _IsMouseDownMove = true;
+                _ViewMoveStartX = _ViewOffsetX - e.X;
+                _ViewMoveStartY = _ViewOffsetY - e.Y;
+            }
+        }
+
+        private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button.HasFlag(MouseButtons.Left) && _IsMouseDownDraw)
+            {
+                _IsMouseDownDraw = false;
+
+                if (listView1.SelectedItems.Count != 0 && listView1.SelectedItems[0].Tag is Pat.FrameImage)
+                {
+                    var image = (Pat.FrameImage)listView1.SelectedItems[0].Tag;
+                    _Project.ImageList.ResetImage(image);
+                    pictureBox1.Invalidate();
+                }
+            }
+            if (e.Button.HasFlag(MouseButtons.Middle) && _IsMouseDownMove)
+            {
+                _IsMouseDownMove = false;
+            }
+        }
+
+        private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (_IsMouseDownMove)
+            {
+                _ViewOffsetX = _ViewMoveStartX + e.X;
+                _ViewOffsetY = _ViewMoveStartY + e.Y;
+                pictureBox1.Invalidate();
+            }
+            else if (_IsMouseDownDraw)
+            {
+                if (listView1.SelectedItems.Count != 0 && listView1.SelectedItems[0].Tag is Pat.FrameImage)
+                {
+                    var image = (Pat.FrameImage)listView1.SelectedItems[0].Tag;
+                    var img = _Project.ImageList.GetImageUnclipped(image.ImageID);
+                    var p0 = PointClientToSprite(e.Location);
+                    p0.X += img.Width / 2;
+                    p0.Y += img.Height / 2;
+                    if (p0.X > img.Width)
+                    {
+                        p0.X = img.Width;
+                    }
+                    if (p0.Y > img.Height)
+                    {
+                        p0.Y = img.Height;
+                    }
+                    p0.X -= image.X;
+                    p0.Y -= image.Y;
+                    image.W = p0.X;
+                    image.H = p0.Y;
+
+                    pictureBox1.Invalidate();
+                }
+            }
+        }
+
+        private static Pen _PenDrawRect = new Pen(Color.Black, 2);
+        private static Brush _BrushImage = Brushes.White;
+
+        private void pictureBox1_Paint(object sender, PaintEventArgs e)
+        {
+            e.Graphics.Clear(Color.LightGray);
+            if (listView1.SelectedItems.Count != 0 && listView1.SelectedItems[0].Tag is Pat.FrameImage)
+            {
+                var image = (Pat.FrameImage)listView1.SelectedItems[0].Tag;
+                var img = _Project.ImageList.GetImageUnclipped(image.ImageID);
+
+                var p0 = PointSpriteToClient(new Point(-img.Width / 2, -img.Height / 2));
+                var p1 = PointSpriteToClient(new Point(img.Width / 2, img.Height / 2));
+
+                e.Graphics.FillRectangle(_BrushImage, p0.X, p0.Y, p1.X - p0.X, p1.Y - p0.Y);
+                e.Graphics.DrawImage(img, p0);
+
+                var pp0 = PointSpriteToClient(new Point(-img.Width / 2 + image.X, -img.Height / 2 + image.Y));
+                var pp1 = PointSpriteToClient(new Point(-img.Width / 2 + image.X + image.W, -img.Height / 2 + image.Y + image.H));
+
+                e.Graphics.DrawRectangle(_PenDrawRect, pp0.X, pp0.Y, pp1.X - pp0.X, pp1.Y - pp0.Y);
+            }
+        }
+
+        private void pictureBox1_Resize(object sender, EventArgs e)
+        {
+            pictureBox1.Invalidate();
         }
     }
 }

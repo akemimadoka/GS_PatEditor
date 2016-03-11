@@ -54,6 +54,8 @@ namespace GS_PatEditor.Pat.Editing
 
         private readonly Dictionary<string, AbstractImage> cachedResource = new Dictionary<string, AbstractImage>();
 
+        private readonly Dictionary<string, Bitmap> cachedUnclipped = new Dictionary<string, Bitmap>();
+
         public ProjectImageFileList(Project proj)
         {
             _Project = proj;
@@ -120,6 +122,28 @@ namespace GS_PatEditor.Pat.Editing
             return null;
         }
 
+        public Bitmap GetImageUnclipped(string id)
+        {
+            Bitmap ret;
+            if (cachedUnclipped.TryGetValue(id, out ret))
+            {
+                return ret;
+            }
+
+            var imgDesc = _Project.Images.FirstOrDefault(f => f.ImageID == id);
+            var res = _Project.FindResource(ProjectDirectoryUsage.Image, imgDesc.Resource.ResourceID);
+
+            AbstractImage imageData = LoadResource(res);
+            if (imageData == null)
+            {
+                return null;
+            }
+            ret = imageData.ToBitmap(_Palette, new Rectangle(0, 0, imageData.Width, imageData.Height));
+
+            cachedUnclipped.Add(id, ret);
+            return ret;
+        }
+
         private AbstractImage LoadResource(string res)
         {
             AbstractImage ret;
@@ -166,6 +190,11 @@ namespace GS_PatEditor.Pat.Editing
             ClearFrameImages(true);
         }
 
+        public void ResetImage(FrameImage img)
+        {
+            cachedImage.Remove(img.ImageID);
+        }
+
         private List<string> _ToRemove = new List<string>();
         private void ClearFrameImages(bool palletteOnly)
         {
@@ -207,6 +236,14 @@ namespace GS_PatEditor.Pat.Editing
                 }
             }
             cachedResource.Clear();
+            foreach (var res in cachedUnclipped)
+            {
+                if (res.Value != null)
+                {
+                    res.Value.Dispose();
+                }
+            }
+            cachedUnclipped.Clear();
         }
 
         public void Dispose()
