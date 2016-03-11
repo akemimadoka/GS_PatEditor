@@ -109,8 +109,8 @@
             this.panelAnimationFramesScroll = new System.Windows.Forms.Panel();
             this.animationFrames = new System.Windows.Forms.PictureBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.saveFileDialog2 = new System.Windows.Forms.SaveFileDialog();
+            this.saveFileDialogExport = new System.Windows.Forms.SaveFileDialog();
+            this.saveFileDialogSave = new System.Windows.Forms.SaveFileDialog();
             this.toolStrip1.SuspendLayout();
             this.panelAnimations.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.animations)).BeginInit();
@@ -804,13 +804,13 @@
             this.openFileDialog1.FileName = "openFileDialog1";
             this.openFileDialog1.Filter = "GS PAT file or Editor PatProject file|*.pat;*.patproj";
             // 
-            // saveFileDialog1
+            // saveFileDialogExport
             // 
-            this.saveFileDialog1.Filter = "Editor PatProject file(*.patproj, *.pat)|*.patproj";
+            this.saveFileDialogExport.Filter = "GS PAT file(*.pat)|*.pat";
             // 
-            // saveFileDialog2
+            // saveFileDialogSave
             // 
-            this.saveFileDialog2.Filter = "GS PAT file(*.pat)|*.pat";
+            this.saveFileDialogSave.Filter = "Editor PatProject File(*.patproj)|*.patproj";
             // 
             // EditorForm
             // 
@@ -918,7 +918,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator10;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator11;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
-        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
-        private System.Windows.Forms.SaveFileDialog saveFileDialog2;
+        private System.Windows.Forms.SaveFileDialog saveFileDialogExport;
+        private System.Windows.Forms.SaveFileDialog saveFileDialogSave;
     }
 }

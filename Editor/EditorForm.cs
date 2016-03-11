@@ -538,17 +538,17 @@ namespace GS_PatEditor.Editor
 
         private void toolStripButtonSave_Click(object sender, EventArgs e)
         {
-            if (saveFileDialog1.ShowDialog(this) == DialogResult.OK)
+            if (saveFileDialogSave.ShowDialog(this) == DialogResult.OK)
             {
-                ProjectSerializer.SaveProject(_Editor.Data, saveFileDialog1.FileName);
+                ProjectSerializer.SaveProject(_Editor.Data, saveFileDialogSave.FileName);
             }
         }
 
         private void toolStripButtonExport_Click(object sender, EventArgs e)
         {
-            if (saveFileDialog2.ShowDialog(this) == DialogResult.OK)
+            if (saveFileDialogExport.ShowDialog(this) == DialogResult.OK)
             {
-                var file = saveFileDialog2.FileName;
+                var file = saveFileDialogExport.FileName;
                 var gspat = ProjectExporter.Export(_Editor.Data);
                 if (System.IO.File.Exists(file))
                 {

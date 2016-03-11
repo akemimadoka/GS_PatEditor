@@ -30,11 +30,11 @@ namespace GS_PatEditor.Pat
         public bool ShouldSerializeY() { return Y != 0; }
 
         [XmlElement]
-        public int W;
+        public int W = -1;
         public bool ShouldSerializeW() { return W != -1; }
 
         [XmlElement]
-        public int H;
+        public int H = -1;
         public bool ShouldSerializeH() { return H != -1; }
     }
 }

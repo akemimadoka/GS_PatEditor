@@ -53,11 +53,11 @@ namespace GS_PatEditor.Pat
         //TODO cache LoadedFrameImage
 
         [XmlElement]
-        public int ScaleX;
+        public int ScaleX = 100;
         public bool ShouldSerializeScaleX() { return ScaleX != 100; }
 
         [XmlElement]
-        public int ScaleY;
+        public int ScaleY = 100;
         public bool ShouldSerializeScaleY() { return ScaleY != 100; }
 
         [XmlElement]

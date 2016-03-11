@@ -11,21 +11,35 @@ namespace GS_PatEditor
 {
     class ProjectSerializer
     {
-        private static XmlSerializer _Serializer;
-        public static XmlSerializer Serializer
+        private static XmlSerializer _ProjSerializer;
+        public static XmlSerializer ProjSerializer
         {
             get
             {
-                if (_Serializer == null)
+                if (_ProjSerializer == null)
                 {
                     var types = System.Reflection.Assembly.GetExecutingAssembly().GetTypes().Where(
                         t => (typeof(Effect).IsAssignableFrom(t) || typeof(Filter).IsAssignableFrom(t)) &&
                             !t.IsAbstract).ToArray();
-                    _Serializer = new XmlSerializer(typeof(Project), types);
+                    _ProjSerializer = new XmlSerializer(typeof(Project), types);
                 }
-                return _Serializer;
+                return _ProjSerializer;
             }
         }
+
+        private static XmlSerializer _LocalSerializer;
+        public static XmlSerializer LocalSerializer
+        {
+            get
+            {
+                if (_LocalSerializer == null)
+                {
+                    _LocalSerializer = new XmlSerializer(typeof(ProjectLocalInfo));
+                }
+                return _LocalSerializer;
+            }
+        }
+
         public static void SaveProject(Project proj, string filename)
         {
             if (File.Exists(filename))
@@ -34,15 +48,34 @@ namespace GS_PatEditor
             }
             using (var file = File.Open(filename, FileMode.CreateNew))
             {
-                Serializer.Serialize(file, proj);
+                ProjSerializer.Serialize(file, proj);
+            }
+            var localFilename = filename + ".local";
+            if (File.Exists(localFilename))
+            {
+                File.Delete(localFilename);
+            }
+            using (var file = File.Open(localFilename, FileMode.CreateNew))
+            {
+                LocalSerializer.Serialize(file, proj.LocalInformation);
             }
         }
         public static Project OpenProject(string filename)
         {
+            Project proj;
             using (var file = File.OpenRead(filename))
             {
-                return (Project)Serializer.Deserialize(file);
+                proj = (Project)ProjSerializer.Deserialize(file);
             }
+            if (File.Exists(filename + ".local"))
+            {
+                using (var file = File.OpenRead(filename + ".local"))
+                {
+                    proj.LocalInformation = (ProjectLocalInfo)LocalSerializer.Deserialize(file);
+                }
+            }
+            proj.ImageList.SelectedPalette = 0;
+            return proj;
         }
     }
 }
