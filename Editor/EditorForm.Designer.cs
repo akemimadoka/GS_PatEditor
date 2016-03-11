@@ -358,35 +358,35 @@
             // resetScaleToolStripMenuItem
             // 
             this.resetScaleToolStripMenuItem.Name = "resetScaleToolStripMenuItem";
-            this.resetScaleToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
+            this.resetScaleToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.resetScaleToolStripMenuItem.Text = "100%";
             this.resetScaleToolStripMenuItem.Click += new System.EventHandler(this.resetScaleToolStripMenuItem_Click);
             // 
             // scale200ToolStripMenuItem
             // 
             this.scale200ToolStripMenuItem.Name = "scale200ToolStripMenuItem";
-            this.scale200ToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
+            this.scale200ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.scale200ToolStripMenuItem.Text = "200%";
             this.scale200ToolStripMenuItem.Click += new System.EventHandler(this.scale200ToolStripMenuItem_Click);
             // 
             // scale300ToolStripMenuItem
             // 
             this.scale300ToolStripMenuItem.Name = "scale300ToolStripMenuItem";
-            this.scale300ToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
+            this.scale300ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.scale300ToolStripMenuItem.Text = "300%";
             this.scale300ToolStripMenuItem.Click += new System.EventHandler(this.scale300ToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(118, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(149, 6);
             // 
             // axisToolStripMenuItem
             // 
             this.axisToolStripMenuItem.Checked = true;
             this.axisToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.axisToolStripMenuItem.Name = "axisToolStripMenuItem";
-            this.axisToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
+            this.axisToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.axisToolStripMenuItem.Text = "Axis";
             this.axisToolStripMenuItem.Click += new System.EventHandler(this.axisToolStripMenuItem_Click);
             // 
@@ -395,7 +395,7 @@
             this.physicalToolStripMenuItem.Checked = true;
             this.physicalToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.physicalToolStripMenuItem.Name = "physicalToolStripMenuItem";
-            this.physicalToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
+            this.physicalToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.physicalToolStripMenuItem.Text = "Physical";
             this.physicalToolStripMenuItem.Click += new System.EventHandler(this.physicalToolStripMenuItem_Click);
             // 
@@ -404,7 +404,7 @@
             this.hitToolStripMenuItem1.Checked = true;
             this.hitToolStripMenuItem1.CheckState = System.Windows.Forms.CheckState.Checked;
             this.hitToolStripMenuItem1.Name = "hitToolStripMenuItem1";
-            this.hitToolStripMenuItem1.Size = new System.Drawing.Size(121, 22);
+            this.hitToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
             this.hitToolStripMenuItem1.Text = "Hit";
             this.hitToolStripMenuItem1.Click += new System.EventHandler(this.hitToolStripMenuItem1_Click);
             // 
@@ -413,7 +413,7 @@
             this.attackToolStripMenuItem.Checked = true;
             this.attackToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.attackToolStripMenuItem.Name = "attackToolStripMenuItem";
-            this.attackToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
+            this.attackToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.attackToolStripMenuItem.Text = "Attack";
             this.attackToolStripMenuItem.Click += new System.EventHandler(this.attackToolStripMenuItem_Click);
             // 
@@ -763,13 +763,13 @@
             // 
             // panelFramePreviewScroll
             // 
-            this.panelFramePreviewScroll.AutoScroll = true;
             this.panelFramePreviewScroll.Controls.Add(this.previewWindow);
             this.panelFramePreviewScroll.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelFramePreviewScroll.Location = new System.Drawing.Point(0, 100);
             this.panelFramePreviewScroll.Name = "panelFramePreviewScroll";
             this.panelFramePreviewScroll.Size = new System.Drawing.Size(698, 259);
             this.panelFramePreviewScroll.TabIndex = 17;
+            this.panelFramePreviewScroll.Resize += new System.EventHandler(this.panelFramePreviewScroll_Resize);
             // 
             // previewWindow
             // 

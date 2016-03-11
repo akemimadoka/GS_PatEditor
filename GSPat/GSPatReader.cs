@@ -47,6 +47,12 @@ namespace GS_PatEditor.GSPat
                     for (int i = 0; i < animationCount; ++i)
                     {
                         ret.Animations.Add(ReadAnimation(br));
+
+                        //sometimes the stream ends before getting all the animations
+                        if (br.BaseStream.Position == br.BaseStream.Length)
+                        {
+                            break;
+                        }
                     }
                 }
 
@@ -64,8 +70,8 @@ namespace GS_PatEditor.GSPat
             if (animationID == -1)
             {
                 ret.Type = AnimationType.Clone;
-                ret.CloneFrom = br.ReadInt16();
-                ret.CloneTo = br.ReadInt16();
+                ret.CloneFrom = (short)br.ReadInt32();
+                ret.CloneTo = (short)br.ReadInt32();
                 return ret;
             }
 

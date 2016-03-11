@@ -278,13 +278,20 @@ namespace GS_PatEditor.Editor
             }
         }
 
+        private void CenterPreview()
+        {
+            previewWindow.Left = (panelFramePreviewScroll.ClientSize.Width - previewWindow.Width) / 2;
+            previewWindow.Top = (panelFramePreviewScroll.ClientSize.Height - previewWindow.Height) / 2;
+        }
+
         private void ResetPreviewPosition(float scale)
         {
             _Editor.PreviewWindowUI.PreviewMoving.ResetScale(scale);
 
-            var x = previewWindow.Width - panelFramePreviewScroll.ClientSize.Width;
-            var y = previewWindow.Height - panelFramePreviewScroll.ClientSize.Height;
-            panelFramePreviewScroll.AutoScrollPosition = new Point(x / 2, y / 2);
+            //var x = previewWindow.Width - panelFramePreviewScroll.ClientSize.Width;
+            //var y = previewWindow.Height - panelFramePreviewScroll.ClientSize.Height;
+            //panelFramePreviewScroll.AutoScrollPosition = new Point(x / 2, y / 2);
+            CenterPreview();
         }
 
         private void ClearToolButtonsToolChecked()
@@ -562,6 +569,11 @@ namespace GS_PatEditor.Editor
                     }
                 }
             }
+        }
+
+        private void panelFramePreviewScroll_Resize(object sender, EventArgs e)
+        {
+            CenterPreview();
         }
     }
 }
