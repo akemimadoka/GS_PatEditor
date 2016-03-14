@@ -12,22 +12,27 @@ namespace GS_PatEditor.Editor.Panels
         private readonly Simulation.World _World;
         private readonly Editor _Parent;
 
-        private Sprite _Sprite, _SpriteLineV, _SpriteLineH;
-        private Sprite[] _SpriteListPhysical;
+        private Sprite _Sprite;
 
         public PreviewWindowPlaying(Editor parent)
         {
             _Parent = parent;
             _World = new Simulation.World();
+            var animation = parent.EditorNode.Animation.Data;
 
             var actor = new Simulation.PlayerActor(_World, new Simulation.SystemAnimationProvider())
             {
+                Y = -100.0f,
             };
-            actor.SetMotion(parent.EditorNode.Animation.Data, 0);
+
+            Simulation.AnimationSetup.SetupActorForAnimation(actor, animation);
+            actor.SetMotion(animation, 0);
             _World.Add(actor);
 
             var sprites = parent.PreviewWindowUI.SpriteManager;
             _Sprite = sprites.GetSprite(0);
+
+            _Parent.PreviewWindowUI.PreviewMoving.ResetScaleForPlay();
         }
 
         public override void Render()
@@ -44,6 +49,8 @@ namespace GS_PatEditor.Editor.Panels
                     if (txt != null)
                     {
                         _Sprite.SetupFrame(txt, frame, window.SpriteMoving);
+                        _Sprite.Left = actor.X;
+                        _Sprite.Top = actor.Y;
                         _Sprite.Render();
                     }
                 }

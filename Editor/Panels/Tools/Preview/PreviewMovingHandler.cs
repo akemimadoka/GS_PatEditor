@@ -134,6 +134,25 @@ namespace GS_PatEditor.Editor.Panels.Tools.Preview
             _Parent.Render.Transform.Scale = _PreviewScale;
         }
 
+        public void ResetScaleForPlay()
+        {
+            int offsetY = 0;
+            {
+                var parentCtrl = _Control.Parent as ScrollableControl;
+                if (parentCtrl != null)
+                {
+                    offsetY = parentCtrl.ClientSize.Height / 2;
+                }
+            }
+            _PreviewX = _Control.Width / 2;
+            _PreviewY = _Control.Height / 2 + offsetY;
+            _Parent.Render.Transform.X = _PreviewX;
+            _Parent.Render.Transform.Y = _PreviewY;
+
+            _PreviewScale = 1.0f;
+            _Parent.Render.Transform.Scale = _PreviewScale;
+        }
+
         //TODO transform in point
 
         public float TransformXSpriteToClient(float x)
