@@ -127,6 +127,9 @@ namespace GS_PatEditor.Editor.Panels
                 case FrameNode.FramePreviewMode.Pause:
                     CurrentContent = new PreviewWindowStatic(_Parent);
                     break;
+                case FrameNode.FramePreviewMode.Play:
+                    CurrentContent = new PreviewWindowPlaying(_Parent);
+                    break;
                 default:
                     CurrentContent = null;
                     break;

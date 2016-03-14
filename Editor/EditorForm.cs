@@ -25,11 +25,6 @@ namespace GS_PatEditor.Editor
                     editor.PreviewWindowUI.Init(frm.previewWindow);
                     editor.AnimationListUI.Init(frm.animations);
 
-                    frm.timer1.Tick += delegate(object sender, EventArgs e)
-                    {
-                        editor.PreviewWindowUI.Refresh();
-                    };
-
                     #region init clipboards
                     frm._ClipboardPhysical = new ClipboardUIProvider(editor.PreviewWindowUI.PhysicalEditing)
                     {
@@ -169,9 +164,7 @@ namespace GS_PatEditor.Editor
                     editor.ShowAnimationListUI();
 
                     frm.Show();
-
-
-                    Application.Run(frm);
+                    frm.RunRenderLoop();
                 }
             }
         }
@@ -221,6 +214,24 @@ namespace GS_PatEditor.Editor
         public EditorForm()
         {
             InitializeComponent();
+        }
+
+        private void RunRenderLoop()
+        {
+            int count = 0;
+            var clock = new System.Diagnostics.Stopwatch();
+            clock.Start();
+            SharpDX.Windows.RenderLoop.Run(this, delegate()
+            {
+                if (clock.ElapsedMilliseconds >= 1000 * 5)
+                {
+                    Text = (count * 1000.0f / clock.ElapsedMilliseconds).ToString();
+                    clock.Restart();
+                    count = 0;
+                }
+                _Editor.PreviewWindowUI.Refresh();
+                ++count;
+            });
         }
 
         private void toolStripCollapseAll_Click(object sender, EventArgs e)
@@ -640,6 +651,11 @@ namespace GS_PatEditor.Editor
 
                 saveFileDialogSave.FileName = "";
             }
+        }
+
+        private void toolStripButtonPlay_Click(object sender, EventArgs e)
+        {
+            _Editor.EditorNode.Animation.Frame.ChangePreviewMode(FrameNode.FramePreviewMode.Play);
         }
     }
 }

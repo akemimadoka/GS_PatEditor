@@ -1,0 +1,20 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace GS_PatEditor.Simulation
+{
+    class PlayerActor : Actor
+    {
+        public PlayerActor(World world, SystemAnimationProvider animation)
+            : base(world, animation)
+        {
+        }
+        public override void Update()
+        {
+            StepAnimation();
+        }
+    }
+}

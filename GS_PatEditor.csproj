@@ -35,8 +35,12 @@
     <StartupObject>GS_PatEditor.EditorTest</StartupObject>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="SharpDX">
-      <HintPath>packages\SharpDX.3.0.1\lib\net45\SharpDX.dll</HintPath>
+    <Reference Include="SharpDX, Version=3.0.2.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>packages\SharpDX.3.0.2\lib\net45\SharpDX.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.Desktop">
+      <HintPath>packages\SharpDX.Desktop.3.0.2\lib\net45\SharpDX.Desktop.dll</HintPath>
     </Reference>
     <Reference Include="SharpDX.Direct3D9">
       <HintPath>packages\SharpDX.Direct3D9.3.0.1\lib\net45\SharpDX.Direct3D9.dll</HintPath>
@@ -65,6 +69,7 @@
     <Compile Include="Editor\ExportForm.Designer.cs">
       <DependentUpon>ExportForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Editor\Panels\PreviewWindowPlaying.cs" />
     <Compile Include="GSPat\GSPatWriter.cs" />
     <Compile Include="ProjectExporter.cs" />
     <Compile Include="ProjectSerializer.cs" />
@@ -198,6 +203,9 @@
     <Compile Include="Render\Sprite.cs" />
     <Compile Include="Render\SpritePatExt.cs" />
     <Compile Include="Render\VertexReflection.cs" />
+    <Compile Include="Simulation\Actor.cs" />
+    <Compile Include="Simulation\PlayerActor.cs" />
+    <Compile Include="Simulation\SystemAnimationProvider.cs" />
     <Compile Include="Simulation\World.cs" />
     <EmbeddedResource Include="Editor\AnimationPropertyFrom.resx">
       <DependentUpon>AnimationPropertyFrom.cs</DependentUpon>

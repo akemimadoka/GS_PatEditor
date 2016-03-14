@@ -71,6 +71,7 @@ namespace GS_PatEditor.Editor.Nodes
         public bool ChangeEditMode(FrameEditMode mode)
         {
             EditMode = mode;
+
             if (EditModeChanged != null)
             {
                 EditModeChanged();
@@ -78,6 +79,20 @@ namespace GS_PatEditor.Editor.Nodes
             return true;
         }
 
+        public void ChangePreviewMode(FramePreviewMode mode)
+        {
+            PreviewMode = mode;
+            if (_Parent.PreviewWindowUI != null)
+            {
+                _Parent.PreviewWindowUI.UpdatePreviewMode();
+            }
+
+            EditMode = FrameEditMode.None;
+            if (EditModeChanged != null)
+            {
+                EditModeChanged();
+            }
+        }
         public void AddHitBox(Pat.Box box)
         {
 
