@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GS_PatEditor.Simulation
 {
-    class SystemAnimationProvider
+    public class SystemAnimationProvider
     {
         public Pat.Animation GetSystemAnimation_0_Stant(Pat.Project proj)
         {

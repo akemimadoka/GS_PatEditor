@@ -6,15 +6,9 @@ using System.Threading.Tasks;
 
 namespace GS_PatEditor.Simulation
 {
-    enum ActorType
-    {
-        Player,
-        Enemy,
-    }
+    public delegate void ActorLabel(Actor actor);
 
-    delegate void ActorLabel(Actor actor);
-
-    enum ActorVariableType
+    public enum ActorVariableType
     {
         //Integer,
         Float,
@@ -23,15 +17,15 @@ namespace GS_PatEditor.Simulation
         //ActorReference,
     }
 
-    class ActorVariable
+    public class ActorVariable
     {
         public ActorVariableType Type;
         public object Value;
     }
 
-    abstract class Actor
+    public abstract class Actor
     {
-        public event Action<Actor> BeforeRelease, AfterRelease;
+        public Action<Actor> BeforeRelease, AfterRelease;
 
         //world
         public World World { get; private set; }
@@ -109,6 +103,15 @@ namespace GS_PatEditor.Simulation
             CurrentFrameCounter = 0;
         }
 
+        public void Release()
+        {
+            if (BeforeRelease != null)
+            {
+                BeforeRelease(this);
+            }
+            IsReleased = true;
+        }
+
         protected void StepAnimation()
         {
             //TODO callback
@@ -130,5 +133,25 @@ namespace GS_PatEditor.Simulation
                 }
             }
         }
+
+        protected void UpdateGravity()
+        {
+            if (!ImmuneGravity)
+            {
+                if (Gravity.HasValue)
+                {
+                    VY += Gravity.Value;
+                }
+                else
+                {
+                    VY += DefaultGravity;
+                }
+                if (VY > 15)
+                {
+                    VY = 15;
+                }
+            }
+        }
+
     }
 }

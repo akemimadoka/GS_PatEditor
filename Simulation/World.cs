@@ -6,9 +6,18 @@ using System.Threading.Tasks;
 
 namespace GS_PatEditor.Simulation
 {
-    class World : IEnumerable<Actor>
+    public class World : IEnumerable<Actor>
     {
         private readonly List<Actor> _Actors = new List<Actor>();
+        private readonly List<Actor> _AddActors = new List<Actor>();
+        private readonly List<Actor> _RemoveActors = new List<Actor>();
+
+        private readonly PhyisicalCollisionDetector _Physical;
+
+        public World(int width, int height)
+        {
+            _Physical = new PhyisicalCollisionDetector(-width / 2, -height, width, height);
+        }
 
         #region actor list access
 
@@ -26,7 +35,7 @@ namespace GS_PatEditor.Simulation
 
         public void Add(Actor actor)
         {
-            _Actors.Add(actor);
+            _AddActors.Add(actor);
         }
 
         public void Update()
@@ -35,7 +44,39 @@ namespace GS_PatEditor.Simulation
             foreach (var actor in this)
             {
                 actor.Update();
+
+                if (actor.IsReleased)
+                {
+                    if (actor.AfterRelease != null)
+                    {
+                        actor.AfterRelease(actor);
+                    }
+                    _RemoveActors.Add(actor);
+                    continue;
+                }
+
+                _Physical.TestActor(actor);
+
+                if (actor.IsInAir && actor.HitBottom)
+                {
+                    if (actor.SitLabel != null)
+                    {
+                        actor.SitLabel(actor);
+                    }
+                }
+                actor.IsInAir = !actor.HitBottom;
             }
+
+            foreach (var actor in _AddActors)
+            {
+                _Actors.Add(actor);
+            }
+            _AddActors.Clear();
+            foreach (var actor in _RemoveActors)
+            {
+                _Actors.Remove(actor);
+            }
+            _RemoveActors.Clear();
         }
     }
 }

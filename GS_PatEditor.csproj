@@ -205,6 +205,7 @@
     <Compile Include="Render\VertexReflection.cs" />
     <Compile Include="Simulation\Actor.cs" />
     <Compile Include="Simulation\AnimationSetup.cs" />
+    <Compile Include="Simulation\PhyisicalCollisionDetector.cs" />
     <Compile Include="Simulation\PlayerActor.cs" />
     <Compile Include="Simulation\SystemAnimationProvider.cs" />
     <Compile Include="Simulation\World.cs" />
@@ -264,7 +265,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Pat\Effects\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

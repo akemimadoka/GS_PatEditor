@@ -135,5 +135,21 @@ namespace GS_PatEditor.Editor.Panels
                     break;
             }
         }
+
+        public int ControlWidth
+        {
+            get
+            {
+                return _Control == null ? 100 : _Control.Parent.ClientSize.Width;
+            }
+        }
+
+        public int ControlHeight
+        {
+            get
+            {
+                return _Control == null ? 100 : _Control.Parent.ClientSize.Height;
+            }
+        }
     }
 }

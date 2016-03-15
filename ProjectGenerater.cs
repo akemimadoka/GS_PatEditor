@@ -118,8 +118,26 @@ namespace GS_PatEditor
             //import animations
             ImportSimpleAnimation(proj, gspat, gspat.Animations[0], "stand");
             ImportSimpleAnimation(proj, gspat, gspat.Animations[1], "walk");
-            var indexAttack = gspat.Animations.FindLastIndex(a => a.AnimationID == 20 + gspat.Animations[0].AnimationID);
-            ImportAnimationSegments(proj, gspat, indexAttack, "attack");
+            ImportAnimationSegments(proj, gspat, 20, "attack");
+
+            //import homura's attack long for test
+            //open homura_m's pat (which is also named homura.pat) may produce error
+            if (Path.GetFileNameWithoutExtension(patfile) == "homura")
+            {
+                var attackLong = ImportAnimationSegments(proj, gspat, 24, "attack_long");
+                attackLong.ActionID = "attack_long";
+
+                Pat.Action action = new Pat.Action()
+                {
+                    ActionID = "attack_long",
+                    InitEffects = new List<Effect>()
+                    {
+                        new Pat.TestEffect(),
+                    },
+                    KeyFrameEffects = new List<Effect>(),
+                    UpdateEffects = new List<Effect>(),
+                };
+            }
 
             CheckImageResources(proj, Path.GetDirectoryName(patfile));
 
@@ -168,8 +186,9 @@ namespace GS_PatEditor
             }
             return dialog.FileName;
         }
-        private static void ImportAnimationSegments(Pat.Project proj, GSPat.GSPatFile pat, int start, string id)
+        private static Pat.Animation ImportAnimationSegments(Pat.Project proj, GSPat.GSPatFile pat, int index, string id)
         {
+            var start = pat.Animations.FindLastIndex(a => a.AnimationID == index + pat.Animations[0].AnimationID);
             var patAnimation = new Pat.Animation
             {
                 AnimationID = id,
@@ -183,6 +202,8 @@ namespace GS_PatEditor
                 patAnimation.ImageID = patAnimation.Segments[0].Frames[0].ImageID;
             }
             proj.Animations.Add(patAnimation);
+
+            return patAnimation;
         }
         private static void ImportSimpleAnimation(Pat.Project proj, GSPat.GSPatFile pat, GSPat.Animation animation, string id)
         {

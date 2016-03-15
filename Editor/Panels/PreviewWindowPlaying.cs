@@ -17,12 +17,11 @@ namespace GS_PatEditor.Editor.Panels
         public PreviewWindowPlaying(Editor parent)
         {
             _Parent = parent;
-            _World = new Simulation.World();
+            _World = new Simulation.World(_Parent.PreviewWindowUI.ControlWidth, _Parent.PreviewWindowUI.ControlHeight);
             var animation = parent.EditorNode.Animation.Data;
 
             var actor = new Simulation.PlayerActor(_World, new Simulation.SystemAnimationProvider())
             {
-                Y = -100.0f,
             };
 
             Simulation.AnimationSetup.SetupActorForAnimation(actor, animation);
@@ -40,7 +39,7 @@ namespace GS_PatEditor.Editor.Panels
             _World.Update();
 
             var window = _Parent.PreviewWindowUI;
-            foreach (var actor in _World)
+            foreach (var actor in _World.OrderBy(a => a.Priority))
             {
                 var frame = actor.CurrentFrame;
                 if (frame != null && frame.ImageID != null)
@@ -48,9 +47,7 @@ namespace GS_PatEditor.Editor.Panels
                     var txt = _Parent.Data.ImageList.GetTexture(frame.ImageID, _Parent.PreviewWindowUI.Render);
                     if (txt != null)
                     {
-                        _Sprite.SetupFrame(txt, frame, window.SpriteMoving);
-                        _Sprite.Left = actor.X;
-                        _Sprite.Top = actor.Y;
+                        _Sprite.SetupActor(txt, actor, window.SpriteMoving);
                         _Sprite.Render();
                     }
                 }

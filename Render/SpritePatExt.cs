@@ -13,6 +13,18 @@ namespace GS_PatEditor.Render
 {
     static class SpritePatExt
     {
+        public static void SetupActor(this Sprite sprite, Texture txt, Simulation.Actor actor, EditingPoint editing)
+        {
+            //TODO do not use Setup (which only supports Scale but not Size)
+            var frame = actor.CurrentFrame;
+            sprite.Setup(txt,
+                OriginX: frame.OriginX + editing.OffsetX + 0.5f,
+                OriginY: frame.OriginY + editing.OffsetY + 0.5f,
+                ScaleX: frame.ScaleX / 100.0f * actor.ScaleX,
+                ScaleY: frame.ScaleY / 100.0f * actor.ScaleY);
+            sprite.SetupPosition(actor.X, actor.Y, frame.Rotation / 180.0f * 3.1415926f + actor.Rotation);
+        }
+
         public static void SetupFrame(this Sprite sprite, Texture txt, Frame frame, EditingPoint editing)
         {
             //TODO do not use Setup (which only supports Scale but not Size)
