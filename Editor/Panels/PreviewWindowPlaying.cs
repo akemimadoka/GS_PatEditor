@@ -14,18 +14,38 @@ namespace GS_PatEditor.Editor.Panels
 
         private Sprite _Sprite;
 
+        private class PatProjectAnimationProvider : Simulation.AnimationProvider
+        {
+            public Pat.Project Project;
+            public string DefaultAnimation;
+
+            public Pat.Animation GetAnimationByID(string id)
+            {
+                return Project.Animations.FirstOrDefault(a => a.AnimationID == (id == null ? DefaultAnimation : id));
+            }
+        }
+
         public PreviewWindowPlaying(Editor parent)
         {
             _Parent = parent;
             _World = new Simulation.World(_Parent.PreviewWindowUI.ControlWidth, _Parent.PreviewWindowUI.ControlHeight);
             var animation = parent.EditorNode.Animation.Data;
 
-            var actor = new Simulation.PlayerActor(_World, new Simulation.SystemAnimationProvider())
+            var actor = new Simulation.PlayerActor(_World,
+                new PatProjectAnimationProvider { Project = parent.Data, DefaultAnimation = animation.AnimationID },
+                new Simulation.SystemAnimationProvider())
             {
             };
 
             Simulation.AnimationSetup.SetupActorForAnimation(actor, animation);
             actor.SetMotion(animation, 0);
+
+            var action = _Parent.Data.Actions.FirstOrDefault(a => a.ActionID == animation.ActionID);
+            if (animation.ActionID != null && action != null)
+            {
+                Simulation.ActionSetup.SetupActorForAction(actor, action);
+            }
+
             _World.Add(actor);
 
             var sprites = parent.PreviewWindowUI.SpriteManager;

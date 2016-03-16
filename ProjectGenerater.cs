@@ -132,11 +132,28 @@ namespace GS_PatEditor
                     ActionID = "attack_long",
                     InitEffects = new List<Effect>()
                     {
-                        new Pat.TestEffect(),
+                        //new Pat.TestEffect(),
+                        new Pat.Effects.Init.PlayerSkillInitEffect {
+                            AutoCancel = true,
+                            IsInAir = false,
+                        },
                     },
-                    KeyFrameEffects = new List<Effect>(),
-                    UpdateEffects = new List<Effect>(),
+                    KeyFrameEffects = new List<Effect>[0],
+                    UpdateEffects = new List<Effect>()
+                    {
+                        new FilteredEffect
+                        {
+                            Filter = new SimpleListFilter(
+                                new Pat.Effects.Init.AnimationCountAfterFilter { Count = 95 },
+                                new Pat.Effects.Init.AnimationSegmentFilter { Segment = 1 }
+                            ),
+                            Effect = new Pat.Effects.Init.AnimationContinueEffect(),
+                        },
+                        new Pat.Effects.Init.PlayerSkillIncreaseCountEffect(),
+                    },
                 };
+
+                proj.Actions.Add(action);
             }
 
             CheckImageResources(proj, Path.GetDirectoryName(patfile));

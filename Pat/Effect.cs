@@ -68,6 +68,42 @@ namespace GS_PatEditor.Pat
         }
     }
 
+    [Serializable]
+    public abstract class FilterListFilter : Filter
+    {
+        protected abstract IEnumerable<Filter> Filters
+        {
+            get;
+        }
+
+        public override bool Test(Simulation.Actor actor)
+        {
+            return Filters.All(f => f.Test(actor));
+        }
+    }
+
+    [Serializable]
+    public class SimpleListFilter : FilterListFilter
+    {
+        [XmlElement(ElementName = "Filter")]
+        public readonly List<Filter> FilterList = new List<Filter>();
+
+        public SimpleListFilter() { }
+
+        public SimpleListFilter(params Filter[] filters)
+        {
+            FilterList.AddRange(filters);
+        }
+
+        protected override IEnumerable<Filter> Filters
+        {
+            get
+            {
+                return FilterList;
+            }
+        }
+    }
+
 
     //tests
 

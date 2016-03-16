@@ -6,6 +6,12 @@ using System.Threading.Tasks;
 
 namespace GS_PatEditor.Simulation
 {
+    public enum ActorLabelType
+    {
+        Fall,
+        Sit,
+    }
+
     public delegate void ActorLabel(Actor actor);
 
     public enum ActorVariableType
@@ -30,6 +36,7 @@ namespace GS_PatEditor.Simulation
         //world
         public World World { get; private set; }
         public SystemAnimationProvider SystemAnimations { get; private set; }
+        public AnimationProvider Animations { get; private set; }
         public bool IsReleased { get; private set; }
         public bool IsVisible { get; private set; }
 
@@ -74,16 +81,17 @@ namespace GS_PatEditor.Simulation
         public ActorLabel UpdateLabel;
         public ActorLabel SitLabel;
         public ActorLabel FallLabel; //not used in simulation
-        public ActorLabel EndMotionLabel;
-        public ActorLabel[] EndKeyFrameLabel;
+        public ActorLabel[] EndKeyFrameLabel; //TODO IMPORTANT if it will be executed in looping animation, if EndMotion will be executed in looping animation
         public ActorLabel HitEvent; //bullet only
 
         public Dictionary<string, ActorVariable> Variables = new Dictionary<string, ActorVariable>();
 
-        public Actor(World theWorld, SystemAnimationProvider animation)
+        public Actor(World theWorld, AnimationProvider animations, SystemAnimationProvider sysanimations)
         {
             this.World = theWorld;
-            this.SystemAnimations = animation;
+
+            this.Animations = animations;
+            this.SystemAnimations = sysanimations;
 
             this.ScaleX = 1;
             this.ScaleY = 1;
@@ -94,6 +102,16 @@ namespace GS_PatEditor.Simulation
         }
 
         public abstract void Update();
+
+        public void SetMotion(SystemAnimationType sys, int segment)
+        {
+            SetMotion(SystemAnimations.GetSystemAnimation(sys), segment);
+        }
+
+        public void SetMotion(string id, int segment)
+        {
+            SetMotion(Animations.GetAnimationByID(id), segment);
+        }
 
         public void SetMotion(Pat.Animation animation, int segment)
         {
@@ -114,7 +132,7 @@ namespace GS_PatEditor.Simulation
 
         protected void StepAnimation()
         {
-            //TODO callback
+            //TODO IMPORTANT callback
             if (++CurrentFrameCounter == CurrentFrame.Duration)
             {
                 CurrentFrameCounter = 0;
@@ -150,6 +168,14 @@ namespace GS_PatEditor.Simulation
                 {
                     VY = 15;
                 }
+            }
+        }
+
+        protected void RunUpdateLabel()
+        {
+            if (UpdateLabel != null)
+            {
+                UpdateLabel(this);
             }
         }
 

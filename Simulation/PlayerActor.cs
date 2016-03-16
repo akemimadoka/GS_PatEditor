@@ -8,8 +8,8 @@ namespace GS_PatEditor.Simulation
 {
     class PlayerActor : Actor
     {
-        public PlayerActor(World world, SystemAnimationProvider animation)
-            : base(world, animation)
+        public PlayerActor(World world, AnimationProvider animations, SystemAnimationProvider sysanimations)
+            : base(world, animations, sysanimations)
         {
             ImmuneGravity = false;
             DefaultGravity = 1.0f;
@@ -17,9 +17,11 @@ namespace GS_PatEditor.Simulation
 
             CollisionEnabled = true;
         }
+
         public override void Update()
         {
             UpdateGravity();
+            RunUpdateLabel();
             StepAnimation();
         }
     }
