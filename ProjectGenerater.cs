@@ -138,7 +138,7 @@ namespace GS_PatEditor
                             IsInAir = false,
                         },
                     },
-                    KeyFrameEffects = new List<Effect>[0],
+                    KeyFrameEffects = new List<List<Effect>>(),
                     UpdateEffects = new List<Effect>()
                     {
                         new FilteredEffect

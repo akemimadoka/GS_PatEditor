@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace GS_PatEditor.Pat.Effects.Init
 {
-    class AnimationContinueEffect : Effect
+    [Serializable]
+    public class AnimationContinueEffect : Effect
     {
         public override void Run(Simulation.Actor actor)
         {

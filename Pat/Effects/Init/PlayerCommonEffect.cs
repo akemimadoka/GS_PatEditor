@@ -12,7 +12,8 @@ namespace GS_PatEditor.Pat.Effects.Init
     {
         [XmlAttribute]
         public Simulation.ActorLabelType Label;
-        [XmlAttribute]
+
+        [XmlElement]
         public Effect Effect;
 
         public override void Run(Simulation.Actor actor)

@@ -16,9 +16,19 @@ namespace GS_PatEditor.Pat
             {
                 if (_ProjectSerializer == null)
                 {
-                    var types = System.Reflection.Assembly.GetExecutingAssembly().GetTypes().Where(
-                        t => (typeof(Effect).IsAssignableFrom(t) || typeof(Filter).IsAssignableFrom(t)) &&
-                            !t.IsAbstract).ToArray();
+                    //var types = System.Reflection.Assembly.GetExecutingAssembly().GetTypes().Where(
+                    //    t => (typeof(Effect).IsAssignableFrom(t) || typeof(Filter).IsAssignableFrom(t)) &&
+                    //        !t.IsAbstract).ToArray();
+                    var types = new Type[]
+                    {
+                        typeof(Pat.FilteredEffect),
+                        typeof(Pat.Effects.Init.PlayerSkillInitEffect),
+                        typeof(Pat.SimpleListFilter),
+                        typeof(Pat.Effects.Init.AnimationCountAfterFilter),
+                        typeof(Pat.Effects.Init.AnimationSegmentFilter),
+                        typeof(Pat.Effects.Init.AnimationContinueEffect),
+                        typeof(Pat.Effects.Init.PlayerSkillIncreaseCountEffect),
+                    };
                     _ProjectSerializer = new XmlSerializer(typeof(Project), types);
                 }
                 return _ProjectSerializer;

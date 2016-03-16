@@ -17,7 +17,8 @@ namespace GS_PatEditor.Pat
         public List<Effect> InitEffects;
         [XmlArray]
         public List<Effect> UpdateEffects;
-        [XmlArray]
-        public List<Effect>[] KeyFrameEffects;
+        //[XmlArray]
+        [XmlIgnore]
+        public List<List<Effect>> KeyFrameEffects;
     }
 }
