@@ -71,6 +71,11 @@ namespace GS_PatEditor.Simulation
         {
             get
             {
+                if (CurrentAnimation == null || CurrentAnimation.Segments.Count <= CurrentSegmentIndex ||
+                    CurrentAnimation.Segments[CurrentSegmentIndex].Frames.Count <= CurrentFrameIndex)
+                {
+                    return Pat.Frame.EmptyFrame;
+                }
                 return CurrentAnimation.Segments[CurrentSegmentIndex].Frames[CurrentFrameIndex];
             }
         }

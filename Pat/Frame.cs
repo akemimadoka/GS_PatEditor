@@ -83,5 +83,16 @@ namespace GS_PatEditor.Pat
 
         [XmlArray]
         public List<Box> AttackBoxes;
+
+        public static readonly Frame EmptyFrame = new Frame
+        {
+            AttackBoxes = new List<Box>(),
+            Duration = 1,
+            HitBoxes = new List<Box>(),
+            ImageID = "",
+            Points = new List<FramePoint>(),
+            ScaleX = 1,
+            ScaleY = 1,
+        };
     }
 }

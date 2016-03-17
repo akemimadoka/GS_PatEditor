@@ -59,8 +59,6 @@ namespace GS_PatEditor.Editor.Panels
 
             SpriteManager = new PreviewWindowSpriteManager(this);
 
-            UpdatePreviewMode();
-
             //tools
 
             PreviewMoving = new PreviewMovingHandler(this, ctrl);
@@ -71,6 +69,8 @@ namespace GS_PatEditor.Editor.Panels
 
             HitEditing = new HitBoxesEditingHandler(_Parent, ctrl);
             AttackEditing = new AttackBoxesEditingHandler(_Parent, ctrl);
+
+            UpdatePreviewMode();
         }
 
         public EventFilter GetFilterForEditMode(FrameEditMode mode)
@@ -126,6 +126,7 @@ namespace GS_PatEditor.Editor.Panels
             {
                 case FrameNode.FramePreviewMode.Pause:
                     CurrentContent = new PreviewWindowStatic(_Parent);
+                    PreviewMoving.ResetScale(1.0f);
                     break;
                 case FrameNode.FramePreviewMode.Play:
                     CurrentContent = new PreviewWindowPlaying(_Parent);

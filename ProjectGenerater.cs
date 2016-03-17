@@ -131,7 +131,7 @@ namespace GS_PatEditor
                         new EffectList(),
                         new EffectList()
                         {
-                            new Pat.Effects.Init.PlayerBeginStandEffect(),
+                            //new Pat.Effects.Init.PlayerBeginStandEffect(),
                         },
                     },
                     UpdateEffects = new EffectList()
