@@ -40,7 +40,7 @@ namespace GS_PatEditor.Pat.Effects.Init
             actor.UpdateLabel = null;
             actor.SitLabel = null;
             actor.FallLabel = null;
-            actor.EndKeyFrameLabel = null;
+            actor.EndKeyFrameLabel = new Simulation.ActorLabel[0];
             actor.HitEvent = null;
 
             actor.Variables.Clear();
@@ -57,6 +57,7 @@ namespace GS_PatEditor.Pat.Effects.Init
             //TODO freeCancel
             //TODO warikomi
             _ClearLabel.Run(actor);
+            //TODO
         }
     }
 

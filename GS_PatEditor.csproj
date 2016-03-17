@@ -190,7 +190,6 @@
     <Compile Include="Pat\Effect.cs" />
     <Compile Include="Pat\Frame.cs" />
     <Compile Include="Pat\FrameImage.cs" />
-    <Compile Include="Pat\PatSerialization.cs" />
     <Compile Include="Pat\ProjectExt.cs" />
     <Compile Include="Pat\ResourceReference.cs" />
     <Compile Include="Pat\Project.cs" />

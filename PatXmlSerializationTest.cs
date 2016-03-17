@@ -108,7 +108,7 @@ namespace GS_PatEditor
             {
                 new Pat.Action
                 {
-                    InitEffects = new List<Effect>()
+                    InitEffects = new EffectList()
                     {
                         new TestEffect(),
                         new FilteredEffect { Filter = new TestFilter(), Effect = new TestEffect() },

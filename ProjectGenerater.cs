@@ -12,20 +12,6 @@ namespace GS_PatEditor
 {
     class ProjectGenerater
     {
-        [STAThread]
-        private static void Main()
-        {
-            var proj = Generate();
-            using (var f = File.Open(@"E:\proj.xml", FileMode.CreateNew))
-            {
-                Pat.PatSerialization.ProjectSerializer.Serialize(f, proj);
-            }
-            using (var f = File.Open(@"E:\proj_local.xml", FileMode.CreateNew))
-            {
-                Pat.PatSerialization.LocalSerializer.Serialize(f, proj.LocalInformation);
-            }
-        }
-
         public static Project GenerateEmpty(string path, List<string> palList)
         {
             var proj = new Pat.Project()
@@ -130,7 +116,7 @@ namespace GS_PatEditor
                 Pat.Action action = new Pat.Action()
                 {
                     ActionID = "attack_long",
-                    InitEffects = new List<Effect>()
+                    InitEffects = new EffectList()
                     {
                         //new Pat.TestEffect(),
                         new Pat.Effects.Init.PlayerSkillInitEffect {
@@ -138,8 +124,17 @@ namespace GS_PatEditor
                             IsInAir = false,
                         },
                     },
-                    KeyFrameEffects = new List<List<Effect>>(),
-                    UpdateEffects = new List<Effect>()
+                    KeyFrameEffects = new List<EffectList>()
+                    {
+                        new EffectList(),
+                        new EffectList(),
+                        new EffectList(),
+                        new EffectList()
+                        {
+                            new Pat.Effects.Init.PlayerBeginStandEffect(),
+                        },
+                    },
+                    UpdateEffects = new EffectList()
                     {
                         new FilteredEffect
                         {

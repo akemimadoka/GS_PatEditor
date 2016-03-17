@@ -112,7 +112,7 @@ namespace GS_PatEditor.Pat
     {
         public override void Run(Simulation.Actor actor)
         {
-            actor.Y -= 100;
+            actor.Y -= 20;
         }
     }
 

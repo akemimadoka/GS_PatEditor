@@ -31,8 +31,6 @@ namespace GS_PatEditor.Simulation
 
     public abstract class Actor
     {
-        public Action<Actor> BeforeRelease, AfterRelease;
-
         //world
         public World World { get; private set; }
         public SystemAnimationProvider SystemAnimations { get; private set; }
@@ -115,6 +113,12 @@ namespace GS_PatEditor.Simulation
 
         public void SetMotion(Pat.Animation animation, int segment)
         {
+            if (animation == null)
+            {
+                World.OnError();
+                return;
+            }
+
             CurrentAnimation = animation;
             CurrentSegmentIndex = segment;
             CurrentFrameIndex = 0;
@@ -123,29 +127,47 @@ namespace GS_PatEditor.Simulation
 
         public void Release()
         {
-            if (BeforeRelease != null)
-            {
-                BeforeRelease(this);
-            }
             IsReleased = true;
         }
 
         protected void StepAnimation()
         {
-            //TODO IMPORTANT callback
             if (++CurrentFrameCounter == CurrentFrame.Duration)
             {
                 CurrentFrameCounter = 0;
 
                 var seg = CurrentAnimation.Segments[CurrentSegmentIndex];
+
+                //next frame
                 if (++CurrentFrameIndex == seg.Frames.Count)
                 {
-                    CurrentFrameIndex = 0;
-                    if (!seg.IsLoop)
-                    {
-                        if (++CurrentSegmentIndex == CurrentAnimation.Segments.Count)
-                        {
+                    //CurrentFrameIndex = 0;
+                    //make a flag on CurrentFrameIndex
+                    CurrentFrameIndex = -1;
 
+                    //next segment or loop
+
+                    //anyway, first trigget key callback
+                    if (EndKeyFrameLabel != null && CurrentSegmentIndex < EndKeyFrameLabel.Length)
+                    {
+                        EndKeyFrameLabel[CurrentSegmentIndex](this);
+                    }
+
+                    if (CurrentFrameIndex == -1)
+                    {
+                        //SetMotion not called in EndKeyFrameLabel
+                        CurrentFrameIndex = 0;
+
+                        if (!seg.IsLoop)
+                        {
+                            //next segment
+                            ++CurrentSegmentIndex;
+                        }
+
+                        if (CurrentSegmentIndex == CurrentAnimation.Segments.Count)
+                        {
+                            //end of animation
+                            World.OnFinished();
                         }
                     }
                 }
@@ -154,7 +176,7 @@ namespace GS_PatEditor.Simulation
 
         protected void UpdateGravity()
         {
-            if (!ImmuneGravity)
+            if (!ImmuneGravity && IsInAir)
             {
                 if (Gravity.HasValue)
                 {

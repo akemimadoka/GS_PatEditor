@@ -29,11 +29,15 @@ namespace GS_PatEditor.Editor.Panels
         {
             _Parent = parent;
             _World = new Simulation.World(_Parent.PreviewWindowUI.ControlWidth, _Parent.PreviewWindowUI.ControlHeight);
+
+            _World.WhenFinished += PlayingFinished;
+            _World.WhenError += PlayerError;
+
             var animation = parent.EditorNode.Animation.Data;
 
             var actor = new Simulation.PlayerActor(_World,
                 new PatProjectAnimationProvider { Project = parent.Data, DefaultAnimation = animation.AnimationID },
-                new Simulation.SystemAnimationProvider())
+                new Simulation.SystemAnimationProvider(_Parent.Data))
             {
             };
 
@@ -52,6 +56,16 @@ namespace GS_PatEditor.Editor.Panels
             _Sprite = sprites.GetSprite(0);
 
             _Parent.PreviewWindowUI.PreviewMoving.ResetScaleForPlay();
+        }
+
+        private void PlayingFinished()
+        {
+            _Parent.EditorNode.Animation.Frame.ChangePreviewMode(Nodes.FrameNode.FramePreviewMode.Pause);
+        }
+
+        private void PlayerError()
+        {
+            _Parent.EditorNode.Animation.Frame.ChangePreviewMode(Nodes.FrameNode.FramePreviewMode.Pause);
         }
 
         public override void Render()

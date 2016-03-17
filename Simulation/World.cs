@@ -8,6 +8,9 @@ namespace GS_PatEditor.Simulation
 {
     public class World : IEnumerable<Actor>
     {
+        public event Action WhenError;
+        public event Action WhenFinished;
+
         private readonly List<Actor> _Actors = new List<Actor>();
         private readonly List<Actor> _AddActors = new List<Actor>();
         private readonly List<Actor> _RemoveActors = new List<Actor>();
@@ -47,10 +50,6 @@ namespace GS_PatEditor.Simulation
 
                 if (actor.IsReleased)
                 {
-                    if (actor.AfterRelease != null)
-                    {
-                        actor.AfterRelease(actor);
-                    }
                     _RemoveActors.Add(actor);
                     continue;
                 }
@@ -77,6 +76,22 @@ namespace GS_PatEditor.Simulation
                 _Actors.Remove(actor);
             }
             _RemoveActors.Clear();
+        }
+
+        public void OnError()
+        {
+            if (WhenError != null)
+            {
+                WhenError();
+            }
+        }
+
+        public void OnFinished()
+        {
+            if (WhenFinished != null)
+            {
+                WhenFinished();
+            }
         }
     }
 }

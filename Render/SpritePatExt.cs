@@ -17,6 +17,14 @@ namespace GS_PatEditor.Render
         {
             //TODO do not use Setup (which only supports Scale but not Size)
             var frame = actor.CurrentFrame;
+
+            //handle invalid frame
+            if (frame == null)
+            {
+                sprite.Texture = null;
+                return;
+            }
+
             sprite.Setup(txt,
                 OriginX: frame.OriginX + editing.OffsetX + 0.5f,
                 OriginY: frame.OriginY + editing.OffsetY + 0.5f,
