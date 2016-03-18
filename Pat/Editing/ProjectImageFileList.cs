@@ -113,9 +113,16 @@ namespace GS_PatEditor.Pat.Editing
                 {
                     return null;
                 }
+                var clipped = ClipBitmap(imageData, image);
+
+                if (image.AlphaBlendMode)
+                {
+                    MakeAlphaBlendBitmap(clipped);
+                }
+
                 return new LoadedFrameImage
                 {
-                    Bitmap = ClipBitmap(imageData, image),
+                    Bitmap = clipped,
                     UsePalette = imageData.UsePalette
                 };
             }
@@ -139,6 +146,11 @@ namespace GS_PatEditor.Pat.Editing
                 return null;
             }
             ret = imageData.ToBitmap(_Palette, new Rectangle(0, 0, imageData.Width, imageData.Height));
+
+            if (imgDesc.AlphaBlendMode)
+            {
+                MakeAlphaBlendBitmap(ret);
+            }
 
             cachedUnclipped.Add(id, ret);
             return ret;
@@ -170,6 +182,19 @@ namespace GS_PatEditor.Pat.Editing
         private Bitmap ClipBitmap(AbstractImage res, FrameImage img)
         {
             return res.ToBitmap(_Palette, new Rectangle(img.X, img.Y, img.W, img.H));
+        }
+
+        private void MakeAlphaBlendBitmap(Bitmap bitmap)
+        {
+            for (int i = 0; i < bitmap.Width; ++i)
+            {
+                for (int j = 0; j < bitmap.Height; ++j)
+                {
+                    var c = bitmap.GetPixel(i, j);
+                    var cc = Color.FromArgb((int)((c.R + c.G + c.B) / 3.0f), c);
+                    bitmap.SetPixel(i, j, cc);
+                }
+            }
         }
 
         private void OnPaletteChange()

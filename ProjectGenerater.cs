@@ -102,14 +102,16 @@ namespace GS_PatEditor
             };
 
             //import animations
-            ImportSimpleAnimation(proj, gspat, gspat.Animations[0], "stand");
-            ImportSimpleAnimation(proj, gspat, gspat.Animations[1], "walk");
+            ImportAnimationSegments(proj, gspat, 0, "stand");
+            ImportAnimationSegments(proj, gspat, 1, "walk");
             ImportAnimationSegments(proj, gspat, 20, "attack");
 
             //import homura's attack long for test
             //open homura_m's pat (which is also named homura.pat) may produce error
             if (Path.GetFileNameWithoutExtension(patfile) == "homura")
             {
+                ImportAnimationSegments(proj, gspat, 51, "assult_rifle");
+
                 var attackLong = ImportAnimationSegments(proj, gspat, 24, "attack_long");
                 attackLong.ActionID = "attack_long";
 
@@ -131,7 +133,7 @@ namespace GS_PatEditor
                         new EffectList(),
                         new EffectList()
                         {
-                            //new Pat.Effects.Init.PlayerBeginStandEffect(),
+                            new Pat.Effects.Init.PlayerBeginStandEffect(),
                         },
                     },
                     UpdateEffects = new EffectList()
@@ -371,7 +373,8 @@ namespace GS_PatEditor
             var ret = new Pat.FrameImage()
             {
                 ImageID = id,
-                AlphaBlendMode = false, //not supported
+                //TODO AlphaBlend might be 0,1,2. catch 2
+                AlphaBlendMode = frame.ImageManipulation == null ? false : frame.ImageManipulation.AlphaBlend == 1,
                 Resource = new ResourceReference { ResourceID = filename },
                 X = frame.ViewOffsetX,
                 Y = frame.ViewOffsetY,
