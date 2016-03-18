@@ -6,17 +6,18 @@ using System.Threading.Tasks;
 
 namespace GS_PatEditor.Simulation
 {
-    class PlayerActor : Actor
+    class BulletActor : Actor
     {
-        public PlayerActor(World world, AnimationProvider animations, SystemAnimationProvider sysanimations,
+        public BulletActor(World world, AnimationProvider animations, SystemAnimationProvider sysanimations,
             ActionProvider actions)
             : base(world, animations, sysanimations, actions)
         {
-            ImmuneGravity = false;
-            DefaultGravity = 1.0f;
-            Priority = 100;
+            ImmuneGravity = true;
+            IsInAir = true;
 
-            CollisionEnabled = true;
+            DefaultGravity = 0.0f;
+            Priority = 300;
+            CollisionEnabled = false;
         }
 
         public override void Update()

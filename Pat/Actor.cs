@@ -13,7 +13,7 @@ namespace GS_PatEditor.Pat
     }
 
     [Serializable]
-    public class Actor
+    public class Actor_
     {
         [XmlAttribute]
         public string ActorID;

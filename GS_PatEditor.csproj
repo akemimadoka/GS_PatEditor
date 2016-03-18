@@ -71,12 +71,14 @@
     </Compile>
     <Compile Include="Editor\Panels\PreviewWindowPlaying.cs" />
     <Compile Include="GSPat\GSPatWriter.cs" />
+    <Compile Include="Pat\Effects\Init\BulletEffect.cs" />
     <Compile Include="Pat\Effects\Init\CommonEffect.cs" />
     <Compile Include="Pat\Effects\Init\CommonFilter.cs" />
     <Compile Include="Pat\Effects\Init\PlayerCommonEffect.cs" />
     <Compile Include="Pat\Effects\Init\PlayerSkillInitEffect.cs" />
     <Compile Include="Pat\Effects\Init\PlayerSkillUpdateEffect.cs" />
     <Compile Include="Pat\Effects\Init\PlayerSystemEffect.cs" />
+    <Compile Include="Pat\Effects\Init\PointProvider.cs" />
     <Compile Include="ProjectExporter.cs" />
     <Compile Include="ProjectSerializer.cs" />
     <Compile Include="EditorTest.cs" />
@@ -208,10 +210,12 @@
     <Compile Include="Render\Sprite.cs" />
     <Compile Include="Render\SpritePatExt.cs" />
     <Compile Include="Render\VertexReflection.cs" />
+    <Compile Include="Simulation\ActionProvider.cs" />
     <Compile Include="Simulation\ActionSetup.cs" />
     <Compile Include="Simulation\Actor.cs" />
     <Compile Include="Simulation\AnimationProvider.cs" />
     <Compile Include="Simulation\AnimationSetup.cs" />
+    <Compile Include="Simulation\BulletActor.cs" />
     <Compile Include="Simulation\PhyisicalCollisionDetector.cs" />
     <Compile Include="Simulation\PlayerActor.cs" />
     <Compile Include="Simulation\SystemAnimationProvider.cs" />

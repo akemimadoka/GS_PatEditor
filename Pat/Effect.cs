@@ -20,6 +20,12 @@ namespace GS_PatEditor.Pat
     }
 
     [Serializable]
+    public abstract class PointProvider
+    {
+        public abstract FramePoint GetPointForActor(Simulation.Actor actor);
+    }
+
+    [Serializable]
     public class FilteredEffect : Effect
     {
         [XmlElement]

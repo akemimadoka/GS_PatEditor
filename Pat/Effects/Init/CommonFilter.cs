@@ -51,7 +51,7 @@ namespace GS_PatEditor.Pat.Effects.Init
 
         public override bool Test(Simulation.Actor actor)
         {
-            return actor.ActionCount % Divisor == Mod;
+            return (actor.ActionCount % Divisor) == Mod;
         }
     }
 

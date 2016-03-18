@@ -25,6 +25,16 @@ namespace GS_PatEditor.Editor.Panels
             }
         }
 
+        private class PatProjectActionProvider : Simulation.ActionProvider
+        {
+            public Pat.Project Project;
+
+            public Pat.Action GetActionByID(string id)
+            {
+                return Project.Actions.FirstOrDefault(a => a.ActionID == id);
+            }
+        }
+
         public PreviewWindowPlaying(Editor parent)
         {
             _Parent = parent;
@@ -37,12 +47,10 @@ namespace GS_PatEditor.Editor.Panels
 
             var actor = new Simulation.PlayerActor(_World,
                 new PatProjectAnimationProvider { Project = parent.Data, DefaultAnimation = animation.AnimationID },
-                new Simulation.SystemAnimationProvider(_Parent.Data))
+                new Simulation.SystemAnimationProvider(_Parent.Data),
+                new PatProjectActionProvider { Project = parent.Data })
             {
             };
-
-            Simulation.AnimationSetup.SetupActorForAnimation(actor, animation);
-            actor.SetMotion(animation, 0);
 
             var action = _Parent.Data.Actions.FirstOrDefault(a => a.ActionID == animation.ActionID);
             if (animation.ActionID != null && action != null)

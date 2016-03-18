@@ -17,7 +17,7 @@ namespace GS_PatEditor
             var proj = new Pat.Project()
             {
                 Actions = new List<Pat.Action>(),
-                Actors = new List<Pat.Actor>(),
+                //Actors = new List<Pat.Actor>(),
                 Animations = new List<Pat.Animation>(),
                 Images = new List<Pat.FrameImage>(),
                 LocalInformation = new Pat.ProjectLocalInfo
@@ -71,7 +71,7 @@ namespace GS_PatEditor
             proj.Images = new List<FrameImage>();
             proj.Animations = new List<Pat.Animation>();
             proj.Actions = new List<Pat.Action>();
-            proj.Actors = new List<Pat.Actor>();
+            //proj.Actors = new List<Pat.Actor>();
             proj.Settings = new ProjectSettings()
             {
                 ProjectName = Path.GetFileNameWithoutExtension(patfile),
@@ -115,6 +115,27 @@ namespace GS_PatEditor
                 var attackLong = ImportAnimationSegments(proj, gspat, 24, "attack_long");
                 attackLong.ActionID = "attack_long";
 
+                Pat.Action action_assult_rifle = new Pat.Action()
+                {
+                    ActionID = "assult_rifle",
+                    InitEffects = new EffectList()
+                    {
+                        new Pat.Effects.Init.BulletInitEffect { AnimationID = "assult_rifle" },
+                    },
+                    KeyFrameEffects = new List<EffectList>()
+                    {
+                    },
+                    UpdateEffects = new EffectList()
+                    {
+                        new FilteredEffect()
+                        {
+                            Filter = new Pat.Effects.Init.AnimationCountAfterFilter { Count = 4 },
+                            Effect = new Pat.Effects.Init.ReleaseActorEffect(),
+                        },
+                        new Pat.Effects.Init.PlayerSkillIncreaseCountEffect(),
+                    },
+                };
+
                 Pat.Action action = new Pat.Action()
                 {
                     ActionID = "attack_long",
@@ -147,9 +168,25 @@ namespace GS_PatEditor
                             Effect = new Pat.Effects.Init.AnimationContinueEffect(),
                         },
                         new Pat.Effects.Init.PlayerSkillIncreaseCountEffect(),
+                        new FilteredEffect
+                        {
+                            Filter = new SimpleListFilter(
+                                new Pat.Effects.Init.AnimationCountModFilter { Divisor = 5},
+                                new Pat.Effects.Init.AnimationSegmentFilter { Segment = 1 }
+                            ),
+                            Effect = new Pat.Effects.Init.CreateBulletEffect
+                            {
+                                ActionName = "assult_rifle",
+                                Position = new Pat.Effects.Init.FrameSinglePointProvider
+                                {
+                                    Index = 0,
+                                }
+                            },
+                        },
                     },
                 };
 
+                proj.Actions.Add(action_assult_rifle);
                 proj.Actions.Add(action);
             }
 

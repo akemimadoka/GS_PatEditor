@@ -19,8 +19,11 @@ namespace GS_PatEditor
                 if (_ProjSerializer == null)
                 {
                     var types = System.Reflection.Assembly.GetExecutingAssembly().GetTypes().Where(
-                        t => (typeof(Effect).IsAssignableFrom(t) || typeof(Filter).IsAssignableFrom(t)) &&
-                            !t.IsAbstract).ToArray();
+                        t => (
+                            typeof(Effect).IsAssignableFrom(t) ||
+                            typeof(Filter).IsAssignableFrom(t) ||
+                            typeof(PointProvider).IsAssignableFrom(t)
+                        ) && !t.IsAbstract).ToArray();
                     _ProjSerializer = new XmlSerializer(typeof(Project), types);
                 }
                 return _ProjSerializer;

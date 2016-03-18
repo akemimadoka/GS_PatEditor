@@ -33,8 +33,11 @@ namespace GS_PatEditor.Simulation
     {
         //world
         public World World { get; private set; }
+
         public SystemAnimationProvider SystemAnimations { get; private set; }
         public AnimationProvider Animations { get; private set; }
+        public ActionProvider Actions { get; private set; }
+
         public bool IsReleased { get; private set; }
         public bool IsVisible { get; private set; }
 
@@ -89,12 +92,14 @@ namespace GS_PatEditor.Simulation
 
         public Dictionary<string, ActorVariable> Variables = new Dictionary<string, ActorVariable>();
 
-        public Actor(World theWorld, AnimationProvider animations, SystemAnimationProvider sysanimations)
+        public Actor(World theWorld, AnimationProvider animations, SystemAnimationProvider sysanimations,
+            ActionProvider actions)
         {
             this.World = theWorld;
 
             this.Animations = animations;
             this.SystemAnimations = sysanimations;
+            this.Actions = actions;
 
             this.ScaleX = 1;
             this.ScaleY = 1;
