@@ -101,6 +101,23 @@ namespace GS_PatEditor.Editor.EffectEditable
                 }
                 Nodes.Add(new EditableEffectTreeNode(dest));
             }
+            else if (Data is Pat.Effects.CreateBulletEffect)
+            {
+                var ce = (Pat.Effects.CreateBulletEffect)Data;
+                var nodePP = new EditablePointProviderTreeNode(ce.Position,
+                    new DelegateSingleEditable<Pat.PointProvider>
+                    {
+                        OnReset = epp =>
+                        {
+                            ce.Position = epp;
+                        }
+                    });
+                Nodes.Add(TreeNodeExt.CreateNodeWithChild("Position", nodePP));
+                if (ce.Position == null)
+                {
+                    nodePP.Reset();
+                }
+            }
         }
     }
 }

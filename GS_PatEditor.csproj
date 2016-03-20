@@ -72,9 +72,11 @@
     <Compile Include="Editor\EffectEditable\Editable.cs" />
     <Compile Include="Editor\EffectEditable\EditableEffectTreeNode.cs" />
     <Compile Include="Editor\EffectEditable\EditableFilterTreeNode.cs" />
+    <Compile Include="Editor\EffectEditable\EditablePointProviderTreeNode.cs" />
     <Compile Include="Editor\EffectEditable\EditableTreeNode.cs" />
     <Compile Include="Editor\EffectEditable\SelectEffect.cs" />
     <Compile Include="Editor\EffectEditable\SelectFilter.cs" />
+    <Compile Include="Editor\EffectEditable\SelectPointProvider.cs" />
     <Compile Include="Editor\EffectEditable\TreeViewExt.cs" />
     <Compile Include="Editor\EffectListEditForm.cs">
       <SubType>Form</SubType>
