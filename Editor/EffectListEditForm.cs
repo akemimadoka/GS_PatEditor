@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GS_PatEditor.Editor.EffectEditable;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -28,10 +29,10 @@ namespace GS_PatEditor.Editor
             treeView1.Nodes.Clear();
             foreach (var effect in _Effects)
             {
-                treeView1.Nodes.Add(EffectTreeNodeHandler.CreateNode(effect,
+                treeView1.Nodes.Add(new EditableEffectTreeNode(effect,
                     new ListMultiEditable<Pat.Effect> { List = _Effects.Effects }));
             }
-            treeView1.Nodes.Add(EffectTreeNodeHandler.CreateFinalEffectNode(
+            treeView1.Nodes.Add(new EditableEffectTreeNode(
                 new ListMultiEditable<Pat.Effect> { List = _Effects.Effects }));
         }
 
@@ -54,7 +55,7 @@ namespace GS_PatEditor.Editor
 
             propertyGrid1.SelectedObject = node.Tag;
 
-            var nnode = node as EditableTreeNode;
+            var nnode = node as EditableEffectTreeNode;
             if (nnode != null)
             {
                 button2.Enabled = nnode.CanReset;
@@ -69,7 +70,7 @@ namespace GS_PatEditor.Editor
 
         private void button2_Click(object sender, EventArgs e)
         {
-            var node = treeView1.SelectedNode as EditableTreeNode;
+            var node = treeView1.SelectedNode as EditableEffectTreeNode;
             if (node != null)
             {
                 node.Reset();
