@@ -63,6 +63,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Editor\ActionEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Editor\ActionEditForm.Designer.cs">
+      <DependentUpon>ActionEditForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Editor\EffectListEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Editor\EffectListEditForm.Designer.cs">
+      <DependentUpon>EffectListEditForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Editor\EffectTreeNodeHandler.cs" />
     <Compile Include="Editor\ExportForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -220,6 +233,9 @@
     <Compile Include="Simulation\PlayerActor.cs" />
     <Compile Include="Simulation\SystemAnimationProvider.cs" />
     <Compile Include="Simulation\World.cs" />
+    <EmbeddedResource Include="Editor\ActionEditForm.resx">
+      <DependentUpon>ActionEditForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Editor\AnimationPropertyFrom.resx">
       <DependentUpon>AnimationPropertyFrom.cs</DependentUpon>
     </EmbeddedResource>
@@ -234,6 +250,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Editor\EditorForm.resx">
       <DependentUpon>EditorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editor\EffectListEditForm.resx">
+      <DependentUpon>EffectListEditForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Editor\ExportForm.resx">
       <DependentUpon>ExportForm.cs</DependentUpon>

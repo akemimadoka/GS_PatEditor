@@ -20,8 +20,13 @@ namespace GS_PatEditor.Pat.Effects.Init
     public class PlayerSkillStopMovingEffect : Effect
     {
         [XmlAttribute]
-        public float ReduceSpeed = 0.1f;
+        public float ReduceSpeed { get; set; }
         public bool ShouldSerializeReduceSpeed() { return ReduceSpeed != 0.1f; }
+
+        public PlayerSkillStopMovingEffect()
+        {
+            ReduceSpeed = 0.1f;
+        }
 
         public override void Run(Simulation.Actor actor)
         {

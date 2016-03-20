@@ -11,10 +11,10 @@ namespace GS_PatEditor.Pat.Effects.Init
     public class BulletInitEffect : Effect
     {
         [XmlAttribute]
-        public string AnimationID;
+        public string AnimationID { get; set; }
 
         [XmlAttribute]
-        public int Segment;
+        public int Segment { get; set; }
 
         public override void Run(Simulation.Actor actor)
         {

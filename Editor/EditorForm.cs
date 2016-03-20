@@ -657,5 +657,10 @@ namespace GS_PatEditor.Editor
         {
             _Editor.EditorNode.Animation.Frame.ChangePreviewMode(FrameNode.FramePreviewMode.Play);
         }
+
+        private void toolStripButtonEditAction_Click(object sender, EventArgs e)
+        {
+            _Editor.EditorNode.Animation.ShowActionEditForm();
+        }
     }
 }

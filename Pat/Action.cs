@@ -8,28 +8,6 @@ using System.Xml.Serialization;
 namespace GS_PatEditor.Pat
 {
     [Serializable]
-    public class EffectList : IEnumerable<Effect>
-    {
-        [XmlElement(ElementName = "Effect")]
-        public List<Effect> Effects = new List<Effect>();
-
-        public IEnumerator<Effect> GetEnumerator()
-        {
-            return Effects.GetEnumerator();
-        }
-
-        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
-        {
-            return Effects.GetEnumerator();
-        }
-
-        public void Add(Effect effect)
-        {
-            Effects.Add(effect);
-        }
-    }
-
-    [Serializable]
     public class Action
     {
         [XmlAttribute]

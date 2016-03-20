@@ -20,7 +20,9 @@ namespace GS_PatEditor.Pat.Effects.Init
     public class CreateBulletEffect : Effect
     {
         [XmlElement]
-        public string ActionName;
+        public string ActionName { get; set; }
+
+        //TODO edit provider
         [XmlElement]
         public PointProvider Position;
 

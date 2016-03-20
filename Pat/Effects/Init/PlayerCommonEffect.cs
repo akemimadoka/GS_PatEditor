@@ -11,7 +11,7 @@ namespace GS_PatEditor.Pat.Effects.Init
     public class PlayerSetLabelEffect : Effect
     {
         [XmlAttribute]
-        public Simulation.ActorLabelType Label;
+        public Simulation.ActorLabelType Label { get; set; }
 
         [XmlElement]
         public Effect Effect;

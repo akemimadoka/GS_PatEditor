@@ -11,7 +11,7 @@ namespace GS_PatEditor.Pat.Effects.Init
     class FrameSinglePointProvider : PointProvider
     {
         [XmlAttribute]
-        public int Index;
+        public int Index { get; set; }
 
         public override FramePoint GetPointForActor(Simulation.Actor actor)
         {

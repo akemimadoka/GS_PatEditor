@@ -87,5 +87,18 @@ namespace GS_PatEditor.Editor.Nodes
                 OnReset();
             }
         }
+
+        public void ShowActionEditForm()
+        {
+            if (Data != null && Data.ActionID != null)
+            {
+                var action = _Parent.Data.Actions.FirstOrDefault(a => a.ActionID == Data.ActionID);
+                if (action != null)
+                {
+                    var dialog = new ActionEditForm(action);
+                    dialog.ShowDialog();
+                }
+            }
+        }
     }
 }

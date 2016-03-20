@@ -11,7 +11,7 @@ namespace GS_PatEditor.Pat.Effects.Init
     public class PlayerSkillInitPositionEffect : Effect
     {
         [XmlAttribute]
-        public bool IsInAir;
+        public bool IsInAir { get; set; }
 
         public override void Run(Simulation.Actor actor)
         {
@@ -41,10 +41,10 @@ namespace GS_PatEditor.Pat.Effects.Init
     public class PlayerSkillSetMotionEffect : Effect
     {
         [XmlAttribute]
-        public string Animation;
+        public string Animation { get; set; }
 
         [XmlAttribute]
-        public int Segment;
+        public int Segment { get; set; }
 
         public override void Run(Simulation.Actor actor)
         {
@@ -91,10 +91,10 @@ namespace GS_PatEditor.Pat.Effects.Init
     public class PlayerSkillInitEffect : EffectListEffect
     {
         [XmlAttribute]
-        public bool IsInAir;
+        public bool IsInAir { get; set; }
 
         [XmlAttribute]
-        public bool AutoCancel;
+        public bool AutoCancel { get; set; }
 
         private PlayerSkillInitPositionEffect _Position = new PlayerSkillInitPositionEffect();
         private PlayerClearLabelEffect _ClearLabel = PlayerClearLabelEffect.Instance;

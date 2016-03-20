@@ -11,7 +11,7 @@ namespace GS_PatEditor.Pat.Effects.Init
     public class AnimationSegmentFilter : Filter
     {
         [XmlAttribute]
-        public int Segment;
+        public int Segment { get; set; }
 
         public override bool Test(Simulation.Actor actor)
         {
@@ -23,7 +23,7 @@ namespace GS_PatEditor.Pat.Effects.Init
     public class AnimationCountAfterFilter : Filter
     {
         [XmlAttribute]
-        public int Count;
+        public int Count { get; set; }
 
         public override bool Test(Simulation.Actor actor)
         {
@@ -45,9 +45,9 @@ namespace GS_PatEditor.Pat.Effects.Init
     public class AnimationCountModFilter : Filter
     {
         [XmlAttribute]
-        public int Divisor;
+        public int Divisor { get; set; }
         [XmlAttribute]
-        public int Mod;
+        public int Mod { get; set; }
 
         public override bool Test(Simulation.Actor actor)
         {

@@ -63,7 +63,7 @@ namespace GS_PatEditor.Pat
     public class SimpleListEffect : EffectListEffect
     {
         [XmlElement(ElementName = "Effect")]
-        public readonly List<Effect> EffectList = new List<Effect>();
+        public readonly EffectList EffectList = new EffectList();
 
         protected override IEnumerable<Effect> Effects
         {
@@ -92,7 +92,7 @@ namespace GS_PatEditor.Pat
     public class SimpleListFilter : FilterListFilter
     {
         [XmlElement(ElementName = "Filter")]
-        public readonly List<Filter> FilterList = new List<Filter>();
+        public readonly FilterList FilterList = new FilterList();
 
         public SimpleListFilter() { }
 
@@ -107,6 +107,55 @@ namespace GS_PatEditor.Pat
             {
                 return FilterList;
             }
+        }
+    }
+
+    [Serializable]
+    public class EffectList : IEnumerable<Effect>
+    {
+        [XmlElement(ElementName = "Effect")]
+        public List<Effect> Effects = new List<Effect>();
+
+        public IEnumerator<Effect> GetEnumerator()
+        {
+            return Effects.GetEnumerator();
+        }
+
+        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
+        {
+            return Effects.GetEnumerator();
+        }
+
+        public void Add(Effect effect)
+        {
+            Effects.Add(effect);
+        }
+    }
+
+    [Serializable]
+    public class FilterList : IEnumerable<Filter>
+    {
+        [XmlElement(ElementName = "Filter")]
+        public List<Filter> Filters = new List<Filter>();
+
+        public IEnumerator<Filter> GetEnumerator()
+        {
+            return Filters.GetEnumerator();
+        }
+
+        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
+        {
+            return Filters.GetEnumerator();
+        }
+
+        public void Add(Filter filter)
+        {
+            Filters.Add(filter);
+        }
+
+        public void AddRange(IEnumerable<Filter> filters)
+        {
+            Filters.AddRange(filters);
         }
     }
 
