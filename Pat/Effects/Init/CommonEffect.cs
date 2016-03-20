@@ -52,4 +52,39 @@ namespace GS_PatEditor.Pat.Effects.Init
             actor.Release();
         }
     }
+
+    [Serializable]
+    public class SetMotionEffect : Effect
+    {
+        [XmlAttribute]
+        public string Animation { get; set; }
+
+        [XmlAttribute]
+        public int Segment { get; set; }
+
+        public override void Run(Simulation.Actor actor)
+        {
+            actor.SetMotion(Animation == "" ? null : Animation, Segment);
+        }
+    }
+
+    [Serializable]
+    public class InitCountEffect : Effect
+    {
+        public static readonly InitCountEffect Instance = new InitCountEffect();
+
+        public override void Run(Simulation.Actor actor)
+        {
+            actor.ActionCount = 0;
+        }
+    }
+
+    [Serializable]
+    public class IncreaseCountEffect : Effect
+    {
+        public override void Run(Simulation.Actor actor)
+        {
+            actor.ActionCount += 1;
+        }
+    }
 }

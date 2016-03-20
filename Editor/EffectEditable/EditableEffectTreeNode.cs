@@ -28,6 +28,17 @@ namespace GS_PatEditor.Editor.EffectEditable
             });
         }
 
+        protected override TreeNode CreateSingleEditableNode(SingleEditable<Pat.Effect> dest)
+        {
+            EditableEffectTreeNode ret = null;
+            ret = new EditableEffectTreeNode(new SelectEffect(delegate(Pat.Effect effect)
+            {
+                dest.Reset(effect);
+                ret.Replace(new EditableEffectTreeNode(effect, dest));
+            }), null);
+            return ret;
+        }
+
         protected override void SetupCommon()
         {
             Tag = Data;
@@ -47,33 +58,49 @@ namespace GS_PatEditor.Editor.EffectEditable
             if (Data is Pat.FilteredEffect)
             {
                 var ce = (Pat.FilteredEffect)Data;
+                var nodeFilter = new EditableFilterTreeNode(ce.Filter,
+                    new DelegateSingleEditable<Pat.Filter>
+                    {
+                        OnReset = ffilter =>
+                        {
+                            ce.Filter = ffilter;
+                        }
+                    });
                 var nodeEffect = new EditableEffectTreeNode(ce.Effect,
                     new DelegateSingleEditable<Pat.Effect>
                     {
-                        OnReset = delegate(Pat.Effect eeffect)
+                        OnReset = eeffect =>
                         {
                             ce.Effect = eeffect;
                         }
                     });
                 Nodes.Add(TreeNodeExt.CreateNodeWithChild("Filter",
-                    TreeNodeExt.CreateNode(ce.Filter)));
-                Nodes.Add(TreeNodeExt.CreateNodeWithChild("Effect", nodeEffect));
+                    nodeFilter));
+                Nodes.Add(TreeNodeExt.CreateNodeWithChild("Effect",
+                    nodeEffect));
+                if (ce.Filter == null)
+                {
+                    nodeFilter.Reset();
+                }
                 if (ce.Effect == null)
                 {
-                    (nodeEffect as EditableEffectTreeNode).Reset();
+                    nodeEffect.Reset();
                 }
             }
-        }
-
-        protected override TreeNode CreateSingleEditableNode(SingleEditable<Pat.Effect> dest)
-        {
-            EditableEffectTreeNode ret = null;
-            ret = new EditableEffectTreeNode(new SelectEffect(delegate(Pat.Effect effect)
+            else if (Data is Pat.SimpleListEffect)
             {
-                dest.Reset(effect);
-                ret.Replace(new EditableEffectTreeNode(effect, dest));
-            }), null);
-            return ret;
+                var ce = (Pat.SimpleListEffect)Data;
+                var dest = new ListMultiEditable<Pat.Effect>
+                {
+                    List = ce.EffectList.Effects,
+                };
+                foreach (var e in ce.EffectList)
+                {
+                    var nodeEffect = new EditableEffectTreeNode(e, dest);
+                    Nodes.Add(nodeEffect);
+                }
+                Nodes.Add(new EditableEffectTreeNode(dest));
+            }
         }
     }
 }

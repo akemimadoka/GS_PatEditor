@@ -132,7 +132,7 @@ namespace GS_PatEditor
                             Filter = new Pat.Effects.Init.AnimationCountAfterFilter { Count = 4 },
                             Effect = new Pat.Effects.Init.ReleaseActorEffect(),
                         },
-                        new Pat.Effects.Init.PlayerSkillIncreaseCountEffect(),
+                        new Pat.Effects.Init.IncreaseCountEffect(),
                     },
                 };
 
@@ -167,7 +167,7 @@ namespace GS_PatEditor
                             ),
                             Effect = new Pat.Effects.Init.AnimationContinueEffect(),
                         },
-                        new Pat.Effects.Init.PlayerSkillIncreaseCountEffect(),
+                        new Pat.Effects.Init.IncreaseCountEffect(),
                         new FilteredEffect
                         {
                             Filter = new SimpleListFilter(

@@ -71,8 +71,10 @@
     </Compile>
     <Compile Include="Editor\EffectEditable\Editable.cs" />
     <Compile Include="Editor\EffectEditable\EditableEffectTreeNode.cs" />
+    <Compile Include="Editor\EffectEditable\EditableFilterTreeNode.cs" />
     <Compile Include="Editor\EffectEditable\EditableTreeNode.cs" />
     <Compile Include="Editor\EffectEditable\SelectEffect.cs" />
+    <Compile Include="Editor\EffectEditable\SelectFilter.cs" />
     <Compile Include="Editor\EffectEditable\TreeViewExt.cs" />
     <Compile Include="Editor\EffectListEditForm.cs">
       <SubType>Form</SubType>
@@ -80,7 +82,6 @@
     <Compile Include="Editor\EffectListEditForm.Designer.cs">
       <DependentUpon>EffectListEditForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Editor\EffectTreeNodeHandler.cs" />
     <Compile Include="Editor\ExportForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -92,6 +93,7 @@
     <Compile Include="Pat\Effects\Init\BulletEffect.cs" />
     <Compile Include="Pat\Effects\Init\CommonEffect.cs" />
     <Compile Include="Pat\Effects\Init\CommonFilter.cs" />
+    <Compile Include="Pat\Effects\Init\IHideFromEditor.cs" />
     <Compile Include="Pat\Effects\Init\PlayerCommonEffect.cs" />
     <Compile Include="Pat\Effects\Init\PlayerSkillInitEffect.cs" />
     <Compile Include="Pat\Effects\Init\PlayerSkillUpdateEffect.cs" />

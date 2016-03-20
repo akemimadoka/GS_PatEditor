@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace GS_PatEditor.Editor.EffectEditable
 {
-    [TypeConverter(typeof(EffectTypeConverter))]
-    class EffectType
+    [TypeConverter(typeof(FilterTypeConverter))]
+    class FilterType
     {
         public Type Value;
 
@@ -18,26 +18,26 @@ namespace GS_PatEditor.Editor.EffectEditable
         }
     }
 
-    class EffectTypeConverter : TypeConverter
+    class FilterTypeConverter : TypeConverter
     {
-        private static List<Type> _EffectTypes;
-        private static List<Type> EffectTypes
+        private static List<Type> _FilterTypes;
+        private static List<Type> FilterTypes
         {
             get
             {
-                if (_EffectTypes == null)
+                if (_FilterTypes == null)
                 {
-                    _EffectTypes = typeof(EffectTypeConverter).Assembly.GetTypes()
+                    _FilterTypes = typeof(FilterTypeConverter).Assembly.GetTypes()
                         .Where(t =>
                             !t.IsAbstract &&
-                            typeof(Pat.Effect).IsAssignableFrom(t) &&
-                            t != typeof(SelectEffect))
+                            typeof(Pat.Filter).IsAssignableFrom(t) &&
+                            t != typeof(SelectFilter))
                         .Where(t =>
                             !typeof(Pat.Effects.Init.IHideFromEditor).IsAssignableFrom(t))
                         .OrderBy(t => t.Name)
                         .ToList();
                 }
-                return _EffectTypes;
+                return _FilterTypes;
             }
         }
 
@@ -48,7 +48,7 @@ namespace GS_PatEditor.Editor.EffectEditable
 
         public override StandardValuesCollection GetStandardValues(ITypeDescriptorContext context)
         {
-            return new StandardValuesCollection(EffectTypes.Select(type => type.Name).ToArray());
+            return new StandardValuesCollection(FilterTypes.Select(type => type.Name).ToArray());
         }
 
         public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
@@ -65,11 +65,11 @@ namespace GS_PatEditor.Editor.EffectEditable
         {
             if (value is string)
             {
-                foreach (var t in EffectTypes)
+                foreach (var t in FilterTypes)
                 {
                     if (t.Name == (string)value)
                     {
-                        return new EffectType { Value = t };
+                        return new FilterType { Value = t };
                     }
                 }
             }
@@ -77,16 +77,16 @@ namespace GS_PatEditor.Editor.EffectEditable
         }
     }
 
-    class SelectEffect : Pat.Effect
+    class SelectFilter : Pat.Filter
     {
-        private readonly Action<Pat.Effect> _OnNewEffect;
+        private readonly Action<Pat.Filter> _OnNewFilter;
 
-        public SelectEffect(Action<Pat.Effect> onNewEffect)
+        public SelectFilter(Action<Pat.Filter> onNewFilter)
         {
-            _OnNewEffect = onNewEffect;
+            _OnNewFilter = onNewFilter;
         }
 
-        public EffectType Type
+        public FilterType Type
         {
             get
             {
@@ -99,12 +99,13 @@ namespace GS_PatEditor.Editor.EffectEditable
                     return;
                 }
                 //TODO error handling
-                _OnNewEffect((Pat.Effect)value.Value.GetConstructor(new Type[0]).Invoke(new object[0]));
+                _OnNewFilter((Pat.Filter)value.Value.GetConstructor(new Type[0]).Invoke(new object[0]));
             }
         }
 
-        public override void Run(Simulation.Actor actor)
+        public override bool Test(Simulation.Actor actor)
         {
+            return false;
         }
     }
 }

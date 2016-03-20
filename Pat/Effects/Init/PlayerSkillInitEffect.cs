@@ -8,7 +8,7 @@ using System.Xml.Serialization;
 namespace GS_PatEditor.Pat.Effects.Init
 {
     [Serializable]
-    public class PlayerSkillInitPositionEffect : Effect
+    public class PlayerSkillInitPositionEffect : Effect, IHideFromEditor
     {
         [XmlAttribute]
         public bool IsInAir { get; set; }
@@ -25,35 +25,9 @@ namespace GS_PatEditor.Pat.Effects.Init
             }
         }
     }
-    
-    [Serializable]
-    public class PlayerSkillInitCountEffect : Effect
-    {
-        public static readonly PlayerSkillInitCountEffect Instance = new PlayerSkillInitCountEffect();
-
-        public override void Run(Simulation.Actor actor)
-        {
-            actor.ActionCount = 0;
-        }
-    }
 
     [Serializable]
-    public class PlayerSkillSetMotionEffect : Effect
-    {
-        [XmlAttribute]
-        public string Animation { get; set; }
-
-        [XmlAttribute]
-        public int Segment { get; set; }
-
-        public override void Run(Simulation.Actor actor)
-        {
-            actor.SetMotion(Animation, Segment);
-        }
-    }
-
-    [Serializable]
-    public class PlayerSkillFallCancelEffect : PlayerSetLabelEffect
+    public class PlayerSkillFallCancelEffect : PlayerSetLabelEffect, IHideFromEditor
     {
         public static readonly PlayerSkillFallCancelEffect Instance = new PlayerSkillFallCancelEffect();
 
@@ -65,7 +39,7 @@ namespace GS_PatEditor.Pat.Effects.Init
     }
 
     [Serializable]
-    public class PlayerSkillSitCancelEffect : PlayerSetLabelEffect
+    public class PlayerSkillSitCancelEffect : PlayerSetLabelEffect, IHideFromEditor
     {
         public static readonly PlayerSkillSitCancelEffect Instance = new PlayerSkillSitCancelEffect();
 
@@ -77,7 +51,7 @@ namespace GS_PatEditor.Pat.Effects.Init
     }
 
     [Serializable]
-    public class PlayerAdjustDirectionEffect : Effect
+    public class PlayerAdjustDirectionEffect : Effect, IHideFromEditor
     {
         public static readonly PlayerAdjustDirectionEffect Instance = new PlayerAdjustDirectionEffect();
 
@@ -98,8 +72,8 @@ namespace GS_PatEditor.Pat.Effects.Init
 
         private PlayerSkillInitPositionEffect _Position = new PlayerSkillInitPositionEffect();
         private PlayerClearLabelEffect _ClearLabel = PlayerClearLabelEffect.Instance;
-        private PlayerSkillInitCountEffect _InitCount = PlayerSkillInitCountEffect.Instance;
-        private PlayerSkillSetMotionEffect _SetMotion = new PlayerSkillSetMotionEffect();
+        private InitCountEffect _InitCount = InitCountEffect.Instance;
+        private SetMotionEffect _SetMotion = new SetMotionEffect();
         private PlayerSkillFallCancelEffect _FallCancel = PlayerSkillFallCancelEffect.Instance;
         private PlayerSkillSitCancelEffect _SitCancel = PlayerSkillSitCancelEffect.Instance;
         private PlayerAdjustDirectionEffect _AdjustDirection = PlayerAdjustDirectionEffect.Instance;

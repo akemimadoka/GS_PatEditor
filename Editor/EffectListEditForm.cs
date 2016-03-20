@@ -55,7 +55,7 @@ namespace GS_PatEditor.Editor
 
             propertyGrid1.SelectedObject = node.Tag;
 
-            var nnode = node as EditableEffectTreeNode;
+            var nnode = node as IEditableTreeNode;
             if (nnode != null)
             {
                 button2.Enabled = nnode.CanReset;
@@ -70,10 +70,19 @@ namespace GS_PatEditor.Editor
 
         private void button2_Click(object sender, EventArgs e)
         {
-            var node = treeView1.SelectedNode as EditableEffectTreeNode;
+            var node = treeView1.SelectedNode as IEditableTreeNode;
             if (node != null)
             {
                 node.Reset();
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            var node = treeView1.SelectedNode as IEditableTreeNode;
+            if (node != null)
+            {
+                node.Delete();
             }
         }
     }

@@ -11,7 +11,7 @@ namespace GS_PatEditor.Pat.Effects.Init
     {
         public static readonly PlayerBeginFallEffect Instance = new PlayerBeginFallEffect();
 
-        private PlayerChangeToFreeMoveEffect _ChangeToFreeMove = new PlayerChangeToFreeMoveEffect();
+        private PlayerChangeFreeMoveEffect _ChangeToFreeMove = new PlayerChangeFreeMoveEffect();
 
         public override void Run(Simulation.Actor actor)
         {
@@ -28,7 +28,7 @@ namespace GS_PatEditor.Pat.Effects.Init
     {
         public static readonly PlayerBeginStandEffect Instance = new PlayerBeginStandEffect();
 
-        private PlayerChangeToFreeMoveEffect _ChangeToFreeMove = new PlayerChangeToFreeMoveEffect();
+        private PlayerChangeFreeMoveEffect _ChangeToFreeMove = new PlayerChangeFreeMoveEffect();
 
         public override void Run(Simulation.Actor actor)
         {

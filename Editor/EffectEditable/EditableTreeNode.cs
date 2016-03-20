@@ -7,7 +7,15 @@ using System.Windows.Forms;
 
 namespace GS_PatEditor.Editor.EffectEditable
 {
-    abstract class EditableTreeNode<T> : TreeNode
+    interface IEditableTreeNode
+    {
+        void Reset();
+        bool CanReset { get; }
+        void Delete();
+        bool CanDelete { get; }
+    }
+
+    abstract class EditableTreeNode<T> : TreeNode, IEditableTreeNode
         where T : class
     {
         protected readonly T Data;
@@ -48,7 +56,7 @@ namespace GS_PatEditor.Editor.EffectEditable
                 this.Replace(newNode);
             }
         }
-        public bool CanReset { get { return Dest != null && Dest is SingleEditable<Pat.Effect>; } }
+        public bool CanReset { get { return Dest != null && Dest is SingleEditable<T>; } }
 
         public void Delete()
         {
@@ -63,6 +71,6 @@ namespace GS_PatEditor.Editor.EffectEditable
                 this.RemoveFromParent();
             }
         }
-        public bool CanDelete { get { return Dest != null && Dest is MultiEditable<Pat.Effect>; } }
+        public bool CanDelete { get { return Dest != null && Dest is MultiEditable<T>; } }
     }
 }

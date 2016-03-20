@@ -8,7 +8,7 @@ using System.Xml.Serialization;
 namespace GS_PatEditor.Pat.Effects.Init
 {
     [Serializable]
-    public class PlayerSetLabelEffect : Effect
+    public class PlayerSetLabelEffect : Effect, IHideFromEditor
     {
         [XmlAttribute]
         public Simulation.ActorLabelType Label { get; set; }
@@ -31,7 +31,7 @@ namespace GS_PatEditor.Pat.Effects.Init
     }
 
     [Serializable]
-    public class PlayerClearLabelEffect : Effect
+    public class PlayerClearLabelEffect : Effect, IHideFromEditor
     {
         public static readonly PlayerClearLabelEffect Instance = new PlayerClearLabelEffect();
 
@@ -48,16 +48,32 @@ namespace GS_PatEditor.Pat.Effects.Init
     }
 
     [Serializable]
-    public class PlayerChangeToFreeMoveEffect : Effect
+    public class PlayerChangeFreeMoveEffect : Effect
     {
-        private PlayerClearLabelEffect _ClearLabel = PlayerClearLabelEffect.Instance;
+        public static readonly PlayerChangeFreeMoveEffect Instance = new PlayerChangeFreeMoveEffect();
 
         public override void Run(Simulation.Actor actor)
         {
-            //TODO freeCancel
+            PlayerClearLabelEffect.Instance.Run(actor);
+            //TODO freeCancel = true
+        }
+    }
+
+    [Serializable]
+    public class PlayerEndToFreeMoveEffect : Effect
+    {
+        public override void Run(Simulation.Actor actor)
+        {
+            PlayerChangeFreeMoveEffect.Instance.Run(actor);
             //TODO warikomi
-            _ClearLabel.Run(actor);
-            //TODO
+            if (actor.IsInAir)
+            {
+                PlayerBeginFallEffect.Instance.Run(actor);
+            }
+            else
+            {
+                PlayerBeginStandEffect.Instance.Run(actor);
+            }
         }
     }
 

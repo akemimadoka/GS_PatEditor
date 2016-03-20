@@ -8,15 +8,6 @@ using System.Xml.Serialization;
 namespace GS_PatEditor.Pat.Effects.Init
 {
     [Serializable]
-    public class PlayerSkillIncreaseCountEffect : Effect
-    {
-        public override void Run(Simulation.Actor actor)
-        {
-            actor.ActionCount += 1;
-        }
-    }
-
-    [Serializable]
     public class PlayerSkillStopMovingEffect : Effect
     {
         [XmlAttribute]
