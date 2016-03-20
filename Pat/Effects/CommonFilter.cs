@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
-namespace GS_PatEditor.Pat.Effects.Init
+namespace GS_PatEditor.Pat.Effects
 {
     [Serializable]
     public class AnimationSegmentFilter : Filter

@@ -33,7 +33,7 @@ namespace GS_PatEditor.Editor.EffectEditable
                             typeof(Pat.Filter).IsAssignableFrom(t) &&
                             t != typeof(SelectFilter))
                         .Where(t =>
-                            !typeof(Pat.Effects.Init.IHideFromEditor).IsAssignableFrom(t))
+                            !typeof(Pat.Effects.IHideFromEditor).IsAssignableFrom(t))
                         .OrderBy(t => t.Name)
                         .ToList();
                 }

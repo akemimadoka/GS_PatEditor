@@ -120,7 +120,7 @@ namespace GS_PatEditor
                     ActionID = "assult_rifle",
                     InitEffects = new EffectList()
                     {
-                        new Pat.Effects.Init.BulletInitEffect { AnimationID = "assult_rifle" },
+                        new Pat.Effects.BulletInitEffect { AnimationID = "assult_rifle" },
                     },
                     KeyFrameEffects = new List<EffectList>()
                     {
@@ -129,10 +129,10 @@ namespace GS_PatEditor
                     {
                         new FilteredEffect()
                         {
-                            Filter = new Pat.Effects.Init.AnimationCountAfterFilter { Count = 4 },
-                            Effect = new Pat.Effects.Init.ReleaseActorEffect(),
+                            Filter = new Pat.Effects.AnimationCountAfterFilter { Count = 4 },
+                            Effect = new Pat.Effects.ReleaseActorEffect(),
                         },
-                        new Pat.Effects.Init.IncreaseCountEffect(),
+                        new Pat.Effects.IncreaseCountEffect(),
                     },
                 };
 
@@ -142,7 +142,7 @@ namespace GS_PatEditor
                     InitEffects = new EffectList()
                     {
                         //new Pat.TestEffect(),
-                        new Pat.Effects.Init.PlayerSkillInitEffect {
+                        new Pat.Effects.PlayerSkillInitEffect {
                             AutoCancel = true,
                             IsInAir = false,
                         },
@@ -154,7 +154,7 @@ namespace GS_PatEditor
                         new EffectList(),
                         new EffectList()
                         {
-                            new Pat.Effects.Init.PlayerBeginStandEffect(),
+                            new Pat.Effects.PlayerBeginStandEffect(),
                         },
                     },
                     UpdateEffects = new EffectList()
@@ -162,22 +162,22 @@ namespace GS_PatEditor
                         new FilteredEffect
                         {
                             Filter = new SimpleListFilter(
-                                new Pat.Effects.Init.AnimationCountAfterFilter { Count = 95 },
-                                new Pat.Effects.Init.AnimationSegmentFilter { Segment = 1 }
+                                new Pat.Effects.AnimationCountAfterFilter { Count = 95 },
+                                new Pat.Effects.AnimationSegmentFilter { Segment = 1 }
                             ),
-                            Effect = new Pat.Effects.Init.AnimationContinueEffect(),
+                            Effect = new Pat.Effects.AnimationContinueEffect(),
                         },
-                        new Pat.Effects.Init.IncreaseCountEffect(),
+                        new Pat.Effects.IncreaseCountEffect(),
                         new FilteredEffect
                         {
                             Filter = new SimpleListFilter(
-                                new Pat.Effects.Init.AnimationCountModFilter { Divisor = 5},
-                                new Pat.Effects.Init.AnimationSegmentFilter { Segment = 1 }
+                                new Pat.Effects.AnimationCountModFilter { Divisor = 5},
+                                new Pat.Effects.AnimationSegmentFilter { Segment = 1 }
                             ),
-                            Effect = new Pat.Effects.Init.CreateBulletEffect
+                            Effect = new Pat.Effects.CreateBulletEffect
                             {
                                 ActionName = "assult_rifle",
-                                Position = new Pat.Effects.Init.FrameSinglePointProvider
+                                Position = new Pat.Effects.FrameSinglePointProvider
                                 {
                                     Index = 0,
                                 }

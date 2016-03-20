@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GS_PatEditor.Pat.Effects.Init
+namespace GS_PatEditor.Pat.Effects
 {
     [Serializable]
     public class PlayerBeginFallEffect : Effect
