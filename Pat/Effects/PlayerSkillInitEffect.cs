@@ -27,7 +27,7 @@ namespace GS_PatEditor.Pat.Effects
     }
 
     [Serializable]
-    public class PlayerSkillFallCancelEffect : PlayerSetLabelEffect, IHideFromEditor
+    public class PlayerSkillFallCancelEffect : SetLabelEffect, IHideFromEditor
     {
         public static readonly PlayerSkillFallCancelEffect Instance = new PlayerSkillFallCancelEffect();
 
@@ -39,7 +39,7 @@ namespace GS_PatEditor.Pat.Effects
     }
 
     [Serializable]
-    public class PlayerSkillSitCancelEffect : PlayerSetLabelEffect, IHideFromEditor
+    public class PlayerSkillSitCancelEffect : SetLabelEffect, IHideFromEditor
     {
         public static readonly PlayerSkillSitCancelEffect Instance = new PlayerSkillSitCancelEffect();
 

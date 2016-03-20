@@ -118,6 +118,23 @@ namespace GS_PatEditor.Editor.EffectEditable
                     nodePP.Reset();
                 }
             }
+            else if (Data is Pat.Effects.SetLabelEffect)
+            {
+                var ce = (Pat.Effects.SetLabelEffect)Data;
+                var nodeEffect = new EditableEffectTreeNode(ce.Effect,
+                    new DelegateSingleEditable<Pat.Effect>
+                    {
+                        OnReset = eeffect =>
+                        {
+                            ce.Effect = eeffect;
+                        }
+                    });
+                Nodes.Add(TreeNodeExt.CreateNodeWithChild("Effect", nodeEffect));
+                if (ce.Effect == null)
+                {
+                    nodeEffect.Reset();
+                }
+            }
         }
     }
 }

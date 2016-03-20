@@ -8,29 +8,6 @@ using System.Xml.Serialization;
 namespace GS_PatEditor.Pat.Effects
 {
     [Serializable]
-    public class PlayerSetLabelEffect : Effect, IHideFromEditor
-    {
-        [XmlAttribute]
-        public Simulation.ActorLabelType Label { get; set; }
-
-        [XmlElement]
-        public Effect Effect;
-
-        public override void Run(Simulation.Actor actor)
-        {
-            switch (Label)
-            {
-                case Simulation.ActorLabelType.Fall:
-                    actor.FallLabel = Effect.Run;
-                    break;
-                case Simulation.ActorLabelType.Sit:
-                    actor.SitLabel = Effect.Run;
-                    break;
-            }
-        }
-    }
-
-    [Serializable]
     public class PlayerClearLabelEffect : Effect, IHideFromEditor
     {
         public static readonly PlayerClearLabelEffect Instance = new PlayerClearLabelEffect();

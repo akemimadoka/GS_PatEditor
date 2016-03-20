@@ -22,7 +22,7 @@ namespace GS_PatEditor.Pat.Effects
         [XmlElement]
         public string ActionName { get; set; }
 
-        //TODO edit provider
+        //supported in EditableEffectTreeNode
         [XmlElement]
         public PointProvider Position;
 
@@ -85,6 +85,30 @@ namespace GS_PatEditor.Pat.Effects
         public override void Run(Simulation.Actor actor)
         {
             actor.ActionCount += 1;
+        }
+    }
+
+    [Serializable]
+    public class SetLabelEffect : Effect
+    {
+        [XmlAttribute]
+        public Simulation.ActorLabelType Label { get; set; }
+
+        //supported in EditableEffectTreeNode
+        [XmlElement]
+        public Effect Effect;
+
+        public override void Run(Simulation.Actor actor)
+        {
+            switch (Label)
+            {
+                case Simulation.ActorLabelType.Fall:
+                    actor.FallLabel = Effect.Run;
+                    break;
+                case Simulation.ActorLabelType.Sit:
+                    actor.SitLabel = Effect.Run;
+                    break;
+            }
         }
     }
 }
