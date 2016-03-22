@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GS_PatEditor.Editor.EffectEditable;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,11 +24,12 @@ namespace GS_PatEditor.Pat.Effects
     public class AnimationCountAfterFilter : Filter
     {
         [XmlAttribute]
-        public int Count { get; set; }
+        [EditorChildNode("Count")]
+        public Value Count;
 
         public override bool Test(Simulation.Actor actor)
         {
-            return actor.ActionCount > Count;
+            return actor.ActionCount > Count.GetInt(actor);
         }
     }
 
@@ -45,13 +47,15 @@ namespace GS_PatEditor.Pat.Effects
     public class AnimationCountModFilter : Filter
     {
         [XmlAttribute]
-        public int Divisor { get; set; }
+        [EditorChildNode("Divisor")]
+        public Value Divisor;
         [XmlAttribute]
-        public int Mod { get; set; }
+        [EditorChildNode("Mod")]
+        public Value Mod;
 
         public override bool Test(Simulation.Actor actor)
         {
-            return (actor.ActionCount % Divisor) == Mod;
+            return (actor.ActionCount % Divisor.GetInt(actor)) == Mod.GetInt(actor);
         }
     }
 

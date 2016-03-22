@@ -8,6 +8,8 @@ namespace GS_PatEditor.Simulation
 {
     public class World : IEnumerable<Actor>
     {
+        public Random Random = new Random();
+
         public event Action WhenError;
         public event Action WhenFinished;
 

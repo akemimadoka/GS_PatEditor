@@ -70,6 +70,22 @@ namespace GS_PatEditor.Pat.Effects
     }
 
     [Serializable]
+    public class SetMotionRandomSegmentEffect : Effect
+    {
+        [XmlAttribute]
+        public string Animation { get; set; }
+
+        [XmlAttribute]
+        public int SegmentCount { get; set; }
+
+        public override void Run(Simulation.Actor actor)
+        {
+            actor.SetMotion(Animation == "" ? null : Animation, actor.World.Random.Next(SegmentCount));
+        }
+    }
+
+
+    [Serializable]
     public class InitCountEffect : Effect
     {
         public static readonly InitCountEffect Instance = new InitCountEffect();

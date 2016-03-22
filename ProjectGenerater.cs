@@ -120,7 +120,7 @@ namespace GS_PatEditor
                     ActionID = "assult_rifle",
                     InitEffects = new EffectList()
                     {
-                        new Pat.Effects.BulletInitEffect { AnimationID = "assult_rifle" },
+                        new Pat.Effects.SetMotionEffect { Animation = "assult_rifle" },
                     },
                     KeyFrameEffects = new List<EffectList>()
                     {
@@ -129,7 +129,7 @@ namespace GS_PatEditor
                     {
                         new FilteredEffect()
                         {
-                            Filter = new Pat.Effects.AnimationCountAfterFilter { Count = 4 },
+                            Filter = new Pat.Effects.AnimationCountAfterFilter { Count = new ConstValue { Value = 4 } },
                             Effect = new Pat.Effects.ReleaseActorEffect(),
                         },
                         new Pat.Effects.IncreaseCountEffect(),
@@ -162,7 +162,7 @@ namespace GS_PatEditor
                         new FilteredEffect
                         {
                             Filter = new SimpleListFilter(
-                                new Pat.Effects.AnimationCountAfterFilter { Count = 95 },
+                                new Pat.Effects.AnimationCountAfterFilter { Count = new ConstValue { Value = 95 } },
                                 new Pat.Effects.AnimationSegmentFilter { Segment = 1 }
                             ),
                             Effect = new Pat.Effects.AnimationContinueEffect(),
@@ -171,7 +171,7 @@ namespace GS_PatEditor
                         new FilteredEffect
                         {
                             Filter = new SimpleListFilter(
-                                new Pat.Effects.AnimationCountModFilter { Divisor = 5},
+                                new Pat.Effects.AnimationCountModFilter { Divisor = new ConstValue { Value = 5 } },
                                 new Pat.Effects.AnimationSegmentFilter { Segment = 1 }
                             ),
                             Effect = new Pat.Effects.CreateBulletEffect

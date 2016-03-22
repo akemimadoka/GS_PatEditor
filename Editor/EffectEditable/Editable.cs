@@ -21,19 +21,6 @@ namespace GS_PatEditor.Editor.EffectEditable
         void Append(T val);
     }
 
-    class DelegateSingleEditable<T> : SingleEditable<T>
-    {
-        public Action<T> OnReset;
-
-        public void Reset(T value)
-        {
-            if (OnReset != null)
-            {
-                OnReset(value);
-            }
-        }
-    }
-
     class ListMultiEditable<T> : MultiEditable<T>
     {
         public List<T> List;

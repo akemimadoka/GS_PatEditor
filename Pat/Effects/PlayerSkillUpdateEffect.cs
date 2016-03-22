@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GS_PatEditor.Editor.EffectEditable;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,23 +12,26 @@ namespace GS_PatEditor.Pat.Effects
     public class PlayerSkillStopMovingEffect : Effect
     {
         [XmlAttribute]
-        public float ReduceSpeed { get; set; }
-        public bool ShouldSerializeReduceSpeed() { return ReduceSpeed != 0.1f; }
+        [EditorChildNode("ReduceSpeed")]
+        public Value ReduceSpeed = new ConstValue { Value = 0.1f };
 
-        public PlayerSkillStopMovingEffect()
+        public bool ShouldSerializeReduceSpeed()
         {
-            ReduceSpeed = 0.1f;
+            return !(
+                ReduceSpeed is ConstValue &&
+                ((ConstValue)ReduceSpeed).Value == 0.1f);
         }
 
         public override void Run(Simulation.Actor actor)
         {
-            if (Math.Abs(actor.VX) < ReduceSpeed)
+            var rs = ReduceSpeed.Get(actor);
+            if (Math.Abs(actor.VX) < rs)
             {
                 actor.VX = 0;
             }
             else
             {
-                actor.VX -= actor.VX > 0 ? ReduceSpeed : -ReduceSpeed;
+                actor.VX -= actor.VX > 0 ? rs : -rs;
             }
         }
     }

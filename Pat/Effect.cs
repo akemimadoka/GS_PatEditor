@@ -29,10 +29,10 @@ namespace GS_PatEditor.Pat
     [Serializable]
     public abstract class Value
     {
-        public abstract float Get();
-        public int GetInt()
+        public abstract float Get(Simulation.Actor actor);
+        public int GetInt(Simulation.Actor actor)
         {
-            return (int)Get();
+            return (int)Get(actor);
         }
     }
 
@@ -190,7 +190,7 @@ namespace GS_PatEditor.Pat
         [XmlAttribute]
         public float Value { get; set; }
 
-        public override float Get()
+        public override float Get(Simulation.Actor actor)
         {
             return Value;
         }
