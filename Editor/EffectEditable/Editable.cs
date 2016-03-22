@@ -48,4 +48,24 @@ namespace GS_PatEditor.Editor.EffectEditable
             List.Add(val);
         }
     }
+
+    class EditableListMultiEditable<T> : MultiEditable<T>
+    {
+        private IEditableList<T> _List;
+
+        public EditableListMultiEditable(IEditableList<T> list)
+        {
+            _List = list;
+        }
+
+        public void Remove(T val)
+        {
+            _List.Remove(val);
+        }
+
+        public void Append(T val)
+        {
+            _List.Add(val);
+        }
+    }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GS_PatEditor.Editor.EffectEditable;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,8 +23,8 @@ namespace GS_PatEditor.Pat.Effects
         [XmlElement]
         public string ActionName { get; set; }
 
-        //supported in EditableEffectTreeNode
         [XmlElement]
+        [EditorChildNode("Position")]
         public PointProvider Position;
 
         public override void Run(Simulation.Actor actor)
@@ -94,8 +95,8 @@ namespace GS_PatEditor.Pat.Effects
         [XmlAttribute]
         public Simulation.ActorLabelType Label { get; set; }
 
-        //supported in EditableEffectTreeNode
         [XmlElement]
+        [EditorChildNode("Effect")]
         public Effect Effect;
 
         public override void Run(Simulation.Actor actor)

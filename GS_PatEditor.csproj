@@ -70,10 +70,9 @@
       <DependentUpon>ActionEditForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Editor\EffectEditable\Editable.cs" />
-    <Compile Include="Editor\EffectEditable\EditableEffectTreeNode.cs" />
-    <Compile Include="Editor\EffectEditable\EditableFilterTreeNode.cs" />
-    <Compile Include="Editor\EffectEditable\EditablePointProviderTreeNode.cs" />
+    <Compile Include="Editor\EffectEditable\EditableNodeGenerator.cs" />
     <Compile Include="Editor\EffectEditable\EditableTreeNode.cs" />
+    <Compile Include="Editor\EffectEditable\GenericEditorSelectorTypeConverter.cs" />
     <Compile Include="Editor\EffectEditable\SelectEffect.cs" />
     <Compile Include="Editor\EffectEditable\SelectFilter.cs" />
     <Compile Include="Editor\EffectEditable\SelectPointProvider.cs" />

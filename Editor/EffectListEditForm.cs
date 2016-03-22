@@ -27,13 +27,14 @@ namespace GS_PatEditor.Editor
         private void RefreshList()
         {
             treeView1.Nodes.Clear();
+            var me = new ListMultiEditable<Pat.Effect> { List = _Effects.Effects };
             foreach (var effect in _Effects)
             {
-                treeView1.Nodes.Add(new EditableEffectTreeNode(effect,
-                    new ListMultiEditable<Pat.Effect> { List = _Effects.Effects }));
+                //treeView1.Nodes.Add(new EditableEffectTreeNode(effect,
+                //    new ListMultiEditable<Pat.Effect> { List = _Effects.Effects }));
+                treeView1.Nodes.Add(EditableNodeGenerator.Create<Pat.Effect>(effect, me));
             }
-            treeView1.Nodes.Add(new EditableEffectTreeNode(
-                new ListMultiEditable<Pat.Effect> { List = _Effects.Effects }));
+            treeView1.Nodes.Add(EditableNodeGenerator.Create<Pat.Effect>(me));
         }
 
         private void treeView1_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)

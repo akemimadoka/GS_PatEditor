@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GS_PatEditor.Editor.EffectEditable;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -26,11 +27,23 @@ namespace GS_PatEditor.Pat
     }
 
     [Serializable]
+    public abstract class Value
+    {
+        public abstract float Get();
+        public int GetInt()
+        {
+            return (int)Get();
+        }
+    }
+
+    [Serializable]
     public class FilteredEffect : Effect
     {
         [XmlElement]
+        [EditorChildNode("Filter")]
         public Filter Filter;
         [XmlElement]
+        [EditorChildNode("Effect")]
         public Effect Effect;
 
         public override void Run(Simulation.Actor actor)
@@ -63,6 +76,7 @@ namespace GS_PatEditor.Pat
     public class SimpleListEffect : EffectListEffect
     {
         [XmlElement(ElementName = "Effect")]
+        [EditorChildNode(null)]
         public readonly EffectList EffectList = new EffectList();
 
         protected override IEnumerable<Effect> Effects
@@ -92,6 +106,7 @@ namespace GS_PatEditor.Pat
     public class SimpleListFilter : FilterListFilter
     {
         [XmlElement(ElementName = "Filter")]
+        [EditorChildNode(null)]
         public readonly FilterList FilterList = new FilterList();
 
         public SimpleListFilter() { }
@@ -111,7 +126,7 @@ namespace GS_PatEditor.Pat
     }
 
     [Serializable]
-    public class EffectList : IEnumerable<Effect>
+    public class EffectList : IEditableList<Effect>, IEnumerable<Effect>
     {
         [XmlElement(ElementName = "Effect")]
         public List<Effect> Effects = new List<Effect>();
@@ -130,10 +145,15 @@ namespace GS_PatEditor.Pat
         {
             Effects.Add(effect);
         }
+
+        public void Remove(Effect val)
+        {
+            Effects.Remove(val);
+        }
     }
 
     [Serializable]
-    public class FilterList : IEnumerable<Filter>
+    public class FilterList : IEditableList<Filter>, IEnumerable<Filter>
     {
         [XmlElement(ElementName = "Filter")]
         public List<Filter> Filters = new List<Filter>();
@@ -156,6 +176,23 @@ namespace GS_PatEditor.Pat
         public void AddRange(IEnumerable<Filter> filters)
         {
             Filters.AddRange(filters);
+        }
+
+        public void Remove(Filter val)
+        {
+            Filters.Remove(val);
+        }
+    }
+
+    [Serializable]
+    public class ConstValue : Value
+    {
+        [XmlAttribute]
+        public float Value { get; set; }
+
+        public override float Get()
+        {
+            return Value;
         }
     }
 
