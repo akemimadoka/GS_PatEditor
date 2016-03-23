@@ -21,7 +21,7 @@ namespace GS_PatEditor.Editor.Panels
             _Parent = parent;
 
             RefreshList();
-            _Parent.EditorNode.OnReset += RefreshList;
+            _Parent.ProjectReset += RefreshList;
         }
 
         public void Init(Control ctrl)
@@ -157,8 +157,8 @@ namespace GS_PatEditor.Editor.Panels
         {
             if (_SelectedItem != null)
             {
-                _Parent.EditorNode.SelectedAnimationIndex = _SelectedItem.Index;
-                _Parent.ShowAnimationUI();
+                _Parent.SelectedAnimationIndex = _SelectedItem.Index;
+                _Parent.CurrentUI = EditorUI.Animation;
             }
         }
 

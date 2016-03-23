@@ -122,16 +122,16 @@ namespace GS_PatEditor.Editor
                     #endregion
 
                     editor.AnimationListUI.SelectedChange += frm.SetupToolbarEnabled;
-                    editor.EditorNode.Animation.Frame.OnReset += delegate()
+                    editor.Animation.Frame.OnReset += delegate()
                     {
-                        var animation = editor.EditorNode.Animation.Data;
-                        var seg = editor.EditorNode.Animation.Frame.SegmentData;
+                        var animation = editor.Animation.Data;
+                        var seg = editor.Animation.Frame.SegmentData;
                         if (animation != null && seg != null && seg.Frames.Count > 0)
                         {
-                            var isKeyFrame = editor.EditorNode.Animation.Frame.FrameData ==
+                            var isKeyFrame = editor.Animation.Frame.FrameData ==
                                 seg.Frames[0];
                             var isLoop = isKeyFrame ?
-                                editor.EditorNode.Animation.Frame.SegmentData.IsLoop : false;
+                                editor.Animation.Frame.SegmentData.IsLoop : false;
                             frm.keyFrameToolStripMenuItem.Enabled = true;
                             frm.keyFrameToolStripMenuItem.Checked = isKeyFrame;
 
@@ -150,9 +150,9 @@ namespace GS_PatEditor.Editor
                         }
                     };
 
-                    editor.EditorNode.Animation.Frame.EditModeChanged += frm.OnEditModeChanged;
+                    editor.Animation.Frame.EditModeChanged += frm.OnEditModeChanged;
 
-                    editor.UISwitched += delegate()
+                    editor.CurrentUISwitched += delegate()
                     {
                         switch (editor.CurrentUI)
                         {
@@ -166,7 +166,7 @@ namespace GS_PatEditor.Editor
                                 break;
                         }
                     };
-                    editor.ShowAnimationListUI();
+                    editor.CurrentUI = EditorUI.AnimationList;
 
                     frm.Show();
                     frm.RunRenderLoop();
@@ -254,7 +254,7 @@ namespace GS_PatEditor.Editor
             _GroupEditPhysical.Visible = false;
             _GroupEditHit.Visible = false;
             _GroupEditAttack.Visible = false;
-            switch (_Editor.EditorNode.Animation.Frame.EditMode)
+            switch (_Editor.Animation.Frame.EditMode)
             {
                 case FrameEditMode.Physical:
                     _GroupEditPhysical.Visible = true;
@@ -270,12 +270,12 @@ namespace GS_PatEditor.Editor
             if (toolStripButtonPlay.Text == "Play")
             {
                 toolStripButtonPlay.Enabled = 
-                    _Editor.EditorNode.Animation.Frame.PreviewMode == FrameNode.FramePreviewMode.Pause;
+                    _Editor.Animation.Frame.PreviewMode == FrameNode.FramePreviewMode.Pause;
             }
             else if (toolStripButtonPlay.Text == "Stop")
             {
                 toolStripButtonPlay.Enabled =
-                    _Editor.EditorNode.Animation.Frame.PreviewMode == FrameNode.FramePreviewMode.Play;
+                    _Editor.Animation.Frame.PreviewMode == FrameNode.FramePreviewMode.Play;
             }
             else
             {
@@ -285,7 +285,7 @@ namespace GS_PatEditor.Editor
 
         private void ChangeEditMode(FrameEditMode mode)
         {
-            _Editor.EditorNode.Animation.Frame.ChangeEditMode(mode);
+            _Editor.Animation.Frame.ChangeEditMode(mode);
         }
 
         private void SetupToolbarEnabled()
@@ -414,25 +414,25 @@ namespace GS_PatEditor.Editor
         private void physicalToolStripMenuItem_Click(object sender, EventArgs e)
         {
             physicalToolStripMenuItem.Checked = !physicalToolStripMenuItem.Checked;
-            _Editor.EditorNode.Animation.Frame.PhysicalBoxVisible = physicalToolStripMenuItem.Checked;
+            _Editor.Animation.Frame.PhysicalBoxVisible = physicalToolStripMenuItem.Checked;
         }
 
         private void axisToolStripMenuItem_Click(object sender, EventArgs e)
         {
             axisToolStripMenuItem.Checked = !axisToolStripMenuItem.Checked;
-            _Editor.EditorNode.Animation.Frame.AxisVisible = axisToolStripMenuItem.Checked;
+            _Editor.Animation.Frame.AxisVisible = axisToolStripMenuItem.Checked;
         }
 
         private void hitToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             hitToolStripMenuItem1.Checked = !hitToolStripMenuItem1.Checked;
-            _Editor.EditorNode.Animation.Frame.HitBoxVisible = hitToolStripMenuItem1.Checked;
+            _Editor.Animation.Frame.HitBoxVisible = hitToolStripMenuItem1.Checked;
         }
 
         private void attackToolStripMenuItem_Click(object sender, EventArgs e)
         {
             attackToolStripMenuItem.Checked = !attackToolStripMenuItem.Checked;
-            _Editor.EditorNode.Animation.Frame.AttackBoxVisible = attackToolStripMenuItem.Checked;
+            _Editor.Animation.Frame.AttackBoxVisible = attackToolStripMenuItem.Checked;
         }
 
         private void toolStripSplitEdit_DropDownOpening(object sender, EventArgs e)
@@ -459,7 +459,7 @@ namespace GS_PatEditor.Editor
 
         private void toolStripButtonBack_Click(object sender, EventArgs e)
         {
-            _Editor.ShowAnimationListUI();
+            _Editor.CurrentUI = EditorUI.AnimationList;
         }
 
         private void toolStripButtonEditAnimation_Click(object sender, EventArgs e)
@@ -680,18 +680,18 @@ namespace GS_PatEditor.Editor
             if (toolStripButtonPlay.Text == "Play")
             {
                 toolStripButtonPlay.Text = "Stop";
-                _Editor.EditorNode.Animation.Frame.ChangePreviewMode(FrameNode.FramePreviewMode.Play);
+                _Editor.Animation.Frame.ChangePreviewMode(FrameNode.FramePreviewMode.Play);
             }
             else if (toolStripButtonPlay.Text == "Stop")
             {
                 toolStripButtonPlay.Text = "Play";
-                _Editor.EditorNode.Animation.Frame.ChangePreviewMode(FrameNode.FramePreviewMode.Pause);
+                _Editor.Animation.Frame.ChangePreviewMode(FrameNode.FramePreviewMode.Pause);
             }
         }
 
         private void toolStripButtonEditAction_Click(object sender, EventArgs e)
         {
-            _Editor.EditorNode.Animation.ShowActionEditForm();
+            _Editor.Animation.ShowActionEditForm();
         }
     }
 }

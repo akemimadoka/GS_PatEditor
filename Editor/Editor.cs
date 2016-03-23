@@ -12,13 +12,12 @@ namespace GS_PatEditor.Editor
     {
         AnimationList,
         Animation,
-        ImageList,
     }
 
     class Editor : IDisposable
     {
         public Pat.Project Data { get; private set; }
-        public RootNode EditorNode { get; private set; }
+        //public RootNode EditorNode { get; private set; }
 
         //ui
 
@@ -29,45 +28,83 @@ namespace GS_PatEditor.Editor
 
         public Editor(Pat.Project proj)
         {
-            Data = proj;
-            EditorNode = RootNode.CreateRootNode(proj, this);
+            //Data = proj;
+            //EditorNode = RootNode.CreateRootNode(proj, this);
             AnimationFramesUI = new AnimationFrames(this);
             PreviewWindowUI = new PreviewWindow(this);
             AnimationListUI = new AnimationList(this);
+
+            Animation = new AnimationNode(this);
+            SwitchProject(proj);
         }
+
+
+        #region Main UI
+
+        public event Action CurrentUISwitched;
+
+        private EditorUI _CurrentUI;
+        public EditorUI CurrentUI
+        {
+            get
+            {
+                return _CurrentUI;
+            }
+            set
+            {
+                _CurrentUI = value;
+                if (value == EditorUI.AnimationList)
+                {
+                    AnimationListUI.Activate();
+                }
+                if (CurrentUISwitched != null)
+                {
+                    CurrentUISwitched();
+                }
+            }
+        }
+
+        #endregion
+
+        #region Root Node
+
+        public AnimationNode Animation { get; private set; }
+
+        public event Action ProjectReset;
 
         public void SwitchProject(Pat.Project proj)
         {
             Data = proj;
-            EditorNode.Reset(proj);
-        }
-
-        public EditorUI CurrentUI
-        {
-            get;
-            private set;
-        }
-
-        public event Action UISwitched;
-
-        public void ShowAnimationListUI()
-        {
-            CurrentUI = EditorUI.AnimationList;
-            AnimationListUI.Activate();
-            if (UISwitched != null)
+            //EditorNode.Reset(proj);
+            SelectedAnimationIndex = proj.Animations.Count == 0 ? -1 : 0;
+            if (ProjectReset != null)
             {
-                UISwitched();
+                ProjectReset();
             }
         }
 
-        public void ShowAnimationUI()
+        private int _SelectedAnimationIndex;
+        public int SelectedAnimationIndex
         {
-            CurrentUI = EditorUI.Animation;
-            if (UISwitched != null)
+            get
             {
-                UISwitched();
+                return _SelectedAnimationIndex;
+            }
+            set
+            {
+                _SelectedAnimationIndex = value;
+                if (value == -1)
+                {
+                    Animation.Reset(null);
+                }
+                else
+                {
+                    Animation.Reset(Data.Animations[value]);
+                }
             }
         }
+
+        #endregion
 
         public void Dispose()
         {

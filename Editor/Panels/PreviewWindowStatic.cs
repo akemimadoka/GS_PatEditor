@@ -57,7 +57,7 @@ namespace GS_PatEditor.Editor.Panels
 
         public override void Render()
         {
-            var frame = _Parent.EditorNode.Animation.Frame.FrameData;
+            var frame = _Parent.Animation.Frame.FrameData;
             var window = _Parent.PreviewWindowUI;
 
             if (frame != null && frame.ImageID != null)
@@ -70,13 +70,13 @@ namespace GS_PatEditor.Editor.Panels
                 }
             }
 
-            if (_Parent.EditorNode.Animation.Frame.AxisVisible)
+            if (_Parent.Animation.Frame.AxisVisible)
             {
                 _SpriteLineV.Render();
                 _SpriteLineH.Render();
             }
 
-            if (_Parent.EditorNode.Animation.Frame.PhysicalBoxVisible)
+            if (_Parent.Animation.Frame.PhysicalBoxVisible)
             {
                 if (frame != null && frame.PhysicalBox != null)
                 {
@@ -87,7 +87,7 @@ namespace GS_PatEditor.Editor.Panels
 
             var sprites = _Parent.PreviewWindowUI.SpriteManager;
             int rectIndex = 1;
-            if (_Parent.EditorNode.Animation.Frame.HitBoxVisible)
+            if (_Parent.Animation.Frame.HitBoxVisible)
             {
                 foreach (var box in _Parent.PreviewWindowUI.HitEditing.BoxData.Data)
                 {
@@ -96,7 +96,7 @@ namespace GS_PatEditor.Editor.Panels
                     s.Render();
                 }
             }
-            if (_Parent.EditorNode.Animation.Frame.AttackBoxVisible)
+            if (_Parent.Animation.Frame.AttackBoxVisible)
             {
                 foreach (var box in _Parent.PreviewWindowUI.AttackEditing.BoxData.Data)
                 {
