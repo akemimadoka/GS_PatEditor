@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GS_PatEditor.Pat.Effects;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 namespace GS_PatEditor.Editor.EffectEditable
 {
     [EditorSelector(typeof(Pat.Filter))]
-    class SelectFilter : Pat.Filter, Pat.Effects.IHideFromEditor
+    class SelectFilter : Pat.Filter, IHideFromEditor, IEditableEnvironment
     {
         private readonly Action<Pat.Filter> _OnNewFilter;
 
@@ -30,8 +31,7 @@ namespace GS_PatEditor.Editor.EffectEditable
                 {
                     return;
                 }
-                //TODO error handling
-                _OnNewFilter((Pat.Filter)value.Value.GetConstructor(new Type[0]).Invoke(new object[0]));
+                _OnNewFilter(SelectHelper.Create<Pat.Filter>(value.Value, Environment));
             }
         }
 
@@ -39,5 +39,9 @@ namespace GS_PatEditor.Editor.EffectEditable
         {
             return false;
         }
+
+
+        [Browsable(false)]
+        public EditableEnvironment Environment { get; set; }
     }
 }

@@ -252,7 +252,7 @@ namespace GS_PatEditor.Editor
         {
             if (CurrentAction != null)
             {
-                var dialog = new ActionEditForm(CurrentAction);
+                var dialog = new ActionEditForm(Project, CurrentAction);
                 dialog.ShowDialog();
             }
         }

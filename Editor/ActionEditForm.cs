@@ -12,12 +12,14 @@ namespace GS_PatEditor.Editor
 {
     public partial class ActionEditForm : Form
     {
-        private Pat.Action _Action;
+        private readonly Pat.Project _Project;
+        private readonly Pat.Action _Action;
 
-        public ActionEditForm(Pat.Action action)
+        public ActionEditForm(Pat.Project proj, Pat.Action action)
         {
             InitializeComponent();
 
+            _Project = proj;
             _Action = action;
             RefreshList();
         }
@@ -146,7 +148,7 @@ namespace GS_PatEditor.Editor
             }
             if (effects != null)
             {
-                var dialog = new EffectListEditForm(effects);
+                var dialog = new EffectListEditForm(_Project, effects);
                 dialog.ShowDialog();
                 var txt = "KeyFrame";
                 if (s == 0)

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GS_PatEditor.Pat.Effects;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,19 +19,22 @@ namespace GS_PatEditor.Editor.EffectEditable
     abstract class EditableTreeNode<T> : TreeNode, IEditableTreeNode
         where T : class
     {
+        protected readonly EditableEnvironment Env;
         protected readonly T Data;
         protected readonly Editable<T> Dest;
 
-        protected EditableTreeNode(T data, Editable<T> dest)
+        protected EditableTreeNode(EditableEnvironment env, T data, Editable<T> dest)
         {
+            Env = env;
             Data = data;
             Dest = dest;
 
             SetupCommon();
         }
 
-        protected EditableTreeNode(MultiEditable<T> dest)
+        protected EditableTreeNode(EditableEnvironment env, MultiEditable<T> dest)
         {
+            Env = env;
             Data = CreateSelectObject(dest);
             Dest = null;
 

@@ -1,6 +1,8 @@
 ﻿using GS_PatEditor.Editor.EffectEditable;
+using GS_PatEditor.Pat.Effects.Converter;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,9 +20,10 @@ namespace GS_PatEditor.Pat.Effects
     }
 
     [Serializable]
-    public class CreateBulletEffect : Effect
+    public class CreateBulletEffect : Effect, IEditableEnvironment
     {
         [XmlElement]
+        [TypeConverter(typeof(ActionIDConverter))]
         public string ActionName { get; set; }
 
         [XmlElement]
@@ -43,6 +46,9 @@ namespace GS_PatEditor.Pat.Effects
                 actor.World.Add(bullet);
             }
         }
+
+        [Browsable(false)]
+        public EditableEnvironment Environment { get; set; }
     }
 
     [Serializable]
@@ -55,9 +61,10 @@ namespace GS_PatEditor.Pat.Effects
     }
 
     [Serializable]
-    public class SetMotionEffect : Effect
+    public class SetMotionEffect : Effect, IEditableEnvironment
     {
         [XmlAttribute]
+        [TypeConverter(typeof(ActionIDConverter))]
         public string Animation { get; set; }
 
         [XmlAttribute]
@@ -67,12 +74,16 @@ namespace GS_PatEditor.Pat.Effects
         {
             actor.SetMotion(Animation == "" ? null : Animation, Segment);
         }
+
+        [Browsable(false)]
+        public EditableEnvironment Environment { get; set; }
     }
 
     [Serializable]
-    public class SetMotionRandomSegmentEffect : Effect
+    public class SetMotionRandomSegmentEffect : Effect, IEditableEnvironment
     {
         [XmlAttribute]
+        [TypeConverter(typeof(ActionIDConverter))]
         public string Animation { get; set; }
 
         [XmlAttribute]
@@ -82,6 +93,9 @@ namespace GS_PatEditor.Pat.Effects
         {
             actor.SetMotion(Animation == "" ? null : Animation, actor.World.Random.Next(SegmentCount));
         }
+
+        [Browsable(false)]
+        public EditableEnvironment Environment { get; set; }
     }
 
 

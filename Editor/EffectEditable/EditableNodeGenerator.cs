@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GS_PatEditor.Pat.Effects;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -13,13 +14,21 @@ namespace GS_PatEditor.Editor.EffectEditable
         private class GenericEditableTreeNode<T> : EditableTreeNode<T>
             where T : class
         {
-            public GenericEditableTreeNode(T data, Editable<T> dest)
-                : base(data, dest)
+            public GenericEditableTreeNode(EditableEnvironment env, T data, Editable<T> dest)
+                : base(env, data, dest)
             {
+                if (data is IEditableEnvironment)
+                {
+                    var cv = (IEditableEnvironment)data;
+                    if (cv.Environment == null)
+                    {
+                        cv.Environment = env;
+                    }
+                }
             }
 
-            public GenericEditableTreeNode(MultiEditable<T> dest)
-                : base(dest)
+            public GenericEditableTreeNode(EditableEnvironment env, MultiEditable<T> dest)
+                : base(env, dest)
             {
             }
 
@@ -28,18 +37,18 @@ namespace GS_PatEditor.Editor.EffectEditable
                 return EditableNodeGenerator.CreateSelectObject<T>(obj =>
                 {
                     dest.Append(obj);
-                    this.InsertBefore(new GenericEditableTreeNode<T>(obj, dest));
-                });
+                    this.InsertBefore(new GenericEditableTreeNode<T>(Env, obj, dest));
+                }, Env);
             }
 
             protected override TreeNode CreateSingleEditableNode(SingleEditable<T> dest)
             {
                 GenericEditableTreeNode<T> ret = null;
-                ret = new GenericEditableTreeNode<T>(EditableNodeGenerator.CreateSelectObject<T>(obj =>
+                ret = new GenericEditableTreeNode<T>(Env, EditableNodeGenerator.CreateSelectObject<T>(obj =>
                 {
                     dest.Reset(obj);
-                    ret.Replace(new GenericEditableTreeNode<T>(obj, dest));
-                }), null);
+                    ret.Replace(new GenericEditableTreeNode<T>(Env, obj, dest));
+                }, Env), null);
                 return ret;
             }
 
@@ -59,7 +68,7 @@ namespace GS_PatEditor.Editor.EffectEditable
                     Text = Data.GetType().Name;
                 }
 
-                EditableNodeGenerator.SetupChildren<T>(this, Data);
+                EditableNodeGenerator.SetupChildren<T>(this, Env, Data);
             }
         }
 
@@ -80,16 +89,16 @@ namespace GS_PatEditor.Editor.EffectEditable
             }
         }
 
-        public static EditableTreeNode<T> Create<T>(T value, Editable<T> dest)
+        public static EditableTreeNode<T> Create<T>(EditableEnvironment env, T value, Editable<T> dest)
             where T : class
         {
-            return new GenericEditableTreeNode<T>(value, dest);
+            return new GenericEditableTreeNode<T>(env, value, dest);
         }
 
-        public static EditableTreeNode<T> Create<T>(MultiEditable<T> dest)
+        public static EditableTreeNode<T> Create<T>(EditableEnvironment env, MultiEditable<T> dest)
             where T : class
         {
-            return new GenericEditableTreeNode<T>(dest);
+            return new GenericEditableTreeNode<T>(env, dest);
         }
 
         //select object class
@@ -108,13 +117,15 @@ namespace GS_PatEditor.Editor.EffectEditable
             }
         }
 
-        private static T CreateSelectObject<T>(Action<T> action)
+        private static T CreateSelectObject<T>(Action<T> action, GS_PatEditor.Pat.Effects.EditableEnvironment env)
         {
             var type = _SelectObjectTypes[typeof(T)];
-            return (T)(type.GetConstructor(new Type[] { typeof(Action<T>) }).Invoke(new object[] { action }));
+            var ret = (T)(type.GetConstructor(new Type[] { typeof(Action<T>) }).Invoke(new object[] { action }));
+            ((GS_PatEditor.Pat.Effects.IEditableEnvironment)ret).Environment = env;
+            return ret;
         }
 
-        private static void SetupChildren<T>(TreeNode node, T obj)
+        private static void SetupChildren<T>(TreeNode node, EditableEnvironment env, T obj)
         {
             if (obj == null)
             {
@@ -161,18 +172,19 @@ namespace GS_PatEditor.Editor.EffectEditable
                     var me = typeof(EditableListMultiEditable<>).MakeGenericType(listInterface)
                         .GetConstructor(new Type[] { editableListT })
                         .Invoke(new object[] { valueF });
-                    var creator1 = treeNodeT
-                        .GetConstructor(new Type[] { listInterface, editableT });
-                    var creator2 = treeNodeT
-                        .GetConstructor(new Type[] { typeof(MultiEditable<>).MakeGenericType(listInterface) });
+                    var creator1 = treeNodeT.GetConstructor(new Type[] {
+                        typeof(EditableEnvironment), listInterface, editableT });
+                    var creator2 = treeNodeT.GetConstructor(new Type[] {
+                        typeof(EditableEnvironment),
+                        typeof(MultiEditable<>).MakeGenericType(listInterface) });
 
                     var list = (System.Collections.IEnumerable)valueF;
                     foreach (var item in list)
                     {
-                        var newNode = (TreeNode)creator1.Invoke(new object[] { item, me });
+                        var newNode = (TreeNode)creator1.Invoke(new object[] { env, item, me });
                         coll.Add(newNode);
                     }
-                    coll.Add((TreeNode)creator2.Invoke(new object[] { me }));
+                    coll.Add((TreeNode)creator2.Invoke(new object[] { env, me }));
                 }
                 else
                 {
@@ -181,8 +193,8 @@ namespace GS_PatEditor.Editor.EffectEditable
                         .GetConstructor(new Type[] { typeof(object), typeof(FieldInfo) })
                         .Invoke(new object[] { obj, f });
                     var creator = typeof(GenericEditableTreeNode<>).MakeGenericType(typeV)
-                        .GetConstructor(new Type[] { typeV, editableT });
-                    var newNode = (IEditableTreeNode)creator.Invoke(new object[] { valueF, se });
+                        .GetConstructor(new Type[] { typeof(EditableEnvironment), typeV, editableT });
+                    var newNode = (IEditableTreeNode)creator.Invoke(new object[] { env, valueF, se });
                     coll.Add((TreeNode)newNode);
                     if (valueF == null)
                     {

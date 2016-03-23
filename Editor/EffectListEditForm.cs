@@ -1,4 +1,5 @@
 ﻿using GS_PatEditor.Editor.EffectEditable;
+using GS_PatEditor.Pat.Effects;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,13 +14,15 @@ namespace GS_PatEditor.Editor
 {
     public partial class EffectListEditForm : Form
     {
-        private Pat.EffectList _Effects;
+        private readonly Pat.Project _Project;
+        private readonly Pat.EffectList _Effects;
 
-        public EffectListEditForm(Pat.EffectList effects)
+        public EffectListEditForm(Pat.Project proj, Pat.EffectList effects)
         {
             InitializeComponent();
             treeView1.Tag = (Action)UpdateSelectedNode;
 
+            _Project = proj;
             _Effects = effects;
             RefreshList();
         }
@@ -28,13 +31,14 @@ namespace GS_PatEditor.Editor
         {
             treeView1.Nodes.Clear();
             var me = new ListMultiEditable<Pat.Effect> { List = _Effects.Effects };
+            var env = new EditableEnvironment(_Project);
             foreach (var effect in _Effects)
             {
                 //treeView1.Nodes.Add(new EditableEffectTreeNode(effect,
                 //    new ListMultiEditable<Pat.Effect> { List = _Effects.Effects }));
-                treeView1.Nodes.Add(EditableNodeGenerator.Create<Pat.Effect>(effect, me));
+                treeView1.Nodes.Add(EditableNodeGenerator.Create<Pat.Effect>(env, effect, me));
             }
-            treeView1.Nodes.Add(EditableNodeGenerator.Create<Pat.Effect>(me));
+            treeView1.Nodes.Add(EditableNodeGenerator.Create<Pat.Effect>(env, me));
         }
 
         private void treeView1_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)

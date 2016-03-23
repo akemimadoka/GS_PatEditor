@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace GS_PatEditor.Editor.EffectEditable
 {
-    class SelectType
+    public class SelectType
     {
         public Type Value;
 

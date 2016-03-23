@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GS_PatEditor.Pat.Effects;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 namespace GS_PatEditor.Editor.EffectEditable
 {
     [EditorSelector(typeof(Pat.PointProvider))]
-    class SelectPointProvider : Pat.PointProvider, Pat.Effects.IHideFromEditor
+    class SelectPointProvider : Pat.PointProvider, IHideFromEditor, IEditableEnvironment
     {
         private readonly Action<Pat.PointProvider> _OnNewPointProvider;
 
@@ -30,8 +31,7 @@ namespace GS_PatEditor.Editor.EffectEditable
                 {
                     return;
                 }
-                //TODO error handling
-                _OnNewPointProvider((Pat.PointProvider)value.Value.GetConstructor(new Type[0]).Invoke(new object[0]));
+                _OnNewPointProvider(SelectHelper.Create<Pat.PointProvider>(value.Value, Environment));
             }
         }
 
@@ -39,5 +39,9 @@ namespace GS_PatEditor.Editor.EffectEditable
         {
             return new Pat.FramePoint { X = (int)actor.X, Y = (int)actor.Y };
         }
+
+
+        [Browsable(false)]
+        public EditableEnvironment Environment { get; set; }
     }
 }
