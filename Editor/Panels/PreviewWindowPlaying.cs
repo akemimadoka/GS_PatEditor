@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace GS_PatEditor.Editor.Panels
 {
@@ -71,25 +72,34 @@ namespace GS_PatEditor.Editor.Panels
         private void PlayerError()
         {
             _Parent.PreviewMode = FramePreviewMode.Pause;
+            MessageBox.Show("Error in playing.", "PatEditor",
+                MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         public override void Render()
         {
-            _World.Update();
-
-            var window = _Parent.PreviewWindowUI;
-            foreach (var actor in _World.OrderBy(a => a.Priority))
+            try
             {
-                var frame = actor.CurrentFrame;
-                if (frame != null && frame.ImageID != null)
+                _World.Update();
+
+                var window = _Parent.PreviewWindowUI;
+                foreach (var actor in _World.OrderBy(a => a.Priority))
                 {
-                    var txt = _Parent.Project.ImageList.GetTexture(frame.ImageID, _Parent.PreviewWindowUI.Render);
-                    if (txt != null)
+                    var frame = actor.CurrentFrame;
+                    if (frame != null && frame.ImageID != null)
                     {
-                        _Sprite.SetupActor(txt, actor, window.SpriteMoving);
-                        _Sprite.Render();
+                        var txt = _Parent.Project.ImageList.GetTexture(frame.ImageID, _Parent.PreviewWindowUI.Render);
+                        if (txt != null)
+                        {
+                            _Sprite.SetupActor(txt, actor, window.SpriteMoving);
+                            _Sprite.Render();
+                        }
                     }
                 }
+            }
+            catch
+            {
+                PlayerError();
             }
         }
     }

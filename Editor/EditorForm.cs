@@ -148,6 +148,7 @@ namespace GS_PatEditor.Editor
                     };
 
                     editor.EditModeChanged += frm.OnEditModeChanged;
+                    editor.PreviewModeChanged += frm.OnPreviewModeChanged;
 
                     editor.CurrentUISwitched += delegate()
                     {
@@ -162,6 +163,7 @@ namespace GS_PatEditor.Editor
                                 frm.ResetPreviewPosition(1.0f);
                                 break;
                         }
+                        frm.OnPreviewModeChanged();
                     };
                     editor.CurrentUI = EditorUI.AnimationList;
 
@@ -263,16 +265,19 @@ namespace GS_PatEditor.Editor
                     _GroupEditAttack.Visible = true;
                     break;
             }
+            UpdateToolButtonsToolChecked();
+        }
 
-            if (toolStripButtonPlay.Text == "Play")
+        private void OnPreviewModeChanged()
+        {
+            toolStripButtonPlay.Enabled = true;
+            if (_Editor.PreviewMode == FramePreviewMode.Pause)
             {
-                toolStripButtonPlay.Enabled =
-                    _Editor.PreviewMode == FramePreviewMode.Pause;
+                toolStripButtonPlay.Text = "Play";
             }
-            else if (toolStripButtonPlay.Text == "Stop")
+            else if (_Editor.PreviewMode == FramePreviewMode.Play)
             {
-                toolStripButtonPlay.Enabled =
-                    _Editor.PreviewMode == FramePreviewMode.Play;
+                toolStripButtonPlay.Text = "Stop";
             }
             else
             {
@@ -344,14 +349,10 @@ namespace GS_PatEditor.Editor
         private void ResetPreviewPosition(float scale)
         {
             _Editor.PreviewWindowUI.PreviewMoving.ResetScale(scale);
-
-            //var x = previewWindow.Width - panelFramePreviewScroll.ClientSize.Width;
-            //var y = previewWindow.Height - panelFramePreviewScroll.ClientSize.Height;
-            //panelFramePreviewScroll.AutoScrollPosition = new Point(x / 2, y / 2);
             CenterPreview();
         }
 
-        private void ClearToolButtonsToolChecked()
+        private void UpdateToolButtonsToolChecked()
         {
             toolStripButtonToolCursor.CheckState = CheckState.Unchecked;
             toolStripButtonToolMove.CheckState = CheckState.Unchecked;
@@ -359,48 +360,64 @@ namespace GS_PatEditor.Editor
             toolStripButtonToolHit.CheckState = CheckState.Unchecked;
             toolStripButtonToolAttack.CheckState = CheckState.Unchecked;
             toolStripButtonToolPoint.CheckState = CheckState.Unchecked;
+
+            switch (_Editor.EditMode)
+            {
+                case FrameEditMode.None:
+                    toolStripButtonToolCursor.CheckState = CheckState.Checked;
+                    break;
+                case FrameEditMode.Move:
+                    toolStripButtonToolMove.CheckState = CheckState.Checked;
+                    break;
+                case FrameEditMode.Physical:
+                    toolStripButtonToolPhysics.CheckState = CheckState.Checked;
+                    break;
+                case FrameEditMode.Hit:
+                    toolStripButtonToolHit.CheckState = CheckState.Checked;
+                    break;
+                case FrameEditMode.Attack:
+                    toolStripButtonToolAttack.CheckState = CheckState.Checked;
+                    break;
+                case FrameEditMode.Point:
+                    toolStripButtonToolPoint.CheckState = CheckState.Checked;
+                    break;
+            }
         }
 
         private void toolStripButtonToolCursor_Click(object sender, EventArgs e)
         {
             _Editor.EditMode = FrameEditMode.None;
-            ClearToolButtonsToolChecked();
-            toolStripButtonToolCursor.CheckState = CheckState.Checked;
+            UpdateToolButtonsToolChecked();
         }
 
         private void toolStripButtonToolMove_Click(object sender, EventArgs e)
         {
             _Editor.EditMode = FrameEditMode.Move;
-            ClearToolButtonsToolChecked();
-            toolStripButtonToolMove.CheckState = CheckState.Checked;
+            UpdateToolButtonsToolChecked();
         }
 
         private void toolStripButtonToolPhysics_Click(object sender, EventArgs e)
         {
             _Editor.EditMode = FrameEditMode.Physical;
-            ClearToolButtonsToolChecked();
-            toolStripButtonToolPhysics.CheckState = CheckState.Checked;
+            UpdateToolButtonsToolChecked();
         }
 
         private void toolStripButtonToolHit_Click(object sender, EventArgs e)
         {
             _Editor.EditMode = FrameEditMode.Hit;
-            ClearToolButtonsToolChecked();
-            toolStripButtonToolHit.CheckState = CheckState.Checked;
+            UpdateToolButtonsToolChecked();
         }
 
         private void toolStripButtonToolAttack_Click(object sender, EventArgs e)
         {
             _Editor.EditMode = FrameEditMode.Attack;
-            ClearToolButtonsToolChecked();
-            toolStripButtonToolAttack.CheckState = CheckState.Checked;
+            UpdateToolButtonsToolChecked();
         }
 
         private void toolStripButtonToolPoint_Click(object sender, EventArgs e)
         {
             _Editor.EditMode = FrameEditMode.Point;
-            ClearToolButtonsToolChecked();
-            toolStripButtonToolPoint.CheckState = CheckState.Checked;
+            UpdateToolButtonsToolChecked();
         }
 
         private void physicalToolStripMenuItem_Click(object sender, EventArgs e)
@@ -457,6 +474,7 @@ namespace GS_PatEditor.Editor
 
         private void toolStripButtonBack_Click(object sender, EventArgs e)
         {
+            _Editor.PreviewMode = FramePreviewMode.Pause;
             _Editor.CurrentUI = EditorUI.AnimationList;
         }
 
