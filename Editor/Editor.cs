@@ -51,7 +51,7 @@ namespace GS_PatEditor.Editor
 
         public Editor(Pat.Project proj)
         {
-            ProjectReset += ResetAnimationIndex;
+            ProjectReset += ResetActionIndex;
             AnimationReset += ResetPreviewMode;
             AnimationReset += ResetEditMode;
 
@@ -122,25 +122,32 @@ namespace GS_PatEditor.Editor
 
         public event Action AnimationReset;
 
-        public Pat.Animation CurrentAnimation { get; private set; }
-
-        private int _SelectedAnimationIndex;
-        public int SelectedAnimationIndex
+        public Pat.Action CurrentAction { get; private set; }
+        public Pat.Animation CurrentAnimation
         {
             get
             {
-                return _SelectedAnimationIndex;
+                return CurrentAction == null ? null : CurrentAction.Animation;
+            }
+        }
+
+        private int _SelectedActionIndex;
+        public int SelectedActionIndex
+        {
+            get
+            {
+                return _SelectedActionIndex;
             }
             set
             {
-                _SelectedAnimationIndex = value;
+                _SelectedActionIndex = value;
                 if (value == -1)
                 {
-                    CurrentAnimation = null;
+                    CurrentAction = null;
                 }
                 else
                 {
-                    CurrentAnimation = Project.Animations[value];
+                    CurrentAction = Project.Actions[value];
                 }
 
                 SelectedFrameIndex = new FrameIndex(0, 0);
@@ -152,9 +159,9 @@ namespace GS_PatEditor.Editor
             }
         }
 
-        private void ResetAnimationIndex()
+        private void ResetActionIndex()
         {
-            SelectedAnimationIndex = Project.Animations.Count == 0 ? -1 : 0;
+            SelectedActionIndex = Project.Actions.Count == 0 ? -1 : 0;
         }
 
         #endregion
@@ -243,14 +250,10 @@ namespace GS_PatEditor.Editor
 
         public void ShowActionEditForm()
         {
-            if (CurrentAnimation != null && CurrentAnimation.ActionID != null)
+            if (CurrentAction != null)
             {
-                var action = Project.Actions.FirstOrDefault(a => a.ActionID == CurrentAnimation.ActionID);
-                if (action != null)
-                {
-                    var dialog = new ActionEditForm(action);
-                    dialog.ShowDialog();
-                }
+                var dialog = new ActionEditForm(CurrentAction);
+                dialog.ShowDialog();
             }
         }
 

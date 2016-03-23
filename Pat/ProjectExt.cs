@@ -19,5 +19,10 @@ namespace GS_PatEditor.Pat
                 .Where(file => File.Exists(file))
                 .FirstOrDefault();
         }
+
+        public static IEnumerable<Animation> GetAllAnimations(this Project proj)
+        {
+            return proj.Actions.Select(a => a.Animation).Where(a => a != null);
+        }
     }
 }

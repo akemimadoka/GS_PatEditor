@@ -21,7 +21,10 @@ namespace GS_PatEditor.Editor.Panels
 
             public Pat.Animation GetAnimationByID(string id)
             {
-                return Project.Animations.FirstOrDefault(a => a.AnimationID == (id == null ? DefaultAnimation : id));
+                return Project.Actions
+                    .Where(a => a.ActionID == (id == null ? DefaultAnimation : id) && a.Animation != null)
+                    .Select(a => a.Animation)
+                    .FirstOrDefault();
             }
         }
 
@@ -43,20 +46,14 @@ namespace GS_PatEditor.Editor.Panels
             _World.WhenFinished += PlayingFinished;
             _World.WhenError += PlayerError;
 
-            var animation = parent.CurrentAnimation;
+            var action = parent.CurrentAction;
 
             var actor = new Simulation.PlayerActor(_World,
-                new PatProjectAnimationProvider { Project = parent.Project, DefaultAnimation = animation.AnimationID },
+                new PatProjectAnimationProvider { Project = parent.Project, DefaultAnimation = action.ActionID },
                 new Simulation.SystemAnimationProvider(_Parent.Project),
-                new PatProjectActionProvider { Project = parent.Project })
-            {
-            };
+                new PatProjectActionProvider { Project = parent.Project });
 
-            var action = _Parent.Project.Actions.FirstOrDefault(a => a.ActionID == animation.ActionID);
-            if (animation.ActionID != null && action != null)
-            {
-                Simulation.ActionSetup.SetupActorForAction(actor, action);
-            }
+            Simulation.ActionSetup.SetupActorForAction(actor, action);
 
             _World.Add(actor);
 

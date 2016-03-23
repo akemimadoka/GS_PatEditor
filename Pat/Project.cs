@@ -19,8 +19,8 @@ namespace GS_PatEditor.Pat
         [XmlArray]
         public List<FrameImage> Images;
 
-        [XmlArray]
-        public List<Animation> Animations;
+        //[XmlArray]
+        //public List<Animation> Animations;
 
         [XmlArray]
         public List<Action> Actions;

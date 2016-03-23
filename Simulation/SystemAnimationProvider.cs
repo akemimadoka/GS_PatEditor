@@ -48,32 +48,32 @@ namespace GS_PatEditor.Simulation
 
         public Pat.Animation GetSystemAnimation_0_Stant()
         {
-            return _Project.Animations.FirstOrDefault(a => a.AnimationID == "stand");
+            return _Project.Actions.FirstOrDefault(a => a.ActionID == "stand").Animation;
         }
 
         public Pat.Animation GetSystemAnimation_1_Run()
         {
-            return _Project.Animations.FirstOrDefault(a => a.AnimationID == "run");
+            return _Project.Actions.FirstOrDefault(a => a.ActionID == "run").Animation;
         }
 
         public Pat.Animation GetSystemAnimation_3_JumpUp()
         {
-            return _Project.Animations.FirstOrDefault(a => a.AnimationID == "jump_up");
+            return _Project.Actions.FirstOrDefault(a => a.ActionID == "jump_up").Animation;
         }
 
         public Pat.Animation GetSystemAnimation_4_JumpFront()
         {
-            return _Project.Animations.FirstOrDefault(a => a.AnimationID == "jump_front");
+            return _Project.Actions.FirstOrDefault(a => a.ActionID == "jump_front").Animation;
         }
 
         public Pat.Animation GetSystemAnimation_8_Fall()
         {
-            return _Project.Animations.FirstOrDefault(a => a.AnimationID == "fall");
+            return _Project.Actions.FirstOrDefault(a => a.ActionID == "fall").Animation;
         }
 
         public Pat.Animation GetSystemAnimation_9_FallAttack()
         {
-            return _Project.Animations.FirstOrDefault(a => a.AnimationID == "fall_attack");
+            return _Project.Actions.FirstOrDefault(a => a.ActionID == "fall_attack").Animation;
         }
     }
 }

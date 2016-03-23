@@ -20,5 +20,8 @@ namespace GS_PatEditor.Pat
         [XmlArray]
         //[XmlIgnore]
         public List<EffectList> KeyFrameEffects;
+
+        [XmlElement]
+        public Animation Animation;
     }
 }

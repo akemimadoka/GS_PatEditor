@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GS_PatEditor.Pat;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -222,14 +223,14 @@ namespace GS_PatEditor.Editor
                     //replace all image ids
                     //TODO move to ImageList
                     image.ImageID = newValue;
-                    foreach (var animation in _Project.Animations)
+                    foreach (var animation in _Project.GetAllAnimations())
                     {
                         if (animation.ImageID == oldValue)
                         {
                             animation.ImageID = newValue;
                         }
                     }
-                    foreach (var frame in _Project.Animations
+                    foreach (var frame in _Project.GetAllAnimations()
                         .SelectMany(p => p.Segments)
                         .SelectMany(s => s.Frames))
                     {

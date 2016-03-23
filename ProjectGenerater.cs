@@ -18,7 +18,7 @@ namespace GS_PatEditor
             {
                 Actions = new List<Pat.Action>(),
                 //Actors = new List<Pat.Actor>(),
-                Animations = new List<Pat.Animation>(),
+                //Animations = new List<Pat.Animation>(),
                 Images = new List<Pat.FrameImage>(),
                 LocalInformation = new Pat.ProjectLocalInfo
                 {
@@ -69,7 +69,7 @@ namespace GS_PatEditor
 
             var proj = new Project();
             proj.Images = new List<FrameImage>();
-            proj.Animations = new List<Pat.Animation>();
+            //proj.Animations = new List<Pat.Animation>();
             proj.Actions = new List<Pat.Action>();
             //proj.Actors = new List<Pat.Actor>();
             proj.Settings = new ProjectSettings()
@@ -102,22 +102,39 @@ namespace GS_PatEditor
             };
 
             //import animations
-            ImportAnimationSegments(proj, gspat, 0, "stand");
-            ImportAnimationSegments(proj, gspat, 1, "walk");
-            ImportAnimationSegments(proj, gspat, 20, "attack");
+            proj.Actions.Add(new Pat.Action
+            {
+                ActionID = "stand",
+                Animation = ImportAnimationSegments(proj, gspat, 0),
+                InitEffects = new EffectList(),
+                UpdateEffects = new EffectList(),
+                KeyFrameEffects = new List<EffectList>(),
+            });
+            proj.Actions.Add(new Pat.Action
+            {
+                ActionID = "walk",
+                Animation = ImportAnimationSegments(proj, gspat, 1),
+                InitEffects = new EffectList(),
+                UpdateEffects = new EffectList(),
+                KeyFrameEffects = new List<EffectList>(),
+            });
+            proj.Actions.Add(new Pat.Action
+            {
+                ActionID = "attack",
+                Animation = ImportAnimationSegments(proj, gspat, 20),
+                InitEffects = new EffectList(),
+                UpdateEffects = new EffectList(),
+                KeyFrameEffects = new List<EffectList>(),
+            });
 
             //import homura's attack long for test
             //open homura_m's pat (which is also named homura.pat) may produce error
             if (Path.GetFileNameWithoutExtension(patfile) == "homura")
             {
-                ImportAnimationSegments(proj, gspat, 51, "assult_rifle");
-
-                var attackLong = ImportAnimationSegments(proj, gspat, 24, "attack_long");
-                attackLong.ActionID = "attack_long";
-
-                Pat.Action action_assult_rifle = new Pat.Action()
+                Pat.Action assult_rifle = new Pat.Action
                 {
                     ActionID = "assult_rifle",
+                    Animation = ImportAnimationSegments(proj, gspat, 51),
                     InitEffects = new EffectList()
                     {
                         new Pat.Effects.SetMotionEffect { Animation = "assult_rifle" },
@@ -135,10 +152,12 @@ namespace GS_PatEditor
                         new Pat.Effects.IncreaseCountEffect(),
                     },
                 };
+                proj.Actions.Add(assult_rifle);
 
-                Pat.Action action = new Pat.Action()
+                Pat.Action attack_long = new Pat.Action()
                 {
                     ActionID = "attack_long",
+                    Animation = ImportAnimationSegments(proj, gspat, 24),
                     InitEffects = new EffectList()
                     {
                         //new Pat.TestEffect(),
@@ -189,9 +208,7 @@ namespace GS_PatEditor
                         },
                     },
                 };
-
-                proj.Actions.Add(action_assult_rifle);
-                proj.Actions.Add(action);
+                proj.Actions.Add(attack_long);
             }
 
             CheckImageResources(proj, Path.GetDirectoryName(patfile));
@@ -241,12 +258,11 @@ namespace GS_PatEditor
             }
             return dialog.FileName;
         }
-        private static Pat.Animation ImportAnimationSegments(Pat.Project proj, GSPat.GSPatFile pat, int index, string id)
+        private static Pat.Animation ImportAnimationSegments(Pat.Project proj, GSPat.GSPatFile pat, int index)
         {
             var start = pat.Animations.FindLastIndex(a => a.AnimationID == index + pat.Animations[0].AnimationID);
             var patAnimation = new Pat.Animation
             {
-                AnimationID = id,
                 Segments = pat.Animations
                         .Skip(start).Take(1)
                         .Concat(pat.Animations.Skip(start + 1).TakeWhile(a => a.AnimationID == -2))
@@ -256,7 +272,6 @@ namespace GS_PatEditor
             {
                 patAnimation.ImageID = patAnimation.Segments[0].Frames[0].ImageID;
             }
-            proj.Animations.Add(patAnimation);
 
             return patAnimation;
         }
@@ -264,7 +279,6 @@ namespace GS_PatEditor
         {
             var patAnimation = new Pat.Animation
             {
-                AnimationID = id,
                 Segments = new List<AnimationSegment>()
                 {
                     ImportSegment(proj, pat, animation),
@@ -274,7 +288,13 @@ namespace GS_PatEditor
             {
                 patAnimation.ImageID = patAnimation.Segments[0].Frames[0].ImageID;
             }
-            proj.Animations.Add(patAnimation);
+
+            var action = new Pat.Action
+            {
+                ActionID = id,
+                Animation = patAnimation,
+            };
+            proj.Actions.Add(action);
         }
         private static AnimationSegment ImportSegment(Pat.Project proj, GSPat.GSPatFile pat, GSPat.Animation animation)
         {

@@ -10,14 +10,14 @@ namespace GS_PatEditor.Pat
     [Serializable]
     public class Animation
     {
-        [XmlAttribute]
-        public string AnimationID;
+        //[XmlAttribute]
+        //public string AnimationID;
 
         [XmlAttribute]
         public string ImageID;
 
-        [XmlAttribute]
-        public string SystemActionID;
+        //[XmlAttribute]
+        //public string SystemActionID;
 
         [XmlAttribute]
         public string ActionID;

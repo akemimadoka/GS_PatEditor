@@ -98,7 +98,7 @@ namespace GS_PatEditor.Editor.Panels
         {
             _Items.Clear();
 
-            var list = _Parent.Project.Animations;
+            var list = _Parent.Project.Actions;
             for (int i = 0; i < list.Count; ++i)
             {
                 var a = list[i];
@@ -120,15 +120,16 @@ namespace GS_PatEditor.Editor.Panels
             }
         }
 
-        private AnimationListItem CreateItemForAnimation(Pat.Animation animation, int index)
+        private AnimationListItem CreateItemForAnimation(Pat.Action action, int index)
         {
+            var animation = action.Animation;
             var img = animation.ImageID != null ?
                 _Parent.Project.ImageList.GetImage(animation.ImageID) :
                 null;
             var frameCount = animation.Segments.Sum(s => s.Frames.Count);
             var desc = animation.Segments.Count.ToString() + " segment(s), " +
                 frameCount.ToString() + " frame(s).";
-            return new AnimationListItem(img, animation.AnimationID, desc, index);
+            return new AnimationListItem(img, action.ActionID, desc, index);
         }
 
         public void Activate()
@@ -157,7 +158,7 @@ namespace GS_PatEditor.Editor.Panels
         {
             if (_SelectedItem != null)
             {
-                _Parent.SelectedAnimationIndex = _SelectedItem.Index;
+                _Parent.SelectedActionIndex = _SelectedItem.Index;
                 _Parent.CurrentUI = EditorUI.Animation;
             }
         }
@@ -166,7 +167,7 @@ namespace GS_PatEditor.Editor.Panels
         {
             if (_SelectedItem != null)
             {
-                _Parent.Project.Animations.RemoveAt(_SelectedItem.Index);
+                _Parent.Project.Actions.RemoveAt(_SelectedItem.Index);
                 _SelectedItem.IsSelected = false;
                 _SelectedItem = null;
 
@@ -176,22 +177,31 @@ namespace GS_PatEditor.Editor.Panels
 
         public void AddNew()
         {
-            var animation = new Pat.Animation();
-
             //find an available name
             int id = 1;
             {
-                var list = _Parent.Project.Animations;
-                while (list.Any(a => a.AnimationID == "New Animation " + id.ToString()))
+                var list = _Parent.Project.Actions;
+                while (list.Any(a => a.ActionID == "New Action " + id.ToString()))
                 {
                     ++id;
                 }
             }
-            animation.AnimationID = "New Animation " + id.ToString();
 
-            animation.Segments = new List<Pat.AnimationSegment>();
+            var animation = new Pat.Animation()
+            {
+                Segments = new List<Pat.AnimationSegment>(),
+            };
 
-            _Parent.Project.Animations.Add(animation);
+            var action = new Pat.Action()
+            {
+                ActionID = "New Action " + id.ToString(),
+                Animation = animation,
+                InitEffects = new Pat.EffectList(),
+                UpdateEffects = new Pat.EffectList(),
+                KeyFrameEffects = new List<Pat.EffectList>(),
+            };
+
+            _Parent.Project.Actions.Add(action);
 
             if (_SelectedItem != null)
             {
@@ -214,11 +224,11 @@ namespace GS_PatEditor.Editor.Panels
                 
                 var id = _SelectedItem.Index;
 
-                var currentAnimation = _Parent.Project.Animations[id];
-                dialog.AnimationID = currentAnimation.AnimationID;
+                var currentAnimation = _Parent.Project.Actions[id];
+                dialog.AnimationID = currentAnimation.ActionID;
                 if (dialog.ShowDialog() == DialogResult.OK)
                 {
-                    currentAnimation.AnimationID = dialog.AnimationID;
+                    currentAnimation.ActionID = dialog.AnimationID;
 
                     _SelectedItem.IsSelected = false;
                     _SelectedItem = null;

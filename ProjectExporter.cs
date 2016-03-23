@@ -27,8 +27,14 @@ namespace GS_PatEditor
             //export animations
             int nextAnimationID = startID;
             ret.Animations = new List<GSPat.Animation>();
-            foreach (var animation in proj.Animations)
+            foreach (var action in proj.Actions)
             {
+                var animation = action.Animation;
+                if (animation == null)
+                {
+                    continue;
+                }
+
                 if (animation.Segments.Count == 0)
                 {
                     continue;
