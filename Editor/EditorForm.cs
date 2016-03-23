@@ -427,6 +427,12 @@ namespace GS_PatEditor.Editor
             _Editor.AttackBoxVisible = attackToolStripMenuItem.Checked;
         }
 
+        private void pointVisibleToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            pointVisibleToolStripMenuItem.Checked = !pointVisibleToolStripMenuItem.Checked;
+            _Editor.PointVisible = pointVisibleToolStripMenuItem.Checked;
+        }
+
         private void toolStripSplitEdit_DropDownOpening(object sender, EventArgs e)
         {
             _ClipboardPhysical.UpdateEnable();
@@ -461,7 +467,11 @@ namespace GS_PatEditor.Editor
 
         private void toolStripButtonRemoveAnimation_Click(object sender, EventArgs e)
         {
-            _Editor.AnimationListUI.RemoveCurrent();
+            if (MessageBox.Show("Remove the action?", "PatEditor",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
+            {
+                _Editor.AnimationListUI.RemoveCurrent();
+            }
         }
 
         private void toolStripButtonNewAnimation_Click(object sender, EventArgs e)

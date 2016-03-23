@@ -115,6 +115,7 @@
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialogExport = new System.Windows.Forms.SaveFileDialog();
             this.saveFileDialogSave = new System.Windows.Forms.SaveFileDialog();
+            this.pointVisibleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1.SuspendLayout();
             this.panelAnimations.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.animations)).BeginInit();
@@ -366,7 +367,8 @@
             this.axisToolStripMenuItem,
             this.physicalToolStripMenuItem,
             this.hitToolStripMenuItem1,
-            this.attackToolStripMenuItem});
+            this.attackToolStripMenuItem,
+            this.pointVisibleToolStripMenuItem});
             this.toolStripSplitBoxVisible.Image = ((System.Drawing.Image)(resources.GetObject("toolStripSplitBoxVisible.Image")));
             this.toolStripSplitBoxVisible.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripSplitBoxVisible.Name = "toolStripSplitBoxVisible";
@@ -855,6 +857,15 @@
             // 
             this.saveFileDialogSave.Filter = "Editor PatProject File(*.patproj)|*.patproj";
             // 
+            // pointVisibleToolStripMenuItem
+            // 
+            this.pointVisibleToolStripMenuItem.Checked = true;
+            this.pointVisibleToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.pointVisibleToolStripMenuItem.Name = "pointVisibleToolStripMenuItem";
+            this.pointVisibleToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.pointVisibleToolStripMenuItem.Text = "Point";
+            this.pointVisibleToolStripMenuItem.Click += new System.EventHandler(this.pointVisibleToolStripMenuItem_Click);
+            // 
             // EditorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -968,5 +979,6 @@
         private System.Windows.Forms.ToolStripButton toolStripButtonEditAction;
         private System.Windows.Forms.ToolStripButton toolStripButtonToolPoint;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator12;
+        private System.Windows.Forms.ToolStripMenuItem pointVisibleToolStripMenuItem;
     }
 }
