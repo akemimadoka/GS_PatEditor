@@ -212,28 +212,28 @@ namespace GS_PatEditor.Editor.Panels.Tools.Physical
         {
             get
             {
-                var frame = _Editor.Animation.Frame.FrameData;
+                var frame = _Editor.Frame.FrameData;
                 return frame != null && frame.PhysicalBox != null;
             }
         }
 
         public bool ClipboardDataAvailable(object data)
         {
-            var frame = _Editor.Animation.Frame.FrameData;
+            var frame = _Editor.Frame.FrameData;
             return frame != null && data is Pat.PhysicalBox;
         }
 
         public object Copy()
         {
             FinishMouseEvent();
-            var frame = _Editor.Animation.Frame.FrameData;
+            var frame = _Editor.Frame.FrameData;
             return frame != null ? frame.PhysicalBox : null;
         }
 
         public void Delete()
         {
             FinishMouseEvent();
-            var frame = _Editor.Animation.Frame.FrameData;
+            var frame = _Editor.Frame.FrameData;
             if (frame != null)
             {
                 frame.PhysicalBox = null;
@@ -243,7 +243,7 @@ namespace GS_PatEditor.Editor.Panels.Tools.Physical
         public void Paste(object data)
         {
             FinishMouseEvent();
-            var frame = _Editor.Animation.Frame.FrameData;
+            var frame = _Editor.Frame.FrameData;
             if (data == null && !(data is Pat.PhysicalBox) || frame == null)
             {
                 return;
@@ -260,14 +260,14 @@ namespace GS_PatEditor.Editor.Panels.Tools.Physical
         {
             get
             {
-                var frame = _Editor.Animation.Frame.FrameData;
+                var frame = _Editor.Frame.FrameData;
                 return frame != null && frame.PhysicalBox == null;
             }
         }
 
         public void New()
         {
-            var frame = _Editor.Animation.Frame.FrameData;
+            var frame = _Editor.Frame.FrameData;
             if (frame != null)
             {
                 frame.PhysicalBox = new Pat.PhysicalBox

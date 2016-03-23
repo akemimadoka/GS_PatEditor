@@ -63,7 +63,7 @@ namespace GS_PatEditor.Editor.Nodes
                 }
             }
             SelectedFrameIndex = frame;
-            Frame.Reset(seg, seg.Frames[SelectedFrameIndex]);
+            Frame.Reset(seg, seg.Frames[frame]);
         }
 
         public event Action OnReset;

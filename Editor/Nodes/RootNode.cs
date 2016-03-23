@@ -6,52 +6,52 @@ using System.Threading.Tasks;
 
 namespace GS_PatEditor.Editor.Nodes
 {
-    class RootNode
-    {
-        public Pat.Project Data { get; private set; }
-        public AnimationNode Animation { get; private set; }
-
-        private int _SelectedAnimationIndex;
-        public int SelectedAnimationIndex
-        {
-            get
-            {
-                return _SelectedAnimationIndex;
-            }
-            set
-            {
-                _SelectedAnimationIndex = value;
-                if (value == -1)
-                {
-                    Animation.Reset(null);
-                }
-                else
-                {
-                    Animation.Reset(Data.Animations[value]);
-                }
-            }
-        }
-
-        public event Action OnReset;
-
-        public void Reset(Pat.Project proj)
-        {
-            Data = proj;
-            SelectedAnimationIndex = proj.Animations.Count == 0 ? -1 : 0;
-            if (OnReset != null)
-            {
-                OnReset();
-            }
-        }
-
-        public static RootNode CreateRootNode(Pat.Project proj, Editor parent)
-        {
-            return new RootNode
-            {
-                Data = proj,
-                Animation = new AnimationNode(parent),
-                SelectedAnimationIndex = proj.Animations.Count == 0 ? -1 : 0,
-            };
-        }
-    }
+    //class RootNode
+    //{
+    //    public Pat.Project Data { get; private set; }
+    //    public AnimationNode Animation { get; private set; }
+    //
+    //    private int _SelectedAnimationIndex;
+    //    public int SelectedAnimationIndex
+    //    {
+    //        get
+    //        {
+    //            return _SelectedAnimationIndex;
+    //        }
+    //        set
+    //        {
+    //            _SelectedAnimationIndex = value;
+    //            if (value == -1)
+    //            {
+    //                Animation.Reset(null);
+    //            }
+    //            else
+    //            {
+    //                Animation.Reset(Data.Animations[value]);
+    //            }
+    //        }
+    //    }
+    //
+    //    public event Action OnReset;
+    //
+    //    public void Reset(Pat.Project proj)
+    //    {
+    //        Data = proj;
+    //        SelectedAnimationIndex = proj.Animations.Count == 0 ? -1 : 0;
+    //        if (OnReset != null)
+    //        {
+    //            OnReset();
+    //        }
+    //    }
+    //
+    //    public static RootNode CreateRootNode(Pat.Project proj, Editor parent)
+    //    {
+    //        return new RootNode
+    //        {
+    //            Data = proj,
+    //            Animation = new AnimationNode(parent),
+    //            SelectedAnimationIndex = proj.Animations.Count == 0 ? -1 : 0,
+    //        };
+    //    }
+    //}
 }

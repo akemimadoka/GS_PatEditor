@@ -43,7 +43,7 @@ namespace GS_PatEditor.Editor.Panels
             _World.WhenFinished += PlayingFinished;
             _World.WhenError += PlayerError;
 
-            var animation = parent.Animation.Data;
+            var animation = parent.CurrentAnimation;
 
             var actor = new Simulation.PlayerActor(_World,
                 new PatProjectAnimationProvider { Project = parent.Project, DefaultAnimation = animation.AnimationID },
@@ -68,12 +68,12 @@ namespace GS_PatEditor.Editor.Panels
 
         private void PlayingFinished()
         {
-            _Parent.Animation.Frame.ChangePreviewMode(Nodes.FrameNode.FramePreviewMode.Pause);
+            _Parent.Frame.ChangePreviewMode(Nodes.FrameNode.FramePreviewMode.Pause);
         }
 
         private void PlayerError()
         {
-            _Parent.Animation.Frame.ChangePreviewMode(Nodes.FrameNode.FramePreviewMode.Pause);
+            _Parent.Frame.ChangePreviewMode(Nodes.FrameNode.FramePreviewMode.Pause);
         }
 
         public override void Render()

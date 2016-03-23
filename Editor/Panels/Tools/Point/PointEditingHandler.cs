@@ -68,7 +68,7 @@ namespace GS_PatEditor.Editor.Panels.Tools.Point
         {
             if (e.Button.HasFlag(MouseButtons.Left) && EditingPoint != -1)
             {
-                var frame = _Editor.Animation.Frame.FrameData;
+                var frame = _Editor.Frame.FrameData;
                 ValidatePoints(frame);
                 frame.Points[EditingPoint].X += OffsetX;
                 frame.Points[EditingPoint].Y += OffsetY;
@@ -92,7 +92,7 @@ namespace GS_PatEditor.Editor.Panels.Tools.Point
         private int FindPointAt(int x, int y)
         {
             const int Margin = 3;
-            var frame = _Editor.Animation.Frame.FrameData;
+            var frame = _Editor.Frame.FrameData;
             ValidatePoints(frame);
             for (int i = 0; i < 3; ++i)
             {
@@ -126,7 +126,7 @@ namespace GS_PatEditor.Editor.Panels.Tools.Point
 
         public IEnumerable<Pat.FramePoint> Points()
         {
-            var frame = _Editor.Animation.Frame.FrameData;
+            var frame = _Editor.Frame.FrameData;
             if (frame != null)
             {
                 ValidatePoints(frame);

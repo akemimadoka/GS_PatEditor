@@ -182,7 +182,7 @@ namespace GS_PatEditor.Editor.Panels
         {
             _Parent = parent;
 
-            parent.Animation.OnReset += RefreshList;
+            parent.AnimationReset += OnAnimationReset;
 
             RefreshList();
         }
@@ -287,12 +287,12 @@ namespace GS_PatEditor.Editor.Panels
             if (grid != null)
             {
                 grid.IsSelected = true;
-                _Parent.Animation.SetSelectedFrame(grid.Segment, grid.Frame);
+                _Parent.SelectedFrameIndex = new FrameIndex(grid.Segment, grid.Frame);
             }
             else
             {
                 //clear selected
-                _Parent.Animation.SetSelectedFrame(-1, -1);
+                _Parent.SelectedFrameIndex = new FrameIndex(-1, -1);
             }
             _LastSelected = grid;
 
@@ -327,6 +327,12 @@ namespace GS_PatEditor.Editor.Panels
             }
         }
 
+        private void OnAnimationReset()
+        {
+            _LastSelected = null;
+            RefreshList();
+        }
+
         private void RefreshList()
         {
             //save the list
@@ -336,7 +342,7 @@ namespace GS_PatEditor.Editor.Panels
 
             _GridList.Clear();
 
-            var data = _Parent.Animation.Data;
+            var data = _Parent.CurrentAnimation;
             if (data == null)
             {
                 UpdateControlWidth();
@@ -484,7 +490,7 @@ namespace GS_PatEditor.Editor.Panels
                     return;
                 }
 
-                var animation = _Parent.Animation.Data;
+                var animation = _Parent.CurrentAnimation;
                 if (animation == null)
                 {
                     return;
@@ -524,7 +530,7 @@ namespace GS_PatEditor.Editor.Panels
                     return;
                 }
 
-                var animation = _Parent.Animation.Data;
+                var animation = _Parent.CurrentAnimation;
                 if (animation == null)
                 {
                     return;
@@ -555,7 +561,7 @@ namespace GS_PatEditor.Editor.Panels
                     return;
                 }
 
-                var animation = _Parent.Animation.Data;
+                var animation = _Parent.CurrentAnimation;
                 if (animation == null)
                 {
                     return;
@@ -575,7 +581,7 @@ namespace GS_PatEditor.Editor.Panels
             {
                 var grid = (KeyFrameGrid)_LastSelected;
 
-                var animation = _Parent.Animation.Data;
+                var animation = _Parent.CurrentAnimation;
                 if (animation == null)
                 {
                     return;
@@ -622,7 +628,7 @@ namespace GS_PatEditor.Editor.Panels
             {
                 var grid = (KeyFrameGrid)_LastSelected;
 
-                var animation = _Parent.Animation.Data;
+                var animation = _Parent.CurrentAnimation;
                 if (animation == null)
                 {
                     return;
@@ -649,7 +655,7 @@ namespace GS_PatEditor.Editor.Panels
                 if (dialog.ShowDialog() == DialogResult.OK)
                 {
                     //create a new frame
-                    var animation = _Parent.Animation.Data;
+                    var animation = _Parent.CurrentAnimation;
                     if (animation == null)
                     {
                         return;
@@ -696,7 +702,7 @@ namespace GS_PatEditor.Editor.Panels
                 var segmentIndex = grid.Segment;
                 var frameIndex = grid.Frame;
 
-                var animation = _Parent.Animation.Data;
+                var animation = _Parent.CurrentAnimation;
                 if (animation == null)
                 {
                     return;
@@ -734,7 +740,7 @@ namespace GS_PatEditor.Editor.Panels
                 var segmentIndex = grid.Segment;
                 var frameIndex = grid.Frame;
 
-                var animation = _Parent.Animation.Data;
+                var animation = _Parent.CurrentAnimation;
                 if (animation == null)
                 {
                     return;
@@ -779,7 +785,7 @@ namespace GS_PatEditor.Editor.Panels
             get
             {
                 //can not insert (only paste is supported) at the beginning
-                return _Parent.Animation.Data != null &&
+                return _Parent.CurrentAnimation != null &&
                     (_LastSelected == null || _LastSelected.Segment != 0 || _LastSelected.Frame != 0);
             }
         }
@@ -812,7 +818,7 @@ namespace GS_PatEditor.Editor.Panels
             {
                 return;
             }
-            var animation = _Parent.Animation.Data;
+            var animation = _Parent.CurrentAnimation;
             if (animation == null)
             {
                 return;
@@ -835,7 +841,7 @@ namespace GS_PatEditor.Editor.Panels
                 return;
             }
 
-            var animation = _Parent.Animation.Data;
+            var animation = _Parent.CurrentAnimation;
             if (animation == null)
             {
                 return;
@@ -866,7 +872,7 @@ namespace GS_PatEditor.Editor.Panels
         {
             get
             {
-                return _Parent.Animation.Data != null && _LastSelected != null;
+                return _Parent.CurrentAnimation != null && _LastSelected != null;
             }
         }
 
@@ -874,7 +880,7 @@ namespace GS_PatEditor.Editor.Panels
         {
             get
             {
-                var animation = _Parent.Animation.Data;
+                var animation = _Parent.CurrentAnimation;
                 if (animation == null || _LastSelected == null)
                 {
                     return -1;
@@ -914,7 +920,7 @@ namespace GS_PatEditor.Editor.Panels
                     return;
                 }
 
-                var animation = _Parent.Animation.Data;
+                var animation = _Parent.CurrentAnimation;
                 var segment = animation.Segments[_LastSelected.Segment];
                 var time = segment.Frames.Take(_LastSelected.Frame)
                             .Sum(f => f.Duration);
@@ -954,7 +960,7 @@ namespace GS_PatEditor.Editor.Panels
                     return;
                 }
 
-                var animation = _Parent.Animation.Data;
+                var animation = _Parent.CurrentAnimation;
                 var segment = animation.Segments[_LastSelected.Segment];
                 var time = segment.Frames.Take(_LastSelected.Frame)
                             .Sum(f => f.Duration);

@@ -81,14 +81,14 @@ namespace GS_PatEditor.Editor.Panels
         {
             return delegate(ref bool result)
             {
-                result = _Parent.Animation.Frame.EditMode == mode;
+                result = _Parent.Frame.EditMode == mode;
 
                 //visible condition
 
                 switch (mode)
                 {
                     case FrameEditMode.Physical:
-                        result = result && _Parent.Animation.Frame.PhysicalBoxVisible;
+                        result = result && _Parent.Frame.PhysicalBoxVisible;
                         break;
                 }
             };
@@ -126,7 +126,7 @@ namespace GS_PatEditor.Editor.Panels
         {
             SpriteManager.ResetAll();
 
-            switch (_Parent.Animation.Frame.PreviewMode)
+            switch (_Parent.Frame.PreviewMode)
             {
                 case FrameNode.FramePreviewMode.Pause:
                     CurrentContent = new PreviewWindowStatic(_Parent);

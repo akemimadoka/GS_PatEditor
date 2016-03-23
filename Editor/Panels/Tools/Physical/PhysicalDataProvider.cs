@@ -49,7 +49,7 @@ namespace GS_PatEditor.Editor.Panels.Tools.Physical
         {
             _IsEditing = true;
 
-            var frame = _Editor.Animation.Frame.FrameData;
+            var frame = _Editor.Frame.FrameData;
             if (frame == null || frame.PhysicalBox == null)
             {
                 return;
@@ -65,7 +65,7 @@ namespace GS_PatEditor.Editor.Panels.Tools.Physical
         {
             _IsEditing = false;
 
-            var frame = _Editor.Animation.Frame.FrameData;
+            var frame = _Editor.Frame.FrameData;
             if (frame == null || frame.PhysicalBox == null)
             {
                 return;
@@ -79,7 +79,7 @@ namespace GS_PatEditor.Editor.Panels.Tools.Physical
 
         private Pat.PhysicalBox GetPhysicalBox()
         {
-            var frame = _Editor.Animation.Frame.FrameData;
+            var frame = _Editor.Frame.FrameData;
             if (frame == null || frame.PhysicalBox == null)
             {
                 NullBox.X = 0;

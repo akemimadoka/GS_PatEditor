@@ -14,6 +14,18 @@ namespace GS_PatEditor.Editor
         Animation,
     }
 
+    struct FrameIndex
+    {
+        public readonly int Segment;
+        public readonly int Frame;
+
+        public FrameIndex(int segment, int frame)
+        {
+            Segment = segment;
+            Frame = frame;
+        }
+    }
+
     class Editor : IDisposable
     {
 
@@ -28,7 +40,9 @@ namespace GS_PatEditor.Editor
         {
             ProjectReset += ResetAnimationIndex;
 
-            Animation = new AnimationNode(this);
+            //Animation = new AnimationNode(this);
+            Frame = new FrameNode(this);
+
             Project = proj;
 
             AnimationFramesUI = new AnimationFrames(this);
@@ -43,7 +57,8 @@ namespace GS_PatEditor.Editor
             PreviewWindowUI = null;
         }
 
-        public AnimationNode Animation { get; private set; }
+        //public AnimationNode Animation { get; private set; }
+        public FrameNode Frame;
 
         #region Main UI
 
@@ -97,6 +112,10 @@ namespace GS_PatEditor.Editor
 
         #region AnimationIndex
 
+        public event Action AnimationReset;
+
+        public Pat.Animation CurrentAnimation { get; private set; }
+
         private int _SelectedAnimationIndex;
         public int SelectedAnimationIndex
         {
@@ -109,11 +128,20 @@ namespace GS_PatEditor.Editor
                 _SelectedAnimationIndex = value;
                 if (value == -1)
                 {
-                    Animation.Reset(null);
+                    CurrentAnimation = null;
                 }
                 else
                 {
-                    Animation.Reset(Project.Animations[value]);
+                    CurrentAnimation = Project.Animations[value];
+                }
+
+                //Animation.Reset(CurrentAnimation);
+                Frame.ResetAnimation();
+                SelectedFrameIndex = new FrameIndex(0, 0);
+
+                if (AnimationReset != null)
+                {
+                    AnimationReset();
                 }
             }
         }
@@ -121,6 +149,87 @@ namespace GS_PatEditor.Editor
         private void ResetAnimationIndex()
         {
             SelectedAnimationIndex = Project.Animations.Count == 0 ? -1 : 0;
+        }
+
+        #endregion
+
+        #region FrameIndex
+
+        private int _SelectedFrameIndex, _SelectedSegmentIndex;
+        public FrameIndex SelectedFrameIndex
+        {
+            get
+            {
+                return new FrameIndex(_SelectedSegmentIndex, _SelectedFrameIndex);
+            }
+            set
+            {
+                var segment = value.Segment;
+                var frame = value.Frame;
+
+                if (CurrentAnimation == null)
+                {
+                    Frame.Reset(null, null);
+                    return;
+                }
+
+                if (segment == -1 || frame == -1)
+                {
+                    Frame.Reset(null, null);
+                    return;
+                }
+
+                if (segment >= CurrentAnimation.Segments.Count)
+                {
+                    if (CurrentAnimation.Segments.Count == 0)
+                    {
+                        _SelectedSegmentIndex = -1;
+                        _SelectedFrameIndex = -1;
+                        Frame.Reset(null, null);
+                        return;
+                    }
+                    else
+                    {
+                        segment = 0;
+                    }
+                }
+
+                _SelectedSegmentIndex = segment;
+                var seg = CurrentAnimation.Segments[segment];
+
+                if (frame >= seg.Frames.Count)
+                {
+                    if (seg.Frames.Count == 0)
+                    {
+                        _SelectedFrameIndex = -1;
+                        Frame.Reset(seg, null);
+                        return;
+                    }
+                    else
+                    {
+                        frame = 0;
+                    }
+                }
+                _SelectedFrameIndex = frame;
+                Frame.Reset(seg, seg.Frames[frame]);
+            }
+        }
+
+        #endregion
+
+        #region Show Forms
+
+        public void ShowActionEditForm()
+        {
+            if (CurrentAnimation != null && CurrentAnimation.ActionID != null)
+            {
+                var action = Project.Actions.FirstOrDefault(a => a.ActionID == CurrentAnimation.ActionID);
+                if (action != null)
+                {
+                    var dialog = new ActionEditForm(action);
+                    dialog.ShowDialog();
+                }
+            }
         }
 
         #endregion

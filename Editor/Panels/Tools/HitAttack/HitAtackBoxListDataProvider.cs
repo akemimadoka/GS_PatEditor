@@ -14,7 +14,7 @@ namespace GS_PatEditor.Editor.Panels.Tools.HitAttack
 
         public HitAtackBoxListDataProvider(Editor editor, Func<Pat.Frame, List<Pat.Box>> boxList)
         {
-            editor.Animation.Frame.OnReset += ResetDataList;
+            editor.Frame.OnReset += ResetDataList;
 
             _Editor = editor;
             _BoxList = boxList;
@@ -27,7 +27,7 @@ namespace GS_PatEditor.Editor.Panels.Tools.HitAttack
             //TODO reuse items in the list
             DataList.Clear();
 
-            var frame = _Editor.Animation.Frame.FrameData;
+            var frame = _Editor.Frame.FrameData;
             if (frame != null)
             {
                 var boxList = _BoxList(frame);
