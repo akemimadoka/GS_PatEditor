@@ -1,5 +1,4 @@
-﻿using GS_PatEditor.Editor.Nodes;
-using GS_PatEditor.Editor.Panels;
+﻿using GS_PatEditor.Editor.Panels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -44,12 +43,10 @@ namespace GS_PatEditor.Editor
 
     class Editor : IDisposable
     {
-
         //ui
 
         public AnimationFrames AnimationFramesUI { get; private set; }
         public PreviewWindow PreviewWindowUI { get; private set; }
-
         public AnimationList AnimationListUI { get; private set; }
 
         public Editor(Pat.Project proj)
@@ -63,7 +60,6 @@ namespace GS_PatEditor.Editor
             AnimationFramesUI = new AnimationFrames(this);
             PreviewWindowUI = new PreviewWindow(this);
             AnimationListUI = new AnimationList(this);
-
         }
 
         public void Dispose()
@@ -321,12 +317,6 @@ namespace GS_PatEditor.Editor
                 }
 
                 _PreviewMode = value;
-
-                //TODO use event
-                if (PreviewWindowUI != null)
-                {
-                    PreviewWindowUI.UpdatePreviewMode();
-                }
 
                 if (PreviewModeChanged != null)
                 {

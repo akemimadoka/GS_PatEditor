@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using GS_PatEditor.Editor.Nodes;
 using GS_PatEditor.Pat;
 using System.Windows.Forms;
 

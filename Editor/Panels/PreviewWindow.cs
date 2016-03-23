@@ -1,5 +1,4 @@
-﻿using GS_PatEditor.Editor.Nodes;
-using GS_PatEditor.Editor.Panels.Tools;
+﻿using GS_PatEditor.Editor.Panels.Tools;
 using GS_PatEditor.Editor.Panels.Tools.HitAttack;
 using GS_PatEditor.Editor.Panels.Tools.Move;
 using GS_PatEditor.Editor.Panels.Tools.Physical;
@@ -44,6 +43,7 @@ namespace GS_PatEditor.Editor.Panels
         public PreviewWindow(Editor parent)
         {
             _Parent = parent;
+            parent.PreviewModeChanged += OnPreviewModeChanged;
         }
 
         public void Init(Control ctrl)
@@ -74,7 +74,7 @@ namespace GS_PatEditor.Editor.Panels
 
             PointEditing = new PointEditingHandler(_Parent, ctrl);
 
-            UpdatePreviewMode();
+            OnPreviewModeChanged();
         }
 
         public EventFilter GetFilterForEditMode(FrameEditMode mode)
@@ -130,8 +130,7 @@ namespace GS_PatEditor.Editor.Panels
             }
         }
 
-        //called by FrameNode, when update mode is changed
-        public void UpdatePreviewMode()
+        private void OnPreviewModeChanged()
         {
             SpriteManager.ResetAll();
 

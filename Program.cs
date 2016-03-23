@@ -1,22 +1,28 @@
-﻿using System;
+﻿using GS_PatEditor.Editor;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace GS_PatEditor
 {
-    static class Program
+    class Program
     {
-        /// <summary>
-        /// 应用程序的主入口点。
-        /// </summary>
         [STAThread]
-        static void Main()
+        private static void Main()
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+
+            var proj = ProjectGenerater.GenerateEmpty("", new List<string>());
+            proj.IsEmptyProject = true;
+
+            if (proj != null)
+            {
+                EditorForm.ShowEditorForm(proj);
+            }
         }
     }
 }

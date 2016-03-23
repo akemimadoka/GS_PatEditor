@@ -1,5 +1,4 @@
-﻿using GS_PatEditor.Editor.Nodes;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -269,7 +268,6 @@ namespace GS_PatEditor.Editor.Panels.Tools.HitAttack
 
         void _Control_MouseMove(object sender, MouseEventArgs e)
         {
-            //TODO process edit
             if (_EditingSingleRectPoint != RectPoint.None)
             {
                 var p = new Point(e.X, e.Y);
