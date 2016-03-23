@@ -3,6 +3,7 @@ using GS_PatEditor.Editor.Panels.Tools;
 using GS_PatEditor.Editor.Panels.Tools.HitAttack;
 using GS_PatEditor.Editor.Panels.Tools.Move;
 using GS_PatEditor.Editor.Panels.Tools.Physical;
+using GS_PatEditor.Editor.Panels.Tools.Point;
 using GS_PatEditor.Editor.Panels.Tools.Preview;
 using GS_PatEditor.Render;
 using System;
@@ -38,6 +39,7 @@ namespace GS_PatEditor.Editor.Panels
         public PhysicalEditingHandler PhysicalEditing { get; private set; }
         public HitAttackBoxesEditingHandler HitEditing { get; private set; }
         public HitAttackBoxesEditingHandler AttackEditing { get; private set; }
+        public PointEditingHandler PointEditing { get; private set; }
 
         public PreviewWindow(Editor parent)
         {
@@ -69,6 +71,8 @@ namespace GS_PatEditor.Editor.Panels
 
             HitEditing = new HitBoxesEditingHandler(_Parent, ctrl);
             AttackEditing = new AttackBoxesEditingHandler(_Parent, ctrl);
+
+            PointEditing = new PointEditingHandler(_Parent, ctrl);
 
             UpdatePreviewMode();
         }

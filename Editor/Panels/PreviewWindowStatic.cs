@@ -13,6 +13,7 @@ namespace GS_PatEditor.Editor.Panels
 
         private Sprite _Sprite, _SpriteLineV, _SpriteLineH;
         private Sprite[] _SpriteListPhysical;
+        private Sprite[] _SpritePoints;
 
         public PreviewWindowStatic(Editor parent)
         {
@@ -34,6 +35,24 @@ namespace GS_PatEditor.Editor.Panels
             _SpriteLineV.SetupPosition(0, 0, 0);
 
             _SpriteListPhysical = sprites.GetRectangle(0);
+
+            _SpritePoints = new[] {
+                sprites.GetSprite(3),
+                sprites.GetSprite(4),
+                sprites.GetSprite(5),
+                sprites.GetSprite(6),
+                sprites.GetSprite(7),
+                sprites.GetSprite(8),
+            };
+
+            uint[] colors = new uint[] { 0xDC2020, 0xFFFF00, 0x20F010 };
+            for (int i = 0; i < 3; ++i)
+            {
+                _SpritePoints[i * 2].SetupLine(colors[i], 8);
+                _SpritePoints[i * 2].SetRotationOffset(0.5f);
+                _SpritePoints[i * 2 + 1].SetupLine(colors[i], 8);
+                _SpritePoints[i * 2 + 1].SetRotationOffset(1.5f);
+            }
         }
 
         public override void Render()
@@ -83,6 +102,22 @@ namespace GS_PatEditor.Editor.Panels
                 {
                     var s = sprites.GetRectangle(rectIndex++);
                     s.SetupHit(0xE8A200, box);
+                    s.Render();
+                }
+            }
+            if (true)
+            {
+                int index = 0;
+                Sprite s;
+                foreach (var point in _Parent.PreviewWindowUI.PointEditing.Points())
+                {
+                    //sprite 1
+                    s = _SpritePoints[index++];
+                    s.SetupPosition(point.X, point.Y, 0);
+                    s.Render();
+                    //sprite 2
+                    s = _SpritePoints[index++];
+                    s.SetupPosition(point.X, point.Y, 0);
                     s.Render();
                 }
             }

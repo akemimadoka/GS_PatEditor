@@ -109,9 +109,12 @@ namespace GS_PatEditor.Editor
                         frm.toolStripSplitBoxVisible,
                         frm.toolStripSeparator3,
                         frm.toolStripSplitEdit,
+                        frm.toolStripSplitButtonKeyFrame,
                         frm.toolStripSeparator6,
-                        frm.toolStripButtonBack,
-                        frm.toolStripSplitButtonKeyFrame
+                        frm.toolStripButtonPlay,
+                        frm.toolStripButtonEditAction,
+                        frm.toolStripSeparator12,
+                        frm.toolStripButtonBack
                     );
                     frm._GroupToolImageList = new VisibleGroup(new ToolStripButton[0]);
 
@@ -342,6 +345,7 @@ namespace GS_PatEditor.Editor
             toolStripButtonToolPhysics.CheckState = CheckState.Unchecked;
             toolStripButtonToolHit.CheckState = CheckState.Unchecked;
             toolStripButtonToolAttack.CheckState = CheckState.Unchecked;
+            toolStripButtonToolPoint.CheckState = CheckState.Unchecked;
         }
 
         private void toolStripButtonToolCursor_Click(object sender, EventArgs e)
@@ -386,6 +390,15 @@ namespace GS_PatEditor.Editor
             {
                 ClearToolButtonsToolChecked();
                 toolStripButtonToolAttack.CheckState = CheckState.Checked;
+            }
+        }
+
+        private void toolStripButtonToolPoint_Click(object sender, EventArgs e)
+        {
+            if (ChangeEditMode(FrameEditMode.Point))
+            {
+                ClearToolButtonsToolChecked();
+                toolStripButtonToolPoint.CheckState = CheckState.Checked;
             }
         }
 

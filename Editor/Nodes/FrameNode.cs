@@ -13,6 +13,7 @@ namespace GS_PatEditor.Editor.Nodes
         Physical,
         Hit,
         Attack,
+        Point,
     }
     class FrameNode
     {

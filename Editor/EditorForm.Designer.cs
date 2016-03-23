@@ -113,6 +113,8 @@
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialogExport = new System.Windows.Forms.SaveFileDialog();
             this.saveFileDialogSave = new System.Windows.Forms.SaveFileDialog();
+            this.toolStripSeparator12 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButtonToolPoint = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
             this.panelAnimations.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.animations)).BeginInit();
@@ -150,6 +152,7 @@
             this.toolStripButtonToolPhysics,
             this.toolStripButtonToolHit,
             this.toolStripButtonToolAttack,
+            this.toolStripButtonToolPoint,
             this.toolStripSeparator2,
             this.toolStripSplitBoxVisible,
             this.toolStripSplitEdit,
@@ -157,6 +160,7 @@
             this.toolStripSeparator6,
             this.toolStripButtonPlay,
             this.toolStripButtonEditAction,
+            this.toolStripSeparator12,
             this.toolStripButtonBack});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
@@ -751,7 +755,7 @@
             this.toolStripButtonBack.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonBack.Image")));
             this.toolStripButtonBack.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonBack.Name = "toolStripButtonBack";
-            this.toolStripButtonBack.Size = new System.Drawing.Size(56, 22);
+            this.toolStripButtonBack.Size = new System.Drawing.Size(56, 21);
             this.toolStripButtonBack.Text = "Back";
             this.toolStripButtonBack.Click += new System.EventHandler(this.toolStripButtonBack_Click);
             // 
@@ -835,6 +839,21 @@
             // saveFileDialogSave
             // 
             this.saveFileDialogSave.Filter = "Editor PatProject File(*.patproj)|*.patproj";
+            // 
+            // toolStripSeparator12
+            // 
+            this.toolStripSeparator12.Name = "toolStripSeparator12";
+            this.toolStripSeparator12.Size = new System.Drawing.Size(6, 25);
+            // 
+            // toolStripButtonToolPoint
+            // 
+            this.toolStripButtonToolPoint.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonToolPoint.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonToolPoint.Image")));
+            this.toolStripButtonToolPoint.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonToolPoint.Name = "toolStripButtonToolPoint";
+            this.toolStripButtonToolPoint.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonToolPoint.Text = "toolStripButton1";
+            this.toolStripButtonToolPoint.Click += new System.EventHandler(this.toolStripButtonToolPoint_Click);
             // 
             // EditorForm
             // 
@@ -946,5 +965,7 @@
         private System.Windows.Forms.SaveFileDialog saveFileDialogSave;
         private System.Windows.Forms.ToolStripButton toolStripButtonPlay;
         private System.Windows.Forms.ToolStripButton toolStripButtonEditAction;
+        private System.Windows.Forms.ToolStripButton toolStripButtonToolPoint;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator12;
     }
 }

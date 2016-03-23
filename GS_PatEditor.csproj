@@ -91,6 +91,7 @@
       <DependentUpon>ExportForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Editor\Panels\PreviewWindowPlaying.cs" />
+    <Compile Include="Editor\Panels\Tools\Point\PointEditingHandler.cs" />
     <Compile Include="GSPat\GSPatWriter.cs" />
     <Compile Include="Pat\Effects\BulletEffect.cs" />
     <Compile Include="Pat\Effects\CommonEffect.cs" />

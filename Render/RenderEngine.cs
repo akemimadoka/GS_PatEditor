@@ -172,6 +172,7 @@ namespace GS_PatEditor.Render
             _DoubleColorTextureList.Add(combined, ret);
             return ret;
         }
+
         #endregion
 
         #region Sprite

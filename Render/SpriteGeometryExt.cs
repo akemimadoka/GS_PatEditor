@@ -17,7 +17,7 @@ namespace GS_PatEditor.Render
             sprite.Rotation0 = rotation0;
         }
 
-        public static void SetRotationOffset(this Sprite sprite, int n)
+        public static void SetRotationOffset(this Sprite sprite, float n)
         {
             sprite.RotationOffset = 3.1415926f / 2 * n;
         }
