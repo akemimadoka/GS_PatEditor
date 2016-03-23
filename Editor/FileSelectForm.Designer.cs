@@ -107,6 +107,7 @@
             this.Controls.Add(this.comboBox1);
             this.Name = "FileSelectForm";
             this.ShowIcon = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "FileSelectForm";
             this.ResumeLayout(false);
             this.PerformLayout();

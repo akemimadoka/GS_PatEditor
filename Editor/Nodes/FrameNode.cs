@@ -69,7 +69,7 @@ namespace GS_PatEditor.Editor.Nodes
             }
         }
 
-        public bool ChangeEditMode(FrameEditMode mode)
+        public void ChangeEditMode(FrameEditMode mode)
         {
             EditMode = mode;
 
@@ -77,7 +77,6 @@ namespace GS_PatEditor.Editor.Nodes
             {
                 EditModeChanged();
             }
-            return true;
         }
 
         public void ChangePreviewMode(FramePreviewMode mode)

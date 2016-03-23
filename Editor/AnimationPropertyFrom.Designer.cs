@@ -86,6 +86,7 @@
             this.MinimizeBox = false;
             this.Name = "AnimationPropertyFrom";
             this.ShowIcon = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Animation";
             this.ResumeLayout(false);
             this.PerformLayout();

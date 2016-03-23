@@ -168,8 +168,10 @@
             // 
             // ImageSelectForm
             // 
+            this.AcceptButton = this.buttonOK;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.buttonCancel;
             this.ClientSize = new System.Drawing.Size(484, 262);
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.buttonCancel);
@@ -183,6 +185,7 @@
             this.MinimumSize = new System.Drawing.Size(500, 300);
             this.Name = "ImageSelectForm";
             this.ShowIcon = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Image";
             this.Load += new System.EventHandler(this.ImageSelectForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

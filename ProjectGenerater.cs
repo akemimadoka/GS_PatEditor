@@ -171,7 +171,11 @@ namespace GS_PatEditor
                         new FilteredEffect
                         {
                             Filter = new SimpleListFilter(
-                                new Pat.Effects.AnimationCountModFilter { Divisor = new ConstValue { Value = 5 } },
+                                new Pat.Effects.AnimationCountModFilter
+                                {
+                                    Divisor = new ConstValue { Value = 5 },
+                                    Mod = new ConstValue { Value = 0 },
+                                },
                                 new Pat.Effects.AnimationSegmentFilter { Segment = 1 }
                             ),
                             Effect = new Pat.Effects.CreateBulletEffect
