@@ -16,8 +16,6 @@ namespace GS_PatEditor.Editor
 
     class Editor : IDisposable
     {
-        public Pat.Project Data { get; private set; }
-        //public RootNode EditorNode { get; private set; }
 
         //ui
 
@@ -28,16 +26,24 @@ namespace GS_PatEditor.Editor
 
         public Editor(Pat.Project proj)
         {
-            //Data = proj;
-            //EditorNode = RootNode.CreateRootNode(proj, this);
+            ProjectReset += ResetAnimationIndex;
+
+            Animation = new AnimationNode(this);
+            Project = proj;
+
             AnimationFramesUI = new AnimationFrames(this);
             PreviewWindowUI = new PreviewWindow(this);
             AnimationListUI = new AnimationList(this);
 
-            Animation = new AnimationNode(this);
-            SwitchProject(proj);
         }
 
+        public void Dispose()
+        {
+            PreviewWindowUI.Dispose();
+            PreviewWindowUI = null;
+        }
+
+        public AnimationNode Animation { get; private set; }
 
         #region Main UI
 
@@ -66,22 +72,30 @@ namespace GS_PatEditor.Editor
 
         #endregion
 
-        #region Root Node
-
-        public AnimationNode Animation { get; private set; }
+        #region Project Object Access
 
         public event Action ProjectReset;
 
-        public void SwitchProject(Pat.Project proj)
+        private Pat.Project _Project;
+        public Pat.Project Project
         {
-            Data = proj;
-            //EditorNode.Reset(proj);
-            SelectedAnimationIndex = proj.Animations.Count == 0 ? -1 : 0;
-            if (ProjectReset != null)
+            get
             {
-                ProjectReset();
+                return _Project;
+            }
+            set
+            {
+                _Project = value;
+                if (ProjectReset != null)
+                {
+                    ProjectReset();
+                }
             }
         }
+
+        #endregion
+
+        #region AnimationIndex
 
         private int _SelectedAnimationIndex;
         public int SelectedAnimationIndex
@@ -99,17 +113,16 @@ namespace GS_PatEditor.Editor
                 }
                 else
                 {
-                    Animation.Reset(Data.Animations[value]);
+                    Animation.Reset(Project.Animations[value]);
                 }
             }
         }
 
-        #endregion
-
-        public void Dispose()
+        private void ResetAnimationIndex()
         {
-            PreviewWindowUI.Dispose();
-            PreviewWindowUI = null;
+            SelectedAnimationIndex = Project.Animations.Count == 0 ? -1 : 0;
         }
+
+        #endregion
     }
 }

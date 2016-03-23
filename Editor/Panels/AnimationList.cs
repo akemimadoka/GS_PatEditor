@@ -98,7 +98,7 @@ namespace GS_PatEditor.Editor.Panels
         {
             _Items.Clear();
 
-            var list = _Parent.Data.Animations;
+            var list = _Parent.Project.Animations;
             for (int i = 0; i < list.Count; ++i)
             {
                 var a = list[i];
@@ -123,7 +123,7 @@ namespace GS_PatEditor.Editor.Panels
         private AnimationListItem CreateItemForAnimation(Pat.Animation animation, int index)
         {
             var img = animation.ImageID != null ?
-                _Parent.Data.ImageList.GetImage(animation.ImageID) :
+                _Parent.Project.ImageList.GetImage(animation.ImageID) :
                 null;
             var frameCount = animation.Segments.Sum(s => s.Frames.Count);
             var desc = animation.Segments.Count.ToString() + " segment(s), " +
@@ -166,7 +166,7 @@ namespace GS_PatEditor.Editor.Panels
         {
             if (_SelectedItem != null)
             {
-                _Parent.Data.Animations.RemoveAt(_SelectedItem.Index);
+                _Parent.Project.Animations.RemoveAt(_SelectedItem.Index);
                 _SelectedItem.IsSelected = false;
                 _SelectedItem = null;
 
@@ -181,7 +181,7 @@ namespace GS_PatEditor.Editor.Panels
             //find an available name
             int id = 1;
             {
-                var list = _Parent.Data.Animations;
+                var list = _Parent.Project.Animations;
                 while (list.Any(a => a.AnimationID == "New Animation " + id.ToString()))
                 {
                     ++id;
@@ -191,7 +191,7 @@ namespace GS_PatEditor.Editor.Panels
 
             animation.Segments = new List<Pat.AnimationSegment>();
 
-            _Parent.Data.Animations.Add(animation);
+            _Parent.Project.Animations.Add(animation);
 
             if (_SelectedItem != null)
             {
@@ -214,7 +214,7 @@ namespace GS_PatEditor.Editor.Panels
                 
                 var id = _SelectedItem.Index;
 
-                var currentAnimation = _Parent.Data.Animations[id];
+                var currentAnimation = _Parent.Project.Animations[id];
                 dialog.AnimationID = currentAnimation.AnimationID;
                 if (dialog.ShowDialog() == DialogResult.OK)
                 {

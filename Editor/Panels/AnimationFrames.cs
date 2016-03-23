@@ -344,7 +344,7 @@ namespace GS_PatEditor.Editor.Panels
                 return;
             }
 
-            var imageList = _Parent.Data.ImageList;
+            var imageList = _Parent.Project.ImageList;
             KeyFrameGrid newSelected = null;
             for (int i = 0; i < data.Segments.Count; ++i)
             {
@@ -630,7 +630,7 @@ namespace GS_PatEditor.Editor.Panels
                 
                 var frame = animation.Segments[grid.Segment].Frames[grid.Frame];
 
-                var dialog = new ImageSelectForm(_Parent.Data)
+                var dialog = new ImageSelectForm(_Parent.Project)
                 {
                     SelectedImage = frame.ImageID,
                 };
@@ -642,7 +642,7 @@ namespace GS_PatEditor.Editor.Panels
             }
             else
             {
-                var dialog = new ImageSelectForm(_Parent.Data)
+                var dialog = new ImageSelectForm(_Parent.Project)
                 {
                     SelectedImage = null,
                 };

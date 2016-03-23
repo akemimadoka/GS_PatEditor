@@ -92,7 +92,7 @@ namespace GS_PatEditor.Editor.Nodes
         {
             if (Data != null && Data.ActionID != null)
             {
-                var action = _Parent.Data.Actions.FirstOrDefault(a => a.ActionID == Data.ActionID);
+                var action = _Parent.Project.Actions.FirstOrDefault(a => a.ActionID == Data.ActionID);
                 if (action != null)
                 {
                     var dialog = new ActionEditForm(action);

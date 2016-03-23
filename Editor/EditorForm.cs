@@ -290,7 +290,7 @@ namespace GS_PatEditor.Editor
 
         private void SetupToolbarEnabled()
         {
-            if (_Editor.Data.IsEmptyProject)
+            if (_Editor.Project.IsEmptyProject)
             {
                 foreach (var item in toolStrip1.Items)
                 {
@@ -563,7 +563,7 @@ namespace GS_PatEditor.Editor
 
         private void toolStripButtonNew_Click(object sender, EventArgs e)
         {
-            if (_Editor.Data.IsEmptyProject || MessageBox.Show("Create a new act project?", "AnimationEditor",
+            if (_Editor.Project.IsEmptyProject || MessageBox.Show("Create a new act project?", "AnimationEditor",
                 MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
                 var dialog = new CreateProjectForm();
@@ -576,7 +576,7 @@ namespace GS_PatEditor.Editor
                     .Select(file => System.IO.Path.GetFileName(file)).ToList();
                 palList.Sort();
 
-                _Editor.SwitchProject(ProjectGenerater.GenerateEmpty(dialog.ImagePath, palList));
+                _Editor.Project = ProjectGenerater.GenerateEmpty(dialog.ImagePath, palList);
 
                 SetupToolbarEnabled();
             }
@@ -584,7 +584,7 @@ namespace GS_PatEditor.Editor
 
         private void toolStripButtonOpen_Click(object sender, EventArgs e)
         {
-            if (_Editor.Data.IsEmptyProject || MessageBox.Show("Open a act project?", "AnimationEditor",
+            if (_Editor.Project.IsEmptyProject || MessageBox.Show("Open a act project?", "AnimationEditor",
                 MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
                 if (openFileDialog1.ShowDialog() == DialogResult.OK)
@@ -592,13 +592,11 @@ namespace GS_PatEditor.Editor
                     var file = openFileDialog1.FileName;
                     if (System.IO.Path.GetExtension(file) == ".pat")
                     {
-                        var proj = ProjectGenerater.Generate(file);
-                        _Editor.SwitchProject(proj);
+                        _Editor.Project = ProjectGenerater.Generate(file);
                     }
                     else if (System.IO.Path.GetExtension(file) == ".patproj")
                     {
-                        var proj = ProjectSerializer.OpenProject(file);
-                        _Editor.SwitchProject(proj);
+                        _Editor.Project = ProjectSerializer.OpenProject(file);
                     }
                     else
                     {
@@ -613,14 +611,14 @@ namespace GS_PatEditor.Editor
 
         private void toolStripButtonSave_Click(object sender, EventArgs e)
         {
-            if (_Editor.Data.FilePath != null)
+            if (_Editor.Project.FilePath != null)
             {
-                ProjectSerializer.SaveProject(_Editor.Data, _Editor.Data.FilePath);
+                ProjectSerializer.SaveProject(_Editor.Project, _Editor.Project.FilePath);
             }
             else if (saveFileDialogSave.ShowDialog() == DialogResult.OK)
             {
-                ProjectSerializer.SaveProject(_Editor.Data, saveFileDialogSave.FileName);
-                _Editor.Data.FilePath = saveFileDialogSave.FileName;
+                ProjectSerializer.SaveProject(_Editor.Project, saveFileDialogSave.FileName);
+                _Editor.Project.FilePath = saveFileDialogSave.FileName;
 
                 saveFileDialogSave.FileName = "";
             }
@@ -642,7 +640,7 @@ namespace GS_PatEditor.Editor
                     startID = dialog.StartID;
                 }
 
-                var gspat = ProjectExporter.Export(_Editor.Data, startID);
+                var gspat = ProjectExporter.Export(_Editor.Project, startID);
                 if (System.IO.File.Exists(file))
                 {
                     System.IO.File.Delete(file);
@@ -668,8 +666,8 @@ namespace GS_PatEditor.Editor
         {
             if (saveFileDialogSave.ShowDialog() == DialogResult.OK)
             {
-                ProjectSerializer.SaveProject(_Editor.Data, saveFileDialogSave.FileName);
-                _Editor.Data.FilePath = saveFileDialogSave.FileName;
+                ProjectSerializer.SaveProject(_Editor.Project, saveFileDialogSave.FileName);
+                _Editor.Project.FilePath = saveFileDialogSave.FileName;
 
                 saveFileDialogSave.FileName = "";
             }

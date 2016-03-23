@@ -46,13 +46,13 @@ namespace GS_PatEditor.Editor.Panels
             var animation = parent.Animation.Data;
 
             var actor = new Simulation.PlayerActor(_World,
-                new PatProjectAnimationProvider { Project = parent.Data, DefaultAnimation = animation.AnimationID },
-                new Simulation.SystemAnimationProvider(_Parent.Data),
-                new PatProjectActionProvider { Project = parent.Data })
+                new PatProjectAnimationProvider { Project = parent.Project, DefaultAnimation = animation.AnimationID },
+                new Simulation.SystemAnimationProvider(_Parent.Project),
+                new PatProjectActionProvider { Project = parent.Project })
             {
             };
 
-            var action = _Parent.Data.Actions.FirstOrDefault(a => a.ActionID == animation.ActionID);
+            var action = _Parent.Project.Actions.FirstOrDefault(a => a.ActionID == animation.ActionID);
             if (animation.ActionID != null && action != null)
             {
                 Simulation.ActionSetup.SetupActorForAction(actor, action);
@@ -86,7 +86,7 @@ namespace GS_PatEditor.Editor.Panels
                 var frame = actor.CurrentFrame;
                 if (frame != null && frame.ImageID != null)
                 {
-                    var txt = _Parent.Data.ImageList.GetTexture(frame.ImageID, _Parent.PreviewWindowUI.Render);
+                    var txt = _Parent.Project.ImageList.GetTexture(frame.ImageID, _Parent.PreviewWindowUI.Render);
                     if (txt != null)
                     {
                         _Sprite.SetupActor(txt, actor, window.SpriteMoving);
