@@ -49,7 +49,7 @@ namespace GS_PatEditor.Editor.Panels.Tools.HitAttack
 
             BoxData = new HitAtackBoxListDataProvider(editor, GetBoxListFromFrame);
 
-            editor.Frame.EditModeChanged += ToolSwitched;
+            editor.EditModeChanged += ToolSwitched;
 
             _Control.MouseMove += _Control_MouseMove;
             _Control.MouseDown += _Control_MouseDown;
@@ -438,8 +438,7 @@ namespace GS_PatEditor.Editor.Panels.Tools.HitAttack
         {
             get
             {
-                var frame = _Editor.Frame.FrameData;
-                return frame != null && _SelectedMultiple.Count > 0;
+                return _Editor.CurrentFrame != null && _SelectedMultiple.Count > 0;
             }
         }
 
@@ -451,7 +450,7 @@ namespace GS_PatEditor.Editor.Panels.Tools.HitAttack
         public object Copy()
         {
             FinishMouseEvent();
-            var frame = _Editor.Frame.FrameData;
+            var frame = _Editor.CurrentFrame;
             if (frame == null)
             {
                 return null;
@@ -462,7 +461,7 @@ namespace GS_PatEditor.Editor.Panels.Tools.HitAttack
         public void Delete()
         {
             FinishMouseEvent();
-            var frame = _Editor.Frame.FrameData;
+            var frame = _Editor.CurrentFrame;
             if (frame != null)
             {
                 var list = _SelectedMultiple.Select(b => b.Index).OrderBy(i => -i).ToArray();
@@ -485,7 +484,7 @@ namespace GS_PatEditor.Editor.Panels.Tools.HitAttack
                 return;
             }
             ClearSelected();
-            var frame = _Editor.Frame.FrameData;
+            var frame = _Editor.CurrentFrame;
             if (frame != null)
             {
                 var boxList = GetBoxListFromFrame(frame);
@@ -508,8 +507,7 @@ namespace GS_PatEditor.Editor.Panels.Tools.HitAttack
         {
             get
             {
-                var frame = _Editor.Frame.FrameData;
-                return frame != null;
+                return _Editor.CurrentFrame != null;
             }
         }
 

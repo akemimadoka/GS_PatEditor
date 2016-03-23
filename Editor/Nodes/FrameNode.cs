@@ -6,22 +6,8 @@ using System.Threading.Tasks;
 
 namespace GS_PatEditor.Editor.Nodes
 {
-    enum FrameEditMode
-    {
-        None,
-        Move,
-        Physical,
-        Hit,
-        Attack,
-        Point,
-    }
     class FrameNode
     {
-        public enum FramePreviewMode
-        {
-            Pause,
-            Play,
-        }
 
         private readonly Editor _Parent;
 
@@ -30,13 +16,6 @@ namespace GS_PatEditor.Editor.Nodes
 
         public FrameEditMode EditMode { get; private set; }
         public FramePreviewMode PreviewMode { get; private set; }
-
-        public bool AxisVisible = true;
-        public bool PhysicalBoxVisible = true;
-        public bool HitBoxVisible = true;
-        public bool AttackBoxVisible = true;
-
-        public List<int> EditingBoxes = new List<int>();
 
         //TODO event name should not use OnXxx
         public event Action OnReset;
@@ -92,25 +71,6 @@ namespace GS_PatEditor.Editor.Nodes
             {
                 EditModeChanged();
             }
-        }
-        public void AddHitBox(Pat.Box box)
-        {
-
-        }
-
-        public void AddAttackBox(Pat.Box box)
-        {
-
-        }
-
-        public void RemoveHitBox(int index)
-        {
-
-        }
-
-        public void RemoveAttackBox(int index)
-        {
-
         }
     }
 }

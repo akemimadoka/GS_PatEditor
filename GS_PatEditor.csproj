@@ -163,9 +163,7 @@
     </Compile>
     <Compile Include="Editor\Panels\AnimationFrames.cs" />
     <Compile Include="Editor\Editor.cs" />
-    <Compile Include="Editor\Nodes\AnimationNode.cs" />
     <Compile Include="Editor\Nodes\FrameNode.cs" />
-    <Compile Include="Editor\Nodes\RootNode.cs" />
     <Compile Include="Editor\ClipboardHandler.cs" />
     <Compile Include="Editor\Panels\AnimationList.cs" />
     <Compile Include="Editor\Panels\AnimationListItem.cs" />

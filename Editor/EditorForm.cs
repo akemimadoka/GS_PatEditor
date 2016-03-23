@@ -122,16 +122,14 @@ namespace GS_PatEditor.Editor
                     #endregion
 
                     editor.AnimationListUI.SelectedChange += frm.SetupToolbarEnabled;
-                    editor.Frame.OnReset += delegate()
+                    editor.FrameReset += delegate()
                     {
                         var animation = editor.CurrentAnimation;
-                        var seg = editor.Frame.SegmentData;
+                        var seg = editor.CurrentSegment;
                         if (animation != null && seg != null && seg.Frames.Count > 0)
                         {
-                            var isKeyFrame = editor.Frame.FrameData ==
-                                seg.Frames[0];
-                            var isLoop = isKeyFrame ?
-                                editor.Frame.SegmentData.IsLoop : false;
+                            var isKeyFrame = editor.CurrentFrame == seg.Frames[0];
+                            var isLoop = isKeyFrame ? editor.CurrentSegment.IsLoop : false;
                             frm.keyFrameToolStripMenuItem.Enabled = true;
                             frm.keyFrameToolStripMenuItem.Checked = isKeyFrame;
 
@@ -150,7 +148,7 @@ namespace GS_PatEditor.Editor
                         }
                     };
 
-                    editor.Frame.EditModeChanged += frm.OnEditModeChanged;
+                    editor.EditModeChanged += frm.OnEditModeChanged;
 
                     editor.CurrentUISwitched += delegate()
                     {
@@ -161,7 +159,7 @@ namespace GS_PatEditor.Editor
                                 break;
                             case EditorUI.Animation:
                                 frm.ChangeActivePanel(1);
-                                frm.ChangeEditMode(FrameEditMode.None);
+                                editor.EditMode = FrameEditMode.None;
                                 frm.ResetPreviewPosition(1.0f);
                                 break;
                         }
@@ -254,7 +252,7 @@ namespace GS_PatEditor.Editor
             _GroupEditPhysical.Visible = false;
             _GroupEditHit.Visible = false;
             _GroupEditAttack.Visible = false;
-            switch (_Editor.Frame.EditMode)
+            switch (_Editor.EditMode)
             {
                 case FrameEditMode.Physical:
                     _GroupEditPhysical.Visible = true;
@@ -270,22 +268,17 @@ namespace GS_PatEditor.Editor
             if (toolStripButtonPlay.Text == "Play")
             {
                 toolStripButtonPlay.Enabled =
-                    _Editor.Frame.PreviewMode == FrameNode.FramePreviewMode.Pause;
+                    _Editor.PreviewMode == FramePreviewMode.Pause;
             }
             else if (toolStripButtonPlay.Text == "Stop")
             {
                 toolStripButtonPlay.Enabled =
-                    _Editor.Frame.PreviewMode == FrameNode.FramePreviewMode.Play;
+                    _Editor.PreviewMode == FramePreviewMode.Play;
             }
             else
             {
                 toolStripButtonPlay.Enabled = false;
             }
-        }
-
-        private void ChangeEditMode(FrameEditMode mode)
-        {
-            _Editor.Frame.ChangeEditMode(mode);
         }
 
         private void SetupToolbarEnabled()
@@ -371,42 +364,42 @@ namespace GS_PatEditor.Editor
 
         private void toolStripButtonToolCursor_Click(object sender, EventArgs e)
         {
-            ChangeEditMode(FrameEditMode.None);
+            _Editor.EditMode = FrameEditMode.None;
             ClearToolButtonsToolChecked();
             toolStripButtonToolCursor.CheckState = CheckState.Checked;
         }
 
         private void toolStripButtonToolMove_Click(object sender, EventArgs e)
         {
-            ChangeEditMode(FrameEditMode.Move);
+            _Editor.EditMode = FrameEditMode.Move;
             ClearToolButtonsToolChecked();
             toolStripButtonToolMove.CheckState = CheckState.Checked;
         }
 
         private void toolStripButtonToolPhysics_Click(object sender, EventArgs e)
         {
-            ChangeEditMode(FrameEditMode.Physical);
+            _Editor.EditMode = FrameEditMode.Physical;
             ClearToolButtonsToolChecked();
             toolStripButtonToolPhysics.CheckState = CheckState.Checked;
         }
 
         private void toolStripButtonToolHit_Click(object sender, EventArgs e)
         {
-            ChangeEditMode(FrameEditMode.Hit);
+            _Editor.EditMode = FrameEditMode.Hit;
             ClearToolButtonsToolChecked();
             toolStripButtonToolHit.CheckState = CheckState.Checked;
         }
 
         private void toolStripButtonToolAttack_Click(object sender, EventArgs e)
         {
-            ChangeEditMode(FrameEditMode.Attack);
+            _Editor.EditMode = FrameEditMode.Attack;
             ClearToolButtonsToolChecked();
             toolStripButtonToolAttack.CheckState = CheckState.Checked;
         }
 
         private void toolStripButtonToolPoint_Click(object sender, EventArgs e)
         {
-            ChangeEditMode(FrameEditMode.Point);
+            _Editor.EditMode = FrameEditMode.Point;
             ClearToolButtonsToolChecked();
             toolStripButtonToolPoint.CheckState = CheckState.Checked;
         }
@@ -414,25 +407,25 @@ namespace GS_PatEditor.Editor
         private void physicalToolStripMenuItem_Click(object sender, EventArgs e)
         {
             physicalToolStripMenuItem.Checked = !physicalToolStripMenuItem.Checked;
-            _Editor.Frame.PhysicalBoxVisible = physicalToolStripMenuItem.Checked;
+            _Editor.PhysicalBoxVisible = physicalToolStripMenuItem.Checked;
         }
 
         private void axisToolStripMenuItem_Click(object sender, EventArgs e)
         {
             axisToolStripMenuItem.Checked = !axisToolStripMenuItem.Checked;
-            _Editor.Frame.AxisVisible = axisToolStripMenuItem.Checked;
+            _Editor.AxisVisible = axisToolStripMenuItem.Checked;
         }
 
         private void hitToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             hitToolStripMenuItem1.Checked = !hitToolStripMenuItem1.Checked;
-            _Editor.Frame.HitBoxVisible = hitToolStripMenuItem1.Checked;
+            _Editor.HitBoxVisible = hitToolStripMenuItem1.Checked;
         }
 
         private void attackToolStripMenuItem_Click(object sender, EventArgs e)
         {
             attackToolStripMenuItem.Checked = !attackToolStripMenuItem.Checked;
-            _Editor.Frame.AttackBoxVisible = attackToolStripMenuItem.Checked;
+            _Editor.AttackBoxVisible = attackToolStripMenuItem.Checked;
         }
 
         private void toolStripSplitEdit_DropDownOpening(object sender, EventArgs e)
@@ -678,12 +671,12 @@ namespace GS_PatEditor.Editor
             if (toolStripButtonPlay.Text == "Play")
             {
                 toolStripButtonPlay.Text = "Stop";
-                _Editor.Frame.ChangePreviewMode(FrameNode.FramePreviewMode.Play);
+                _Editor.PreviewMode = FramePreviewMode.Play;
             }
             else if (toolStripButtonPlay.Text == "Stop")
             {
                 toolStripButtonPlay.Text = "Play";
-                _Editor.Frame.ChangePreviewMode(FrameNode.FramePreviewMode.Pause);
+                _Editor.PreviewMode = FramePreviewMode.Pause;
             }
         }
 

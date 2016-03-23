@@ -68,12 +68,12 @@ namespace GS_PatEditor.Editor.Panels
 
         private void PlayingFinished()
         {
-            _Parent.Frame.ChangePreviewMode(Nodes.FrameNode.FramePreviewMode.Pause);
+            _Parent.PreviewMode = FramePreviewMode.Pause;
         }
 
         private void PlayerError()
         {
-            _Parent.Frame.ChangePreviewMode(Nodes.FrameNode.FramePreviewMode.Pause);
+            _Parent.PreviewMode = FramePreviewMode.Pause;
         }
 
         public override void Render()

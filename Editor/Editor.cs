@@ -26,6 +26,22 @@ namespace GS_PatEditor.Editor
         }
     }
 
+    enum FrameEditMode
+    {
+        None,
+        Move,
+        Physical,
+        Hit,
+        Attack,
+        Point,
+    }
+
+    enum FramePreviewMode
+    {
+        Pause,
+        Play,
+    }
+
     class Editor : IDisposable
     {
 
@@ -39,9 +55,8 @@ namespace GS_PatEditor.Editor
         public Editor(Pat.Project proj)
         {
             ProjectReset += ResetAnimationIndex;
-
-            //Animation = new AnimationNode(this);
-            Frame = new FrameNode(this);
+            AnimationReset += ResetPreviewMode;
+            AnimationReset += ResetEditMode;
 
             Project = proj;
 
@@ -56,9 +71,6 @@ namespace GS_PatEditor.Editor
             PreviewWindowUI.Dispose();
             PreviewWindowUI = null;
         }
-
-        //public AnimationNode Animation { get; private set; }
-        public FrameNode Frame;
 
         #region Main UI
 
@@ -135,8 +147,6 @@ namespace GS_PatEditor.Editor
                     CurrentAnimation = Project.Animations[value];
                 }
 
-                //Animation.Reset(CurrentAnimation);
-                Frame.ResetAnimation();
                 SelectedFrameIndex = new FrameIndex(0, 0);
 
                 if (AnimationReset != null)
@@ -155,6 +165,11 @@ namespace GS_PatEditor.Editor
 
         #region FrameIndex
 
+        public Pat.AnimationSegment CurrentSegment { get; private set; }
+        public Pat.Frame CurrentFrame { get; private set; }
+
+        public event Action FrameReset;
+
         private int _SelectedFrameIndex, _SelectedSegmentIndex;
         public FrameIndex SelectedFrameIndex
         {
@@ -169,13 +184,13 @@ namespace GS_PatEditor.Editor
 
                 if (CurrentAnimation == null)
                 {
-                    Frame.Reset(null, null);
+                    ResetFrame(null, null);
                     return;
                 }
 
                 if (segment == -1 || frame == -1)
                 {
-                    Frame.Reset(null, null);
+                    ResetFrame(null, null);
                     return;
                 }
 
@@ -185,7 +200,7 @@ namespace GS_PatEditor.Editor
                     {
                         _SelectedSegmentIndex = -1;
                         _SelectedFrameIndex = -1;
-                        Frame.Reset(null, null);
+                        ResetFrame(null, null);
                         return;
                     }
                     else
@@ -202,7 +217,7 @@ namespace GS_PatEditor.Editor
                     if (seg.Frames.Count == 0)
                     {
                         _SelectedFrameIndex = -1;
-                        Frame.Reset(seg, null);
+                        ResetFrame(seg, null);
                         return;
                     }
                     else
@@ -211,7 +226,18 @@ namespace GS_PatEditor.Editor
                     }
                 }
                 _SelectedFrameIndex = frame;
-                Frame.Reset(seg, seg.Frames[frame]);
+                ResetFrame(seg, seg.Frames[frame]);
+            }
+        }
+
+        private void ResetFrame(Pat.AnimationSegment segment, Pat.Frame frame)
+        {
+            CurrentSegment = segment;
+            CurrentFrame = frame;
+
+            if (FrameReset != null)
+            {
+                FrameReset();
             }
         }
 
@@ -230,6 +256,92 @@ namespace GS_PatEditor.Editor
                     dialog.ShowDialog();
                 }
             }
+        }
+
+        #endregion
+
+        #region Preview Visibles
+
+        public bool AxisVisible = true;
+        public bool PhysicalBoxVisible = true;
+        public bool HitBoxVisible = true;
+        public bool AttackBoxVisible = true;
+        public bool PointVisible = true;
+
+        #endregion
+
+        #region EditMode
+
+        private FrameEditMode _EditMode;
+        public FrameEditMode EditMode
+        {
+            get
+            {
+                return _EditMode;
+            }
+            set
+            {
+                if (_EditMode == value)
+                {
+                    return;
+                }
+
+                _EditMode = value;
+
+                if (EditModeChanged != null)
+                {
+                    EditModeChanged();
+                }
+            }
+        }
+
+        public event Action EditModeChanged;
+
+        private void ResetEditMode()
+        {
+            EditMode = FrameEditMode.None;
+        }
+
+        #endregion
+
+        #region PreviewMode
+
+        private FramePreviewMode _PreviewMode;
+        public FramePreviewMode PreviewMode
+        {
+            get
+            {
+                return _PreviewMode;
+            }
+            set
+            {
+                if (_PreviewMode == value)
+                {
+                    return;
+                }
+
+                _PreviewMode = value;
+
+                //TODO use event
+                if (PreviewWindowUI != null)
+                {
+                    PreviewWindowUI.UpdatePreviewMode();
+                }
+
+                if (PreviewModeChanged != null)
+                {
+                    PreviewModeChanged();
+                }
+
+                EditMode = FrameEditMode.None;
+            }
+        }
+
+        public event Action PreviewModeChanged;
+
+        private void ResetPreviewMode()
+        {
+            PreviewMode = FramePreviewMode.Pause;
         }
 
         #endregion
