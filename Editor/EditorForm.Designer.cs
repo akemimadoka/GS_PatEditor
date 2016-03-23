@@ -50,6 +50,7 @@
             this.toolStripButtonToolPhysics = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonToolHit = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonToolAttack = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonToolPoint = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripSplitBoxVisible = new System.Windows.Forms.ToolStripDropDownButton();
             this.resetScaleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -102,6 +103,7 @@
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButtonPlay = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonEditAction = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator12 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButtonBack = new System.Windows.Forms.ToolStripButton();
             this.panelAnimations = new System.Windows.Forms.Panel();
             this.animations = new System.Windows.Forms.PictureBox();
@@ -113,8 +115,6 @@
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialogExport = new System.Windows.Forms.SaveFileDialog();
             this.saveFileDialogSave = new System.Windows.Forms.SaveFileDialog();
-            this.toolStripSeparator12 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripButtonToolPoint = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
             this.panelAnimations.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.animations)).BeginInit();
@@ -339,6 +339,16 @@
             this.toolStripButtonToolAttack.Size = new System.Drawing.Size(23, 22);
             this.toolStripButtonToolAttack.Text = "Attack";
             this.toolStripButtonToolAttack.Click += new System.EventHandler(this.toolStripButtonToolAttack_Click);
+            // 
+            // toolStripButtonToolPoint
+            // 
+            this.toolStripButtonToolPoint.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonToolPoint.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonToolPoint.Image")));
+            this.toolStripButtonToolPoint.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonToolPoint.Name = "toolStripButtonToolPoint";
+            this.toolStripButtonToolPoint.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonToolPoint.Text = "Point";
+            this.toolStripButtonToolPoint.Click += new System.EventHandler(this.toolStripButtonToolPoint_Click);
             // 
             // toolStripSeparator2
             // 
@@ -750,6 +760,11 @@
             this.toolStripButtonEditAction.Text = "Action";
             this.toolStripButtonEditAction.Click += new System.EventHandler(this.toolStripButtonEditAction_Click);
             // 
+            // toolStripSeparator12
+            // 
+            this.toolStripSeparator12.Name = "toolStripSeparator12";
+            this.toolStripSeparator12.Size = new System.Drawing.Size(6, 25);
+            // 
             // toolStripButtonBack
             // 
             this.toolStripButtonBack.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonBack.Image")));
@@ -839,21 +854,6 @@
             // saveFileDialogSave
             // 
             this.saveFileDialogSave.Filter = "Editor PatProject File(*.patproj)|*.patproj";
-            // 
-            // toolStripSeparator12
-            // 
-            this.toolStripSeparator12.Name = "toolStripSeparator12";
-            this.toolStripSeparator12.Size = new System.Drawing.Size(6, 25);
-            // 
-            // toolStripButtonToolPoint
-            // 
-            this.toolStripButtonToolPoint.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonToolPoint.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonToolPoint.Image")));
-            this.toolStripButtonToolPoint.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonToolPoint.Name = "toolStripButtonToolPoint";
-            this.toolStripButtonToolPoint.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButtonToolPoint.Text = "toolStripButton1";
-            this.toolStripButtonToolPoint.Click += new System.EventHandler(this.toolStripButtonToolPoint_Click);
             // 
             // EditorForm
             // 

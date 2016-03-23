@@ -50,6 +50,18 @@ namespace GS_PatEditor.Editor.Panels.Tools.Point
                 OffsetX = (int)Math.Round((e.X - _DownMouseX) / _Editor.PreviewWindowUI.PreviewMoving.PreviewScale);
                 OffsetY = (int)Math.Round((e.Y - _DownMouseY) / _Editor.PreviewWindowUI.PreviewMoving.PreviewScale);
             }
+            else if (CheckFilter())
+            {
+                var p = FindPointAt(e.X, e.Y);
+                if (p != -1)
+                {
+                    _Control.Cursor = Cursors.Cross;
+                }
+                else
+                {
+                    _Control.Cursor = Cursors.Arrow;
+                }
+            }
         }
 
         private void _Control_MouseUp(object sender, MouseEventArgs e)

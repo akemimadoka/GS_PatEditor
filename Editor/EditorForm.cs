@@ -104,7 +104,7 @@ namespace GS_PatEditor.Editor
                         frm.toolStripSeparator1,
                         frm.toolStripButtonToolCursor, frm.toolStripButtonToolMove,
                         frm.toolStripButtonToolPhysics, frm.toolStripButtonToolHit,
-                        frm.toolStripButtonToolAttack,
+                        frm.toolStripButtonToolAttack, frm.toolStripButtonToolPoint,
                         frm.toolStripSeparator2,
                         frm.toolStripSplitBoxVisible,
                         frm.toolStripSeparator3,
