@@ -25,53 +25,53 @@ namespace GS_PatEditor.Simulation
             _Project = proj;
         }
 
-        public Pat.Action GetSystemAnimation(SystemAnimationType type)
+        public Pat.Action GetSystemAction(SystemAnimationType type)
         {
             switch (type)
             {
                 case SystemAnimationType.Stand:
-                    return GetSystemAnimation_0_Stant();
+                    return GetSystemAction_0_Stant();
                 case SystemAnimationType.Run:
-                    return GetSystemAnimation_1_Run();
+                    return GetSystemAction_1_Run();
                 case SystemAnimationType.JumpUp:
-                    return GetSystemAnimation_3_JumpUp();
+                    return GetSystemAction_3_JumpUp();
                 case SystemAnimationType.JumpFront:
-                    return GetSystemAnimation_4_JumpFront();
+                    return GetSystemAction_4_JumpFront();
                 case SystemAnimationType.Fall:
-                    return GetSystemAnimation_8_Fall();
+                    return GetSystemAction_8_Fall();
                 case SystemAnimationType.FallAttack:
-                    return GetSystemAnimation_9_FallAttack();
+                    return GetSystemAction_9_FallAttack();
                 default:
                     return null;
             }
         }
 
-        public Pat.Action GetSystemAnimation_0_Stant()
+        public Pat.Action GetSystemAction_0_Stant()
         {
             return _Project.Actions.FirstOrDefault(a => a.ActionID == "stand");
         }
 
-        public Pat.Action GetSystemAnimation_1_Run()
+        public Pat.Action GetSystemAction_1_Run()
         {
             return _Project.Actions.FirstOrDefault(a => a.ActionID == "run");
         }
 
-        public Pat.Action GetSystemAnimation_3_JumpUp()
+        public Pat.Action GetSystemAction_3_JumpUp()
         {
             return _Project.Actions.FirstOrDefault(a => a.ActionID == "jump_up");
         }
 
-        public Pat.Action GetSystemAnimation_4_JumpFront()
+        public Pat.Action GetSystemAction_4_JumpFront()
         {
             return _Project.Actions.FirstOrDefault(a => a.ActionID == "jump_front");
         }
 
-        public Pat.Action GetSystemAnimation_8_Fall()
+        public Pat.Action GetSystemAction_8_Fall()
         {
             return _Project.Actions.FirstOrDefault(a => a.ActionID == "fall");
         }
 
-        public Pat.Action GetSystemAnimation_9_FallAttack()
+        public Pat.Action GetSystemAction_9_FallAttack()
         {
             return _Project.Actions.FirstOrDefault(a => a.ActionID == "fall_attack");
         }

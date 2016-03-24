@@ -20,7 +20,7 @@ namespace GS_PatEditor.Editor.Panels
             public Pat.Project Project;
             public string DefaultAnimation;
 
-            public Pat.Action GetAnimationByID(string id)
+            public Pat.Action GetActionByID(string id)
             {
                 return Project.Actions
                     .Where(a => a.ActionID == (id == null ? DefaultAnimation : id))

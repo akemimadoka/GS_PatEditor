@@ -21,13 +21,11 @@ namespace GS_PatEditor.Pat
 
         [XmlArray]
         public EffectList InitEffects;
+
         [XmlArray]
         public EffectList UpdateEffects;
 
         [XmlArray]
         public List<EffectList> KeyFrameEffects;
-
-        //[XmlElement]
-        //public Animation Animation;
     }
 }

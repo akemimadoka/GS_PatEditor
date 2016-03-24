@@ -61,7 +61,6 @@ namespace GS_PatEditor.Simulation
         public bool IsInAir;
 
         //animation
-        //public ActionList Actions { get; private set; }
         public Pat.Action CurrentAction { get; private set; }
         public int CurrentSegmentIndex { get; private set; }
         public int CurrentFrameIndex { get; private set; }
@@ -113,12 +112,12 @@ namespace GS_PatEditor.Simulation
 
         public void SetMotion(SystemAnimationType sys, int segment)
         {
-            SetMotion(SystemAnimations.GetSystemAnimation(sys), segment);
+            SetMotion(SystemAnimations.GetSystemAction(sys), segment);
         }
 
         public void SetMotion(string id, int segment)
         {
-            SetMotion(Animations.GetAnimationByID(id), segment);
+            SetMotion(Animations.GetActionByID(id), segment);
         }
 
         public void SetMotion(Pat.Action action, int segment)
@@ -210,6 +209,5 @@ namespace GS_PatEditor.Simulation
                 UpdateLabel(this);
             }
         }
-
     }
 }

@@ -8,6 +8,6 @@ namespace GS_PatEditor.Simulation
 {
     public interface AnimationProvider
     {
-        Pat.Action GetAnimationByID(string id);
+        Pat.Action GetActionByID(string id);
     }
 }

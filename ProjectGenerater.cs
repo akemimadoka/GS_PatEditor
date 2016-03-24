@@ -17,8 +17,6 @@ namespace GS_PatEditor
             var proj = new Pat.Project()
             {
                 Actions = new List<Pat.Action>(),
-                //Actors = new List<Pat.Actor>(),
-                //Animations = new List<Pat.Animation>(),
                 Images = new List<Pat.FrameImage>(),
                 LocalInformation = new Pat.ProjectLocalInfo
                 {
@@ -69,9 +67,7 @@ namespace GS_PatEditor
 
             var proj = new Project();
             proj.Images = new List<FrameImage>();
-            //proj.Animations = new List<Pat.Animation>();
             proj.Actions = new List<Pat.Action>();
-            //proj.Actors = new List<Pat.Actor>();
             proj.Settings = new ProjectSettings()
             {
                 ProjectName = Path.GetFileNameWithoutExtension(patfile),

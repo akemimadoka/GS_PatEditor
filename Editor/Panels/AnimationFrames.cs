@@ -490,14 +490,14 @@ namespace GS_PatEditor.Editor.Panels
                     return;
                 }
 
-                var animation = _Parent.CurrentAction;
-                if (animation == null)
+                var action = _Parent.CurrentAction;
+                if (action == null)
                 {
                     return;
                 }
 
                 //split a segment
-                var oldSegment = animation.Segments[segmentIndex];
+                var oldSegment = action.Segments[segmentIndex];
                 var newSegment = new Pat.AnimationSegment()
                 {
                     IsLoop = oldSegment.IsLoop,
@@ -507,7 +507,7 @@ namespace GS_PatEditor.Editor.Panels
 
                 //TODO check cancellable data in oldSegment
 
-                animation.Segments.Insert(segmentIndex + 1, newSegment);
+                action.Segments.Insert(segmentIndex + 1, newSegment);
 
                 RefreshList();
             }
@@ -530,20 +530,20 @@ namespace GS_PatEditor.Editor.Panels
                     return;
                 }
 
-                var animation = _Parent.CurrentAction;
-                if (animation == null)
+                var action = _Parent.CurrentAction;
+                if (action == null)
                 {
                     return;
                 }
 
                 //split a segment
-                var lastSegment = animation.Segments[segmentIndex - 1];
-                var theSegment = animation.Segments[segmentIndex];
+                var lastSegment = action.Segments[segmentIndex - 1];
+                var theSegment = action.Segments[segmentIndex];
                 lastSegment.Frames.AddRange(theSegment.Frames);
 
                 //TODO check cancellable data in oldSegment
 
-                animation.Segments.RemoveAt(segmentIndex);
+                action.Segments.RemoveAt(segmentIndex);
 
                 RefreshList();
             }
@@ -561,14 +561,14 @@ namespace GS_PatEditor.Editor.Panels
                     return;
                 }
 
-                var animation = _Parent.CurrentAction;
-                if (animation == null)
+                var action = _Parent.CurrentAction;
+                if (action == null)
                 {
                     return;
                 }
 
                 //split a segment
-                var theSegment = animation.Segments[segmentIndex];
+                var theSegment = action.Segments[segmentIndex];
                 theSegment.IsLoop = !theSegment.IsLoop;
 
                 RefreshList();
@@ -629,13 +629,13 @@ namespace GS_PatEditor.Editor.Panels
             {
                 var grid = (KeyFrameGrid)_LastSelected;
 
-                var animation = _Parent.CurrentAction;
-                if (animation == null)
+                var action = _Parent.CurrentAction;
+                if (action == null)
                 {
                     return;
                 }
                 
-                var frame = animation.Segments[grid.Segment].Frames[grid.Frame];
+                var frame = action.Segments[grid.Segment].Frames[grid.Frame];
 
                 var dialog = new ImageSelectForm(_Parent.Project)
                 {
@@ -656,20 +656,20 @@ namespace GS_PatEditor.Editor.Panels
                 if (dialog.ShowDialog() == DialogResult.OK)
                 {
                     //create a new frame
-                    var animation = _Parent.CurrentAction;
-                    if (animation == null)
+                    var action = _Parent.CurrentAction;
+                    if (action == null)
                     {
                         return;
                     }
 
-                    if (animation.Segments.Count == 0)
+                    if (action.Segments.Count == 0)
                     {
-                        animation.Segments.Add(new Pat.AnimationSegment()
+                        action.Segments.Add(new Pat.AnimationSegment()
                         {
                             Frames = new List<Pat.Frame>(),
                         });
                     }
-                    var segment = animation.Segments.Last();
+                    var segment = action.Segments.Last();
 
                     int duration = 1;
                     if (segment.Frames.Count > 0)
@@ -703,15 +703,15 @@ namespace GS_PatEditor.Editor.Panels
                 var segmentIndex = grid.Segment;
                 var frameIndex = grid.Frame;
 
-                var animation = _Parent.CurrentAction;
-                if (animation == null)
+                var action = _Parent.CurrentAction;
+                if (action == null)
                 {
                     return;
                 }
 
                 var frame = new Pat.Frame()
                 {
-                    Duration = animation.Segments[segmentIndex].Frames[frameIndex].Duration,
+                    Duration = action.Segments[segmentIndex].Frames[frameIndex].Duration,
                     ImageID = null,
                     AttackBoxes = new List<Pat.Box>(),
                     HitBoxes = new List<Pat.Box>(),
@@ -722,11 +722,11 @@ namespace GS_PatEditor.Editor.Panels
 
                 if (frameIndex == 0 && segmentIndex > 0)
                 {
-                    animation.Segments[segmentIndex - 1].Frames.Add(frame);
+                    action.Segments[segmentIndex - 1].Frames.Add(frame);
                 }
                 else
                 {
-                    animation.Segments[segmentIndex].Frames.Insert(frameIndex, frame);
+                    action.Segments[segmentIndex].Frames.Insert(frameIndex, frame);
                 }
 
                 RefreshList();
@@ -741,8 +741,8 @@ namespace GS_PatEditor.Editor.Panels
                 var segmentIndex = grid.Segment;
                 var frameIndex = grid.Frame;
 
-                var animation = _Parent.CurrentAction;
-                if (animation == null)
+                var action = _Parent.CurrentAction;
+                if (action == null)
                 {
                     return;
                 }
@@ -752,11 +752,11 @@ namespace GS_PatEditor.Editor.Panels
                     return;
                 }
 
-                var damage = animation.Segments[segmentIndex].Damage;
+                var damage = action.Segments[segmentIndex].Damage;
                 var dialog = new DamageEditForm(damage);
                 if (dialog.ShowDialog() == DialogResult.OK)
                 {
-                    animation.Segments[segmentIndex].Damage = dialog.GetData();
+                    action.Segments[segmentIndex].Damage = dialog.GetData();
                 }
 
                 RefreshList();
@@ -819,12 +819,12 @@ namespace GS_PatEditor.Editor.Panels
             {
                 return;
             }
-            var animation = _Parent.CurrentAction;
-            if (animation == null)
+            var action = _Parent.CurrentAction;
+            if (action == null)
             {
                 return;
             }
-            animation.Segments[_LastSelected.Segment].Frames.RemoveAt(_LastSelected.Frame);
+            action.Segments[_LastSelected.Segment].Frames.RemoveAt(_LastSelected.Frame);
 
             RefreshList();
         }
@@ -842,8 +842,8 @@ namespace GS_PatEditor.Editor.Panels
                 return;
             }
 
-            var animation = _Parent.CurrentAction;
-            if (animation == null)
+            var action = _Parent.CurrentAction;
+            if (action == null)
             {
                 return;
             }
@@ -855,11 +855,11 @@ namespace GS_PatEditor.Editor.Panels
                     return;
                 }
                 //add to last segment
-                animation.Segments[_LastSelected.Segment - 1].Frames.Add(fdata);
+                action.Segments[_LastSelected.Segment - 1].Frames.Add(fdata);
             }
             else
             {
-                animation.Segments[_LastSelected.Segment].Frames.Insert(_LastSelected.Frame, fdata);
+                action.Segments[_LastSelected.Segment].Frames.Insert(_LastSelected.Frame, fdata);
             }
 
             RefreshList();
@@ -881,8 +881,8 @@ namespace GS_PatEditor.Editor.Panels
         {
             get
             {
-                var animation = _Parent.CurrentAction;
-                if (animation == null || _LastSelected == null)
+                var action = _Parent.CurrentAction;
+                if (action == null || _LastSelected == null)
                 {
                     return -1;
                 }
@@ -893,7 +893,7 @@ namespace GS_PatEditor.Editor.Panels
                 }
 
                 var seg = grid.Segment;
-                var ret = (int)animation.Segments[seg].CancelLevel - 1;
+                var ret = (int)action.Segments[seg].CancelLevel - 1;
                 
                 if (ret == -1)
                 {
@@ -921,8 +921,7 @@ namespace GS_PatEditor.Editor.Panels
                     return;
                 }
 
-                var animation = _Parent.CurrentAction;
-                var segment = animation.Segments[_LastSelected.Segment];
+                var segment = _Parent.CurrentAction.Segments[_LastSelected.Segment];
                 var time = segment.Frames.Take(_LastSelected.Frame)
                             .Sum(f => f.Duration);
                 if (value)
@@ -961,8 +960,7 @@ namespace GS_PatEditor.Editor.Panels
                     return;
                 }
 
-                var animation = _Parent.CurrentAction;
-                var segment = animation.Segments[_LastSelected.Segment];
+                var segment = _Parent.CurrentAction.Segments[_LastSelected.Segment];
                 var time = segment.Frames.Take(_LastSelected.Frame)
                             .Sum(f => f.Duration);
                 if (value)
