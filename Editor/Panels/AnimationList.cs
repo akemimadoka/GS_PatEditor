@@ -122,12 +122,11 @@ namespace GS_PatEditor.Editor.Panels
 
         private AnimationListItem CreateItemForAnimation(Pat.Action action, int index)
         {
-            var animation = action.Animation;
-            var img = animation.ImageID != null ?
-                _Parent.Project.ImageList.GetImage(animation.ImageID) :
+            var img = action.ImageID != null ?
+                _Parent.Project.ImageList.GetImage(action.ImageID) :
                 null;
-            var frameCount = animation.Segments.Sum(s => s.Frames.Count);
-            var desc = animation.Segments.Count.ToString() + " segment(s), " +
+            var frameCount = action.Segments.Sum(s => s.Frames.Count);
+            var desc = action.Segments.Count.ToString() + " segment(s), " +
                 frameCount.ToString() + " frame(s).";
             return new AnimationListItem(img, action.ActionID, desc, index);
         }
@@ -187,15 +186,10 @@ namespace GS_PatEditor.Editor.Panels
                 }
             }
 
-            var animation = new Pat.Animation()
-            {
-                Segments = new List<Pat.AnimationSegment>(),
-            };
-
             var action = new Pat.Action()
             {
                 ActionID = "New Action " + id.ToString(),
-                Animation = animation,
+                Segments = new List<Pat.AnimationSegment>(),
                 InitEffects = new Pat.EffectList(),
                 UpdateEffects = new Pat.EffectList(),
                 KeyFrameEffects = new List<Pat.EffectList>(),

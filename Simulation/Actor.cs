@@ -62,7 +62,7 @@ namespace GS_PatEditor.Simulation
 
         //animation
         //public ActionList Actions { get; private set; }
-        public Pat.Animation CurrentAnimation { get; private set; }
+        public Pat.Action CurrentAction { get; private set; }
         public int CurrentSegmentIndex { get; private set; }
         public int CurrentFrameIndex { get; private set; }
         public int CurrentFrameCounter { get; private set; }
@@ -74,12 +74,12 @@ namespace GS_PatEditor.Simulation
         {
             get
             {
-                if (CurrentAnimation == null || CurrentAnimation.Segments.Count <= CurrentSegmentIndex ||
-                    CurrentAnimation.Segments[CurrentSegmentIndex].Frames.Count <= CurrentFrameIndex)
+                if (CurrentAction == null || CurrentAction.Segments.Count <= CurrentSegmentIndex ||
+                    CurrentAction.Segments[CurrentSegmentIndex].Frames.Count <= CurrentFrameIndex)
                 {
                     return Pat.Frame.EmptyFrame;
                 }
-                return CurrentAnimation.Segments[CurrentSegmentIndex].Frames[CurrentFrameIndex];
+                return CurrentAction.Segments[CurrentSegmentIndex].Frames[CurrentFrameIndex];
             }
         }
 
@@ -121,15 +121,15 @@ namespace GS_PatEditor.Simulation
             SetMotion(Animations.GetAnimationByID(id), segment);
         }
 
-        public void SetMotion(Pat.Animation animation, int segment)
+        public void SetMotion(Pat.Action action, int segment)
         {
-            if (animation == null)
+            if (action == null)
             {
                 World.OnError();
                 return;
             }
 
-            CurrentAnimation = animation;
+            CurrentAction = action;
             CurrentSegmentIndex = segment;
             CurrentFrameIndex = 0;
             CurrentFrameCounter = 0;
@@ -146,7 +146,7 @@ namespace GS_PatEditor.Simulation
             {
                 CurrentFrameCounter = 0;
 
-                var seg = CurrentAnimation.Segments[CurrentSegmentIndex];
+                var seg = CurrentAction.Segments[CurrentSegmentIndex];
 
                 //next frame
                 if (++CurrentFrameIndex == seg.Frames.Count)
@@ -174,7 +174,7 @@ namespace GS_PatEditor.Simulation
                             ++CurrentSegmentIndex;
                         }
 
-                        if (CurrentSegmentIndex == CurrentAnimation.Segments.Count)
+                        if (CurrentSegmentIndex == CurrentAction.Segments.Count)
                         {
                             //end of animation
                             World.OnFinished();

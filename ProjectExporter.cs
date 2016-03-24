@@ -29,13 +29,7 @@ namespace GS_PatEditor
             ret.Animations = new List<GSPat.Animation>();
             foreach (var action in proj.Actions)
             {
-                var animation = action.Animation;
-                if (animation == null)
-                {
-                    continue;
-                }
-
-                if (animation.Segments.Count == 0)
+                if (action.Segments.Count == 0)
                 {
                     continue;
                 }
@@ -45,25 +39,25 @@ namespace GS_PatEditor
                     {
                         AnimationID = nextAnimationID++,
                         AttackLevel = 0,
-                        CancelLevel = (short)animation.Segments[0].CancelLevel,
-                        IsLoop = animation.Segments[0].IsLoop,
+                        CancelLevel = (short)action.Segments[0].CancelLevel,
+                        IsLoop = action.Segments[0].IsLoop,
                         Type = GSPat.AnimationType.Normal,
                     };
-                    ExportFrames(eAnimation, animation.Segments[0], imageIDToObj, imageToFile);
+                    ExportFrames(eAnimation, action.Segments[0], imageIDToObj, imageToFile);
                     ret.Animations.Add(eAnimation);
                 }
-                
-                for (int i = 1; i < animation.Segments.Count - 1; ++i)
+
+                for (int i = 1; i < action.Segments.Count - 1; ++i)
                 {
                     var eAnimation = new GSPat.Animation()
                     {
                         AnimationID = -2,
                         AttackLevel = 0,
-                        CancelLevel = (short)animation.Segments[i].CancelLevel,
-                        IsLoop = animation.Segments[i].IsLoop,
+                        CancelLevel = (short)action.Segments[i].CancelLevel,
+                        IsLoop = action.Segments[i].IsLoop,
                         Type = GSPat.AnimationType.Normal,
                     };
-                    ExportFrames(eAnimation, animation.Segments[i], imageIDToObj, imageToFile);
+                    ExportFrames(eAnimation, action.Segments[i], imageIDToObj, imageToFile);
                     ret.Animations.Add(eAnimation);
                 }
             }

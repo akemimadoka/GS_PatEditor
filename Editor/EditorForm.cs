@@ -123,9 +123,9 @@ namespace GS_PatEditor.Editor
                     editor.AnimationListUI.SelectedChange += frm.SetupToolbarEnabled;
                     editor.FrameReset += delegate()
                     {
-                        var animation = editor.CurrentAnimation;
+                        var action = editor.CurrentAction;
                         var seg = editor.CurrentSegment;
-                        if (animation != null && seg != null && seg.Frames.Count > 0)
+                        if (action != null && seg != null && seg.Frames.Count > 0)
                         {
                             var isKeyFrame = editor.CurrentFrame == seg.Frames[0];
                             var isLoop = isKeyFrame ? editor.CurrentSegment.IsLoop : false;

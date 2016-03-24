@@ -13,15 +13,21 @@ namespace GS_PatEditor.Pat
         [XmlAttribute]
         public string ActionID;
 
+        [XmlAttribute]
+        public string ImageID;
+
+        [XmlArray]
+        public List<AnimationSegment> Segments;
+
         [XmlArray]
         public EffectList InitEffects;
         [XmlArray]
         public EffectList UpdateEffects;
+
         [XmlArray]
-        //[XmlIgnore]
         public List<EffectList> KeyFrameEffects;
 
-        [XmlElement]
-        public Animation Animation;
+        //[XmlElement]
+        //public Animation Animation;
     }
 }

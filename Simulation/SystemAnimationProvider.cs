@@ -25,7 +25,7 @@ namespace GS_PatEditor.Simulation
             _Project = proj;
         }
 
-        public Pat.Animation GetSystemAnimation(SystemAnimationType type)
+        public Pat.Action GetSystemAnimation(SystemAnimationType type)
         {
             switch (type)
             {
@@ -46,34 +46,34 @@ namespace GS_PatEditor.Simulation
             }
         }
 
-        public Pat.Animation GetSystemAnimation_0_Stant()
+        public Pat.Action GetSystemAnimation_0_Stant()
         {
-            return _Project.Actions.FirstOrDefault(a => a.ActionID == "stand").Animation;
+            return _Project.Actions.FirstOrDefault(a => a.ActionID == "stand");
         }
 
-        public Pat.Animation GetSystemAnimation_1_Run()
+        public Pat.Action GetSystemAnimation_1_Run()
         {
-            return _Project.Actions.FirstOrDefault(a => a.ActionID == "run").Animation;
+            return _Project.Actions.FirstOrDefault(a => a.ActionID == "run");
         }
 
-        public Pat.Animation GetSystemAnimation_3_JumpUp()
+        public Pat.Action GetSystemAnimation_3_JumpUp()
         {
-            return _Project.Actions.FirstOrDefault(a => a.ActionID == "jump_up").Animation;
+            return _Project.Actions.FirstOrDefault(a => a.ActionID == "jump_up");
         }
 
-        public Pat.Animation GetSystemAnimation_4_JumpFront()
+        public Pat.Action GetSystemAnimation_4_JumpFront()
         {
-            return _Project.Actions.FirstOrDefault(a => a.ActionID == "jump_front").Animation;
+            return _Project.Actions.FirstOrDefault(a => a.ActionID == "jump_front");
         }
 
-        public Pat.Animation GetSystemAnimation_8_Fall()
+        public Pat.Action GetSystemAnimation_8_Fall()
         {
-            return _Project.Actions.FirstOrDefault(a => a.ActionID == "fall").Animation;
+            return _Project.Actions.FirstOrDefault(a => a.ActionID == "fall");
         }
 
-        public Pat.Animation GetSystemAnimation_9_FallAttack()
+        public Pat.Action GetSystemAnimation_9_FallAttack()
         {
-            return _Project.Actions.FirstOrDefault(a => a.ActionID == "fall_attack").Animation;
+            return _Project.Actions.FirstOrDefault(a => a.ActionID == "fall_attack");
         }
     }
 }

@@ -15,7 +15,7 @@ namespace GS_PatEditor.Pat.Effects
     {
         public override void Run(Simulation.Actor actor)
         {
-            actor.SetMotion(actor.CurrentAnimation, actor.CurrentSegmentIndex + 1);
+            actor.SetMotion(actor.CurrentAction, actor.CurrentSegmentIndex + 1);
         }
     }
 

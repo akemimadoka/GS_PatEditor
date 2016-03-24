@@ -123,13 +123,6 @@ namespace GS_PatEditor.Editor
         public event Action AnimationReset;
 
         public Pat.Action CurrentAction { get; private set; }
-        public Pat.Animation CurrentAnimation
-        {
-            get
-            {
-                return CurrentAction == null ? null : CurrentAction.Animation;
-            }
-        }
 
         private int _SelectedActionIndex;
         public int SelectedActionIndex
@@ -185,7 +178,7 @@ namespace GS_PatEditor.Editor
                 var segment = value.Segment;
                 var frame = value.Frame;
 
-                if (CurrentAnimation == null)
+                if (CurrentAction == null)
                 {
                     ResetFrame(null, null);
                     return;
@@ -197,9 +190,9 @@ namespace GS_PatEditor.Editor
                     return;
                 }
 
-                if (segment >= CurrentAnimation.Segments.Count)
+                if (segment >= CurrentAction.Segments.Count)
                 {
-                    if (CurrentAnimation.Segments.Count == 0)
+                    if (CurrentAction.Segments.Count == 0)
                     {
                         _SelectedSegmentIndex = -1;
                         _SelectedFrameIndex = -1;
@@ -213,7 +206,7 @@ namespace GS_PatEditor.Editor
                 }
 
                 _SelectedSegmentIndex = segment;
-                var seg = CurrentAnimation.Segments[segment];
+                var seg = CurrentAction.Segments[segment];
 
                 if (frame >= seg.Frames.Count)
                 {

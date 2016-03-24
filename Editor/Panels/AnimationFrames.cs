@@ -342,7 +342,7 @@ namespace GS_PatEditor.Editor.Panels
 
             _GridList.Clear();
 
-            var data = _Parent.CurrentAnimation;
+            var data = _Parent.CurrentAction;
             if (data == null)
             {
                 UpdateControlWidth();
@@ -490,7 +490,7 @@ namespace GS_PatEditor.Editor.Panels
                     return;
                 }
 
-                var animation = _Parent.CurrentAnimation;
+                var animation = _Parent.CurrentAction;
                 if (animation == null)
                 {
                     return;
@@ -530,7 +530,7 @@ namespace GS_PatEditor.Editor.Panels
                     return;
                 }
 
-                var animation = _Parent.CurrentAnimation;
+                var animation = _Parent.CurrentAction;
                 if (animation == null)
                 {
                     return;
@@ -561,7 +561,7 @@ namespace GS_PatEditor.Editor.Panels
                     return;
                 }
 
-                var animation = _Parent.CurrentAnimation;
+                var animation = _Parent.CurrentAction;
                 if (animation == null)
                 {
                     return;
@@ -581,17 +581,18 @@ namespace GS_PatEditor.Editor.Panels
             {
                 var grid = (KeyFrameGrid)_LastSelected;
 
-                var animation = _Parent.CurrentAnimation;
-                if (animation == null)
+                var action = _Parent.CurrentAction;
+
+                if (action == null)
                 {
                     return;
                 }
 
-                var frame = animation.Segments[grid.Segment].Frames[grid.Frame];
+                var frame = action.Segments[grid.Segment].Frames[grid.Frame];
 
                 var dialog = new FrameEditForm()
                 {
-                    UseImage = frame.ImageID == animation.ImageID,
+                    UseImage = frame.ImageID == action.ImageID,
                     FrameCount = frame.Duration,
                     SetDuationForAllEnabled = grid.Frame == 0,
                 };
@@ -599,7 +600,7 @@ namespace GS_PatEditor.Editor.Panels
                 {
                     if (dialog.SetDurationForAll)
                     {
-                        foreach (var f in animation.Segments[grid.Segment].Frames)
+                        foreach (var f in action.Segments[grid.Segment].Frames)
                         {
                             f.Duration = dialog.FrameCount;
                         }
@@ -608,13 +609,13 @@ namespace GS_PatEditor.Editor.Panels
                     {
                         frame.Duration = dialog.FrameCount;
                     }
-                    if (frame.ImageID == animation.ImageID && !dialog.UseImage)
+                    if (frame.ImageID == action.ImageID && !dialog.UseImage)
                     {
-                        animation.ImageID = null;
+                        action.ImageID = null;
                     }
                     else if (dialog.UseImage)
                     {
-                        animation.ImageID = frame.ImageID;
+                        action.ImageID = frame.ImageID;
                     }
                 }
 
@@ -628,7 +629,7 @@ namespace GS_PatEditor.Editor.Panels
             {
                 var grid = (KeyFrameGrid)_LastSelected;
 
-                var animation = _Parent.CurrentAnimation;
+                var animation = _Parent.CurrentAction;
                 if (animation == null)
                 {
                     return;
@@ -655,7 +656,7 @@ namespace GS_PatEditor.Editor.Panels
                 if (dialog.ShowDialog() == DialogResult.OK)
                 {
                     //create a new frame
-                    var animation = _Parent.CurrentAnimation;
+                    var animation = _Parent.CurrentAction;
                     if (animation == null)
                     {
                         return;
@@ -702,7 +703,7 @@ namespace GS_PatEditor.Editor.Panels
                 var segmentIndex = grid.Segment;
                 var frameIndex = grid.Frame;
 
-                var animation = _Parent.CurrentAnimation;
+                var animation = _Parent.CurrentAction;
                 if (animation == null)
                 {
                     return;
@@ -740,7 +741,7 @@ namespace GS_PatEditor.Editor.Panels
                 var segmentIndex = grid.Segment;
                 var frameIndex = grid.Frame;
 
-                var animation = _Parent.CurrentAnimation;
+                var animation = _Parent.CurrentAction;
                 if (animation == null)
                 {
                     return;
@@ -785,7 +786,7 @@ namespace GS_PatEditor.Editor.Panels
             get
             {
                 //can not insert (only paste is supported) at the beginning
-                return _Parent.CurrentAnimation != null &&
+                return _Parent.CurrentAction != null &&
                     (_LastSelected == null || _LastSelected.Segment != 0 || _LastSelected.Frame != 0);
             }
         }
@@ -818,7 +819,7 @@ namespace GS_PatEditor.Editor.Panels
             {
                 return;
             }
-            var animation = _Parent.CurrentAnimation;
+            var animation = _Parent.CurrentAction;
             if (animation == null)
             {
                 return;
@@ -841,7 +842,7 @@ namespace GS_PatEditor.Editor.Panels
                 return;
             }
 
-            var animation = _Parent.CurrentAnimation;
+            var animation = _Parent.CurrentAction;
             if (animation == null)
             {
                 return;
@@ -872,7 +873,7 @@ namespace GS_PatEditor.Editor.Panels
         {
             get
             {
-                return _Parent.CurrentAnimation != null && _LastSelected != null;
+                return _Parent.CurrentAction != null && _LastSelected != null;
             }
         }
 
@@ -880,7 +881,7 @@ namespace GS_PatEditor.Editor.Panels
         {
             get
             {
-                var animation = _Parent.CurrentAnimation;
+                var animation = _Parent.CurrentAction;
                 if (animation == null || _LastSelected == null)
                 {
                     return -1;
@@ -920,7 +921,7 @@ namespace GS_PatEditor.Editor.Panels
                     return;
                 }
 
-                var animation = _Parent.CurrentAnimation;
+                var animation = _Parent.CurrentAction;
                 var segment = animation.Segments[_LastSelected.Segment];
                 var time = segment.Frames.Take(_LastSelected.Frame)
                             .Sum(f => f.Duration);
@@ -960,7 +961,7 @@ namespace GS_PatEditor.Editor.Panels
                     return;
                 }
 
-                var animation = _Parent.CurrentAnimation;
+                var animation = _Parent.CurrentAction;
                 var segment = animation.Segments[_LastSelected.Segment];
                 var time = segment.Frames.Take(_LastSelected.Frame)
                             .Sum(f => f.Duration);

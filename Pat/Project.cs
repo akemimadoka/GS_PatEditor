@@ -19,14 +19,8 @@ namespace GS_PatEditor.Pat
         [XmlArray]
         public List<FrameImage> Images;
 
-        //[XmlArray]
-        //public List<Animation> Animations;
-
         [XmlArray]
         public List<Action> Actions;
-
-        //[XmlArray]
-        //public List<Actor> Actors;
 
         [XmlIgnore]
         public ProjectLocalInfo LocalInformation;

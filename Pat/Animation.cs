@@ -10,19 +10,9 @@ namespace GS_PatEditor.Pat
     [Serializable]
     public class Animation
     {
+        //TODO move to action
         //[XmlAttribute]
-        //public string AnimationID;
+        //public string ImageID;
 
-        [XmlAttribute]
-        public string ImageID;
-
-        //[XmlAttribute]
-        //public string SystemActionID;
-
-        [XmlAttribute]
-        public string ActionID;
-
-        [XmlElement(ElementName = "Segment")]
-        public List<AnimationSegment> Segments;
     }
 }

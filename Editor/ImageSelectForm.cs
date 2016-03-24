@@ -223,14 +223,14 @@ namespace GS_PatEditor.Editor
                     //replace all image ids
                     //TODO move to ImageList
                     image.ImageID = newValue;
-                    foreach (var animation in _Project.GetAllAnimations())
+                    foreach (var action in _Project.Actions)
                     {
-                        if (animation.ImageID == oldValue)
+                        if (action.ImageID == oldValue)
                         {
-                            animation.ImageID = newValue;
+                            action.ImageID = newValue;
                         }
                     }
-                    foreach (var frame in _Project.GetAllAnimations()
+                    foreach (var frame in _Project.Actions
                         .SelectMany(p => p.Segments)
                         .SelectMany(s => s.Frames))
                     {
