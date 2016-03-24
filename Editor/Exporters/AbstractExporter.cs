@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 
 namespace GS_PatEditor.Editor.Exporters
 {
-    abstract class AbstractExporter
+    [Serializable]
+    public abstract class AbstractExporter
     {
         private Pat.Project _Project;
         private string _OutputFile;
@@ -18,7 +19,7 @@ namespace GS_PatEditor.Editor.Exporters
         private List<CodeGenerator> _Codes = new List<CodeGenerator>();
 
         public abstract void Export(Pat.Project proj);
-        public abstract void ShowOptionDialog();
+        public abstract void ShowOptionDialog(Pat.Project proj);
 
         public void InitExporter(Pat.Project proj, string outputFile)
         {

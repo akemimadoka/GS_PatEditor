@@ -1,4 +1,5 @@
-﻿using GS_PatEditor.Pat.Editing;
+﻿using GS_PatEditor.Editor.Exporters;
+using GS_PatEditor.Pat.Editing;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +22,9 @@ namespace GS_PatEditor.Pat
 
         [XmlArray]
         public List<Action> Actions;
+
+        [XmlElement]
+        public AbstractExporter Exporter;
 
         [XmlIgnore]
         public ProjectLocalInfo LocalInformation;

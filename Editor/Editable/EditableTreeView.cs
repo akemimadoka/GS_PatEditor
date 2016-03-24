@@ -11,8 +11,56 @@ namespace GS_PatEditor.Editor.Editable
     class EditableTreeView : TreeView
     {
         public PropertyGrid LinkedPropertyGrid { get; set; }
-        public Button LinkedResetButton { get; set; }
-        public Button LinkedDeleteButton { get; set; }
+
+        private Button _LinkedResetButton;
+        public Button LinkedResetButton
+        {
+            get
+            {
+                return _LinkedResetButton;
+            }
+            set
+            {
+                if (_LinkedResetButton == value)
+                {
+                    return;
+                }
+                if (_LinkedResetButton != null)
+                {
+                    _LinkedResetButton.Click -= ResetButton_Click;
+                }
+                if (value != null)
+                {
+                    value.Click += ResetButton_Click;
+                }
+                _LinkedResetButton = value;
+            }
+        }
+
+        private Button _LinkedDeleteButton;
+        public Button LinkedDeleteButton
+        {
+            get
+            {
+                return _LinkedDeleteButton;
+            }
+            set
+            {
+                if (_LinkedDeleteButton == value)
+                {
+                    return;
+                }
+                if (_LinkedDeleteButton != null)
+                {
+                    _LinkedDeleteButton.Click -= DeleteButton_Click;
+                }
+                if (value != null)
+                {
+                    value.Click += DeleteButton_Click;
+                }
+                _LinkedDeleteButton = value;
+            }
+        }
         
         public EditableTreeView()
         {
@@ -35,7 +83,7 @@ namespace GS_PatEditor.Editor.Editable
             }
             else
             {
-                SetLinkedStatus(false, false, null);
+                SetLinkedStatus(false, false, node != null ? node.Tag : null);
             }
         }
 
@@ -55,16 +103,22 @@ namespace GS_PatEditor.Editor.Editable
             }
         }
 
-        public void ResetList<T>(EditableEnvironment env, List<T> list)
-            where T : class
+        private void ResetButton_Click(object sender, EventArgs e)
         {
-            Nodes.Clear();
-            var me = new ListMultiEditable<T> { List = list };
-            foreach (var effect in list)
+            var node = SelectedNode as IEditableTreeNode;
+            if (node != null)
             {
-                Nodes.Add(EditableNodeGenerator.Create<T>(env, effect, me));
+                node.Reset();
             }
-            Nodes.Add(EditableNodeGenerator.Create<T>(env, me));
+        }
+
+        private void DeleteButton_Click(object sender, EventArgs e)
+        {
+            var node = SelectedNode as IEditableTreeNode;
+            if (node != null)
+            {
+                node.Delete();
+            }
         }
     }
 }

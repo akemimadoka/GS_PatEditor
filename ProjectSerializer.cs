@@ -1,4 +1,5 @@
 ﻿using GS_PatEditor.Editor.Editable;
+using GS_PatEditor.Editor.Exporters;
 using GS_PatEditor.Pat;
 using System;
 using System.Collections.Generic;
@@ -25,7 +26,8 @@ namespace GS_PatEditor
                             typeof(Effect).IsAssignableFrom(t) ||
                             typeof(Filter).IsAssignableFrom(t) ||
                             typeof(PointProvider).IsAssignableFrom(t) ||
-                            typeof(Value).IsAssignableFrom(t)
+                            typeof(Value).IsAssignableFrom(t) ||
+                            typeof(AbstractExporter).IsAssignableFrom(t)
                         ))
                         .Where(t => !t.IsAbstract)
                         .Where(t => t.GetCustomAttribute<EditorSelectorAttribute>() == null)

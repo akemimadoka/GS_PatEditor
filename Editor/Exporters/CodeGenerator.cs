@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GS_PatEditor.Editor.Exporters
 {
-    class CodeGenerator
+    public class CodeGenerator
     {
         public CodeGenerator(string filename)
         {

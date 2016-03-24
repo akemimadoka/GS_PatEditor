@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GS_PatEditor.Pat.Effects;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -67,6 +68,18 @@ namespace GS_PatEditor.Editor.Editable
                 Text = filter == null ? "<null>" : filter.GetType().Name,
                 Tag = filter
             };
+        }
+
+        public static void AddEditableList<T>(this TreeNodeCollection coll,
+            EditableEnvironment env, List<T> list)
+            where T : class
+        {
+            var me = new ListMultiEditable<T> { List = list };
+            foreach (var item in list)
+            {
+                coll.Add(EditableNodeGenerator.Create<T>(env, item, me));
+            }
+            coll.Add(EditableNodeGenerator.Create<T>(env, me));
         }
     }
 }

@@ -46,17 +46,20 @@
             // button1
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.button1.Enabled = false;
             this.button1.Location = new System.Drawing.Point(193, 265);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 2;
             this.button1.Text = "Delete";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // treeView1
             // 
             this.treeView1.HideSelection = false;
+            this.treeView1.LinkedDeleteButton = null;
+            this.treeView1.LinkedPropertyGrid = null;
+            this.treeView1.LinkedResetButton = null;
             this.treeView1.Location = new System.Drawing.Point(12, 12);
             this.treeView1.Name = "treeView1";
             this.treeView1.Size = new System.Drawing.Size(256, 247);
@@ -65,13 +68,13 @@
             // button2
             // 
             this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.button2.Enabled = false;
             this.button2.Location = new System.Drawing.Point(112, 265);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 2;
             this.button2.Text = "Reset";
             this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // EffectListEditForm
             // 

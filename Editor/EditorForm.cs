@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GS_PatEditor.Editor.Exporters.Player;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -91,6 +92,8 @@ namespace GS_PatEditor.Editor
                         frm.toolStripButtonOpen,
                         frm.toolStripButtonSave,
                         frm.toolStripButtonSaveAs,
+                        frm.toolStripSeparator13,
+                        frm.toolStripButtonExporter,
                         frm.toolStripButtonExport,
                         frm.toolStripSeparator7,
                         frm.toolStripButtonNewAnimation,
@@ -710,6 +713,54 @@ namespace GS_PatEditor.Editor
         private void toolStripButtonEditAction_Click(object sender, EventArgs e)
         {
             _Editor.ShowActionEditForm();
+        }
+
+        private void toolStripButtonExporter_DropDownOpening(object sender, EventArgs e)
+        {
+            editExporterToolStripMenuItem.Enabled = false;
+            removeExporterToolStripMenuItem.Enabled = false;
+            createExporterToolStripMenuItem.Enabled = false;
+
+            if (!_Editor.Project.IsEmptyProject)
+            {
+                if (_Editor.Project.Exporter != null)
+                {
+                    editExporterToolStripMenuItem.Enabled = true;
+                    removeExporterToolStripMenuItem.Enabled = true;
+                }
+                else
+                {
+                    createExporterToolStripMenuItem.Enabled = true;
+                }
+            }
+        }
+
+        private void playerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!_Editor.Project.IsEmptyProject)
+            {
+                _Editor.Project.Exporter = new PlayerExporter();
+            }
+        }
+
+        private void removeExporterToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!_Editor.Project.IsEmptyProject)
+            {
+                if (MessageBox.Show("Remove exporter?", "PatEditor",
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
+                {
+                    _Editor.Project.Exporter = null;
+                }
+            }
+        }
+
+        private void editExporterToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!_Editor.Project.IsEmptyProject && _Editor.Project.Exporter != null)
+            {
+                _Editor.Project.Exporter.ShowOptionDialog(_Editor.Project);
+            }
         }
     }
 }
