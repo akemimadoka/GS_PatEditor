@@ -8,7 +8,7 @@ using System.Xml.Serialization;
 namespace GS_PatEditor.Pat.Effects
 {
     [Serializable]
-    class FrameSinglePointProvider : PointProvider
+    public class FrameSinglePointProvider : PointProvider
     {
         [XmlAttribute]
         public int Index { get; set; }

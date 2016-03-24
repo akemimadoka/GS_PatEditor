@@ -23,7 +23,7 @@ namespace GS_PatEditor.Pat.Effects
     [Serializable]
     public class AnimationCountAfterFilter : Filter
     {
-        [XmlAttribute]
+        [XmlElement]
         [EditorChildNode("Count")]
         public Value Count;
 
@@ -46,10 +46,10 @@ namespace GS_PatEditor.Pat.Effects
     [Serializable]
     public class AnimationCountModFilter : Filter
     {
-        [XmlAttribute]
+        [XmlElement]
         [EditorChildNode("Divisor")]
         public Value Divisor;
-        [XmlAttribute]
+        [XmlElement]
         [EditorChildNode("Mod")]
         public Value Mod;
 

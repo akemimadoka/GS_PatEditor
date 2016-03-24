@@ -1,8 +1,10 @@
-﻿using GS_PatEditor.Pat;
+﻿using GS_PatEditor.Editor.EffectEditable;
+using GS_PatEditor.Pat;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
@@ -18,12 +20,16 @@ namespace GS_PatEditor
             {
                 if (_ProjSerializer == null)
                 {
-                    var types = System.Reflection.Assembly.GetExecutingAssembly().GetTypes().Where(
-                        t => (
+                    var types = System.Reflection.Assembly.GetExecutingAssembly().GetTypes()
+                        .Where(t => (
                             typeof(Effect).IsAssignableFrom(t) ||
                             typeof(Filter).IsAssignableFrom(t) ||
-                            typeof(PointProvider).IsAssignableFrom(t)
-                        ) && !t.IsAbstract).ToArray();
+                            typeof(PointProvider).IsAssignableFrom(t) ||
+                            typeof(Value).IsAssignableFrom(t)
+                        ))
+                        .Where(t => !t.IsAbstract)
+                        .Where(t => t.GetCustomAttribute<EditorSelectorAttribute>() == null)
+                        .ToArray();
                     _ProjSerializer = new XmlSerializer(typeof(Project), types);
                 }
                 return _ProjSerializer;

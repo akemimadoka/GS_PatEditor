@@ -11,7 +11,7 @@ namespace GS_PatEditor.Pat.Effects
     [Serializable]
     public class PlayerSkillStopMovingEffect : Effect
     {
-        [XmlAttribute]
+        [XmlElement]
         [EditorChildNode("ReduceSpeed")]
         public Value ReduceSpeed = new ConstValue { Value = 0.1f };
 

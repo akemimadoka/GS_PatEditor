@@ -47,6 +47,7 @@ namespace GS_PatEditor.Pat.Effects
             }
         }
 
+        [XmlIgnore]
         [Browsable(false)]
         public EditableEnvironment Environment { get; set; }
     }
@@ -75,6 +76,7 @@ namespace GS_PatEditor.Pat.Effects
             actor.SetMotion(Animation == "" ? null : Animation, Segment);
         }
 
+        [XmlIgnore]
         [Browsable(false)]
         public EditableEnvironment Environment { get; set; }
     }
@@ -94,6 +96,7 @@ namespace GS_PatEditor.Pat.Effects
             actor.SetMotion(Animation == "" ? null : Animation, actor.World.Random.Next(SegmentCount));
         }
 
+        [XmlIgnore]
         [Browsable(false)]
         public EditableEnvironment Environment { get; set; }
     }
