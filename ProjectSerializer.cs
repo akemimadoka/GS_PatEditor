@@ -1,4 +1,4 @@
-﻿using GS_PatEditor.Editor.EffectEditable;
+﻿using GS_PatEditor.Editor.Editable;
 using GS_PatEditor.Pat;
 using System;
 using System.Collections.Generic;

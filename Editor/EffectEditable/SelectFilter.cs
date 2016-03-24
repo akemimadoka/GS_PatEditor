@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GS_PatEditor.Editor.EffectEditable
+namespace GS_PatEditor.Editor.Editable
 {
     [EditorSelector(typeof(Pat.Filter))]
     class SelectFilter : Pat.Filter, IHideFromEditor, IEditableEnvironment

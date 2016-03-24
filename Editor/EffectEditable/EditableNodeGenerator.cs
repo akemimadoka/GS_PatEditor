@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace GS_PatEditor.Editor.EffectEditable
+namespace GS_PatEditor.Editor.Editable
 {
     class EditableNodeGenerator
     {
