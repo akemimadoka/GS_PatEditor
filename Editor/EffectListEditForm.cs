@@ -20,7 +20,10 @@ namespace GS_PatEditor.Editor
         public EffectListEditForm(Pat.Project proj, Pat.EffectList effects)
         {
             InitializeComponent();
-            treeView1.SelectedNodeChanged += UpdateSelectedNode;
+
+            treeView1.LinkedPropertyGrid = propertyGrid1;
+            treeView1.LinkedDeleteButton = button1;
+            treeView1.LinkedResetButton = button2;
 
             _Project = proj;
             _Effects = effects;
@@ -29,46 +32,7 @@ namespace GS_PatEditor.Editor
 
         private void RefreshList()
         {
-            treeView1.Nodes.Clear();
-            var me = new ListMultiEditable<Pat.Effect> { List = _Effects.Effects };
-            var env = new EditableEnvironment(_Project);
-            foreach (var effect in _Effects)
-            {
-                treeView1.Nodes.Add(EditableNodeGenerator.Create<Pat.Effect>(env, effect, me));
-            }
-            treeView1.Nodes.Add(EditableNodeGenerator.Create<Pat.Effect>(env, me));
-        }
-
-        private void treeView1_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
-        {
-            treeView1.SelectedNode = e.Node;
-            UpdateSelectedNode(null, EventArgs.Empty);
-        }
-
-        private void UpdateSelectedNode(object sender, EventArgs e)
-        {
-            var node = treeView1.SelectedNode;
-            if (node == null)
-            {
-                propertyGrid1.SelectedObject = null;
-                button1.Enabled = false;
-                button2.Enabled = false;
-                return;
-            }
-
-            propertyGrid1.SelectedObject = node.Tag;
-
-            var nnode = node as IEditableTreeNode;
-            if (nnode != null)
-            {
-                button2.Enabled = nnode.CanReset;
-                button1.Enabled = nnode.CanDelete;
-            }
-            else
-            {
-                button2.Enabled = false;
-                button1.Enabled = false;
-            }
+            treeView1.ResetList<Pat.Effect>(new EditableEnvironment(_Project), _Effects.Effects);
         }
 
         private void button2_Click(object sender, EventArgs e)

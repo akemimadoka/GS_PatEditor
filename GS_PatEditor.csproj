@@ -69,25 +69,30 @@
     <Compile Include="Editor\ActionEditForm.Designer.cs">
       <DependentUpon>ActionEditForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Editor\EffectEditable\Editable.cs" />
-    <Compile Include="Editor\EffectEditable\EditableNodeGenerator.cs" />
-    <Compile Include="Editor\EffectEditable\EditableTreeNode.cs" />
-    <Compile Include="Editor\EffectEditable\EditableTreeView.cs">
+    <Compile Include="Editor\Editable\Editable.cs" />
+    <Compile Include="Editor\Editable\EditableNodeGenerator.cs" />
+    <Compile Include="Editor\Editable\EditableTreeNode.cs" />
+    <Compile Include="Editor\Editable\EditableTreeView.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Editor\EffectEditable\GenericEditorSelectorTypeConverter.cs" />
-    <Compile Include="Editor\EffectEditable\SelectEffect.cs" />
-    <Compile Include="Editor\EffectEditable\SelectFilter.cs" />
-    <Compile Include="Editor\EffectEditable\SelectHelper.cs" />
-    <Compile Include="Editor\EffectEditable\SelectPointProvider.cs" />
-    <Compile Include="Editor\EffectEditable\SelectValue.cs" />
-    <Compile Include="Editor\EffectEditable\TreeViewExt.cs" />
+    <Compile Include="Editor\Editable\GenericEditorSelectorTypeConverter.cs" />
+    <Compile Include="Editor\Editable\SelectEffect.cs" />
+    <Compile Include="Editor\Editable\SelectFilter.cs" />
+    <Compile Include="Editor\Editable\SelectHelper.cs" />
+    <Compile Include="Editor\Editable\SelectPointProvider.cs" />
+    <Compile Include="Editor\Editable\SelectValue.cs" />
+    <Compile Include="Editor\Editable\TreeViewExt.cs" />
     <Compile Include="Editor\EffectListEditForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Editor\EffectListEditForm.Designer.cs">
       <DependentUpon>EffectListEditForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Editor\Exporters\AbstractExporter.cs" />
+    <Compile Include="Editor\Exporters\CodeGenerator.cs" />
+    <Compile Include="Editor\Exporters\ExportHelper.cs" />
+    <Compile Include="Editor\Exporters\ImageListExporter.cs" />
+    <Compile Include="Editor\Exporters\Player\PlayerExporter.cs" />
     <Compile Include="Editor\ExportForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -96,6 +101,12 @@
     </Compile>
     <Compile Include="Editor\Panels\PreviewWindowPlaying.cs" />
     <Compile Include="Editor\Panels\Tools\Point\PointEditingHandler.cs" />
+    <Compile Include="Editor\Exporters\Player\PlayerExporterOptionsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Editor\Exporters\Player\PlayerExporterOptionsForm.Designer.cs">
+      <DependentUpon>PlayerExporterOptionsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="GSPat\GSPatWriter.cs" />
     <Compile Include="Pat\Effects\BulletEffect.cs" />
     <Compile Include="Pat\Effects\CommonEffect.cs" />
@@ -260,6 +271,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Editor\ImageSelectForm.resx">
       <DependentUpon>ImageSelectForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editor\Exporters\Player\PlayerExporterOptionsForm.resx">
+      <DependentUpon>PlayerExporterOptionsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
