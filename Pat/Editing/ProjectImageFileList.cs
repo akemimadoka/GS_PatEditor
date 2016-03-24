@@ -129,6 +129,25 @@ namespace GS_PatEditor.Pat.Editing
             return null;
         }
 
+        public Bitmap GetImageUnclippedByRes(string id, bool alphaBlend)
+        {
+            var res = _Project.FindResource(ProjectDirectoryUsage.Image, id);
+
+            Bitmap ret;
+            AbstractImage imageData = LoadResource(res);
+            if (imageData == null)
+            {
+                return null;
+            }
+            ret = imageData.ToBitmap(_Palette, new Rectangle(0, 0, imageData.Width, imageData.Height));
+
+            if (alphaBlend)
+            {
+                MakeAlphaBlendBitmap(ret);
+            }
+            return ret;
+        }
+
         public Bitmap GetImageUnclipped(string id)
         {
             Bitmap ret;
@@ -138,20 +157,11 @@ namespace GS_PatEditor.Pat.Editing
             }
 
             var imgDesc = _Project.Images.FirstOrDefault(f => f.ImageID == id);
-            var res = _Project.FindResource(ProjectDirectoryUsage.Image, imgDesc.Resource.ResourceID);
-
-            AbstractImage imageData = LoadResource(res);
-            if (imageData == null)
+            if (imgDesc == null)
             {
                 return null;
             }
-            ret = imageData.ToBitmap(_Palette, new Rectangle(0, 0, imageData.Width, imageData.Height));
-
-            if (imgDesc.AlphaBlendMode)
-            {
-                MakeAlphaBlendBitmap(ret);
-            }
-
+            ret = GetImageUnclippedByRes(imgDesc.Resource.ResourceID, imgDesc.AlphaBlendMode);
             cachedUnclipped.Add(id, ret);
             return ret;
         }
@@ -218,6 +228,7 @@ namespace GS_PatEditor.Pat.Editing
         public void ResetImage(FrameImage img)
         {
             cachedImage.Remove(img.ImageID);
+            cachedUnclipped.Remove(img.ImageID);
         }
 
         private List<string> _ToRemove = new List<string>();

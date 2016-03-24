@@ -15,6 +15,7 @@ namespace GS_PatEditor.Editor
     public partial class ImageSelectForm : Form
     {
         private Pat.Project _Project;
+        private Bitmap _PreviewImage;
 
         public ImageSelectForm(Pat.Project project)
         {
@@ -123,12 +124,14 @@ namespace GS_PatEditor.Editor
             }
             else if (listView1.SelectedItems[0].Tag is Pat.FrameImage)
             {
+                _PreviewImage = null;
                 textBox1.Enabled = true;
                 buttonOK.Enabled = true;
                 textBox1.ReadOnly = false;
                 //image item
                 var img = (Pat.FrameImage)listView1.SelectedItems[0].Tag;
                 SetupImage(img);
+                checkBox2.Checked = img.AlphaBlendMode;
             }
             else if (listView1.SelectedItems[0].Tag is string)
             {
@@ -139,6 +142,12 @@ namespace GS_PatEditor.Editor
                 var file = (string)listView1.SelectedItems[0].Tag;
                 //TODO handle duplicate file
                 textBox1.Text = Path.GetFileNameWithoutExtension(file);
+
+                //show preview
+                _PreviewImage = _Project.ImageList.GetImageUnclippedByRes(Path.GetFileName(file), false);
+                checkBox2.Checked = false;
+
+                pictureBox1.Invalidate();
             }
         }
 
@@ -406,11 +415,37 @@ namespace GS_PatEditor.Editor
 
                 e.Graphics.DrawRectangle(_PenDrawRect, pp0.X, pp0.Y, pp1.X - pp0.X, pp1.Y - pp0.Y);
             }
+            else if (_PreviewImage != null)
+            {
+                var p0 = PointSpriteToClient(new Point(-_PreviewImage.Width / 2, -_PreviewImage.Height / 2));
+                var p1 = PointSpriteToClient(new Point(_PreviewImage.Width / 2, _PreviewImage.Height / 2));
+
+                //e.Graphics.FillRectangle(_BrushImage, p0.X, p0.Y, p1.X - p0.X, p1.Y - p0.Y);
+                e.Graphics.DrawImage(_PreviewImage, p0);
+            }
         }
 
         private void pictureBox1_Resize(object sender, EventArgs e)
         {
             pictureBox1.Invalidate();
+        }
+
+        private void checkBox2_CheckedChanged(object sender, EventArgs e)
+        {
+            if (listView1.SelectedItems.Count != 0 && listView1.SelectedItems[0].Tag is Pat.FrameImage)
+            {
+                var img = (Pat.FrameImage)listView1.SelectedItems[0].Tag;
+                img.AlphaBlendMode = checkBox2.Checked;
+                _Project.ImageList.ResetImage(img);
+                pictureBox1.Invalidate();
+            }
+            else if (listView1.SelectedItems.Count != 0 && listView1.SelectedItems[0].Tag is string &&
+                _PreviewImage != null)
+            {
+                var img = (string)listView1.SelectedItems[0].Tag;
+                _PreviewImage = _Project.ImageList.GetImageUnclippedByRes(Path.GetFileName(img), checkBox2.Checked);
+                pictureBox1.Invalidate();
+            }
         }
     }
 }
