@@ -150,6 +150,24 @@ namespace GS_PatEditor.Pat
         {
             Effects.Remove(val);
         }
+
+        public int FindIndex(Effect val)
+        {
+            return Effects.FindIndex(i => i == val);
+        }
+
+        public void Insert(int index, Effect val)
+        {
+            Effects.Insert(index, val);
+        }
+
+        public int Count
+        {
+            get
+            {
+                return Effects.Count;
+            }
+        }
     }
 
     [Serializable]
@@ -181,6 +199,24 @@ namespace GS_PatEditor.Pat
         public void Remove(Filter val)
         {
             Filters.Remove(val);
+        }
+
+        public int FindIndex(Filter val)
+        {
+            return Filters.FindIndex(i => i == val);
+        }
+
+        public void Insert(int index, Filter val)
+        {
+            Filters.Insert(index, val);
+        }
+
+        public int Count
+        {
+            get
+            {
+                return Filters.Count;
+            }
         }
     }
 

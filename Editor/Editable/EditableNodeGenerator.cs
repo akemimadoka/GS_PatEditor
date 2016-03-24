@@ -73,6 +73,7 @@ namespace GS_PatEditor.Editor.Editable
         }
 
         private class FieldSingleEditable<T> : SingleEditable<T>
+            where T : class
         {
             private object _Object;
             private FieldInfo _Field;
@@ -206,9 +207,13 @@ namespace GS_PatEditor.Editor.Editable
     }
 
     public interface IEditableList<T> : IEnumerable<T>
+        where T : class
     {
         void Add(T val);
         void Remove(T val);
+        int FindIndex(T val);
+        void Insert(int index, T val);
+        int Count { get; }
     }
 
     public class EditorChildNodeAttribute : Attribute

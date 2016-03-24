@@ -21,6 +21,8 @@ namespace GS_PatEditor.Editor
             treeView1.LinkedPropertyGrid = propertyGrid1;
             treeView1.LinkedDeleteButton = button1;
             treeView1.LinkedResetButton = button2;
+            treeView1.LinkedMoveDownButton = button3;
+            treeView1.LinkedMoveUpButton = button4;
 
             treeView1.Nodes.AddEditableList(new EditableEnvironment(proj), effects.Effects);
         }

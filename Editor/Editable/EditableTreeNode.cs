@@ -14,6 +14,10 @@ namespace GS_PatEditor.Editor.Editable
         bool CanReset { get; }
         void Delete();
         bool CanDelete { get; }
+        void MoveUp();
+        bool CanMoveUp { get; }
+        void MoveDown();
+        bool CanMoveDown { get; }
     }
 
     abstract class EditableTreeNode<T> : TreeNode, IEditableTreeNode
@@ -76,5 +80,40 @@ namespace GS_PatEditor.Editor.Editable
             }
         }
         public bool CanDelete { get { return Dest != null && Dest is MultiEditable<T>; } }
+
+
+        public void MoveUp()
+        {
+            if (CanMoveUp)
+            {
+                ((MultiEditable<T>)Dest).MoveUp(Data);
+                this.NodeMoveUp();
+            }
+        }
+
+        public bool CanMoveUp
+        {
+            get
+            {
+                return CanDelete && !((MultiEditable<T>)Dest).IsFirst(Data);
+            }
+        }
+
+        public void MoveDown()
+        {
+            if (CanMoveDown)
+            {
+                ((MultiEditable<T>)Dest).MoveDown(Data);
+                this.NodeMoveDown();
+            }
+        }
+
+        public bool CanMoveDown
+        {
+            get
+            {
+                return CanDelete && !((MultiEditable<T>)Dest).IsLast(Data);
+            }
+        }
     }
 }

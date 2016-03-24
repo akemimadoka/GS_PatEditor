@@ -81,5 +81,29 @@ namespace GS_PatEditor.Editor.Editable
             }
             coll.Add(EditableNodeGenerator.Create<T>(env, me));
         }
+
+        public static void NodeMoveUp(this TreeNode node)
+        {
+            var coll = node.GetParentCollection();
+            var index = coll.IndexOf(node);
+            if (index == -1 || index == 0)
+            {
+                return;
+            }
+            coll.RemoveAt(index);
+            coll.Insert(index - 1, node);
+        }
+
+        public static void NodeMoveDown(this TreeNode node)
+        {
+            var coll = node.GetParentCollection();
+            var index = coll.IndexOf(node);
+            if (index == -1 || index == coll.Count - 1)
+            {
+                return;
+            }
+            coll.RemoveAt(index);
+            coll.Insert(index + 1, node);
+        }
     }
 }

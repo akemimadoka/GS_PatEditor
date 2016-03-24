@@ -21,6 +21,8 @@ namespace GS_PatEditor.Editor.Exporters.Player
             treeView1.LinkedPropertyGrid = propertyGrid1;
             treeView1.LinkedDeleteButton = button1;
             treeView1.LinkedResetButton = button2;
+            treeView1.LinkedMoveDownButton = button3;
+            treeView1.LinkedMoveUpButton = button4;
 
             treeView1.Nodes.Add(new TreeNode
             {
