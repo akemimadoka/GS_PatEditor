@@ -39,7 +39,7 @@ namespace GS_PatEditor
                     {
                         AnimationID = nextAnimationID++,
                         AttackLevel = 0,
-                        CancelLevel = (short)action.Segments[0].CancelLevel,
+                        CancelLevel = ExportCancelLevel(action.Segments[0].CancelLevel),
                         IsLoop = action.Segments[0].IsLoop,
                         Type = GSPat.AnimationType.Normal,
                     };
@@ -47,13 +47,13 @@ namespace GS_PatEditor
                     ret.Animations.Add(eAnimation);
                 }
 
-                for (int i = 1; i < action.Segments.Count - 1; ++i)
+                for (int i = 1; i < action.Segments.Count; ++i)
                 {
                     var eAnimation = new GSPat.Animation()
                     {
                         AnimationID = -2,
                         AttackLevel = 0,
-                        CancelLevel = (short)action.Segments[i].CancelLevel,
+                        CancelLevel = ExportCancelLevel(action.Segments[i].CancelLevel),
                         IsLoop = action.Segments[i].IsLoop,
                         Type = GSPat.AnimationType.Normal,
                     };
@@ -63,6 +63,25 @@ namespace GS_PatEditor
             }
 
             return ret;
+        }
+
+        private static short ExportCancelLevel(Pat.CancelLevel value)
+        {
+            switch (value)
+            {
+                case Pat.CancelLevel.Free:
+                case Pat.CancelLevel.None:
+                    return 0;
+                case Pat.CancelLevel.Light:
+                    return 10;
+                case Pat.CancelLevel.Long:
+                    return 30;
+                case Pat.CancelLevel.Heavy:
+                    return 31;
+                case Pat.CancelLevel.Magic:
+                    return 50;
+            }
+            return 0;
         }
 
         private static void ExportFrames(GSPat.Animation toList, Pat.AnimationSegment fromList,
@@ -108,9 +127,9 @@ namespace GS_PatEditor
                     OriginX = (short)frame.OriginX,
                     OriginY = (short)frame.OriginY,
                     PhysicsBox = ExportPhysical(frame.PhysicalBox),
-                    Point0 = new GSPat.PointReference(),
-                    Point1 = new GSPat.PointReference(),
-                    Point2 = new GSPat.PointReference(),
+                    Point0 = ExportPoint(frame.Points, 0),
+                    Point1 = ExportPoint(frame.Points, 1),
+                    Point2 = ExportPoint(frame.Points, 2),
                     SpriteID = imageIndex[frame.ImageID],
                     StateFlag = (frameTime >= cancelSkill ? 0x20 : 0) + (frameTime >= cancelJump ? 0x200000 : 0),
                     ViewHeight = (short)img.H,
@@ -122,6 +141,19 @@ namespace GS_PatEditor
 
                 frameTime += frame.Duration;
             }
+        }
+
+        private static GSPat.PointReference ExportPoint(List<Pat.FramePoint> list, int index)
+        {
+            if (list == null || index >= list.Count)
+            {
+                return new GSPat.PointReference();
+            }
+            return new GSPat.PointReference
+            {
+                X = (short)list[index].X,
+                Y = (short)list[index].Y,
+            };
         }
 
         private static List<GSPat.Box> ExportBoxs(List<Pat.Box> boxes)
