@@ -94,6 +94,7 @@
     <Compile Include="Editor\Exporters\ImageListExporter.cs" />
     <Compile Include="Editor\Exporters\Player\ImageIDEditor.cs" />
     <Compile Include="Editor\Exporters\Player\PlayerExporter.cs" />
+    <Compile Include="Editor\Exporters\Player\PlayerInformation.cs" />
     <Compile Include="Editor\Exporters\Player\Skill.cs" />
     <Compile Include="Editor\ExportForm.cs">
       <SubType>Form</SubType>

@@ -40,13 +40,16 @@
             // 
             this.propertyGrid1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.propertyGrid1.Location = new System.Drawing.Point(274, 12);
+            this.propertyGrid1.Location = new System.Drawing.Point(281, 12);
             this.propertyGrid1.Name = "propertyGrid1";
-            this.propertyGrid1.Size = new System.Drawing.Size(211, 276);
+            this.propertyGrid1.Size = new System.Drawing.Size(211, 258);
             this.propertyGrid1.TabIndex = 1;
             // 
             // treeView1
             // 
+            this.treeView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.treeView1.HideSelection = false;
             this.treeView1.LinkedDeleteButton = null;
             this.treeView1.LinkedMoveDownButton = null;
@@ -55,14 +58,14 @@
             this.treeView1.LinkedResetButton = null;
             this.treeView1.Location = new System.Drawing.Point(12, 12);
             this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(256, 247);
+            this.treeView1.Size = new System.Drawing.Size(263, 229);
             this.treeView1.TabIndex = 3;
             // 
             // button4
             // 
             this.button4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.button4.Enabled = false;
-            this.button4.Location = new System.Drawing.Point(22, 265);
+            this.button4.Location = new System.Drawing.Point(29, 247);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(57, 23);
             this.button4.TabIndex = 7;
@@ -73,7 +76,7 @@
             // 
             this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.button3.Enabled = false;
-            this.button3.Location = new System.Drawing.Point(85, 265);
+            this.button3.Location = new System.Drawing.Point(92, 247);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(57, 23);
             this.button3.TabIndex = 8;
@@ -84,7 +87,7 @@
             // 
             this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.button2.Enabled = false;
-            this.button2.Location = new System.Drawing.Point(148, 265);
+            this.button2.Location = new System.Drawing.Point(155, 247);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(57, 23);
             this.button2.TabIndex = 9;
@@ -95,7 +98,7 @@
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.button1.Enabled = false;
-            this.button1.Location = new System.Drawing.Point(211, 265);
+            this.button1.Location = new System.Drawing.Point(218, 247);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(57, 23);
             this.button1.TabIndex = 10;
@@ -106,7 +109,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(497, 300);
+            this.ClientSize = new System.Drawing.Size(504, 282);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
@@ -116,9 +119,10 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(520, 320);
             this.Name = "EffectListEditForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "EffectListEditForm";
+            this.Text = "Effect List";
             this.ResumeLayout(false);
 
         }

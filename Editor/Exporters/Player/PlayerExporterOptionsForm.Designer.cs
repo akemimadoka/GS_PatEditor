@@ -31,9 +31,9 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.propertyGrid1 = new System.Windows.Forms.PropertyGrid();
-            this.treeView1 = new GS_PatEditor.Editor.Editable.EditableTreeView();
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
+            this.treeView1 = new GS_PatEditor.Editor.Editable.EditableTreeView();
             this.SuspendLayout();
             // 
             // button2
@@ -67,22 +67,6 @@
             this.propertyGrid1.Size = new System.Drawing.Size(210, 258);
             this.propertyGrid1.TabIndex = 4;
             // 
-            // treeView1
-            // 
-            this.treeView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.treeView1.HideSelection = false;
-            this.treeView1.LinkedDeleteButton = null;
-            this.treeView1.LinkedMoveDownButton = null;
-            this.treeView1.LinkedMoveUpButton = null;
-            this.treeView1.LinkedPropertyGrid = null;
-            this.treeView1.LinkedResetButton = null;
-            this.treeView1.Location = new System.Drawing.Point(12, 12);
-            this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(264, 229);
-            this.treeView1.TabIndex = 7;
-            // 
             // button3
             // 
             this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -104,6 +88,22 @@
             this.button4.TabIndex = 5;
             this.button4.Text = "Up";
             this.button4.UseVisualStyleBackColor = true;
+            // 
+            // treeView1
+            // 
+            this.treeView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.treeView1.HideSelection = false;
+            this.treeView1.LinkedDeleteButton = null;
+            this.treeView1.LinkedMoveDownButton = null;
+            this.treeView1.LinkedMoveUpButton = null;
+            this.treeView1.LinkedPropertyGrid = null;
+            this.treeView1.LinkedResetButton = null;
+            this.treeView1.Location = new System.Drawing.Point(12, 12);
+            this.treeView1.Name = "treeView1";
+            this.treeView1.Size = new System.Drawing.Size(264, 229);
+            this.treeView1.TabIndex = 7;
             // 
             // PlayerExporterOptionsForm
             // 

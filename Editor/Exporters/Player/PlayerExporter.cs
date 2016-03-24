@@ -70,8 +70,13 @@ namespace GS_PatEditor.Editor.Exporters.Player
         public int BaseIndex { get; set; }
 
         [XmlElement]
-        [Browsable(false)]
-        public readonly PlayerExporterAnimations Animations = new PlayerExporterAnimations();
+        public PlayerExporterAnimations Animations = new PlayerExporterAnimations();
+
+        [XmlElement]
+        public PlayerInformation PlayerInformation = new PlayerInformation();
+
+        [XmlArray]
+        public List<Skill> Skills = new List<Skill>();
 
         public override void ShowOptionDialog(Pat.Project proj)
         {

@@ -24,6 +24,8 @@ namespace GS_PatEditor.Editor.Exporters.Player
             treeView1.LinkedMoveDownButton = button3;
             treeView1.LinkedMoveUpButton = button4;
 
+            var env = new EditableEnvironment(proj);
+
             treeView1.Nodes.Add(new TreeNode
             {
                 Text = "Export Options",
@@ -35,7 +37,19 @@ namespace GS_PatEditor.Editor.Exporters.Player
                 Text = "System Animations",
                 Tag = exporter.Animations,
             });
-            //treeView1.Nodes.AddEditableList(new EditableEnvironment(proj), effects.Effects);
+
+            treeView1.Nodes.Add(new TreeNode
+            {
+                Text = "Player Information",
+                Tag = exporter.PlayerInformation,
+            });
+
+            var skills = new TreeNode
+            {
+                Text = "Skills",
+            };
+            treeView1.Nodes.Add(skills);
+            skills.Nodes.AddEditableList(env, exporter.Skills);
         }
     }
 }

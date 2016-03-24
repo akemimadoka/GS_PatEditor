@@ -59,7 +59,8 @@ namespace GS_PatEditor.Editor.Editable
                 {
                     Text = "<null>";
                 }
-                else if (EditableNodeGenerator._SelectObjectTypes[typeof(T)].IsAssignableFrom(Data.GetType()))
+                else if (EditableNodeGenerator._SelectObjectTypes.ContainsKey(typeof(T)) &&
+                    EditableNodeGenerator._SelectObjectTypes[typeof(T)].IsAssignableFrom(Data.GetType()))
                 {
                     Text = "<select>";
                 }
