@@ -27,6 +27,12 @@ namespace GS_PatEditor.Editor.Exporters.Player
                 Text = "Basic Information",
                 Tag = exporter,
             });
+
+            treeView1.Nodes.Add(new TreeNode
+            {
+                Text = "System Animations",
+                Tag = exporter.Animations,
+            });
             //treeView1.Nodes.AddEditableList(new EditableEnvironment(proj), effects.Effects);
         }
     }

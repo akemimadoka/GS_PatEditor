@@ -148,9 +148,15 @@ namespace GS_PatEditor.Editor
             pictureBox1.Invalidate();
         }
 
+        //TODO implement this in ImageList
         private Pat.FrameImage MakeNewImageFromFile(string str)
         {
-            //TODO implement this in ImageList
+            if (str == null || str.Length == 0 || !File.Exists(str))
+            {
+                return null;
+            }
+
+            var filenameWithoutPath = Path.GetFileName(str);
             Images.AbstractImage img;
             if (Path.GetExtension(str) == ".cv2")
             {
@@ -179,7 +185,7 @@ namespace GS_PatEditor.Editor
                 ViewHeight = (short)img.Height,
             };
             img.Dispose();
-            var image = ProjectGenerater.AddImageToProject(_Project, str, frame);
+            var image = ProjectGenerater.AddImageToProject(_Project, filenameWithoutPath, frame);
             var item = CreateItem(image);
             listView1.Items.Add(item);
             listView1.SelectedItems.Clear();

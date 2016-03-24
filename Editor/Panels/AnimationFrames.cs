@@ -689,6 +689,9 @@ namespace GS_PatEditor.Editor.Panels
                     };
                     segment.Frames.Add(frame);
 
+                    //ensure after refreshing, the new frame is selected
+                    _LastSelected = new KeyFrameGrid(null, 0, 0, 0, 0, frame);
+                    
                     RefreshList();
                 }
 
