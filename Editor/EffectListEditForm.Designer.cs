@@ -30,7 +30,7 @@
         {
             this.propertyGrid1 = new System.Windows.Forms.PropertyGrid();
             this.button1 = new System.Windows.Forms.Button();
-            this.treeView1 = new System.Windows.Forms.TreeView();
+            this.treeView1 = new GS_PatEditor.Editor.Editable.EditableTreeView();
             this.button2 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -97,7 +97,7 @@
 
         private System.Windows.Forms.PropertyGrid propertyGrid1;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TreeView treeView1;
+        private GS_PatEditor.Editor.Editable.EditableTreeView treeView1;
         private System.Windows.Forms.Button button2;
     }
 }

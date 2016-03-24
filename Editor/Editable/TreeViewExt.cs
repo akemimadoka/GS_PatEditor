@@ -9,16 +9,6 @@ namespace GS_PatEditor.Editor.Editable
 {
     static class TreeNodeExt
     {
-        private static void InvokeSelectedChange(TreeView tv)
-        {
-            //TODO better solution?
-            var action = tv.Tag as Action;
-            if (action != null)
-            {
-                action();
-            }
-        }
-
         public static TreeNodeCollection GetParentCollection(this TreeNode node)
         {
             if (node.Parent == null)
@@ -43,8 +33,7 @@ namespace GS_PatEditor.Editor.Editable
 
             if (shouldSetSelected)
             {
-                newNode.TreeView.SelectedNode = newNode;
-                InvokeSelectedChange(newNode.TreeView);
+                ((EditableTreeView)newNode.TreeView).SetSelectedNodeWithCallback(newNode);
             }
         }
 

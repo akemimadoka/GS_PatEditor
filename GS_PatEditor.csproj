@@ -72,6 +72,9 @@
     <Compile Include="Editor\EffectEditable\Editable.cs" />
     <Compile Include="Editor\EffectEditable\EditableNodeGenerator.cs" />
     <Compile Include="Editor\EffectEditable\EditableTreeNode.cs" />
+    <Compile Include="Editor\EffectEditable\EditableTreeView.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Editor\EffectEditable\GenericEditorSelectorTypeConverter.cs" />
     <Compile Include="Editor\EffectEditable\SelectEffect.cs" />
     <Compile Include="Editor\EffectEditable\SelectFilter.cs" />
@@ -145,12 +148,6 @@
     </Compile>
     <Compile Include="Editor\FileSelectForm.Designer.cs">
       <DependentUpon>FileSelectForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Editor\Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Editor\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Editor\FrameEditForm.cs">
       <SubType>Form</SubType>
@@ -257,9 +254,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Editor\FileSelectForm.resx">
       <DependentUpon>FileSelectForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Editor\Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Editor\FrameEditForm.resx">
       <DependentUpon>FrameEditForm.cs</DependentUpon>

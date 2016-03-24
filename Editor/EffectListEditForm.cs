@@ -20,7 +20,7 @@ namespace GS_PatEditor.Editor
         public EffectListEditForm(Pat.Project proj, Pat.EffectList effects)
         {
             InitializeComponent();
-            treeView1.Tag = (Action)UpdateSelectedNode;
+            treeView1.SelectedNodeChanged += UpdateSelectedNode;
 
             _Project = proj;
             _Effects = effects;
@@ -34,8 +34,6 @@ namespace GS_PatEditor.Editor
             var env = new EditableEnvironment(_Project);
             foreach (var effect in _Effects)
             {
-                //treeView1.Nodes.Add(new EditableEffectTreeNode(effect,
-                //    new ListMultiEditable<Pat.Effect> { List = _Effects.Effects }));
                 treeView1.Nodes.Add(EditableNodeGenerator.Create<Pat.Effect>(env, effect, me));
             }
             treeView1.Nodes.Add(EditableNodeGenerator.Create<Pat.Effect>(env, me));
@@ -44,10 +42,10 @@ namespace GS_PatEditor.Editor
         private void treeView1_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
             treeView1.SelectedNode = e.Node;
-            UpdateSelectedNode();
+            UpdateSelectedNode(null, EventArgs.Empty);
         }
 
-        private void UpdateSelectedNode()
+        private void UpdateSelectedNode(object sender, EventArgs e)
         {
             var node = treeView1.SelectedNode;
             if (node == null)
