@@ -420,7 +420,6 @@ namespace GS_PatEditor.Editor
                 var p0 = PointSpriteToClient(new Point(-_PreviewImage.Width / 2, -_PreviewImage.Height / 2));
                 var p1 = PointSpriteToClient(new Point(_PreviewImage.Width / 2, _PreviewImage.Height / 2));
 
-                //e.Graphics.FillRectangle(_BrushImage, p0.X, p0.Y, p1.X - p0.X, p1.Y - p0.Y);
                 e.Graphics.DrawImage(_PreviewImage, p0);
             }
         }

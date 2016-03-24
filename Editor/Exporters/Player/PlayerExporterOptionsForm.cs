@@ -24,7 +24,7 @@ namespace GS_PatEditor.Editor.Exporters.Player
 
             treeView1.Nodes.Add(new TreeNode
             {
-                Text = "Basic Information",
+                Text = "Export Options",
                 Tag = exporter,
             });
 
