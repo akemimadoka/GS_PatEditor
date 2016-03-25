@@ -70,6 +70,12 @@ namespace GS_PatEditor.Editor.Exporters.Player
         public int BaseIndex { get; set; }
 
         [XmlElement]
+        public string PlayerName { get; set; }
+
+        [XmlElement]
+        public string ScriptFileName { get; set; }
+
+        [XmlElement]
         public PlayerExporterAnimations Animations = new PlayerExporterAnimations();
 
         [XmlElement]
@@ -77,6 +83,10 @@ namespace GS_PatEditor.Editor.Exporters.Player
 
         [XmlArray]
         public List<Skill> Skills = new List<Skill>();
+
+        private Pat.Project _Project;
+        private Dictionary<string, int> _GeneratedActionID = new Dictionary<string, int>();
+        private int _NextFreeActionID;
 
         public override void ShowOptionDialog(Pat.Project proj)
         {
@@ -89,6 +99,64 @@ namespace GS_PatEditor.Editor.Exporters.Player
 
         public override void Export(Pat.Project proj)
         {
+            _Project = proj;
+            _GeneratedActionID.Clear();
+            _NextFreeActionID = 20;
+
+            //init script
+            var actorCommon = base.AddCodeFile("actorCommon.add.cv4");
+            PlayerInitFunctionGenerator.Generate(this, proj, actorCommon);
+
+            //actions
+            ExportAction(Animations.Stand, 0);
+            ExportAction(Animations.Walk, 1);
+            ExportAction(Animations.JumpUp, 3);
+            ExportAction(Animations.JumpFront, 4);
+            ExportAction(Animations.Fall, 8);
+            ExportAction(Animations.Damage, 10);
+            ExportAction(Animations.Dead, 18);
+            ExportAction(Animations.Lost, 19);
+            //TODO make Revive action here
+
+            var playerScript = base.AddCodeFile(ScriptFileName + ".cv4");
+            SystemActionFunctionGenerator.Generate(this, proj, playerScript);
+            SkillGenerator.GenerateSkills(this, proj, playerScript);
+
+            ExportAction(Animations.Stand, 100);
+            ExportAction(Animations.Stand, 101);
+            ExportAction(Animations.Stand, 102);
+            ExportAction(Animations.Stand, 103);
+        }
+
+        private void ExportAction(string name, int id)
+        {
+            if (name == null || name.Length == 0)
+            {
+                return;
+            }
+
+            var action = _Project.Actions.FirstOrDefault(a => a.ActionID == name);
+            if (action != null)
+            {
+                base.AddNormalAnimation(action, id + BaseIndex);
+            }
+        }
+
+        public int GetActionID(string name)
+        {
+            int ret;
+            if (_GeneratedActionID.TryGetValue(name, out ret))
+            {
+                return ret;
+            }
+            ret = _NextFreeActionID++;
+            ExportAction(name, ret);
+            return ret;
+        }
+
+        public Pat.Action GetAction(string name)
+        {
+            return _Project.Actions.FirstOrDefault(a => a.ActionID == name);
         }
 
         [XmlIgnore]

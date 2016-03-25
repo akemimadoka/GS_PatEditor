@@ -1,4 +1,6 @@
 ﻿using GS_PatEditor.Editor.Editable;
+using GS_PatEditor.Editor.Exporters;
+using GS_PatEditor.Editor.Exporters.CodeFormat;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,6 +35,19 @@ namespace GS_PatEditor.Pat.Effects
             {
                 actor.VX -= actor.VX > 0 ? rs : -rs;
             }
+        }
+
+        public override ILineObject Generate(GenerationEnvironment env)
+        {
+            var val = ReduceSpeed.ToString();
+            return new SimpleBlock(new ILineObject[] {
+                new ControlBlock(ControlBlockType.If, "this.Abs(this.vx) <= " + val, new ILineObject[] {
+                    new SimpleLineObject("this.vx = 0.0;"),
+                }).Statement(),
+                new ControlBlock(ControlBlockType.Else, new ILineObject[] {
+                    new SimpleLineObject("this.vx -= this.vx > 0.0 ? " + val + " : -(" + val + ")7;"),
+                }).Statement(),
+            }).Statement();
         }
     }
 

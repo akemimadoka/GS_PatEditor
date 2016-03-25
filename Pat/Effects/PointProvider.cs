@@ -1,4 +1,6 @@
-﻿using System;
+﻿using GS_PatEditor.Editor.Exporters;
+using GS_PatEditor.Editor.Exporters.CodeFormat;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -32,6 +34,18 @@ namespace GS_PatEditor.Pat.Effects
                 X = (int)(actor.X + scaleX * p.X),
                 Y = (int)(actor.Y + scaleY * p.Y),
             };
+        }
+
+        public override Expression GenerateX(GenerationEnvironment env)
+        {
+            return new BiOpExpr(ThisExpr.Instance.MakeIndex("point0_x"),
+                ThisExpr.Instance.MakeIndex("vx"), BiOpExpr.Op.Add);
+        }
+
+        public override Expression GenerateY(GenerationEnvironment env)
+        {
+            return new BiOpExpr(ThisExpr.Instance.MakeIndex("point0_y"),
+                ThisExpr.Instance.MakeIndex("vy"), BiOpExpr.Op.Add);
         }
     }
 }

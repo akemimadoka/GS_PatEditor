@@ -1,4 +1,6 @@
 ﻿using GS_PatEditor.Editor.Editable;
+using GS_PatEditor.Editor.Exporters;
+using GS_PatEditor.Editor.Exporters.CodeFormat;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +20,11 @@ namespace GS_PatEditor.Pat.Effects
         {
             return actor.CurrentSegmentIndex == Segment;
         }
+
+        public override Expression Generate(GenerationEnvironment env)
+        {
+            return new BiOpExpr(ThisExpr.Instance.MakeIndex("keyTake"), new ConstNumberExpr(Segment), BiOpExpr.Op.Equal);
+        }
     }
 
     [Serializable]
@@ -31,6 +38,11 @@ namespace GS_PatEditor.Pat.Effects
         {
             return actor.ActionCount > Count.GetInt(actor);
         }
+
+        public override Expression Generate(GenerationEnvironment env)
+        {
+            return new BiOpExpr(ThisExpr.Instance.MakeIndex("count"), Count.Generate(env), BiOpExpr.Op.Greater);
+        }
     }
 
     [Serializable]
@@ -40,6 +52,11 @@ namespace GS_PatEditor.Pat.Effects
         public override bool Test(Simulation.Actor actor)
         {
             return false;
+        }
+
+        public override Expression Generate(GenerationEnvironment env)
+        {
+            return ThisExpr.Instance.MakeIndex("input").MakeIndex(env.GetCurrentSkillKeyName()).IsZero();
         }
     }
 
@@ -56,6 +73,14 @@ namespace GS_PatEditor.Pat.Effects
         public override bool Test(Simulation.Actor actor)
         {
             return (actor.ActionCount % Divisor.GetInt(actor)) == Mod.GetInt(actor);
+        }
+
+        public override Expression Generate(GenerationEnvironment env)
+        {
+            var count = ThisExpr.Instance.MakeIndex("count");
+            return new BiOpExpr(
+                new BiOpExpr(count, Divisor.Generate(env), BiOpExpr.Op.Mod),
+                Mod.Generate(env), BiOpExpr.Op.Equal);
         }
     }
 

@@ -649,34 +649,19 @@ namespace GS_PatEditor.Editor
 
         private void toolStripButtonExport_Click(object sender, EventArgs e)
         {
-            if (saveFileDialogExport.ShowDialog() == DialogResult.OK)
+            if (!_Editor.Project.IsEmptyProject && _Editor.Project.Exporter != null)
             {
-                var file = saveFileDialogExport.FileName;
-
-                int startID;
+                if (saveFileDialogExport.ShowDialog() == DialogResult.OK)
                 {
-                    var dialog = new GS_PatEditor.Editor.ExportForm();
-                    if (dialog.ShowDialog() != System.Windows.Forms.DialogResult.OK)
-                    {
-                        return;
-                    }
-                    startID = dialog.StartID;
-                }
+                    var file = saveFileDialogExport.FileName;
 
-                var gspat = ProjectExporter.Export(_Editor.Project, startID);
-                if (System.IO.File.Exists(file))
-                {
-                    System.IO.File.Delete(file);
-                }
-                using (var stream = System.IO.File.Open(file, System.IO.FileMode.CreateNew))
-                {
-                    using (var writer = new System.IO.BinaryWriter(stream))
-                    {
-                        GSPat.GSPatWriter.Write(gspat, writer);
-                    }
-                }
+                    var proj = _Editor.Project;
+                    proj.Exporter.InitExporter(proj, file);
+                    proj.Exporter.Export(proj);
+                    proj.Exporter.FinishExporter();
 
-                saveFileDialogExport.FileName = "";
+                    saveFileDialogExport.FileName = "";
+                }
             }
         }
 

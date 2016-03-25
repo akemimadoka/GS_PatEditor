@@ -43,5 +43,10 @@ namespace GS_PatEditor.Editor.Editable
 
         [Browsable(false)]
         public EditableEnvironment Environment { get; set; }
+
+        public override Exporters.CodeFormat.Expression Generate(Exporters.GenerationEnvironment env)
+        {
+            return new Exporters.CodeFormat.ConstNumberExpr(0);
+        }
     }
 }

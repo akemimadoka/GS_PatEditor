@@ -89,13 +89,26 @@
       <DependentUpon>EffectListEditForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Editor\Exporters\AbstractExporter.cs" />
+    <Compile Include="Editor\Exporters\CodeFormat\Block.cs" />
+    <Compile Include="Editor\Exporters\CodeFormat\Expression.cs" />
+    <Compile Include="Editor\Exporters\CodeFormat\Blocks.cs" />
+    <Compile Include="Editor\Exporters\CodeFormat\ExpressionExt.cs" />
+    <Compile Include="Editor\Exporters\CodeFormat\ILineObject.cs" />
+    <Compile Include="Editor\Exporters\CodeFormat\IWritable.cs" />
+    <Compile Include="Editor\Exporters\CodeFormat\SimpleBlock.cs" />
+    <Compile Include="Editor\Exporters\CodeFormat\Statement.cs" />
+    <Compile Include="Editor\Exporters\CodeFormat\TextWriterExt.cs" />
     <Compile Include="Editor\Exporters\CodeGenerator.cs" />
     <Compile Include="Editor\Exporters\ExportHelper.cs" />
+    <Compile Include="Editor\Exporters\GenerationEnvironment.cs" />
     <Compile Include="Editor\Exporters\ImageListExporter.cs" />
     <Compile Include="Editor\Exporters\Player\ImageIDEditor.cs" />
     <Compile Include="Editor\Exporters\Player\PlayerExporter.cs" />
     <Compile Include="Editor\Exporters\Player\PlayerInformation.cs" />
+    <Compile Include="Editor\Exporters\Player\PlayerInitFunctionGenerator.cs" />
     <Compile Include="Editor\Exporters\Player\Skill.cs" />
+    <Compile Include="Editor\Exporters\Player\SkillGenerator.cs" />
+    <Compile Include="Editor\Exporters\Player\SystemActionFunctionGenerator.cs" />
     <Compile Include="Editor\ExportForm.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -1,4 +1,5 @@
-﻿using GS_PatEditor.Pat.Effects;
+﻿using GS_PatEditor.Editor.Exporters.CodeFormat;
+using GS_PatEditor.Pat.Effects;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -38,6 +39,11 @@ namespace GS_PatEditor.Editor.Editable
         public override float Get(Simulation.Actor actor)
         {
             return 0.0f;
+        }
+
+        public override Exporters.CodeFormat.Expression Generate(Exporters.GenerationEnvironment env)
+        {
+            return new ConstNumberExpr(0);
         }
 
         [Browsable(false)]

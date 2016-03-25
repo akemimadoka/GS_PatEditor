@@ -1,4 +1,6 @@
 ﻿using GS_PatEditor.Editor.Editable;
+using GS_PatEditor.Editor.Exporters;
+using GS_PatEditor.Editor.Exporters.CodeFormat;
 using GS_PatEditor.Pat.Effects.Converter;
 using System;
 using System.Collections.Generic;
@@ -16,6 +18,14 @@ namespace GS_PatEditor.Pat.Effects
         public override void Run(Simulation.Actor actor)
         {
             actor.SetMotion(actor.CurrentAction, actor.CurrentSegmentIndex + 1);
+        }
+
+        public override ILineObject Generate(GenerationEnvironment env)
+        {
+            return ThisExpr.Instance.MakeIndex("SetMotion").Call(
+                ThisExpr.Instance.MakeIndex("motion"),
+                new BiOpExpr(ThisExpr.Instance.MakeIndex("keyTake"), new ConstNumberExpr(1), BiOpExpr.Op.Add)
+                ).Statement();
         }
     }
 
@@ -47,6 +57,26 @@ namespace GS_PatEditor.Pat.Effects
             }
         }
 
+        public override ILineObject Generate(GenerationEnvironment env)
+        {
+            var funcName = env.GenerateActionAsActorInit(ActionName);
+
+            return new SimpleBlock(new ILineObject[] {
+                //create t
+                new SimpleLineObject("local t = this.DefaultShotTable();"),
+                //TODO setup t
+
+                //create actor
+                ThisExpr.Instance.MakeIndex("world2D").MakeIndex("CreateActor").Call(
+                    Position.GenerateX(env),
+                    Position.GenerateY(env),
+                    ThisExpr.Instance.MakeIndex("direction"),
+                    ThisExpr.Instance.MakeIndex(funcName),
+                    new IdentifierExpr("t")
+                ).Statement(),
+            }).Statement();
+        }
+
         [XmlIgnore]
         [Browsable(false)]
         public EditableEnvironment Environment { get; set; }
@@ -58,6 +88,11 @@ namespace GS_PatEditor.Pat.Effects
         public override void Run(Simulation.Actor actor)
         {
             actor.Release();
+        }
+
+        public override ILineObject Generate(GenerationEnvironment env)
+        {
+            return ThisExpr.Instance.MakeIndex("Release").Call().Statement();
         }
     }
 
@@ -74,6 +109,14 @@ namespace GS_PatEditor.Pat.Effects
         public override void Run(Simulation.Actor actor)
         {
             actor.SetMotion(Animation == "" ? null : Animation, Segment);
+        }
+
+        public override ILineObject Generate(GenerationEnvironment env)
+        {
+            var id = env.GetActionID(Animation);
+            return ThisExpr.Instance.MakeIndex("SetMotion").Call(
+                new ConstNumberExpr(id),
+                new ConstNumberExpr(Segment)).Statement();
         }
 
         [XmlIgnore]
@@ -96,6 +139,14 @@ namespace GS_PatEditor.Pat.Effects
             actor.SetMotion(Animation == "" ? null : Animation, actor.World.Random.Next(SegmentCount));
         }
 
+        public override ILineObject Generate(GenerationEnvironment env)
+        {
+            var id = env.GetActionID(Animation);
+            var segment = new BiOpExpr(ThisExpr.Instance.MakeIndex("rand").Call(),
+                new ConstNumberExpr(SegmentCount), BiOpExpr.Op.Mod);
+            return ThisExpr.Instance.MakeIndex("SetMotion").Call(new ConstNumberExpr(id), segment).Statement();
+        }
+
         [XmlIgnore]
         [Browsable(false)]
         public EditableEnvironment Environment { get; set; }
@@ -111,6 +162,11 @@ namespace GS_PatEditor.Pat.Effects
         {
             actor.ActionCount = 0;
         }
+
+        public override ILineObject Generate(GenerationEnvironment env)
+        {
+            return new SimpleLineObject("this.count = 0;");
+        }
     }
 
     [Serializable]
@@ -119,6 +175,11 @@ namespace GS_PatEditor.Pat.Effects
         public override void Run(Simulation.Actor actor)
         {
             actor.ActionCount += 1;
+        }
+
+        public override ILineObject Generate(GenerationEnvironment env)
+        {
+            return new SimpleLineObject("this.count++;");
         }
     }
 
@@ -142,6 +203,20 @@ namespace GS_PatEditor.Pat.Effects
                 case Simulation.ActorLabelType.Sit:
                     actor.SitLabel = Effect.Run;
                     break;
+            }
+        }
+
+        public override ILineObject Generate(GenerationEnvironment env)
+        {
+            var func = new FunctionBlock("", new string[0], new ILineObject[] { Effect.Generate(env) });
+            switch (Label)
+            {
+                case Simulation.ActorLabelType.Fall:
+                    return ThisExpr.Instance.MakeIndex("fallLabel").Assign(func.AsExpression()).Statement();
+                case Simulation.ActorLabelType.Sit:
+                    return ThisExpr.Instance.MakeIndex("sitLabel").Assign(func.AsExpression()).Statement();
+                default:
+                    throw new Exception();
             }
         }
     }

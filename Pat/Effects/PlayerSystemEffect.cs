@@ -1,4 +1,6 @@
-﻿using System;
+﻿using GS_PatEditor.Editor.Exporters;
+using GS_PatEditor.Editor.Exporters.CodeFormat;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,6 +23,11 @@ namespace GS_PatEditor.Pat.Effects
             actor.SitLabel = PlayerBeginStandEffect.Instance.Run;
             actor.IsInAir = true;
         }
+
+        public override ILineObject Generate(GenerationEnvironment env)
+        {
+            return new SimpleLineObject("this.u.BeginFall.call(this);");
+        }
     }
 
     [Serializable]
@@ -37,6 +44,11 @@ namespace GS_PatEditor.Pat.Effects
             actor.IsInAir = false;
             actor.VX = 0;
             actor.VY = 0;
+        }
+
+        public override ILineObject Generate(GenerationEnvironment env)
+        {
+            return new SimpleLineObject("this.u.BeginStand.call(this);");
         }
     }
 

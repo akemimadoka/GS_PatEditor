@@ -28,7 +28,11 @@ namespace GS_PatEditor.Editor.Exporters
             _OutputDir = Path.GetDirectoryName(outputFile);
 
             _ImageList = new ImageListExporter();
-            _OutputData = new GSPat.GSPatFile();
+            _OutputData = new GSPat.GSPatFile()
+            {
+                Animations = new List<GSPat.Animation>(),
+                Images = new List<string>(),
+            };
             _Codes.Clear();
 
             //first export images

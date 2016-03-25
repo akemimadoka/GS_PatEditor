@@ -1,4 +1,5 @@
-﻿using GS_PatEditor.Pat.Effects;
+﻿using GS_PatEditor.Editor.Exporters.CodeFormat;
+using GS_PatEditor.Pat.Effects;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -40,6 +41,17 @@ namespace GS_PatEditor.Editor.Editable
             return new Pat.FramePoint { X = (int)actor.X, Y = (int)actor.Y };
         }
 
+        public override Exporters.CodeFormat.Expression GenerateX(Exporters.GenerationEnvironment env)
+        {
+            return new BiOpExpr(ThisExpr.Instance.MakeIndex("x"),
+                ThisExpr.Instance.MakeIndex("vx"), BiOpExpr.Op.Add);
+        }
+
+        public override Exporters.CodeFormat.Expression GenerateY(Exporters.GenerationEnvironment env)
+        {
+            return new BiOpExpr(ThisExpr.Instance.MakeIndex("y"),
+                ThisExpr.Instance.MakeIndex("vy"), BiOpExpr.Op.Add);
+        }
 
         [Browsable(false)]
         public EditableEnvironment Environment { get; set; }

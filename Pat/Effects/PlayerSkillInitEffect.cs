@@ -1,4 +1,6 @@
-﻿using System;
+﻿using GS_PatEditor.Editor.Exporters;
+using GS_PatEditor.Editor.Exporters.CodeFormat;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +25,11 @@ namespace GS_PatEditor.Pat.Effects
             {
                 actor.Y = 0.0f;
             }
+        }
+
+        public override ILineObject Generate(GenerationEnvironment env)
+        {
+            return SimpleLineObject.Empty;
         }
     }
 
@@ -57,6 +64,13 @@ namespace GS_PatEditor.Pat.Effects
 
         public override void Run(Simulation.Actor actor)
         {
+        }
+
+        public override ILineObject Generate(GenerationEnvironment env)
+        {
+            return new ControlBlock(ControlBlockType.If, "this.input.x", new ILineObject[] {
+                new SimpleLineObject("this.direction = this.input.x > 0 ? 1.0 : -1.0;"),
+            }).Statement();
         }
     }
 
@@ -100,6 +114,34 @@ namespace GS_PatEditor.Pat.Effects
                 yield return _AdjustDirection;
                 yield break;
             }
+        }
+
+        public override ILineObject Generate(GenerationEnvironment env)
+        {
+            var ret = new SimpleBlock(new ILineObject[] {
+                _ClearLabel.Generate(env),
+                _InitCount.Generate(env),
+                _SetMotion.Generate(env),
+                _AdjustDirection.Generate(env),
+            }).Statement();
+            if (AutoCancel)
+            {
+                if (IsInAir)
+                {
+                    ret = new SimpleBlock(new ILineObject[] {
+                        ret,
+                        _SitCancel.Generate(env),
+                    }).Statement();
+                }
+                else
+                {
+                    ret = new SimpleBlock(new ILineObject[] {
+                        ret,
+                        _FallCancel.Generate(env),
+                    }).Statement();
+                }
+            }
+            return ret;
         }
     }
 }

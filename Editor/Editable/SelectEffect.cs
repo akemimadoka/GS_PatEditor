@@ -41,5 +41,10 @@ namespace GS_PatEditor.Editor.Editable
 
         [Browsable(false)]
         public EditableEnvironment Environment { get; set; }
+
+        public override Exporters.CodeFormat.ILineObject Generate(Exporters.GenerationEnvironment env)
+        {
+            return Exporters.CodeFormat.SimpleLineObject.Empty;
+        }
     }
 }

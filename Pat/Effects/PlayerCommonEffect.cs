@@ -1,4 +1,6 @@
-﻿using System;
+﻿using GS_PatEditor.Editor.Exporters;
+using GS_PatEditor.Editor.Exporters.CodeFormat;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +24,11 @@ namespace GS_PatEditor.Pat.Effects
 
             actor.Variables.Clear();
         }
+
+        public override ILineObject Generate(GenerationEnvironment env)
+        {
+            return new SimpleLineObject("this.LabelClear();");
+        }
     }
 
     [Serializable]
@@ -33,6 +40,11 @@ namespace GS_PatEditor.Pat.Effects
         {
             PlayerClearLabelEffect.Instance.Run(actor);
             //TODO freeCancel = true
+        }
+
+        public override ILineObject Generate(GenerationEnvironment env)
+        {
+            return new SimpleLineObject("this.ChangeFreeMove();");
         }
     }
 
@@ -51,6 +63,11 @@ namespace GS_PatEditor.Pat.Effects
             {
                 PlayerBeginStandEffect.Instance.Run(actor);
             }
+        }
+
+        public override ILineObject Generate(GenerationEnvironment env)
+        {
+            return new SimpleLineObject("this.u.EndToFreeMove.call(this);");
         }
     }
 

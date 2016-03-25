@@ -46,6 +46,21 @@ namespace GS_PatEditor.Editor.Exporters.Player
     {
         KeyA,
         KeyB,
+        KeyC,
+    }
+
+    public static class SkillKeyExt
+    {
+        public static string GetKeyName(this SkillKey key)
+        {
+            switch (key)
+            {
+                case SkillKey.KeyA: return "b0";
+                case SkillKey.KeyB: return "b1";
+                case SkillKey.KeyC: return "b2";
+                default: return "b0";
+            }
+        }
     }
 
     public enum DirectionHorizontal
@@ -61,6 +76,13 @@ namespace GS_PatEditor.Editor.Exporters.Player
         Empty,
         UpOnly,
         DownOnly,
+    }
+
+    public enum AirState
+    {
+        GroundOnly,
+        AirOnly,
+        Any,
     }
 
     [Serializable]
@@ -82,6 +104,17 @@ namespace GS_PatEditor.Editor.Exporters.Player
         [XmlAttribute]
         public DirectionVertical Y { get; set; }
         public bool ShouldSerializeY() { return Y != DirectionVertical.Any; }
+
+        [XmlAttribute]
+        public AirState AirState { get; set; }
+        public bool ShouldSerializeAirState() { return AirState != Player.AirState.GroundOnly; }
+
+        [XmlAttribute]
+        public Pat.CancelLevel CancelLevel { get; set; }
+
+        [XmlAttribute]
+        public int MagicUse { get; set; }
+        public bool ShouldSerializeMagicUse() { return MagicUse != 0; }
 
         [XmlAttribute]
         [TypeConverter(typeof(ActionIDConverter))]

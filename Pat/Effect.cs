@@ -1,4 +1,6 @@
 ﻿using GS_PatEditor.Editor.Editable;
+using GS_PatEditor.Editor.Exporters;
+using GS_PatEditor.Editor.Exporters.CodeFormat;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,24 +14,30 @@ namespace GS_PatEditor.Pat
     public abstract class Effect
     {
         public abstract void Run(Simulation.Actor actor);
+        public abstract ILineObject Generate(GenerationEnvironment env);
     }
 
     [Serializable]
     public abstract class Filter
     {
         public abstract bool Test(Simulation.Actor actor);
+        public abstract Expression Generate(GenerationEnvironment env);
     }
 
     [Serializable]
     public abstract class PointProvider
     {
         public abstract FramePoint GetPointForActor(Simulation.Actor actor);
+        public abstract Expression GenerateX(GenerationEnvironment env);
+        public abstract Expression GenerateY(GenerationEnvironment env);
     }
 
     [Serializable]
     public abstract class Value
     {
         public abstract float Get(Simulation.Actor actor);
+        public abstract Expression Generate(GenerationEnvironment env);
+
         public int GetInt(Simulation.Actor actor)
         {
             return (int)Get(actor);
@@ -53,6 +61,13 @@ namespace GS_PatEditor.Pat
                 Effect.Run(actor);
             }
         }
+
+        public override ILineObject Generate(GenerationEnvironment env)
+        {
+            return new ControlBlock(ControlBlockType.If, Filter.Generate(env), new ILineObject[] {
+                Effect.Generate(env),
+            }).Statement();
+        }
     }
 
     [Serializable]
@@ -69,6 +84,11 @@ namespace GS_PatEditor.Pat
             {
                 effect.Run(actor);
             }
+        }
+
+        public override ILineObject Generate(GenerationEnvironment env)
+        {
+            return new SimpleBlock(Effects.Select(e => e.Generate(env)).ToArray()).Statement();
         }
     }
 
@@ -99,6 +119,11 @@ namespace GS_PatEditor.Pat
         public override bool Test(Simulation.Actor actor)
         {
             return Filters.All(f => f.Test(actor));
+        }
+
+        public override Expression Generate(GenerationEnvironment env)
+        {
+            return ExpressionExt.AndAll(Filters.Select(f => f.Generate(env)).ToArray());
         }
     }
 
@@ -230,6 +255,11 @@ namespace GS_PatEditor.Pat
         {
             return Value;
         }
+
+        public override Expression Generate(GenerationEnvironment env)
+        {
+            return new ConstNumberExpr(Value);
+        }
     }
 
 
@@ -242,6 +272,11 @@ namespace GS_PatEditor.Pat
         {
             actor.Y -= 20;
         }
+
+        public override ILineObject Generate(GenerationEnvironment env)
+        {
+            return SimpleLineObject.Empty;
+        }
     }
 
     [Serializable]
@@ -250,6 +285,11 @@ namespace GS_PatEditor.Pat
         public override bool Test(Simulation.Actor actor)
         {
             return true;
+        }
+
+        public override Expression Generate(GenerationEnvironment env)
+        {
+            return new ConstNumberExpr(1);
         }
     }
 }
