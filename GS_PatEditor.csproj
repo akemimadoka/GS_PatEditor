@@ -136,7 +136,6 @@
     <Compile Include="Pat\Effects\PlayerSystemEffect.cs" />
     <Compile Include="Pat\Effects\PointProvider.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="ProjectExporter.cs" />
     <Compile Include="ProjectSerializer.cs" />
     <Compile Include="Editor\AnimationPropertyFrom.cs">
       <SubType>Form</SubType>

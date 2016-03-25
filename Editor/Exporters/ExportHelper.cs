@@ -94,7 +94,7 @@ namespace GS_PatEditor.Editor.Exporters
                     HitVY = (short)hitY,
 
                     //TODO
-                    ImageManipulation = null,
+                    ImageManipulation = ExportIM(frame, img),
 
                     OriginX = (short)frame.OriginX,
                     OriginY = (short)frame.OriginY,
@@ -152,6 +152,31 @@ namespace GS_PatEditor.Editor.Exporters
                 X2 = box.X + box.W,
                 Y1 = box.Y,
                 Y2 = box.Y + box.H,
+            };
+        }
+
+        private static GSPat.ImageManipulation ExportIM(Pat.Frame frame, Pat.FrameImage image)
+        {
+            var scaleX = frame.ScaleX;
+            var scaleY = frame.ScaleY;
+            var rotation = frame.Rotation;
+            var alphaBlend = image.AlphaBlendMode;
+            //TODO add other fields
+            if (scaleX == 100 && scaleY == 100 && rotation == 0 && !alphaBlend)
+            {
+                return null;
+            }
+            return new GSPat.ImageManipulation
+            {
+                AlphaBlend = (short)(alphaBlend ? 1 : 0),
+                ScaleX = (short)scaleX,
+                ScaleY = (short)scaleY,
+                Rotation = (short)rotation,
+
+                Alpha = 255,
+                Red = 255,
+                Green = 255,
+                Blue = 255,
             };
         }
     }

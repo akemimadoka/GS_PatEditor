@@ -67,11 +67,11 @@ namespace GS_PatEditor.Pat.Effects
                 //TODO setup t
 
                 //create actor
-                ThisExpr.Instance.MakeIndex("world2D").MakeIndex("CreateActor").Call(
+                ThisExpr.Instance.MakeIndex("world2d").MakeIndex("CreateActor").Call(
                     Position.GenerateX(env),
                     Position.GenerateY(env),
                     ThisExpr.Instance.MakeIndex("direction"),
-                    ThisExpr.Instance.MakeIndex(funcName),
+                    ThisExpr.Instance.MakeIndex("u").MakeIndex(funcName),
                     new IdentifierExpr("t")
                 ).Statement(),
             }).Statement();

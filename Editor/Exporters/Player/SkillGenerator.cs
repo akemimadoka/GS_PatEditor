@@ -39,7 +39,9 @@ namespace GS_PatEditor.Editor.Exporters.Player
 
                 var lastActionName = CurrentActionName;
                 CurrentActionName = name;
-                var funcContent = GenerateNormalSkillFunction(Exporter, this, name);
+                List<ILineObject> funcContent = new List<ILineObject>();
+                funcContent.Add(new SimpleLineObject("this.ShotInit(t);"));
+                funcContent.AddRange(GenerateNormalSkillFunction(Exporter, this, name, true));
                 CurrentActionName = lastActionName;
 
                 ret = "InitAction_" + name;
@@ -85,7 +87,7 @@ namespace GS_PatEditor.Editor.Exporters.Player
                     env.CurrentSkillKeyName = cskill.Key.GetKeyName();
                     env.CurrentActionName = cskill.ActionID;
 
-                    ILineObject[] functionContent = GenerateNormalSkillFunction(exporter, env, cskill.ActionID);
+                    var functionContent = GenerateNormalSkillFunction(exporter, env, cskill.ActionID, false);
                     var func = new FunctionBlock(skillFuncName, new string[0], functionContent);
                     output.WriteStatement(func.Statement());
                 }
@@ -205,16 +207,26 @@ namespace GS_PatEditor.Editor.Exporters.Player
 
         #region Skill
 
-        private static ILineObject[] GenerateNormalSkillFunction(PlayerExporter exporter, SkillGeneratorEnv env, string id)
+        private static IEnumerable<ILineObject> GenerateNormalSkillFunction(PlayerExporter exporter,
+            SkillGeneratorEnv env, string id, bool stateLabelAsUpdate)
         {
             List<ILineObject> ret = new List<ILineObject>();
 
             var action = exporter.GetAction(id);
             ret.AddRange(action.InitEffects.Select(e => e.Generate(env)));
 
-            var list2 = action.UpdateEffects.Select(e => e.Generate(env));
+            var list2 = action.UpdateEffects.Select(e => e.Generate(env))
+                .Concat(new ILineObject[] { new SimpleLineObject("return true;") });
             var updateFunc = new FunctionBlock("", new string[0], list2).AsExpression();
-            var setUpdate = ThisExpr.Instance.MakeIndex("stateLabel").Assign(updateFunc).Statement();
+            ILineObject setUpdate;
+            if (stateLabelAsUpdate)
+            {
+                setUpdate = ThisExpr.Instance.MakeIndex("SetUpdateFunction").Call(updateFunc).Statement();
+            }
+            else
+            {
+                setUpdate = ThisExpr.Instance.MakeIndex("stateLabel").Assign(updateFunc).Statement();
+            }
             ret.Add(setUpdate);
 
             var keys = action.KeyFrameEffects.Select(
@@ -237,7 +249,7 @@ namespace GS_PatEditor.Editor.Exporters.Player
                 ret.Add(setEndMotion);
             }
 
-            return ret.ToArray();
+            return ret;
         }
 
         #endregion
