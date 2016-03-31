@@ -84,4 +84,26 @@ namespace GS_PatEditor.Pat.Effects
         }
     }
 
+    [Serializable]
+    public class ValueEqualFilter : Filter
+    {
+        [XmlElement]
+        [EditorChildNode("Left")]
+        public Value Left;
+
+        [XmlElement]
+        [EditorChildNode("Right")]
+        public Value Right;
+
+        public override bool Test(Simulation.Actor actor)
+        {
+            return Left.Get(actor) == Right.Get(actor);
+        }
+
+        public override Expression Generate(GenerationEnvironment env)
+        {
+            return new BiOpExpr(Left.Generate(env), Right.Generate(env),
+                BiOpExpr.Op.Equal);
+        }
+    }
 }

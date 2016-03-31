@@ -220,4 +220,109 @@ namespace GS_PatEditor.Pat.Effects
             }
         }
     }
+
+    [Serializable]
+    public class SetActorMemberEffect : Effect
+    {
+        [XmlAttribute]
+        public ActorMemberType Type { get; set; }
+
+        [XmlElement]
+        [EditorChildNode("Value")]
+        public Value Value;
+
+        public override void Run(Simulation.Actor actor)
+        {
+            var val = Value.Get(actor);
+            switch (Type)
+            {
+                case ActorMemberType.x:
+                    actor.X = val;
+                    break;
+                case ActorMemberType.y:
+                    actor.Y = val;
+                    break;
+                case ActorMemberType.vx:
+                    actor.VX = val;
+                    break;
+                case ActorMemberType.vy:
+                    actor.VY = val;
+                    break;
+                case ActorMemberType.rz:
+                    actor.Rotation = val;
+                    break;
+            }
+        }
+
+        public override ILineObject Generate(GenerationEnvironment env)
+        {
+            string index = null;
+            switch (Type)
+            {
+                case ActorMemberType.x:
+                    index = "x";
+                    break;
+                case ActorMemberType.y:
+                    index = "y";
+                    break;
+                case ActorMemberType.vx:
+                    index = "vx";
+                    break;
+                case ActorMemberType.vy:
+                    index = "vy";
+                    break;
+                case ActorMemberType.rz:
+                    index = "rz";
+                    break;
+            }
+            if (index == null)
+            {
+                return new SimpleLineObject("");
+            }
+            var val = Value.Generate(env);
+            if (Type == ActorMemberType.vx)
+            {
+                val = new BiOpExpr(val, ThisExpr.Instance.MakeIndex("direction"), BiOpExpr.Op.Multiply);
+            }
+            return new BiOpExpr(ThisExpr.Instance.MakeIndex(index), val, BiOpExpr.Op.Assign).Statement();
+        }
+    }
+
+    [Serializable]
+    public class SetMaskEffect : Effect
+    {
+        [XmlAttribute]
+        public int CollisionMask { get; set; }
+
+        [XmlAttribute]
+        public int CallbackMask { get; set; }
+
+        public override void Run(Simulation.Actor actor)
+        {
+            //TODO support mask in simulation
+        }
+
+        public override ILineObject Generate(GenerationEnvironment env)
+        {
+            if (CollisionMask != -1 && CallbackMask == -1)
+            {
+                return new SimpleLineObject("");
+            }
+            else if (CollisionMask == -1)
+            {
+                return new SimpleLineObject("this.collisionMask = " + CollisionMask + ";");
+            }
+            else if (CallbackMask == -1)
+            {
+                return new SimpleLineObject("this.callbackMask = " + CallbackMask + ";");
+            }
+            else
+            {
+                return new SimpleBlock(new ILineObject[] {
+                    new SimpleLineObject("this.collisionMask = " + CollisionMask + ";"),
+                    new SimpleLineObject("this.callbackMask = " + CallbackMask + ";"),
+                }).Statement();
+            }
+        }
+    }
 }

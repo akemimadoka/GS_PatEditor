@@ -112,6 +112,7 @@ namespace GS_PatEditor
                     Segments = ImportAnimationSegments(proj, gspat, 51),
                     InitEffects = new EffectList()
                     {
+                        new Pat.Effects.BulletInitEffect(),
                         new Pat.Effects.SetMotionEffect { Animation = "assult_rifle" },
                     },
                     KeyFrameEffects = new List<EffectList>()
@@ -128,6 +129,22 @@ namespace GS_PatEditor
                     },
                 };
                 proj.Actions.Add(assult_rifle);
+
+                Pat.Action drop_shell = new Pat.Action
+                {
+                    ActionID = "drop_shell",
+                    Segments = ImportSegment(proj, gspat, 52, 4),
+                    InitEffects = new EffectList()
+                    {
+                    },
+                    KeyFrameEffects = new List<EffectList>()
+                    {
+                    },
+                    UpdateEffects = new EffectList()
+                    {
+                    }
+                };
+                proj.Actions.Add(drop_shell);
 
                 Pat.Action attack_long = new Pat.Action()
                 {
@@ -266,6 +283,13 @@ namespace GS_PatEditor
             return pat.Animations
                     .Skip(start).Take(1)
                     .Concat(pat.Animations.Skip(start + 1).TakeWhile(a => a.AnimationID == -2))
+                    .Select(a => ImportSegment(proj, pat, a)).ToList();
+        }
+        private static List<Pat.AnimationSegment> ImportSegment(Pat.Project proj, GSPat.GSPatFile pat, int index, int segment)
+        {
+            var start = pat.Animations.FindLastIndex(a => a.AnimationID == index + pat.Animations[0].AnimationID);
+            return pat.Animations
+                    .Skip(start + segment).Take(1)
                     .Select(a => ImportSegment(proj, pat, a)).ToList();
         }
         private static AnimationSegment ImportSegment(Pat.Project proj, GSPat.GSPatFile pat, GSPat.Animation animation)

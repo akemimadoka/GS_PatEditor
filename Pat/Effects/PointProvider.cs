@@ -36,15 +36,18 @@ namespace GS_PatEditor.Pat.Effects
             };
         }
 
+        private static string[] pointXNames = new[] { "point0_x", "point1_x", "point2_x" };
+        private static string[] pointYNames = new[] { "point0_y", "point1_y", "point2_y" };
+
         public override Expression GenerateX(GenerationEnvironment env)
         {
-            return new BiOpExpr(ThisExpr.Instance.MakeIndex("point0_x"),
+            return new BiOpExpr(ThisExpr.Instance.MakeIndex(pointXNames[Index]),
                 ThisExpr.Instance.MakeIndex("vx"), BiOpExpr.Op.Add);
         }
 
         public override Expression GenerateY(GenerationEnvironment env)
         {
-            return new BiOpExpr(ThisExpr.Instance.MakeIndex("point0_y"),
+            return new BiOpExpr(ThisExpr.Instance.MakeIndex(pointYNames[Index]),
                 ThisExpr.Instance.MakeIndex("vy"), BiOpExpr.Op.Add);
         }
     }

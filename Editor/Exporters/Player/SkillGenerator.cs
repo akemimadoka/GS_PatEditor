@@ -40,7 +40,6 @@ namespace GS_PatEditor.Editor.Exporters.Player
                 var lastActionName = CurrentActionName;
                 CurrentActionName = name;
                 List<ILineObject> funcContent = new List<ILineObject>();
-                funcContent.Add(new SimpleLineObject("this.ShotInit(t);"));
                 funcContent.AddRange(GenerateNormalSkillFunction(Exporter, this, name, true));
                 CurrentActionName = lastActionName;
 
