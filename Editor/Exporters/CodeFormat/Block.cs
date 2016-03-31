@@ -20,13 +20,13 @@ namespace GS_PatEditor.Editor.Exporters.CodeFormat
         {
             if (Head.Count > 0)
             {
-                Head[0].Write(output, lastIndent + 1);
+                Head[0].Write(output, lastIndent);
                 output.WriteLine();
             }
             for (int i = 1; i < Head.Count; ++i)
             {
                 output.WriteIndent(lastIndent);
-                Head[i].Write(output, lastIndent + 1);
+                Head[i].Write(output, lastIndent);
                 output.WriteLine();
             }
         }
@@ -36,13 +36,13 @@ namespace GS_PatEditor.Editor.Exporters.CodeFormat
             for (int i = 0; i < Tail.Count - 1; ++i)
             {
                 output.WriteIndent(lastIndent);
-                Tail[i].Write(output, lastIndent + 1);
+                Tail[i].Write(output, lastIndent);
                 output.WriteLine();
             }
             if (Tail.Count > 0)
             {
                 output.WriteIndent(lastIndent);
-                Tail[Tail.Count - 1].Write(output, lastIndent + 1);
+                Tail[Tail.Count - 1].Write(output, lastIndent);
             }
         }
 

@@ -203,6 +203,9 @@ namespace GS_PatEditor.Pat.Effects
                 case Simulation.ActorLabelType.Sit:
                     actor.SitLabel = Effect.Run;
                     break;
+                case Simulation.ActorLabelType.Hit:
+                    actor.HitEvent = Effect.Run;
+                    break;
             }
         }
 
@@ -215,6 +218,8 @@ namespace GS_PatEditor.Pat.Effects
                     return ThisExpr.Instance.MakeIndex("fallLabel").Assign(func.AsExpression()).Statement();
                 case Simulation.ActorLabelType.Sit:
                     return ThisExpr.Instance.MakeIndex("sitLabel").Assign(func.AsExpression()).Statement();
+                case Simulation.ActorLabelType.Hit:
+                    return ThisExpr.Instance.MakeIndex("hitEvent").Assign(func.AsExpression()).Statement();
                 default:
                     throw new Exception();
             }
@@ -308,11 +313,11 @@ namespace GS_PatEditor.Pat.Effects
             {
                 return new SimpleLineObject("");
             }
-            else if (CollisionMask == -1)
+            else if (CallbackMask == -1)
             {
                 return new SimpleLineObject("this.collisionMask = " + CollisionMask + ";");
             }
-            else if (CallbackMask == -1)
+            else if (CollisionMask == -1)
             {
                 return new SimpleLineObject("this.callbackMask = " + CallbackMask + ";");
             }

@@ -43,7 +43,7 @@ namespace GS_PatEditor.Editor.Exporters.CodeFormat
         public override void Write(TextWriter output, int indent)
         {
             output.WriteIndent(indent);
-            _Expr.Write(output, indent + 1);
+            _Expr.Write(output, indent);
             output.WriteLine(';');
         }
     }

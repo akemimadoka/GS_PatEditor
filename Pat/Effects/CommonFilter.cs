@@ -84,8 +84,16 @@ namespace GS_PatEditor.Pat.Effects
         }
     }
 
+    public enum CompareOperator
+    {
+        Equal,
+        Greater,
+        GreaterOrEqual,
+        NotEqual,
+    }
+
     [Serializable]
-    public class ValueEqualFilter : Filter
+    public class ValueCompareFilter : Filter
     {
         [XmlElement]
         [EditorChildNode("Left")]
@@ -95,15 +103,49 @@ namespace GS_PatEditor.Pat.Effects
         [EditorChildNode("Right")]
         public Value Right;
 
+        [XmlElement]
+        public CompareOperator Operator { get; set; }
+
         public override bool Test(Simulation.Actor actor)
         {
-            return Left.Get(actor) == Right.Get(actor);
+            switch (Operator)
+            {
+                case CompareOperator.Equal:
+                    return Left.Get(actor) == Right.Get(actor);
+                case CompareOperator.Greater:
+                    return Left.Get(actor) > Right.Get(actor);
+                case CompareOperator.GreaterOrEqual:
+                    return Left.Get(actor) >= Right.Get(actor);
+                case CompareOperator.NotEqual:
+                    return Left.Get(actor) != Right.Get(actor);
+                default:
+                    return false;
+            }
         }
 
         public override Expression Generate(GenerationEnvironment env)
         {
-            return new BiOpExpr(Left.Generate(env), Right.Generate(env),
-                BiOpExpr.Op.Equal);
+            BiOpExpr.Op opr;
+            switch (Operator)
+            {
+                case CompareOperator.Equal:
+                    opr = BiOpExpr.Op.Equal;
+                    break;
+                case CompareOperator.Greater:
+                    opr = BiOpExpr.Op.Greater;
+                    break;
+                case CompareOperator.GreaterOrEqual:
+                    opr = BiOpExpr.Op.GreaterOrEqual;
+                    break;
+                case CompareOperator.NotEqual:
+                    opr = BiOpExpr.Op.NotEqual;
+                    break;
+                default:
+                    return new ConstNumberExpr(0);
+            }
+            return new BiOpExpr(Left.Generate(env), Right.Generate(env), opr);
         }
+
+
     }
 }

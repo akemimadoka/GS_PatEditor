@@ -10,6 +10,7 @@ namespace GS_PatEditor.Simulation
     {
         Fall,
         Sit,
+        Hit,
     }
 
     public delegate void ActorLabel(Actor actor);

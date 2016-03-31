@@ -62,21 +62,21 @@ namespace GS_PatEditor.Editor.Exporters.CodeFormat
 
         public override void Write(TextWriter writer, int indent)
         {
-            _Func.Write(writer, indent + 1);
+            _Func.Write(writer, indent);
             writer.Write('(');
             Expression lastArg = null;
             foreach (var arg in _Args)
             {
                 if (lastArg != null)
                 {
-                    lastArg.Write(writer, indent + 1);
+                    lastArg.Write(writer, indent);
                     writer.Write(", ");
                 }
                 lastArg = arg;
             }
             if (lastArg != null)
             {
-                lastArg.Write(writer, indent + 1);
+                lastArg.Write(writer, indent);
             }
             writer.Write(")");
         }
@@ -161,7 +161,7 @@ namespace GS_PatEditor.Editor.Exporters.CodeFormat
 
         public override void Write(TextWriter writer, int indent)
         {
-            _Table.Write(writer, indent + 1);
+            _Table.Write(writer, indent);
             if (_Index != null)
             {
                 writer.Write('.');
@@ -170,7 +170,7 @@ namespace GS_PatEditor.Editor.Exporters.CodeFormat
             else
             {
                 writer.Write('[');
-                _IndexExpr.Write(writer, indent + 1);
+                _IndexExpr.Write(writer, indent);
                 writer.Write(']');
             }
         }
@@ -188,6 +188,7 @@ namespace GS_PatEditor.Editor.Exporters.CodeFormat
             Assign,
             And,
             Greater,
+            GreaterOrEqual,
             Less,
             NotEqual,
             Equal,
@@ -209,7 +210,7 @@ namespace GS_PatEditor.Editor.Exporters.CodeFormat
             {
                 writer.Write('(');
             }
-            _Left.Write(writer, indent + 1);
+            _Left.Write(writer, indent);
             if (_Op != Op.Assign)
             {
                 writer.Write(')');
@@ -219,7 +220,7 @@ namespace GS_PatEditor.Editor.Exporters.CodeFormat
             {
                 writer.Write('(');
             }
-            _Right.Write(writer, indent + 1);
+            _Right.Write(writer, indent);
             if (_Op != Op.Assign)
             {
                 writer.Write(')');
@@ -238,6 +239,7 @@ namespace GS_PatEditor.Editor.Exporters.CodeFormat
                 case Op.Assign: return " = ";
                 case Op.And: return " && ";
                 case Op.Greater: return " > ";
+                case Op.GreaterOrEqual: return " >= ";
                 case Op.Less: return " < ";
                 case Op.NotEqual: return " != ";
                 case Op.Equal: return " == ";
@@ -268,7 +270,7 @@ namespace GS_PatEditor.Editor.Exporters.CodeFormat
         {
             writer.Write(GetOpLeftStr(_Op));
             writer.Write('(');
-            _Expr.Write(writer, indent + 1);
+            _Expr.Write(writer, indent);
             writer.Write(')');
             writer.Write(GetOpRightStr(_Op));
         }
@@ -335,14 +337,14 @@ namespace GS_PatEditor.Editor.Exporters.CodeFormat
             {
                 if (lastExpr != null)
                 {
-                    lastExpr.Write(writer, indent + 1);
+                    lastExpr.Write(writer, indent);
                     writer.Write(", ");
                 }
                 lastExpr = e;
             }
             if (lastExpr != null)
             {
-                lastExpr.Write(writer, indent + 1);
+                lastExpr.Write(writer, indent);
             }
             writer.Write(']');
         }
