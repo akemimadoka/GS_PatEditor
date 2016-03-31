@@ -92,6 +92,7 @@ namespace GS_PatEditor.Editor
                         frm.toolStripButtonOpen,
                         frm.toolStripButtonSave,
                         frm.toolStripButtonSaveAs,
+                        frm.toolStripButtonDirectories,
                         frm.toolStripSeparator13,
                         frm.toolStripButtonExporter,
                         frm.toolStripButtonExport,
@@ -613,18 +614,25 @@ namespace GS_PatEditor.Editor
                 if (openFileDialog1.ShowDialog() == DialogResult.OK)
                 {
                     var file = openFileDialog1.FileName;
+                    Pat.Project proj = null;
                     if (System.IO.Path.GetExtension(file) == ".pat")
                     {
-                        _Editor.Project = ProjectGenerater.Generate(file);
+                        proj = ProjectGenerater.Generate(file);
                     }
                     else if (System.IO.Path.GetExtension(file) == ".patproj")
                     {
-                        _Editor.Project = ProjectSerializer.OpenProject(file);
+                        proj = ProjectSerializer.OpenProject(file);
                     }
                     else
                     {
                         MessageBox.Show("Unknown file extension.");
                     }
+
+                    if (proj != null)
+                    {
+                        _Editor.Project = proj;
+                    }
+
                     SetupToolbarEnabled();
 
                     openFileDialog1.FileName = "";
@@ -745,6 +753,22 @@ namespace GS_PatEditor.Editor
             if (!_Editor.Project.IsEmptyProject && _Editor.Project.Exporter != null)
             {
                 _Editor.Project.Exporter.ShowOptionDialog(_Editor.Project);
+            }
+        }
+
+        private void toolStripButtonDirectories_Click(object sender, EventArgs e)
+        {
+            if (!_Editor.Project.IsEmptyProject)
+            {
+                var oldList = new List<Pat.ProjectDirectoryDesc>(_Editor.Project.Settings.Directories);
+                var dialog = new ProjectDirectoryEditForm(_Editor.Project.Settings, true);
+                if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                }
+                else
+                {
+                    _Editor.Project.Settings.Directories = oldList;
+                }
             }
         }
     }

@@ -111,7 +111,7 @@ namespace GS_PatEditor.Pat.Editing
                 AbstractImage imageData = LoadResource(res);
                 if (imageData == null)
                 {
-                    return null;
+                    return _EmptyImage;
                 }
                 var clipped = ClipBitmap(imageData, image);
 
@@ -126,7 +126,7 @@ namespace GS_PatEditor.Pat.Editing
                     UsePalette = imageData.UsePalette
                 };
             }
-            return null;
+            return _EmptyImage;
         }
 
         public Bitmap GetImageUnclippedByRes(string id, bool alphaBlend)

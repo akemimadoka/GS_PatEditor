@@ -27,9 +27,6 @@ namespace GS_PatEditor.Pat
         public AbstractExporter Exporter;
 
         [XmlIgnore]
-        public ProjectLocalInfo LocalInformation;
-
-        [XmlIgnore]
         public readonly ProjectImageFileList ImageList;
 
         [XmlIgnore]

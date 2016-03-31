@@ -34,10 +34,9 @@ namespace GS_PatEditor.Editor
             }
             if (checkBox1.Checked)
             {
-                var dirList = _Project.LocalInformation.Directories.Join(
-                    _Project.Settings.Directories.Where(d => d.Usage == Pat.ProjectDirectoryUsage.Image),
-                    d => d.Name, d => d.Name,
-                    (Pat.ProjectDirectoryPath d1, Pat.ProjectDirectoryDesc d2) => d1.Path);
+                var dirList = _Project.Settings.Directories
+                    .Where(d => d.Usage == ProjectDirectoryUsage.Image && d.Path != null && d.Path.Length > 0)
+                    .Select(d => d.Path);
                 foreach (var dir in dirList)
                 {
                     if (!Directory.Exists(dir))

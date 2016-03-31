@@ -18,17 +18,6 @@ namespace GS_PatEditor
             {
                 Actions = new List<Pat.Action>(),
                 Images = new List<Pat.FrameImage>(),
-                LocalInformation = new Pat.ProjectLocalInfo
-                {
-                    Directories = new List<Pat.ProjectDirectoryPath>()
-                        {
-                            new Pat.ProjectDirectoryPath()
-                            {
-                                Name = "image",
-                                Path = path,
-                            }
-                        },
-                },
                 Settings = new Pat.ProjectSettings
                 {
                     ProjectName = "Untitled",
@@ -38,6 +27,7 @@ namespace GS_PatEditor
                             {
                                 Name = "image",
                                 Usage = Pat.ProjectDirectoryUsage.Image,
+                                Path = path,
                             }
                         },
                     Palettes = palList,
@@ -77,23 +67,12 @@ namespace GS_PatEditor
                     {
                         Name = "images",
                         Usage = ProjectDirectoryUsage.Image,
+                        Path = Path.GetDirectoryName(patfile),
                     }
                 },
                 Palettes = new List<string>()
                 {
                     "palette000.pal",
-                },
-            };
-
-            proj.LocalInformation = new ProjectLocalInfo
-            {
-                Directories = new List<ProjectDirectoryPath>()
-                {
-                    new ProjectDirectoryPath
-                    {
-                        Name = "images",
-                        Path = Path.GetDirectoryName(patfile),
-                    }
                 },
             };
 
@@ -205,6 +184,24 @@ namespace GS_PatEditor
                     },
                 };
                 proj.Actions.Add(attack_long);
+
+                var exporter = new Editor.Exporters.Player.PlayerExporter();
+                exporter.BaseIndex = 0;
+                exporter.PlayerName = "Homura";
+                exporter.ScriptFileName = "homura";
+                exporter.Skills.Add(new Editor.Exporters.Player.NormalSkill()
+                {
+                    ActionID = "attack_long",
+                    AirState = Editor.Exporters.Player.AirState.GroundOnly,
+                    CancelLevel = CancelLevel.Long,
+                    Key = Editor.Exporters.Player.SkillKey.KeyB,
+                    MagicUse = 0,
+                    X = Editor.Exporters.Player.DirectionHorizontal.Empty,
+                    Y = Editor.Exporters.Player.DirectionVertical.Empty,
+                });
+                exporter.Animations.Stand = "stand";
+                exporter.Animations.Walk = "walk";
+                proj.Exporter = exporter;
             }
 
             //set action image

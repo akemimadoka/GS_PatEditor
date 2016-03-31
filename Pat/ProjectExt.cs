@@ -13,9 +13,8 @@ namespace GS_PatEditor.Pat
         {
             //TODO cache dir list
             return proj.Settings.Directories
-                .Where(dir => dir.Usage == usage)
-                .Join(proj.LocalInformation.Directories, s => s.Name, d => d.Name,
-                    (ProjectDirectoryDesc s, ProjectDirectoryPath d) => Path.Combine(d.Path, id))
+                .Where(dir => dir.Usage == usage && dir.Path != null && dir.Path.Length > 0)
+                .Select(d => Path.Combine(d.Path, id))
                 .Where(file => File.Exists(file))
                 .FirstOrDefault();
         }

@@ -12,14 +12,20 @@ namespace GS_PatEditor.Pat
         SoundEffect,
         Image,
     }
+
     [Serializable]
     public class ProjectDirectoryDesc
     {
         [XmlAttribute]
         public string Name;
+
         [XmlAttribute]
         public ProjectDirectoryUsage Usage;
+
+        [XmlIgnore]
+        public string Path;
     }
+
     [Serializable]
     public class ProjectDirectoryPath
     {
