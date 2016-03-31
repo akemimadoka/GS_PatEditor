@@ -764,6 +764,8 @@ namespace GS_PatEditor.Editor
                 var dialog = new ProjectDirectoryEditForm(_Editor.Project.Settings, true);
                 if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
+                    _Editor.Project.ImageList.ReloadAllResources();
+                    _Editor.AnimationListUI.Activate();
                 }
                 else
                 {
