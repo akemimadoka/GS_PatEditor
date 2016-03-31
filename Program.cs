@@ -13,15 +13,22 @@ namespace GS_PatEditor
         [STAThread]
         private static void Main()
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-
-            var proj = ProjectGenerater.GenerateEmpty("", new List<string>());
-            proj.IsEmptyProject = true;
-
-            if (proj != null)
+            try
             {
-                EditorForm.ShowEditorForm(proj);
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
+
+                var proj = ProjectGenerater.GenerateEmpty("", new List<string>());
+                proj.IsEmptyProject = true;
+
+                if (proj != null)
+                {
+                    EditorForm.ShowEditorForm(proj);
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.ToString());
             }
         }
     }
