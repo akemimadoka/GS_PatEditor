@@ -36,6 +36,7 @@
             this.toolStripButtonOpen = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonSave = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonSaveAs = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonDirectories = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator13 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButtonExporter = new System.Windows.Forms.ToolStripDropDownButton();
             this.createExporterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -122,7 +123,6 @@
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialogExport = new System.Windows.Forms.SaveFileDialog();
             this.saveFileDialogSave = new System.Windows.Forms.SaveFileDialog();
-            this.toolStripButtonDirectories = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
             this.panelAnimations.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.animations)).BeginInit();
@@ -219,6 +219,16 @@
             this.toolStripButtonSaveAs.Text = "SaveAs";
             this.toolStripButtonSaveAs.Click += new System.EventHandler(this.toolStripButtonSaveAs_Click);
             // 
+            // toolStripButtonDirectories
+            // 
+            this.toolStripButtonDirectories.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonDirectories.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonDirectories.Image")));
+            this.toolStripButtonDirectories.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonDirectories.Name = "toolStripButtonDirectories";
+            this.toolStripButtonDirectories.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonDirectories.Text = "Directories";
+            this.toolStripButtonDirectories.Click += new System.EventHandler(this.toolStripButtonDirectories_Click);
+            // 
             // toolStripSeparator13
             // 
             this.toolStripSeparator13.Name = "toolStripSeparator13";
@@ -243,7 +253,7 @@
             this.createExporterToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.playerToolStripMenuItem});
             this.createExporterToolStripMenuItem.Name = "createExporterToolStripMenuItem";
-            this.createExporterToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
+            this.createExporterToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.createExporterToolStripMenuItem.Text = "Create";
             // 
             // playerToolStripMenuItem
@@ -256,14 +266,14 @@
             // editExporterToolStripMenuItem
             // 
             this.editExporterToolStripMenuItem.Name = "editExporterToolStripMenuItem";
-            this.editExporterToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
+            this.editExporterToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.editExporterToolStripMenuItem.Text = "Edit...";
             this.editExporterToolStripMenuItem.Click += new System.EventHandler(this.editExporterToolStripMenuItem_Click);
             // 
             // removeExporterToolStripMenuItem
             // 
             this.removeExporterToolStripMenuItem.Name = "removeExporterToolStripMenuItem";
-            this.removeExporterToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
+            this.removeExporterToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.removeExporterToolStripMenuItem.Text = "Remove";
             this.removeExporterToolStripMenuItem.Click += new System.EventHandler(this.removeExporterToolStripMenuItem_Click);
             // 
@@ -923,16 +933,6 @@
             // saveFileDialogSave
             // 
             this.saveFileDialogSave.Filter = "Editor PatProject File(*.patproj)|*.patproj";
-            // 
-            // toolStripButtonDirectories
-            // 
-            this.toolStripButtonDirectories.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonDirectories.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonDirectories.Image")));
-            this.toolStripButtonDirectories.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonDirectories.Name = "toolStripButtonDirectories";
-            this.toolStripButtonDirectories.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButtonDirectories.Text = "Directories";
-            this.toolStripButtonDirectories.Click += new System.EventHandler(this.toolStripButtonDirectories_Click);
             // 
             // EditorForm
             // 
