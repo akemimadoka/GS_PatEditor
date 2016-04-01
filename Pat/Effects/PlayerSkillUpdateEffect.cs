@@ -13,20 +13,22 @@ namespace GS_PatEditor.Pat.Effects
     [Serializable]
     public class PlayerSkillStopMovingEffect : Effect
     {
+        public PlayerSkillStopMovingEffect()
+        {
+            ReduceSpeed = 0.1f;
+        }
+
         [XmlElement]
-        [EditorChildNode("ReduceSpeed")]
-        public Value ReduceSpeed = new ConstValue { Value = 0.1f };
+        public float ReduceSpeed { get; set; }
 
         public bool ShouldSerializeReduceSpeed()
         {
-            return !(
-                ReduceSpeed is ConstValue &&
-                ((ConstValue)ReduceSpeed).Value == 0.1f);
+            return ReduceSpeed != 0.1f;
         }
 
         public override void Run(Simulation.Actor actor)
         {
-            var rs = ReduceSpeed.Get(actor);
+            var rs = ReduceSpeed;
             if (Math.Abs(actor.VX) < rs)
             {
                 actor.VX = 0;
@@ -45,10 +47,9 @@ namespace GS_PatEditor.Pat.Effects
                     new SimpleLineObject("this.vx = 0.0;"),
                 }).Statement(),
                 new ControlBlock(ControlBlockType.Else, new ILineObject[] {
-                    new SimpleLineObject("this.vx -= this.vx > 0.0 ? " + val + " : -(" + val + ")7;"),
+                    new SimpleLineObject("this.vx -= this.vx > 0.0 ? " + val + " : -(" + val + ");"),
                 }).Statement(),
             }).Statement();
         }
     }
-
 }

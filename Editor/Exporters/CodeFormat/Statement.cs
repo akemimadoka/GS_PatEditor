@@ -47,4 +47,24 @@ namespace GS_PatEditor.Editor.Exporters.CodeFormat
             output.WriteLine(';');
         }
     }
+
+    public class LocalVarStatement : Statement
+    {
+        private readonly string _Name;
+        private readonly Expression _Expr;
+
+        public LocalVarStatement(string name, Expression expr)
+        {
+            _Name = name;
+            _Expr = expr;
+        }
+
+        public override void Write(TextWriter output, int indent)
+        {
+            output.WriteIndent(indent);
+            output.Write("local " + _Name + " = ");
+            _Expr.Write(output, indent);
+            output.WriteLine(";");
+        }
+    }
 }

@@ -87,6 +87,12 @@ namespace GS_PatEditor.Editor.Exporters.Player
                     env.CurrentActionName = cskill.ActionID;
 
                     var functionContent = GenerateNormalSkillFunction(exporter, env, cskill.ActionID, false);
+                    functionContent = new ILineObject[] {
+                        new ControlBlock(ControlBlockType.If, "!(\"uu\" in this.u)", new ILineObject[] {
+                            new SimpleLineObject("this.u.uu <- this.u;"),
+                        }).Statement(),
+                    }.Concat(functionContent);
+
                     var func = new FunctionBlock(skillFuncName, new string[0], functionContent);
                     output.WriteStatement(func.Statement());
                 }

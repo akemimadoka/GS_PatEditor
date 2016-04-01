@@ -71,7 +71,7 @@ namespace GS_PatEditor.Pat.Effects
                     Position.GenerateX(env),
                     Position.GenerateY(env),
                     ThisExpr.Instance.MakeIndex("direction"),
-                    ThisExpr.Instance.MakeIndex("u").MakeIndex(funcName),
+                    ThisExpr.Instance.MakeIndex("u").MakeIndex("uu").MakeIndex(funcName),
                     new IdentifierExpr("t")
                 ).Statement(),
             }).Statement();
@@ -256,6 +256,12 @@ namespace GS_PatEditor.Pat.Effects
                 case ActorMemberType.rz:
                     actor.Rotation = val;
                     break;
+                case ActorMemberType.sx:
+                    actor.ScaleX = val;
+                    break;
+                case ActorMemberType.sy:
+                    actor.ScaleY = val;
+                    break;
             }
         }
 
@@ -278,6 +284,12 @@ namespace GS_PatEditor.Pat.Effects
                     break;
                 case ActorMemberType.rz:
                     index = "rz";
+                    break;
+                case ActorMemberType.sx:
+                    index = "sx";
+                    break;
+                case ActorMemberType.sy:
+                    index = "sy";
                     break;
             }
             if (index == null)
@@ -329,5 +341,29 @@ namespace GS_PatEditor.Pat.Effects
                 }).Statement();
             }
         }
+    }
+
+    [Serializable]
+    public class SetHitEffectEffect : Effect, IEditableEnvironment
+    {
+        [XmlAttribute]
+        [TypeConverter(typeof(ActionIDConverter))]
+        public string Action { get; set; }
+
+        public override void Run(Simulation.Actor actor)
+        {
+            //not supported
+        }
+
+        public override ILineObject Generate(GenerationEnvironment env)
+        {
+            var funcName = env.GenerateActionAsActorInit(Action);
+            return ThisExpr.Instance.MakeIndex("hitEffect").Assign(
+                ThisExpr.Instance.MakeIndex("u").MakeIndex("uu").MakeIndex(funcName)).Statement();
+        }
+
+        [XmlIgnore]
+        [Browsable(false)]
+        public EditableEnvironment Environment { get; set; }
     }
 }

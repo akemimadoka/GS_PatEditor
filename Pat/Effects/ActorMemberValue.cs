@@ -16,6 +16,8 @@ namespace GS_PatEditor.Pat.Effects
         vx,
         vy,
         rz,
+        sx,
+        sy,
     }
 
     [Serializable]
@@ -38,6 +40,10 @@ namespace GS_PatEditor.Pat.Effects
                     return actor.VY;
                 case ActorMemberType.rz:
                     return actor.Rotation;
+                case ActorMemberType.sx:
+                    return actor.ScaleX;
+                case ActorMemberType.sy:
+                    return actor.ScaleY;
             }
             return 0;
         }
@@ -61,6 +67,12 @@ namespace GS_PatEditor.Pat.Effects
                     break;
                 case ActorMemberType.rz:
                     index = "rz";
+                    break;
+                case ActorMemberType.sx:
+                    index = "sx";
+                    break;
+                case ActorMemberType.sy:
+                    index = "sy";
                     break;
             }
             if (index == null)
