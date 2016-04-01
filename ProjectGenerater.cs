@@ -222,6 +222,7 @@ namespace GS_PatEditor
             }
 
             //set action image
+            //TODO merge to import functions?
             foreach (var action in proj.Actions)
             {
                 if (action.Segments.Count > 0 && action.Segments[0].Frames.Count > 0)
@@ -230,6 +231,7 @@ namespace GS_PatEditor
                 }
             }
 
+            //TODO remove this
             CheckImageResources(proj, Path.GetDirectoryName(patfile));
 
             //refresh image cache
@@ -292,7 +294,7 @@ namespace GS_PatEditor
                     .Skip(start + segment).Take(1)
                     .Select(a => ImportSegment(proj, pat, a)).ToList();
         }
-        private static AnimationSegment ImportSegment(Pat.Project proj, GSPat.GSPatFile pat, GSPat.Animation animation)
+        public static AnimationSegment ImportSegment(Pat.Project proj, GSPat.GSPatFile pat, GSPat.Animation animation)
         {
             return new AnimationSegment()
             {
@@ -416,6 +418,11 @@ namespace GS_PatEditor
         //TODO move to image list
         public static Pat.FrameImage AddImageToProject(Project proj, string filename, GSPat.Frame frame)
         {
+            if (Path.GetExtension(filename) == ".bmp")
+            {
+                filename = Path.ChangeExtension(filename, ".cv2");
+            }
+
             var find = proj.Images.FirstOrDefault(
                 img => 
                     img.Resource.ResourceID == filename &&

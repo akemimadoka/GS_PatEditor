@@ -26,5 +26,38 @@ namespace GS_PatEditor.Images
             }
             return ret;
         }
+
+        public static void MakeAlphaBlendBitmap(Bitmap bitmap)
+        {
+            for (int i = 0; i < bitmap.Width; ++i)
+            {
+                for (int j = 0; j < bitmap.Height; ++j)
+                {
+                    var c = bitmap.GetPixel(i, j);
+                    var cc = Color.FromArgb((int)((c.R + c.G + c.B) / 3.0f), c);
+                    bitmap.SetPixel(i, j, cc);
+                }
+            }
+        }
+
+        public static void AdjustRectangle(ref Rectangle rect, Bitmap bitmap)
+        {
+            if (rect.Left < 0)
+            {
+                rect.X = 0;
+            }
+            if (rect.Top < 0)
+            {
+                rect.Y = 0;
+            }
+            if (rect.Right > bitmap.Width)
+            {
+                rect.Width = bitmap.Width - rect.X;
+            }
+            if (rect.Bottom > bitmap.Height)
+            {
+                rect.Height = bitmap.Height - rect.Y;
+            }
+        }
     }
 }

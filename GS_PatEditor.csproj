@@ -119,6 +119,12 @@
     <Compile Include="Editor\ExportForm.Designer.cs">
       <DependentUpon>ExportForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Editor\ImportPatAnimationForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Editor\ImportPatAnimationForm.Designer.cs">
+      <DependentUpon>ImportPatAnimationForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Editor\Panels\PreviewWindowPlaying.cs" />
     <Compile Include="Editor\Panels\Tools\Point\PointEditingHandler.cs" />
     <Compile Include="Editor\Exporters\Player\PlayerExporterOptionsForm.cs">
@@ -134,6 +140,7 @@
       <DependentUpon>ProjectDirectoryEditForm.cs</DependentUpon>
     </Compile>
     <Compile Include="GSPat\GSPatWriter.cs" />
+    <Compile Include="GSPat\ImageManager.cs" />
     <Compile Include="Pat\Effects\ActorMemberValue.cs" />
     <Compile Include="Pat\Effects\ActorVariables.cs" />
     <Compile Include="Pat\Effects\BulletEffect.cs" />
@@ -302,6 +309,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Editor\Exporters\Player\PlayerExporterOptionsForm.resx">
       <DependentUpon>PlayerExporterOptionsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editor\ImportPatAnimationForm.resx">
+      <DependentUpon>ImportPatAnimationForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Editor\ProjectDirectoryEditForm.resx">
       <DependentUpon>ProjectDirectoryEditForm.cs</DependentUpon>

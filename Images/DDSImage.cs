@@ -25,6 +25,7 @@ namespace GS_PatEditor.Images
 
         public override Bitmap ToBitmap(Color[] pal, Rectangle rect)
         {
+            AbstractImage.AdjustRectangle(ref rect, _Bitmap);
             return _Bitmap.Clone(rect, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
         }
 

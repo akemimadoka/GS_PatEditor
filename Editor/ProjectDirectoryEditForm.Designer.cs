@@ -252,7 +252,9 @@
             this.Controls.Add(this.buttonOK);
             this.Controls.Add(this.tabControl1);
             this.Name = "ProjectDirectoryEditForm";
-            this.Text = "ProjectDirectoryEditForm";
+            this.ShowIcon = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.Text = "Directories";
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);

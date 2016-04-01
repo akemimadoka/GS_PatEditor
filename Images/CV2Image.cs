@@ -82,6 +82,7 @@ namespace GS_PatEditor.Images
                 }
                 _Bitmap.Palette = palette;
             }
+            AbstractImage.AdjustRectangle(ref rect, _Bitmap);
             return _Bitmap.Clone(rect, PixelFormat.Format32bppArgb);
         }
 

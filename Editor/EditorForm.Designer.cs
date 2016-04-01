@@ -123,6 +123,7 @@
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialogExport = new System.Windows.Forms.SaveFileDialog();
             this.saveFileDialogSave = new System.Windows.Forms.SaveFileDialog();
+            this.toolStripButtonImport = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
             this.panelAnimations.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.animations)).BeginInit();
@@ -148,6 +149,7 @@
             this.toolStripButtonSaveAs,
             this.toolStripButtonDirectories,
             this.toolStripSeparator13,
+            this.toolStripButtonImport,
             this.toolStripButtonExporter,
             this.toolStripButtonExport,
             this.toolStripSeparator7,
@@ -849,7 +851,7 @@
             this.toolStripButtonBack.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonBack.Image")));
             this.toolStripButtonBack.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonBack.Name = "toolStripButtonBack";
-            this.toolStripButtonBack.Size = new System.Drawing.Size(56, 22);
+            this.toolStripButtonBack.Size = new System.Drawing.Size(56, 21);
             this.toolStripButtonBack.Text = "Back";
             this.toolStripButtonBack.Click += new System.EventHandler(this.toolStripButtonBack_Click);
             // 
@@ -933,6 +935,16 @@
             // saveFileDialogSave
             // 
             this.saveFileDialogSave.Filter = "Editor PatProject File(*.patproj)|*.patproj";
+            // 
+            // toolStripButtonImport
+            // 
+            this.toolStripButtonImport.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonImport.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonImport.Image")));
+            this.toolStripButtonImport.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonImport.Name = "toolStripButtonImport";
+            this.toolStripButtonImport.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonImport.Text = "Import";
+            this.toolStripButtonImport.Click += new System.EventHandler(this.toolStripButtonImport_Click);
             // 
             // EditorForm
             // 
@@ -1055,5 +1067,6 @@
         private System.Windows.Forms.ToolStripMenuItem removeExporterToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem playerToolStripMenuItem;
         private System.Windows.Forms.ToolStripButton toolStripButtonDirectories;
+        private System.Windows.Forms.ToolStripButton toolStripButtonImport;
     }
 }

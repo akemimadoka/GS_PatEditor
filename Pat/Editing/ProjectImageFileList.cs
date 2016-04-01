@@ -117,7 +117,7 @@ namespace GS_PatEditor.Pat.Editing
 
                 if (image.AlphaBlendMode)
                 {
-                    MakeAlphaBlendBitmap(clipped);
+                    AbstractImage.MakeAlphaBlendBitmap(clipped);
                 }
 
                 return new LoadedFrameImage
@@ -143,7 +143,7 @@ namespace GS_PatEditor.Pat.Editing
 
             if (alphaBlend)
             {
-                MakeAlphaBlendBitmap(ret);
+                AbstractImage.MakeAlphaBlendBitmap(ret);
             }
             return ret;
         }
@@ -192,19 +192,6 @@ namespace GS_PatEditor.Pat.Editing
         private Bitmap ClipBitmap(AbstractImage res, FrameImage img)
         {
             return res.ToBitmap(_Palette, new Rectangle(img.X, img.Y, img.W, img.H));
-        }
-
-        private void MakeAlphaBlendBitmap(Bitmap bitmap)
-        {
-            for (int i = 0; i < bitmap.Width; ++i)
-            {
-                for (int j = 0; j < bitmap.Height; ++j)
-                {
-                    var c = bitmap.GetPixel(i, j);
-                    var cc = Color.FromArgb((int)((c.R + c.G + c.B) / 3.0f), c);
-                    bitmap.SetPixel(i, j, cc);
-                }
-            }
         }
 
         private void OnPaletteChange()

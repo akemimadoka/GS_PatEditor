@@ -773,5 +773,45 @@ namespace GS_PatEditor.Editor
                 }
             }
         }
+
+        private void toolStripButtonImport_Click(object sender, EventArgs e)
+        {
+            var dialog = new ImportPatAnimationForm(_Editor.Project);
+            if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                var segments = dialog.ImportedSegments;
+                if (segments != null)
+                {
+                    int id = 1;
+                    {
+                        var list = _Editor.Project.Actions;
+                        while (list.Any(a => a.ActionID == "Imported " + id))
+                        {
+                            ++id;
+                        }
+                    }
+                    var action = new Pat.Action()
+                    {
+                        ActionID = "Imported " + id,
+                        ImageID = null,
+                        Segments = segments,
+                        InitEffects = new Pat.EffectList(),
+                        KeyFrameEffects = new List<Pat.EffectList>(),
+                        UpdateEffects = new Pat.EffectList(),
+                    };
+
+                    //TODO move to action
+                    if (action.Segments.Count > 0 && action.Segments[0].Frames.Count > 0)
+                    {
+                        action.ImageID = action.Segments[0].Frames[0].ImageID;
+                    }
+
+                    _Editor.Project.Actions.Add(action);
+
+                    _Editor.Project.ImageList.ReloadAllResources();
+                    _Editor.AnimationListUI.Activate();
+                }
+            }
+        }
     }
 }
