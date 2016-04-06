@@ -1,0 +1,1792 @@
+<?xml version="1.0"?>
+<GSPatProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Settings>
+    <ProjectName>homura</ProjectName>
+    <Directories>
+      <Directory Name="images" Usage="Image" />
+    </Directories>
+    <Palettes>
+      <Palette>palette000.pal</Palette>
+    </Palettes>
+  </Settings>
+  <Images>
+    <FrameImage ImageID="Homura_stand0000">
+      <Resource>Homura_stand0000.cv2</Resource>
+      <W>64</W>
+      <H>114</H>
+    </FrameImage>
+    <FrameImage ImageID="Homura_stand0001">
+      <Resource>Homura_stand0001.cv2</Resource>
+      <W>64</W>
+      <H>114</H>
+    </FrameImage>
+    <FrameImage ImageID="Homura_stand0002">
+      <Resource>Homura_stand0002.cv2</Resource>
+      <W>64</W>
+      <H>114</H>
+    </FrameImage>
+    <FrameImage ImageID="Homura_stand0003">
+      <Resource>Homura_stand0003.cv2</Resource>
+      <W>64</W>
+      <H>114</H>
+    </FrameImage>
+    <FrameImage ImageID="Homura_stand0004">
+      <Resource>Homura_stand0004.cv2</Resource>
+      <W>64</W>
+      <H>114</H>
+    </FrameImage>
+    <FrameImage ImageID="Homura_stand0005">
+      <Resource>Homura_stand0005.cv2</Resource>
+      <W>64</W>
+      <H>114</H>
+    </FrameImage>
+    <FrameImage ImageID="Homura_stand0006">
+      <Resource>Homura_stand0006.cv2</Resource>
+      <W>64</W>
+      <H>114</H>
+    </FrameImage>
+    <FrameImage ImageID="Homura_stand0007">
+      <Resource>Homura_stand0007.cv2</Resource>
+      <W>64</W>
+      <H>114</H>
+    </FrameImage>
+    <FrameImage ImageID="Homura_run0000">
+      <Resource>Homura_run0000.cv2</Resource>
+      <W>104</W>
+      <H>103</H>
+    </FrameImage>
+    <FrameImage ImageID="Homura_run0001">
+      <Resource>Homura_run0001.cv2</Resource>
+      <W>104</W>
+      <H>103</H>
+    </FrameImage>
+    <FrameImage ImageID="Homura_run0002">
+      <Resource>Homura_run0002.cv2</Resource>
+      <W>104</W>
+      <H>103</H>
+    </FrameImage>
+    <FrameImage ImageID="Homura_run0003">
+      <Resource>Homura_run0003.cv2</Resource>
+      <W>104</W>
+      <H>103</H>
+    </FrameImage>
+    <FrameImage ImageID="Homura_run0004">
+      <Resource>Homura_run0004.cv2</Resource>
+      <W>104</W>
+      <H>103</H>
+    </FrameImage>
+    <FrameImage ImageID="Homura_run0005">
+      <Resource>Homura_run0005.cv2</Resource>
+      <W>104</W>
+      <H>103</H>
+    </FrameImage>
+    <FrameImage ImageID="Homura_run0006">
+      <Resource>Homura_run0006.cv2</Resource>
+      <W>104</W>
+      <H>103</H>
+    </FrameImage>
+    <FrameImage ImageID="Homura_run0007">
+      <Resource>Homura_run0007.cv2</Resource>
+      <W>104</W>
+      <H>103</H>
+    </FrameImage>
+    <FrameImage ImageID="Homura_handGun0000">
+      <Resource>Homura_handGun0000.cv2</Resource>
+      <W>96</W>
+      <H>114</H>
+    </FrameImage>
+    <FrameImage ImageID="Homura_handGun0001">
+      <Resource>Homura_handGun0001.cv2</Resource>
+      <W>96</W>
+      <H>114</H>
+    </FrameImage>
+    <FrameImage ImageID="Homura_handGun0002">
+      <Resource>Homura_handGun0002.cv2</Resource>
+      <W>96</W>
+      <H>114</H>
+    </FrameImage>
+    <FrameImage ImageID="Homura_handGun0003">
+      <Resource>Homura_handGun0003.cv2</Resource>
+      <W>96</W>
+      <H>114</H>
+    </FrameImage>
+    <FrameImage ImageID="Homura_handGun0004">
+      <Resource>Homura_handGun0004.cv2</Resource>
+      <W>96</W>
+      <H>114</H>
+    </FrameImage>
+    <FrameImage ImageID="Homura_handGun0005">
+      <Resource>Homura_handGun0005.cv2</Resource>
+      <W>96</W>
+      <H>114</H>
+    </FrameImage>
+    <FrameImage ImageID="Homura_handGun0006">
+      <Resource>Homura_handGun0006.cv2</Resource>
+      <W>96</W>
+      <H>114</H>
+    </FrameImage>
+    <FrameImage ImageID="Homura_handGun0007">
+      <Resource>Homura_handGun0007.cv2</Resource>
+      <W>96</W>
+      <H>114</H>
+    </FrameImage>
+    <FrameImage ImageID="shotFlashA000">
+      <Resource>shotFlashA000.cv2</Resource>
+      <AlphaBlendMode>true</AlphaBlendMode>
+      <W>128</W>
+      <H>128</H>
+    </FrameImage>
+    <FrameImage ImageID="yakkyouA">
+      <Resource>yakkyouA.cv2</Resource>
+      <W>10</W>
+      <H>8</H>
+    </FrameImage>
+    <FrameImage ImageID="Homura_minimiB0000">
+      <Resource>Homura_minimiB0000.cv2</Resource>
+      <W>106</W>
+      <H>106</H>
+    </FrameImage>
+    <FrameImage ImageID="Homura_minimiB0001">
+      <Resource>Homura_minimiB0001.cv2</Resource>
+      <W>106</W>
+      <H>106</H>
+    </FrameImage>
+    <FrameImage ImageID="Homura_minimiB0002">
+      <Resource>Homura_minimiB0002.cv2</Resource>
+      <W>106</W>
+      <H>106</H>
+    </FrameImage>
+    <FrameImage ImageID="Homura_minimiB0003">
+      <Resource>Homura_minimiB0003.cv2</Resource>
+      <W>106</W>
+      <H>106</H>
+    </FrameImage>
+    <FrameImage ImageID="Homura_minimiB0004">
+      <Resource>Homura_minimiB0004.cv2</Resource>
+      <W>106</W>
+      <H>106</H>
+    </FrameImage>
+    <FrameImage ImageID="Homura_minimiB0005">
+      <Resource>Homura_minimiB0005.cv2</Resource>
+      <W>106</W>
+      <H>106</H>
+    </FrameImage>
+    <FrameImage ImageID="Homura_minimiB0006">
+      <Resource>Homura_minimiB0006.cv2</Resource>
+      <W>106</W>
+      <H>106</H>
+    </FrameImage>
+    <FrameImage ImageID="Homura_minimiB0007">
+      <Resource>Homura_minimiB0007.cv2</Resource>
+      <W>106</W>
+      <H>106</H>
+    </FrameImage>
+    <FrameImage ImageID="Homura_minimiB0008">
+      <Resource>Homura_minimiB0008.cv2</Resource>
+      <W>106</W>
+      <H>106</H>
+    </FrameImage>
+    <FrameImage ImageID="Homura_minimiB0009">
+      <Resource>Homura_minimiB0009.cv2</Resource>
+      <W>106</W>
+      <H>106</H>
+    </FrameImage>
+    <FrameImage ImageID="Homura_minimiB0010">
+      <Resource>Homura_minimiB0010.cv2</Resource>
+      <W>106</W>
+      <H>106</H>
+    </FrameImage>
+    <FrameImage ImageID="shotA000">
+      <Resource>shotA000.cv2</Resource>
+      <AlphaBlendMode>true</AlphaBlendMode>
+      <W>128</W>
+      <H>128</H>
+    </FrameImage>
+    <FrameImage ImageID="shotFlashB000">
+      <Resource>shotFlashB000.cv2</Resource>
+      <AlphaBlendMode>true</AlphaBlendMode>
+      <W>128</W>
+      <H>128</H>
+    </FrameImage>
+    <FrameImage ImageID="Homura_jump0000">
+      <Resource>Homura_jump0000.cv2</Resource>
+      <W>71</W>
+      <H>123</H>
+    </FrameImage>
+    <FrameImage ImageID="Homura_jump0001">
+      <Resource>Homura_jump0001.cv2</Resource>
+      <W>71</W>
+      <H>123</H>
+    </FrameImage>
+    <FrameImage ImageID="Homura_jump0002">
+      <Resource>Homura_jump0002.cv2</Resource>
+      <W>71</W>
+      <H>123</H>
+    </FrameImage>
+    <FrameImage ImageID="Homura_jump0003">
+      <Resource>Homura_jump0003.cv2</Resource>
+      <W>71</W>
+      <H>123</H>
+    </FrameImage>
+    <FrameImage ImageID="Homura_jump0004">
+      <Resource>Homura_jump0004.cv2</Resource>
+      <W>71</W>
+      <H>123</H>
+    </FrameImage>
+    <FrameImage ImageID="Homura_jump0005">
+      <Resource>Homura_jump0005.cv2</Resource>
+      <W>71</W>
+      <H>123</H>
+    </FrameImage>
+    <FrameImage ImageID="Homura_jump0006">
+      <Resource>Homura_jump0006.cv2</Resource>
+      <W>71</W>
+      <H>123</H>
+    </FrameImage>
+    <FrameImage ImageID="Homura_jump0007">
+      <Resource>Homura_jump0007.cv2</Resource>
+      <W>71</W>
+      <H>123</H>
+    </FrameImage>
+    <FrameImage ImageID="Homura_Airjump0000">
+      <Resource>Homura_Airjump0000.cv2</Resource>
+      <W>98</W>
+      <H>117</H>
+    </FrameImage>
+    <FrameImage ImageID="Homura_Airjump0001">
+      <Resource>Homura_Airjump0001.cv2</Resource>
+      <W>98</W>
+      <H>117</H>
+    </FrameImage>
+    <FrameImage ImageID="Homura_Airjump0002">
+      <Resource>Homura_Airjump0002.cv2</Resource>
+      <W>98</W>
+      <H>117</H>
+    </FrameImage>
+    <FrameImage ImageID="Homura_Airjump0003">
+      <Resource>Homura_Airjump0003.cv2</Resource>
+      <W>98</W>
+      <H>117</H>
+    </FrameImage>
+    <FrameImage ImageID="Homura_Airjump0004">
+      <Resource>Homura_Airjump0004.cv2</Resource>
+      <W>98</W>
+      <H>117</H>
+    </FrameImage>
+    <FrameImage ImageID="Homura_Airjump0005">
+      <Resource>Homura_Airjump0005.cv2</Resource>
+      <W>98</W>
+      <H>117</H>
+    </FrameImage>
+    <FrameImage ImageID="Homura_Airjump0006">
+      <Resource>Homura_Airjump0006.cv2</Resource>
+      <W>98</W>
+      <H>117</H>
+    </FrameImage>
+    <FrameImage ImageID="Homura_Airjump0007">
+      <Resource>Homura_Airjump0007.cv2</Resource>
+      <W>98</W>
+      <H>117</H>
+    </FrameImage>
+  </Images>
+  <Actions>
+    <Action ActionID="stand" ImageID="Homura_stand0000">
+      <Segments>
+        <AnimationSegment CancelLevel="Free" IsLoop="true">
+          <Frame>
+            <ImageID>Homura_stand0000</ImageID>
+            <OriginX>37</OriginX>
+            <OriginY>105</OriginY>
+            <Duration>5</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-94" W="44" H="94" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>Homura_stand0001</ImageID>
+            <OriginX>37</OriginX>
+            <OriginY>105</OriginY>
+            <Duration>5</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-94" W="44" H="94" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>Homura_stand0002</ImageID>
+            <OriginX>37</OriginX>
+            <OriginY>105</OriginY>
+            <Duration>5</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-94" W="44" H="94" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>Homura_stand0003</ImageID>
+            <OriginX>37</OriginX>
+            <OriginY>105</OriginY>
+            <Duration>5</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-94" W="44" H="94" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>Homura_stand0004</ImageID>
+            <OriginX>37</OriginX>
+            <OriginY>105</OriginY>
+            <Duration>5</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-94" W="44" H="94" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>Homura_stand0005</ImageID>
+            <OriginX>37</OriginX>
+            <OriginY>105</OriginY>
+            <Duration>5</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-94" W="44" H="94" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>Homura_stand0006</ImageID>
+            <OriginX>37</OriginX>
+            <OriginY>105</OriginY>
+            <Duration>5</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-94" W="44" H="94" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>Homura_stand0007</ImageID>
+            <OriginX>37</OriginX>
+            <OriginY>105</OriginY>
+            <Duration>5</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-94" W="44" H="94" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+        </AnimationSegment>
+      </Segments>
+      <InitEffects />
+      <UpdateEffects />
+      <KeyFrameEffects />
+    </Action>
+    <Action ActionID="walk" ImageID="Homura_run0000">
+      <Segments>
+        <AnimationSegment CancelLevel="Free" IsLoop="true">
+          <Frame>
+            <ImageID>Homura_run0000</ImageID>
+            <OriginX>50</OriginX>
+            <OriginY>97</OriginY>
+            <Duration>5</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-7" Y="-90" W="36" H="41" R="0" />
+              <Box X="-20" Y="-61" W="42" H="62" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>Homura_run0001</ImageID>
+            <OriginX>50</OriginX>
+            <OriginY>97</OriginY>
+            <Duration>5</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-7" Y="-90" W="36" H="41" R="0" />
+              <Box X="-20" Y="-61" W="42" H="62" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>Homura_run0002</ImageID>
+            <OriginX>50</OriginX>
+            <OriginY>97</OriginY>
+            <Duration>5</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-7" Y="-90" W="36" H="41" R="0" />
+              <Box X="-20" Y="-61" W="42" H="62" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>Homura_run0003</ImageID>
+            <OriginX>50</OriginX>
+            <OriginY>97</OriginY>
+            <Duration>5</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-7" Y="-90" W="36" H="41" R="0" />
+              <Box X="-20" Y="-61" W="42" H="62" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>Homura_run0004</ImageID>
+            <OriginX>50</OriginX>
+            <OriginY>97</OriginY>
+            <Duration>5</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-7" Y="-90" W="36" H="41" R="0" />
+              <Box X="-20" Y="-61" W="42" H="62" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>Homura_run0005</ImageID>
+            <OriginX>50</OriginX>
+            <OriginY>97</OriginY>
+            <Duration>5</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-7" Y="-90" W="36" H="41" R="0" />
+              <Box X="-20" Y="-61" W="42" H="62" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>Homura_run0006</ImageID>
+            <OriginX>50</OriginX>
+            <OriginY>97</OriginY>
+            <Duration>5</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-7" Y="-90" W="36" H="41" R="0" />
+              <Box X="-20" Y="-61" W="42" H="62" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>Homura_run0007</ImageID>
+            <OriginX>50</OriginX>
+            <OriginY>97</OriginY>
+            <Duration>5</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-7" Y="-90" W="36" H="41" R="0" />
+              <Box X="-20" Y="-61" W="42" H="62" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+        </AnimationSegment>
+      </Segments>
+      <InitEffects />
+      <UpdateEffects />
+      <KeyFrameEffects />
+    </Action>
+    <Action ActionID="attack" ImageID="Homura_handGun0000">
+      <Segments>
+        <AnimationSegment CancelLevel="Light" IsLoop="false">
+          <Frame>
+            <ImageID>Homura_handGun0000</ImageID>
+            <OriginX>37</OriginX>
+            <OriginY>109</OriginY>
+            <Duration>2</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-94" W="44" H="94" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>Homura_handGun0001</ImageID>
+            <OriginX>40</OriginX>
+            <OriginY>109</OriginY>
+            <Duration>2</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-94" W="44" H="94" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>Homura_handGun0002</ImageID>
+            <OriginX>37</OriginX>
+            <OriginY>109</OriginY>
+            <Duration>2</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-94" W="44" H="94" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>Homura_handGun0003</ImageID>
+            <OriginX>37</OriginX>
+            <OriginY>109</OriginY>
+            <Duration>2</Duration>
+            <Points>
+              <FramePoint X="53" Y="-66" />
+              <FramePoint X="34" Y="-67" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-94" W="44" H="94" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+        </AnimationSegment>
+        <AnimationSegment CancelLevel="Light" IsLoop="false" JumpCancellable="0" SkillCancellable="3">
+          <Frame>
+            <ImageID>Homura_handGun0004</ImageID>
+            <OriginX>37</OriginX>
+            <OriginY>109</OriginY>
+            <Duration>1</Duration>
+            <Points>
+              <FramePoint X="53" Y="-66" />
+              <FramePoint X="34" Y="-67" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-94" W="44" H="94" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>Homura_handGun0005</ImageID>
+            <OriginX>37</OriginX>
+            <OriginY>109</OriginY>
+            <Duration>2</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-94" W="44" H="94" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>Homura_handGun0006</ImageID>
+            <OriginX>37</OriginX>
+            <OriginY>109</OriginY>
+            <Duration>4</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-94" W="44" H="94" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>Homura_handGun0007</ImageID>
+            <OriginX>37</OriginX>
+            <OriginY>109</OriginY>
+            <Duration>4</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-94" W="44" H="94" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>Homura_handGun0006</ImageID>
+            <OriginX>37</OriginX>
+            <OriginY>109</OriginY>
+            <Duration>4</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-94" W="44" H="94" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>Homura_handGun0007</ImageID>
+            <OriginX>37</OriginX>
+            <OriginY>109</OriginY>
+            <Duration>4</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-94" W="44" H="94" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>Homura_handGun0001</ImageID>
+            <OriginX>37</OriginX>
+            <OriginY>109</OriginY>
+            <Duration>3</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-94" W="44" H="94" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>Homura_handGun0000</ImageID>
+            <OriginX>37</OriginX>
+            <OriginY>109</OriginY>
+            <Duration>3</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-94" W="44" H="94" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+        </AnimationSegment>
+      </Segments>
+      <InitEffects />
+      <UpdateEffects />
+      <KeyFrameEffects />
+    </Action>
+    <Action ActionID="assult_rifle" ImageID="shotFlashA000">
+      <Segments>
+        <AnimationSegment CancelLevel="Free" IsLoop="true">
+          <Frame>
+            <ImageID>shotFlashA000</ImageID>
+            <ScaleX>150</ScaleX>
+            <ScaleY>150</ScaleY>
+            <OriginX>5</OriginX>
+            <OriginY>64</OriginY>
+            <Duration>2</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <HitBoxes />
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>shotFlashA000</ImageID>
+            <ScaleX>75</ScaleX>
+            <ScaleY>75</ScaleY>
+            <OriginX>5</OriginX>
+            <OriginY>64</OriginY>
+            <Duration>2</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <HitBoxes />
+            <AttackBoxes />
+          </Frame>
+        </AnimationSegment>
+      </Segments>
+      <InitEffects>
+        <Effect xsi:type="BulletInitEffect" />
+        <Effect xsi:type="SetMotionEffect" Animation="assult_rifle" Segment="0" />
+      </InitEffects>
+      <UpdateEffects>
+        <Effect xsi:type="FilteredEffect">
+          <Filter xsi:type="AnimationCountAfterFilter">
+            <Count xsi:type="ConstValue" Value="4" />
+          </Filter>
+          <Effect xsi:type="ReleaseActorEffect" />
+        </Effect>
+        <Effect xsi:type="IncreaseCountEffect" />
+      </UpdateEffects>
+      <KeyFrameEffects />
+    </Action>
+    <Action ActionID="drop_shell" ImageID="yakkyouA">
+      <Segments>
+        <AnimationSegment CancelLevel="Free" IsLoop="true">
+          <Frame>
+            <ImageID>yakkyouA</ImageID>
+            <OriginX>5</OriginX>
+            <OriginY>3</OriginY>
+            <Duration>4</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <HitBoxes />
+            <AttackBoxes>
+              <Box X="-4" Y="-4" W="8" H="8" R="0" />
+            </AttackBoxes>
+          </Frame>
+          <Damage>
+            <AttackType>None</AttackType>
+            <BaseDamage>0</BaseDamage>
+            <HitStop>
+              <Self>0</Self>
+              <Opponent>0</Opponent>
+            </HitStop>
+            <Knockback>
+              <SpeedX>0</SpeedX>
+              <SpeedY>0</SpeedY>
+              <Gravity>0</Gravity>
+            </Knockback>
+            <SoundEffect>0</SoundEffect>
+          </Damage>
+        </AnimationSegment>
+      </Segments>
+      <InitEffects>
+        <Effect xsi:type="BulletInitEffect" />
+        <Effect xsi:type="SetMotionEffect" Animation="drop_shell" Segment="0" />
+        <Effect xsi:type="InitCountEffect" />
+        <Effect xsi:type="SetActorMemberEffect" Type="vx">
+          <Value xsi:type="RandomFloatValue" Max="-1" Min="-3" Step="0.01" />
+        </Effect>
+        <Effect xsi:type="SetActorMemberEffect" Type="vy">
+          <Value xsi:type="RandomFloatValue" Max="-6" Min="-7" Step="0.01" />
+        </Effect>
+        <Effect xsi:type="ActorSetFloatVariableEffect" Name="rot">
+          <Value xsi:type="RandomFloatValue" Max="-6" Min="-13" Step="0.1" />
+        </Effect>
+        <Effect xsi:type="ActorSetFloatVariableEffect" Name="falling">
+          <Value xsi:type="ConstValue" Value="0" />
+        </Effect>
+        <Effect xsi:type="SetLabelEffect" Label="Hit">
+          <Effect xsi:type="FilteredEffect">
+            <Filter xsi:type="ValueCompareFilter">
+              <Left xsi:type="ActorFloatVariableValue" Name="falling" />
+              <Right xsi:type="ConstValue" Value="0" />
+              <Operator>NotEqual</Operator>
+            </Filter>
+            <Effect xsi:type="SimpleListEffect">
+              <Effect xsi:type="ActorSetFloatVariableEffect" Name="falling">
+                <Value xsi:type="ConstValue" Value="0" />
+              </Effect>
+              <Effect xsi:type="SetActorMemberEffect" Type="vy">
+                <Value xsi:type="BinaryExpressionValue" Operator="Multiply">
+                  <Left xsi:type="ActorMemberValue" Type="vy" />
+                  <Right xsi:type="ConstValue" Value="-0.4" />
+                </Value>
+              </Effect>
+              <Effect xsi:type="SetMaskEffect" CollisionMask="-1" CallbackMask="8" />
+            </Effect>
+          </Effect>
+        </Effect>
+        <Effect xsi:type="SetMaskEffect" CollisionMask="-1" CallbackMask="8" />
+      </InitEffects>
+      <UpdateEffects>
+        <Effect xsi:type="TimeStopCheckEffect" />
+        <Effect xsi:type="SetActorMemberEffect" Type="vy">
+          <Value xsi:type="BinaryExpressionValue" Operator="Add">
+            <Left xsi:type="ActorMemberValue" Type="vy" />
+            <Right xsi:type="ConstValue" Value="0.5" />
+          </Value>
+        </Effect>
+        <Effect xsi:type="SetActorMemberEffect" Type="rz">
+          <Value xsi:type="BinaryExpressionValue" Operator="Add">
+            <Left xsi:type="ActorMemberValue" Type="rz" />
+            <Right xsi:type="ActorFloatVariableValue" Name="rot" />
+          </Value>
+        </Effect>
+        <Effect xsi:type="IncreaseCountEffect" />
+        <Effect xsi:type="FilteredEffect">
+          <Filter xsi:type="AnimationCountAfterFilter">
+            <Count xsi:type="ConstValue" Value="60" />
+          </Filter>
+          <Effect xsi:type="ReleaseActorEffect" />
+        </Effect>
+        <Effect xsi:type="FilteredEffect">
+          <Filter xsi:type="ValueCompareFilter">
+            <Left xsi:type="ActorFloatVariableValue" Name="falling" />
+            <Right xsi:type="ConstValue" Value="0" />
+            <Operator>Equal</Operator>
+          </Filter>
+          <Effect xsi:type="FilteredEffect">
+            <Filter xsi:type="ValueCompareFilter">
+              <Left xsi:type="ActorMemberValue" Type="vy" />
+              <Right xsi:type="ConstValue" Value="0" />
+              <Operator>Greater</Operator>
+            </Filter>
+            <Effect xsi:type="SimpleListEffect">
+              <Effect xsi:type="ActorSetFloatVariableEffect" Name="falling">
+                <Value xsi:type="ConstValue" Value="1" />
+              </Effect>
+              <Effect xsi:type="SetMaskEffect" CollisionMask="-1" CallbackMask="12" />
+            </Effect>
+          </Effect>
+        </Effect>
+      </UpdateEffects>
+      <KeyFrameEffects />
+    </Action>
+    <Action ActionID="attack_long" ImageID="Homura_minimiB0000">
+      <Segments>
+        <AnimationSegment CancelLevel="Long" IsLoop="false">
+          <Frame>
+            <ImageID>Homura_minimiB0000</ImageID>
+            <OriginX>54</OriginX>
+            <OriginY>100</OriginY>
+            <Duration>2</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-94" W="44" H="94" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>Homura_minimiB0001</ImageID>
+            <OriginX>54</OriginX>
+            <OriginY>100</OriginY>
+            <Duration>3</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-94" W="44" H="94" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>Homura_minimiB0002</ImageID>
+            <OriginX>54</OriginX>
+            <OriginY>100</OriginY>
+            <Duration>3</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-94" W="44" H="94" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>Homura_minimiB0003</ImageID>
+            <OriginX>54</OriginX>
+            <OriginY>100</OriginY>
+            <Duration>3</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-94" W="44" H="94" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>Homura_minimiB0004</ImageID>
+            <OriginX>54</OriginX>
+            <OriginY>100</OriginY>
+            <Duration>2</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-94" W="44" H="94" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>Homura_minimiB0005</ImageID>
+            <OriginX>54</OriginX>
+            <OriginY>100</OriginY>
+            <Duration>3</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-94" W="44" H="94" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>Homura_minimiB0006</ImageID>
+            <OriginX>54</OriginX>
+            <OriginY>100</OriginY>
+            <Duration>3</Duration>
+            <Points>
+              <FramePoint X="45" Y="-39" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-94" W="44" H="94" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+        </AnimationSegment>
+        <AnimationSegment CancelLevel="Long" IsLoop="true" JumpCancellable="0" SkillCancellable="0">
+          <Frame>
+            <ImageID>Homura_minimiB0007</ImageID>
+            <OriginX>54</OriginX>
+            <OriginY>100</OriginY>
+            <Duration>3</Duration>
+            <Points>
+              <FramePoint X="46" Y="-41" />
+              <FramePoint X="4" Y="-43" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-94" W="44" H="94" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>Homura_minimiB0008</ImageID>
+            <OriginX>54</OriginX>
+            <OriginY>100</OriginY>
+            <Duration>3</Duration>
+            <Points>
+              <FramePoint X="46" Y="-41" />
+              <FramePoint X="5" Y="-43" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-94" W="44" H="94" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>Homura_minimiB0006</ImageID>
+            <OriginX>54</OriginX>
+            <OriginY>100</OriginY>
+            <Duration>3</Duration>
+            <Points>
+              <FramePoint X="45" Y="-39" />
+              <FramePoint X="3" Y="-41" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-94" W="44" H="94" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+        </AnimationSegment>
+        <AnimationSegment CancelLevel="Long" IsLoop="false" JumpCancellable="0" SkillCancellable="0">
+          <Frame>
+            <ImageID>Homura_minimiB0008</ImageID>
+            <OriginX>54</OriginX>
+            <OriginY>100</OriginY>
+            <Duration>15</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-94" W="44" H="94" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>Homura_minimiB0009</ImageID>
+            <OriginX>54</OriginX>
+            <OriginY>100</OriginY>
+            <Duration>5</Duration>
+            <Points>
+              <FramePoint X="-2" Y="-43" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-94" W="44" H="94" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+        </AnimationSegment>
+        <AnimationSegment CancelLevel="Long" IsLoop="false" JumpCancellable="0" SkillCancellable="0">
+          <Frame>
+            <ImageID>Homura_minimiB0010</ImageID>
+            <OriginX>54</OriginX>
+            <OriginY>100</OriginY>
+            <Duration>5</Duration>
+            <Points>
+              <FramePoint X="-2" Y="-43" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-94" W="44" H="94" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+        </AnimationSegment>
+      </Segments>
+      <InitEffects>
+        <Effect xsi:type="PlayerSkillInitEffect" IsInAir="false" AutoCancel="true" />
+      </InitEffects>
+      <UpdateEffects>
+        <Effect xsi:type="FilteredEffect">
+          <Filter xsi:type="SimpleListFilter">
+            <Filter xsi:type="AnimationCountAfterFilter">
+              <Count xsi:type="ConstValue" Value="95" />
+            </Filter>
+            <Filter xsi:type="AnimationSegmentFilter" Segment="1" />
+          </Filter>
+          <Effect xsi:type="AnimationContinueEffect" />
+        </Effect>
+        <Effect xsi:type="IncreaseCountEffect" />
+        <Effect xsi:type="FilteredEffect">
+          <Filter xsi:type="SimpleListFilter">
+            <Filter xsi:type="AnimationCountModFilter">
+              <Divisor xsi:type="ConstValue" Value="5" />
+              <Mod xsi:type="ConstValue" Value="0" />
+            </Filter>
+            <Filter xsi:type="AnimationSegmentFilter" Segment="1" />
+          </Filter>
+          <Effect xsi:type="SimpleListEffect">
+            <Effect xsi:type="CreateBulletEffect">
+              <Position xsi:type="FrameSinglePointProvider" Index="0" />
+              <ActionName>assult_rifle</ActionName>
+            </Effect>
+            <Effect xsi:type="CreateBulletEffect">
+              <Position xsi:type="FrameSinglePointProvider" Index="1" />
+              <ActionName>drop_shell</ActionName>
+            </Effect>
+            <Effect xsi:type="CreateBulletEffect">
+              <Position xsi:type="FrameSinglePointProvider" Index="0" />
+              <ActionName>attack_long_bullet</ActionName>
+            </Effect>
+            <Effect xsi:type="FilteredEffect">
+              <Filter xsi:type="ValueCompareFilter">
+                <Left xsi:type="ActorMemberValue" Type="vx" />
+                <Right xsi:type="ConstValue" Value="-1" />
+                <Operator>GreaterOrEqual</Operator>
+              </Filter>
+              <Effect xsi:type="SetActorMemberEffect" Type="vx">
+                <Value xsi:type="BinaryExpressionValue" Operator="Add">
+                  <Left xsi:type="ActorMemberValue" Type="vx" />
+                  <Right xsi:type="ConstValue" Value="-1" />
+                </Value>
+              </Effect>
+            </Effect>
+          </Effect>
+        </Effect>
+        <Effect xsi:type="PlayerSkillStopMovingEffect">
+          <ReduceSpeed>0.2</ReduceSpeed>
+        </Effect>
+      </UpdateEffects>
+      <KeyFrameEffects>
+        <ArrayOfEffect />
+        <ArrayOfEffect />
+        <ArrayOfEffect />
+        <ArrayOfEffect>
+          <Effect xsi:type="PlayerBeginStandEffect" />
+        </ArrayOfEffect>
+      </KeyFrameEffects>
+    </Action>
+    <Action ActionID="attack_long_bullet" ImageID="shotA000">
+      <Segments>
+        <AnimationSegment CancelLevel="Free" IsLoop="true">
+          <Frame>
+            <ImageID>shotA000</ImageID>
+            <ScaleX>150</ScaleX>
+            <ScaleY>150</ScaleY>
+            <OriginX>23</OriginX>
+            <OriginY>64</OriginY>
+            <Duration>3</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <HitBoxes />
+            <AttackBoxes>
+              <Box X="-30" Y="-3" W="148" H="6" R="0" />
+            </AttackBoxes>
+          </Frame>
+          <Frame>
+            <ImageID>shotA000</ImageID>
+            <ScaleX>150</ScaleX>
+            <ScaleY>113</ScaleY>
+            <OriginX>23</OriginX>
+            <OriginY>64</OriginY>
+            <Duration>3</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <HitBoxes />
+            <AttackBoxes>
+              <Box X="-30" Y="-3" W="148" H="6" R="0" />
+            </AttackBoxes>
+          </Frame>
+          <Damage>
+            <AttackType>Light</AttackType>
+            <BaseDamage>500</BaseDamage>
+            <HitStop>
+              <Self>0</Self>
+              <Opponent>0</Opponent>
+            </HitStop>
+            <Knockback>
+              <SpeedX>-6000</SpeedX>
+              <SpeedY>-1500</SpeedY>
+              <Gravity>250</Gravity>
+            </Knockback>
+            <SoundEffect>0</SoundEffect>
+          </Damage>
+        </AnimationSegment>
+      </Segments>
+      <InitEffects>
+        <Effect xsi:type="BulletInitEffect" />
+        <Effect xsi:type="SetMotionEffect" Animation="attack_long_bullet" Segment="0" />
+        <Effect xsi:type="BulletSetSpeedEffect">
+          <Speed xsi:type="ConstValue" Value="60" />
+          <Rotation xsi:type="RandomFloatValue" Max="0.09" Min="-0.09" Step="0.001" />
+        </Effect>
+        <Effect xsi:type="InitCountEffect" />
+        <Effect xsi:type="SetLabelEffect" Label="Hit">
+          <Effect xsi:type="SimpleListEffect">
+            <Effect xsi:type="ReleaseActorEffect" />
+          </Effect>
+        </Effect>
+        <Effect xsi:type="SetHitEffectEffect" Action="bullet_hit_effect" />
+      </InitEffects>
+      <UpdateEffects>
+        <Effect xsi:type="TimeStopCheckEffect" />
+        <Effect xsi:type="IncreaseCountEffect" />
+        <Effect xsi:type="FilteredEffect">
+          <Filter xsi:type="AnimationCountAfterFilter">
+            <Count xsi:type="ConstValue" Value="60" />
+          </Filter>
+          <Effect xsi:type="ReleaseActorEffect" />
+        </Effect>
+      </UpdateEffects>
+      <KeyFrameEffects />
+    </Action>
+    <Action ActionID="bullet_hit_effect" ImageID="shotFlashB000">
+      <Segments>
+        <AnimationSegment CancelLevel="Free" IsLoop="true">
+          <Frame>
+            <ImageID>shotFlashB000</ImageID>
+            <ScaleX>150</ScaleX>
+            <ScaleY>150</ScaleY>
+            <OriginX>64</OriginX>
+            <OriginY>64</OriginY>
+            <Duration>2</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <HitBoxes />
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>shotFlashB000</ImageID>
+            <OriginX>64</OriginX>
+            <OriginY>64</OriginY>
+            <Duration>2</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <HitBoxes />
+            <AttackBoxes />
+          </Frame>
+        </AnimationSegment>
+      </Segments>
+      <InitEffects>
+        <Effect xsi:type="BulletInitEffect" />
+        <Effect xsi:type="SetMotionEffect" Animation="bullet_hit_effect" Segment="0" />
+        <Effect xsi:type="SetActorMemberEffect" Type="rz">
+          <Value xsi:type="RandomFloatValue" Max="6.2832" Min="0" Step="0.01" />
+        </Effect>
+        <Effect xsi:type="InitCountEffect" />
+        <Effect xsi:type="SetActorMemberEffect" Type="sx">
+          <Value xsi:type="RandomFloatValue" Max="1.1" Min="0.8" Step="0.01" />
+        </Effect>
+        <Effect xsi:type="SetActorMemberEffect" Type="sy">
+          <Value xsi:type="ActorMemberValue" Type="sx" />
+        </Effect>
+      </InitEffects>
+      <UpdateEffects>
+        <Effect xsi:type="IncreaseCountEffect" />
+        <Effect xsi:type="FilteredEffect">
+          <Filter xsi:type="AnimationCountAfterFilter">
+            <Count xsi:type="ConstValue" Value="6" />
+          </Filter>
+          <Effect xsi:type="ReleaseActorEffect" />
+        </Effect>
+        <Effect xsi:type="SetActorMemberEffect" Type="sx">
+          <Value xsi:type="BinaryExpressionValue" Operator="Multiply">
+            <Left xsi:type="ActorMemberValue" Type="sx" />
+            <Right xsi:type="ConstValue" Value="0.9" />
+          </Value>
+        </Effect>
+        <Effect xsi:type="SetActorMemberEffect" Type="sy">
+          <Value xsi:type="ActorMemberValue" Type="sx" />
+        </Effect>
+      </UpdateEffects>
+      <KeyFrameEffects />
+    </Action>
+    <Action ActionID="jump_up" ImageID="Homura_jump0000">
+      <Segments>
+        <AnimationSegment CancelLevel="Free" IsLoop="false">
+          <Frame>
+            <ImageID>Homura_jump0000</ImageID>
+            <OriginX>36</OriginX>
+            <OriginY>117</OriginY>
+            <Duration>2</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-99" W="44" H="76" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>Homura_jump0001</ImageID>
+            <OriginX>36</OriginX>
+            <OriginY>111</OriginY>
+            <Duration>3</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-99" W="44" H="76" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>Homura_jump0002</ImageID>
+            <OriginX>36</OriginX>
+            <OriginY>111</OriginY>
+            <Duration>10</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-99" W="44" H="76" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>Homura_jump0003</ImageID>
+            <OriginX>36</OriginX>
+            <OriginY>111</OriginY>
+            <Duration>4</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-99" W="44" H="76" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>Homura_jump0004</ImageID>
+            <OriginX>36</OriginX>
+            <OriginY>109</OriginY>
+            <Duration>4</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-99" W="44" H="76" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+        </AnimationSegment>
+        <AnimationSegment CancelLevel="Free" IsLoop="true">
+          <Frame>
+            <ImageID>Homura_jump0005</ImageID>
+            <OriginX>36</OriginX>
+            <OriginY>107</OriginY>
+            <Duration>5</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-99" W="44" H="76" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>Homura_jump0006</ImageID>
+            <OriginX>36</OriginX>
+            <OriginY>107</OriginY>
+            <Duration>5</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-99" W="44" H="76" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>Homura_jump0007</ImageID>
+            <OriginX>36</OriginX>
+            <OriginY>107</OriginY>
+            <Duration>5</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-99" W="44" H="76" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+        </AnimationSegment>
+      </Segments>
+      <InitEffects />
+      <UpdateEffects />
+      <KeyFrameEffects />
+    </Action>
+    <Action ActionID="jump_front" ImageID="Homura_jump0001">
+      <Segments>
+        <AnimationSegment CancelLevel="Free" IsLoop="false">
+          <Frame>
+            <ImageID>Homura_jump0001</ImageID>
+            <OriginX>36</OriginX>
+            <OriginY>111</OriginY>
+            <Duration>3</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-99" W="44" H="76" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>Homura_Airjump0000</ImageID>
+            <OriginX>42</OriginX>
+            <OriginY>109</OriginY>
+            <Duration>3</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-99" W="44" H="76" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>Homura_Airjump0001</ImageID>
+            <OriginX>42</OriginX>
+            <OriginY>109</OriginY>
+            <Duration>3</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-99" W="44" H="76" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>Homura_Airjump0002</ImageID>
+            <OriginX>42</OriginX>
+            <OriginY>109</OriginY>
+            <Duration>3</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-99" W="44" H="76" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>Homura_Airjump0003</ImageID>
+            <OriginX>42</OriginX>
+            <OriginY>109</OriginY>
+            <Duration>3</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-99" W="44" H="76" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>Homura_Airjump0004</ImageID>
+            <OriginX>42</OriginX>
+            <OriginY>109</OriginY>
+            <Duration>3</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-99" W="44" H="76" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>Homura_Airjump0005</ImageID>
+            <OriginX>42</OriginX>
+            <OriginY>109</OriginY>
+            <Duration>3</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-99" W="44" H="76" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>Homura_Airjump0006</ImageID>
+            <OriginX>42</OriginX>
+            <OriginY>109</OriginY>
+            <Duration>3</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-99" W="44" H="76" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>Homura_Airjump0007</ImageID>
+            <OriginX>42</OriginX>
+            <OriginY>109</OriginY>
+            <Duration>3</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-99" W="44" H="76" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+        </AnimationSegment>
+        <AnimationSegment CancelLevel="Free" IsLoop="true">
+          <Frame>
+            <ImageID>Homura_jump0005</ImageID>
+            <OriginX>36</OriginX>
+            <OriginY>107</OriginY>
+            <Duration>5</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-99" W="44" H="76" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>Homura_jump0006</ImageID>
+            <OriginX>36</OriginX>
+            <OriginY>107</OriginY>
+            <Duration>5</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-99" W="44" H="76" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>Homura_jump0007</ImageID>
+            <OriginX>36</OriginX>
+            <OriginY>107</OriginY>
+            <Duration>5</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-99" W="44" H="76" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+        </AnimationSegment>
+      </Segments>
+      <InitEffects />
+      <UpdateEffects />
+      <KeyFrameEffects />
+    </Action>
+    <Action ActionID="fall" ImageID="Homura_jump0005">
+      <Segments>
+        <AnimationSegment CancelLevel="Free" IsLoop="true">
+          <Frame>
+            <ImageID>Homura_jump0005</ImageID>
+            <OriginX>36</OriginX>
+            <OriginY>107</OriginY>
+            <Duration>5</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-99" W="44" H="76" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>Homura_jump0006</ImageID>
+            <OriginX>36</OriginX>
+            <OriginY>107</OriginY>
+            <Duration>5</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-99" W="44" H="76" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>Homura_jump0007</ImageID>
+            <OriginX>36</OriginX>
+            <OriginY>107</OriginY>
+            <Duration>5</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-99" W="44" H="76" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+        </AnimationSegment>
+      </Segments>
+      <InitEffects />
+      <UpdateEffects />
+      <KeyFrameEffects />
+    </Action>
+  </Actions>
+  <Exporter xsi:type="PlayerExporter">
+    <Animations>
+      <Stand>stand</Stand>
+      <Walk>walk</Walk>
+      <JumpUp>jump_up</JumpUp>
+      <JumpFront>jump_front</JumpFront>
+      <Fall>fall</Fall>
+    </Animations>
+    <PlayerInformation>
+      <MagicUse>0</MagicUse>
+    </PlayerInformation>
+    <Skills>
+      <Skill xsi:type="NormalSkill" Key="KeyA" X="Empty" Y="Empty" CancelLevel="Long" ActionID="attack_long" />
+    </Skills>
+    <BaseIndex>0</BaseIndex>
+    <PlayerName>Homura</PlayerName>
+    <ScriptFileName>homura</ScriptFileName>
+  </Exporter>
+</GSPatProject>
