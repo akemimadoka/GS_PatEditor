@@ -17,6 +17,9 @@ namespace GS_PatEditor.Render
         private Direct3D _Direct3d;
         private Device _Device;
 
+        private SharpDX.Direct3D9.Sprite _Sprite;
+        private Font _Font;
+
         private Effect _Effect;
 
         public Device Device { get { return _Device; } }
@@ -64,6 +67,11 @@ namespace GS_PatEditor.Render
 
             _Effect = Effect.FromString(_Device, Shader.Value, ShaderFlags.None);
             _Effect.SetValue("mat_ViewProj", _Device.GetViewProjectionMatrix());
+
+            _Sprite = new SharpDX.Direct3D9.Sprite(_Device);
+            _Font = new Font(_Device, 24, 8, FontWeight.Normal, 1, false,
+                FontCharacterSet.Default, FontPrecision.Default, FontQuality.Default,
+                FontPitchAndFamily.Default, "Times New Roman");
         }
 
         public void Dispose()
@@ -107,6 +115,11 @@ namespace GS_PatEditor.Render
 
             _Effect.EndPass();
             _Effect.End();
+
+            _Sprite.Begin();
+
+            //_Font.DrawText(_Sprite, "Hello World!", 300, 300, new RawColorBGRA(0, 0, 0, 255));
+            _Sprite.End();
 
             _Device.EndScene();
             _Device.Present();

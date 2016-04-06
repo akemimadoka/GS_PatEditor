@@ -42,8 +42,8 @@ namespace GS_PatEditor.Pat.Editing
                 else
                 {
                     _SelectedPalette = value;
-                    OnPaletteChange();
                 }
+                OnPaletteChange();
             }
         }
 
