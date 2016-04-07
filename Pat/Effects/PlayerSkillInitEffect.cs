@@ -79,7 +79,17 @@ namespace GS_PatEditor.Pat.Effects
     public class PlayerSkillInitEffect : EffectListEffect
     {
         [XmlAttribute]
-        public bool IsInAir { get; set; }
+        public bool IsInAir
+        {
+            get
+            {
+                return _Position.IsInAir;
+            }
+            set
+            {
+                _Position.IsInAir = value;
+            }
+        }
 
         [XmlAttribute]
         public bool AutoCancel { get; set; }

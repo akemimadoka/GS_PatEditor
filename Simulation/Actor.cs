@@ -191,6 +191,7 @@ namespace GS_PatEditor.Simulation
                 if (Gravity.HasValue)
                 {
                     VY += Gravity.Value;
+                    Gravity = null;
                 }
                 else
                 {

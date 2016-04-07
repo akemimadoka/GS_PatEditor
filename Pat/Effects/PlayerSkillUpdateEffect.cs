@@ -52,4 +52,20 @@ namespace GS_PatEditor.Pat.Effects
             }).Statement();
         }
     }
+
+    [Serializable]
+    public class GravityEffect : Effect
+    {
+        public float Value { get; set; }
+
+        public override void Run(Simulation.Actor actor)
+        {
+            actor.Gravity = Value;
+        }
+
+        public override ILineObject Generate(GenerationEnvironment env)
+        {
+            return ThisExpr.Instance.MakeIndex("setG").Assign(new ConstNumberExpr(Value)).Statement();
+        }
+    }
 }
