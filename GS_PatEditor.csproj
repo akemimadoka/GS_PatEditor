@@ -155,6 +155,7 @@
     <Compile Include="Pat\Effects\PlayerSkillUpdateEffect.cs" />
     <Compile Include="Pat\Effects\PlayerSystemEffect.cs" />
     <Compile Include="Pat\Effects\PointProvider.cs" />
+    <Compile Include="Pat\Effects\TimestopEffect.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="ProjectSerializer.cs" />
     <Compile Include="Editor\AnimationPropertyFrom.cs">

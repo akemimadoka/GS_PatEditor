@@ -288,6 +288,41 @@
       <W>98</W>
       <H>117</H>
     </FrameImage>
+    <FrameImage ImageID="Homura_mortar0000">
+      <Resource>Homura_mortar0000.cv2</Resource>
+      <W>68</W>
+      <H>106</H>
+    </FrameImage>
+    <FrameImage ImageID="Homura_mortar0001">
+      <Resource>Homura_mortar0001.cv2</Resource>
+      <W>68</W>
+      <H>106</H>
+    </FrameImage>
+    <FrameImage ImageID="Homura_mortar0002">
+      <Resource>Homura_mortar0002.cv2</Resource>
+      <W>68</W>
+      <H>106</H>
+    </FrameImage>
+    <FrameImage ImageID="Homura_mortar0003">
+      <Resource>Homura_mortar0003.cv2</Resource>
+      <W>68</W>
+      <H>106</H>
+    </FrameImage>
+    <FrameImage ImageID="Homura_mortar0004">
+      <Resource>Homura_mortar0004.cv2</Resource>
+      <W>68</W>
+      <H>106</H>
+    </FrameImage>
+    <FrameImage ImageID="Homura_mortar0005">
+      <Resource>Homura_mortar0005.cv2</Resource>
+      <W>68</W>
+      <H>106</H>
+    </FrameImage>
+    <FrameImage ImageID="Homura_mortar0006">
+      <Resource>Homura_mortar0006.cv2</Resource>
+      <W>68</W>
+      <H>106</H>
+    </FrameImage>
   </Images>
   <Actions>
     <Action ActionID="stand" ImageID="Homura_stand0000">
@@ -1220,7 +1255,7 @@
         <ArrayOfEffect />
         <ArrayOfEffect />
         <ArrayOfEffect>
-          <Effect xsi:type="PlayerBeginStandEffect" />
+          <Effect xsi:type="PlayerEndToFreeMoveEffect" />
         </ArrayOfEffect>
       </KeyFrameEffects>
     </Action>
@@ -1770,6 +1805,154 @@
       <UpdateEffects />
       <KeyFrameEffects />
     </Action>
+    <Action ActionID="magic" ImageID="Homura_mortar0000">
+      <Segments>
+        <AnimationSegment CancelLevel="Magic" IsLoop="false">
+          <Frame>
+            <ImageID>Homura_mortar0000</ImageID>
+            <OriginX>37</OriginX>
+            <OriginY>102</OriginY>
+            <Duration>4</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-94" W="44" H="94" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>Homura_mortar0001</ImageID>
+            <OriginX>37</OriginX>
+            <OriginY>102</OriginY>
+            <Duration>7</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-94" W="44" H="94" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>Homura_mortar0002</ImageID>
+            <OriginX>37</OriginX>
+            <OriginY>102</OriginY>
+            <Duration>4</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-94" W="44" H="94" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+        </AnimationSegment>
+        <AnimationSegment CancelLevel="Magic" IsLoop="false">
+          <Frame>
+            <ImageID>Homura_mortar0003</ImageID>
+            <OriginX>37</OriginX>
+            <OriginY>102</OriginY>
+            <Duration>4</Duration>
+            <Points>
+              <FramePoint X="26" Y="-67" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-94" W="44" H="94" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>Homura_mortar0004</ImageID>
+            <OriginX>37</OriginX>
+            <OriginY>102</OriginY>
+            <Duration>4</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-94" W="44" H="94" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>Homura_mortar0004</ImageID>
+            <OriginX>37</OriginX>
+            <OriginY>102</OriginY>
+            <Duration>20</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-94" W="44" H="94" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>Homura_mortar0005</ImageID>
+            <OriginX>37</OriginX>
+            <OriginY>102</OriginY>
+            <Duration>6</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-94" W="44" H="94" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>Homura_mortar0006</ImageID>
+            <OriginX>37</OriginX>
+            <OriginY>102</OriginY>
+            <Duration>6</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-94" W="44" H="94" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+        </AnimationSegment>
+      </Segments>
+      <InitEffects>
+        <Effect xsi:type="PlayerSkillInitEffect" IsInAir="false" AutoCancel="false" />
+      </InitEffects>
+      <UpdateEffects />
+      <KeyFrameEffects>
+        <ArrayOfEffect>
+          <Effect xsi:type="TimeStopEffect" Time="240" />
+        </ArrayOfEffect>
+        <ArrayOfEffect>
+          <Effect xsi:type="PlayerEndToFreeMoveEffect" />
+        </ArrayOfEffect>
+      </KeyFrameEffects>
+    </Action>
   </Actions>
   <Exporter xsi:type="PlayerExporter">
     <Animations>
@@ -1784,6 +1967,7 @@
     </PlayerInformation>
     <Skills>
       <Skill xsi:type="NormalSkill" Key="KeyA" X="Empty" Y="Empty" CancelLevel="Long" ActionID="attack_long" />
+      <Skill xsi:type="NormalSkill" Key="KeyC" CancelLevel="Magic" MagicUse="50" ActionID="magic" />
     </Skills>
     <BaseIndex>0</BaseIndex>
     <PlayerName>Homura</PlayerName>

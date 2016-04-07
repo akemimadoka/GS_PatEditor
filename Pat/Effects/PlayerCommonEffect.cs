@@ -67,7 +67,7 @@ namespace GS_PatEditor.Pat.Effects
 
         public override ILineObject Generate(GenerationEnvironment env)
         {
-            return new SimpleLineObject("this.u.EndToFreeMove.call(this);");
+            return new SimpleLineObject("this.u.EndtoFreeMove.call(this);");
         }
     }
 
