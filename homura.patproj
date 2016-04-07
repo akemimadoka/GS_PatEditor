@@ -2532,6 +2532,18 @@
                 <Value xsi:type="ConstValue" Value="-2" />
               </Effect>
             </Effect>
+            <Effect xsi:type="CreateBulletEffect">
+              <Position xsi:type="FrameSinglePointProvider" Index="0" />
+              <ActionName>assult_rifle</ActionName>
+            </Effect>
+            <Effect xsi:type="CreateBulletEffect">
+              <Position xsi:type="FrameSinglePointProvider" Index="1" />
+              <ActionName>drop_shell</ActionName>
+            </Effect>
+            <Effect xsi:type="CreateBulletEffect">
+              <Position xsi:type="FrameSinglePointProvider" Index="0" />
+              <ActionName>attack_long_air_bullet</ActionName>
+            </Effect>
           </Effect>
         </Effect>
       </UpdateEffects>
@@ -2543,6 +2555,83 @@
           <Effect xsi:type="PlayerEndToFreeMoveEffect" />
         </ArrayOfEffect>
       </KeyFrameEffects>
+    </Action>
+    <Action ActionID="attack_long_air_bullet" ImageID="shotA000">
+      <Segments>
+        <AnimationSegment CancelLevel="Free" IsLoop="true">
+          <Frame>
+            <ImageID>shotA000</ImageID>
+            <ScaleX>125</ScaleX>
+            <OriginX>23</OriginX>
+            <OriginY>64</OriginY>
+            <Duration>3</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <HitBoxes />
+            <AttackBoxes>
+              <Box X="-30" Y="-3" W="118" H="6" R="0" />
+            </AttackBoxes>
+          </Frame>
+          <Frame>
+            <ImageID>shotA000</ImageID>
+            <ScaleX>120</ScaleX>
+            <ScaleY>95</ScaleY>
+            <OriginX>21</OriginX>
+            <OriginY>64</OriginY>
+            <Duration>3</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <HitBoxes />
+            <AttackBoxes>
+              <Box X="-30" Y="-3" W="118" H="6" R="0" />
+            </AttackBoxes>
+          </Frame>
+          <Damage>
+            <AttackType>Light</AttackType>
+            <BaseDamage>400</BaseDamage>
+            <HitStop>
+              <Self>0</Self>
+              <Opponent>0</Opponent>
+            </HitStop>
+            <Knockback>
+              <SpeedX>-6000</SpeedX>
+              <SpeedY>-1500</SpeedY>
+              <Gravity>250</Gravity>
+            </Knockback>
+            <SoundEffect>0</SoundEffect>
+          </Damage>
+        </AnimationSegment>
+      </Segments>
+      <InitEffects>
+        <Effect xsi:type="BulletInitEffect" />
+        <Effect xsi:type="SetMotionEffect" Animation="attack_long_air_bullet" Segment="0" />
+        <Effect xsi:type="BulletSetSpeedEffect">
+          <Speed xsi:type="ConstValue" Value="60" />
+          <Rotation xsi:type="RandomFloatValue" Max="0.09" Min="-0.09" Step="0.001" />
+        </Effect>
+        <Effect xsi:type="IncreaseCountEffect" />
+        <Effect xsi:type="SetLabelEffect" Label="Hit">
+          <Effect xsi:type="ReleaseActorEffect" />
+        </Effect>
+        <Effect xsi:type="SetHitEffectEffect" Action="bullet_hit_effect" />
+      </InitEffects>
+      <UpdateEffects>
+        <Effect xsi:type="TimeStopCheckEffect" />
+        <Effect xsi:type="InitCountEffect" />
+        <Effect xsi:type="FilteredEffect">
+          <Filter xsi:type="AnimationCountAfterFilter">
+            <Count xsi:type="ConstValue" Value="60" />
+          </Filter>
+          <Effect xsi:type="ReleaseActorEffect" />
+        </Effect>
+      </UpdateEffects>
+      <KeyFrameEffects />
     </Action>
   </Actions>
   <Exporter xsi:type="PlayerExporter">

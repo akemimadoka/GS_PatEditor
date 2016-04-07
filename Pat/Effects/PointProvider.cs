@@ -31,8 +31,8 @@ namespace GS_PatEditor.Pat.Effects
 
             return new FramePoint
             {
-                X = (int)(actor.X + scaleX * p.X),
-                Y = (int)(actor.Y + scaleY * p.Y),
+                X = (int)(actor.X + actor.VX + scaleX * p.X),
+                Y = (int)(actor.Y + actor.VY + scaleY * p.Y),
             };
         }
 
