@@ -63,7 +63,7 @@ namespace GS_PatEditor.Editor.Exporters.Player
             ILineObject[] ret = new ILineObject[exporter.Skills.Count];
             for (int i = 0; i < exporter.Skills.Count; ++i)
             {
-                ret[i] = GenerateSkill(exporter.Skills[i], "skill_" + i.ToString());
+                ret[i] = GenerateSkill(i == 0, exporter.Skills[i], "skill_" + i.ToString());
             }
             return ret;
         }
@@ -101,16 +101,16 @@ namespace GS_PatEditor.Editor.Exporters.Player
 
         #region InputAttack
 
-        private static ILineObject GenerateSkill(Skill skill, string name)
+        private static ILineObject GenerateSkill(bool isFirst, Skill skill, string name)
         {
             if (skill is NormalSkill)
             {
-                return GenerateNormalSkill((NormalSkill)skill, name);
+                return GenerateNormalSkill(isFirst, (NormalSkill)skill, name);
             }
             return new SimpleLineObject("");
         }
 
-        private static ILineObject GenerateNormalSkill(NormalSkill skill, string name)
+        private static ILineObject GenerateNormalSkill(bool isFirst, NormalSkill skill, string name)
         {
             var u = ThisExpr.Instance.MakeIndex("u");
             var condition = ExpressionExt.AndAll(
@@ -120,7 +120,8 @@ namespace GS_PatEditor.Editor.Exporters.Player
                 XCondition(skill.X),
                 YCondition(skill.Y),
                 MagicCondition(skill.MagicUse));
-            return new ControlBlock(ControlBlockType.If, condition, new ILineObject[] {
+            return new ControlBlock(isFirst ? ControlBlockType.If : ControlBlockType.ElseIf,
+                condition, new ILineObject[] {
                 u.MakeIndex("InputReset").MakeIndex("call").Call(ThisExpr.Instance).Statement(),
                 u.MakeIndex(name).MakeIndex("call").Call(ThisExpr.Instance).Statement(),
             }).Statement();
