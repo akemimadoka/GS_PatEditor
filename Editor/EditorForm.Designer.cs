@@ -33,11 +33,11 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButtonNew = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButtonOpen = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonSave = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonSaveAs = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonDirectories = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator13 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButtonImport = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonExporter = new System.Windows.Forms.ToolStripDropDownButton();
             this.createExporterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.playerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -123,7 +123,9 @@
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialogExport = new System.Windows.Forms.SaveFileDialog();
             this.saveFileDialogSave = new System.Windows.Forms.SaveFileDialog();
-            this.toolStripButtonImport = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonOpen = new System.Windows.Forms.ToolStripSplitButton();
+            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1.SuspendLayout();
             this.panelAnimations.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.animations)).BeginInit();
@@ -192,16 +194,6 @@
             this.toolStripButtonNew.Text = "New";
             this.toolStripButtonNew.Click += new System.EventHandler(this.toolStripButtonNew_Click);
             // 
-            // toolStripButtonOpen
-            // 
-            this.toolStripButtonOpen.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonOpen.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonOpen.Image")));
-            this.toolStripButtonOpen.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonOpen.Name = "toolStripButtonOpen";
-            this.toolStripButtonOpen.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButtonOpen.Text = "Open";
-            this.toolStripButtonOpen.Click += new System.EventHandler(this.toolStripButtonOpen_Click);
-            // 
             // toolStripButtonSave
             // 
             this.toolStripButtonSave.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -236,6 +228,16 @@
             this.toolStripSeparator13.Name = "toolStripSeparator13";
             this.toolStripSeparator13.Size = new System.Drawing.Size(6, 25);
             // 
+            // toolStripButtonImport
+            // 
+            this.toolStripButtonImport.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonImport.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonImport.Image")));
+            this.toolStripButtonImport.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonImport.Name = "toolStripButtonImport";
+            this.toolStripButtonImport.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonImport.Text = "Import";
+            this.toolStripButtonImport.Click += new System.EventHandler(this.toolStripButtonImport_Click);
+            // 
             // toolStripButtonExporter
             // 
             this.toolStripButtonExporter.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -255,7 +257,7 @@
             this.createExporterToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.playerToolStripMenuItem});
             this.createExporterToolStripMenuItem.Name = "createExporterToolStripMenuItem";
-            this.createExporterToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.createExporterToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
             this.createExporterToolStripMenuItem.Text = "Create";
             // 
             // playerToolStripMenuItem
@@ -268,14 +270,14 @@
             // editExporterToolStripMenuItem
             // 
             this.editExporterToolStripMenuItem.Name = "editExporterToolStripMenuItem";
-            this.editExporterToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.editExporterToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
             this.editExporterToolStripMenuItem.Text = "Edit...";
             this.editExporterToolStripMenuItem.Click += new System.EventHandler(this.editExporterToolStripMenuItem_Click);
             // 
             // removeExporterToolStripMenuItem
             // 
             this.removeExporterToolStripMenuItem.Name = "removeExporterToolStripMenuItem";
-            this.removeExporterToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.removeExporterToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
             this.removeExporterToolStripMenuItem.Text = "Remove";
             this.removeExporterToolStripMenuItem.Click += new System.EventHandler(this.removeExporterToolStripMenuItem_Click);
             // 
@@ -936,15 +938,30 @@
             // 
             this.saveFileDialogSave.Filter = "Editor PatProject File(*.patproj)|*.patproj";
             // 
-            // toolStripButtonImport
+            // toolStripButtonOpen
             // 
-            this.toolStripButtonImport.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonImport.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonImport.Image")));
-            this.toolStripButtonImport.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonImport.Name = "toolStripButtonImport";
-            this.toolStripButtonImport.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButtonImport.Text = "Import";
-            this.toolStripButtonImport.Click += new System.EventHandler(this.toolStripButtonImport_Click);
+            this.toolStripButtonOpen.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonOpen.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem3,
+            this.toolStripMenuItem4});
+            this.toolStripButtonOpen.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonOpen.Image")));
+            this.toolStripButtonOpen.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonOpen.Name = "toolStripButtonOpen";
+            this.toolStripButtonOpen.Size = new System.Drawing.Size(32, 22);
+            this.toolStripButtonOpen.Text = "Open";
+            this.toolStripButtonOpen.ButtonClick += new System.EventHandler(this.toolStripButtonOpen_Click);
+            // 
+            // toolStripMenuItem3
+            // 
+            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem3.Text = "1";
+            // 
+            // toolStripMenuItem4
+            // 
+            this.toolStripMenuItem4.Name = "toolStripMenuItem4";
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem4.Text = "2";
             // 
             // EditorForm
             // 
@@ -1024,7 +1041,6 @@
         private System.Windows.Forms.Panel panelAnimationFramesScroll;
         private System.Windows.Forms.PictureBox animationFrames;
         private System.Windows.Forms.ToolStripButton toolStripButtonNew;
-        private System.Windows.Forms.ToolStripButton toolStripButtonOpen;
         private System.Windows.Forms.ToolStripButton toolStripButtonSave;
         private System.Windows.Forms.ToolStripButton toolStripButtonSaveAs;
         private System.Windows.Forms.ToolStripButton toolStripButtonExport;
@@ -1068,5 +1084,8 @@
         private System.Windows.Forms.ToolStripMenuItem playerToolStripMenuItem;
         private System.Windows.Forms.ToolStripButton toolStripButtonDirectories;
         private System.Windows.Forms.ToolStripButton toolStripButtonImport;
+        private System.Windows.Forms.ToolStripSplitButton toolStripButtonOpen;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem4;
     }
 }

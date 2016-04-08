@@ -107,6 +107,9 @@ namespace GS_PatEditor
         private static bool LoadLocalSettings(Project proj, FileStream file)
         {
             var local = (ProjectLocalInfo)LocalSerializer.Deserialize(file);
+
+            proj.LastExportDirectory = local.LastExportDirectory;
+
             int notFound1 = 0;
             foreach (var dir in local.Directories)
             {

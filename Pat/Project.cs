@@ -35,6 +35,9 @@ namespace GS_PatEditor.Pat
         [XmlIgnore]
         public bool IsEmptyProject;
 
+        [XmlIgnore]
+        public string LastExportDirectory;
+
         public Project()
         {
             ImageList = new ProjectImageFileList(this);

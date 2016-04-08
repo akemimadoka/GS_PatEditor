@@ -16,6 +16,9 @@ namespace GS_PatEditor.Pat
         [XmlArrayItem("Directory")]
         public List<ProjectDirectoryPath> Directories;
 
+        [XmlElement]
+        public string LastExportDirectory;
+
         public void LoadFromProject(Project proj)
         {
             if (Directories == null)
@@ -29,6 +32,8 @@ namespace GS_PatEditor.Pat
             Directories.AddRange(proj.Settings.Directories
                 .Where(d => d.Path != null && d.Path.Length > 0)
                 .Select(d => new ProjectDirectoryPath { Name = d.Name, Path = d.Path }));
+
+            LastExportDirectory = proj.LastExportDirectory;
         }
     }
 }

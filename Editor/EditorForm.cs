@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -219,9 +220,13 @@ namespace GS_PatEditor.Editor
         private VisibleGroup _GroupEditPhysical, _GroupEditHit, _GroupEditAttack;
         private VisibleGroup _GroupToolAnimationList, _GroupToolAnimation, _GroupToolImageList;
 
+        private RecentFileList _RecentFileList;
+
         public EditorForm()
         {
             InitializeComponent();
+            _RecentFileList = new RecentFileList(toolStripButtonOpen);
+            _RecentFileList.OpenFile += OpenFile;
         }
 
         private void RunRenderLoop()
@@ -613,31 +618,37 @@ namespace GS_PatEditor.Editor
             {
                 if (openFileDialog1.ShowDialog() == DialogResult.OK)
                 {
-                    var file = openFileDialog1.FileName;
-                    Pat.Project proj = null;
-                    if (System.IO.Path.GetExtension(file) == ".pat")
-                    {
-                        proj = ProjectGenerater.Generate(file);
-                    }
-                    else if (System.IO.Path.GetExtension(file) == ".patproj")
-                    {
-                        proj = ProjectSerializer.OpenProject(file);
-                    }
-                    else
-                    {
-                        MessageBox.Show("Unknown file extension.");
-                    }
-
-                    if (proj != null)
-                    {
-                        _Editor.Project = proj;
-                    }
-
-                    SetupToolbarEnabled();
-
-                    openFileDialog1.FileName = "";
+                    OpenFile(openFileDialog1.FileName);
                 }
             }
+        }
+
+        private void OpenFile(string file)
+        {
+            _RecentFileList.AddToRecentList(file);
+
+            Pat.Project proj = null;
+            if (System.IO.Path.GetExtension(file) == ".pat")
+            {
+                proj = ProjectGenerater.Generate(file);
+            }
+            else if (System.IO.Path.GetExtension(file) == ".patproj")
+            {
+                proj = ProjectSerializer.OpenProject(file);
+            }
+            else
+            {
+                MessageBox.Show("Unknown file extension.");
+            }
+
+            if (proj != null)
+            {
+                _Editor.Project = proj;
+            }
+
+            SetupToolbarEnabled();
+
+            openFileDialog1.FileName = "";
         }
 
         private void toolStripButtonSave_Click(object sender, EventArgs e)
@@ -659,9 +670,15 @@ namespace GS_PatEditor.Editor
         {
             if (!_Editor.Project.IsEmptyProject && _Editor.Project.Exporter != null)
             {
+                if (_Editor.Project.LastExportDirectory != null &&
+                    Directory.Exists(_Editor.Project.LastExportDirectory))
+                {
+                    saveFileDialogExport.InitialDirectory = _Editor.Project.LastExportDirectory;
+                }
                 if (saveFileDialogExport.ShowDialog() == DialogResult.OK)
                 {
                     var file = saveFileDialogExport.FileName;
+                    _Editor.Project.LastExportDirectory = Path.GetDirectoryName(file);
 
                     var proj = _Editor.Project;
                     proj.Exporter.InitExporter(proj, file);

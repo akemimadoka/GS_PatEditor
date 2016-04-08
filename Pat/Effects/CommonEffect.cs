@@ -366,4 +366,21 @@ namespace GS_PatEditor.Pat.Effects
         [Browsable(false)]
         public EditableEnvironment Environment { get; set; }
     }
+
+    [Serializable]
+    public class SetPriorityEffect : Effect
+    {
+        [XmlElement]
+        public int Value { get; set; }
+
+        public override void Run(Simulation.Actor actor)
+        {
+            //not supported
+        }
+
+        public override ILineObject Generate(GenerationEnvironment env)
+        {
+            return ThisExpr.Instance.MakeIndex("priority").Assign(new ConstNumberExpr(Value)).Statement();
+        }
+    }
 }
