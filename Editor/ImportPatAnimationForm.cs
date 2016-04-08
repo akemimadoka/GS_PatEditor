@@ -50,14 +50,20 @@ namespace GS_PatEditor.Editor
 
             if (!File.Exists(palFile))
             {
-                MessageBox.Show("Palette file not found. Please choose one.", "Animation Import",
-                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                if (openFileDialog2.ShowDialog() != System.Windows.Forms.DialogResult.OK)
+                if (MessageBox.Show("Palette file not found. Please choose one.", "Animation Import",
+                    MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation) == System.Windows.Forms.DialogResult.OK)
                 {
-                    CancelDialog();
-                    return;
+                    if (openFileDialog2.ShowDialog() != System.Windows.Forms.DialogResult.OK)
+                    {
+                        CancelDialog();
+                        return;
+                    }
+                    palFile = openFileDialog2.FileName;
                 }
-                palFile = openFileDialog2.FileName;
+                else
+                {
+                    palFile = null;
+                }
             }
 
             //create objects
@@ -66,7 +72,7 @@ namespace GS_PatEditor.Editor
             {
                 gspat = GSPat.GSPatReader.ReadFromStream(s);
             }
-            var pal = Images.CV2Palette.ReadPaletteFile(palFile);
+            var pal = palFile != null ? Images.CV2Palette.ReadPaletteFile(palFile) : null;
 
             //create image manager
             _Images = new GSPat.ImageManager(gspat, path, pal);

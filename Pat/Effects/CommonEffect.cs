@@ -29,6 +29,12 @@ namespace GS_PatEditor.Pat.Effects
         }
     }
 
+    public enum CreateBulletDirection
+    {
+        Same,
+        Opposite,
+    }
+
     [Serializable]
     public class CreateBulletEffect : Effect, IEditableEnvironment
     {
@@ -40,6 +46,9 @@ namespace GS_PatEditor.Pat.Effects
         [EditorChildNode("Position")]
         public PointProvider Position;
 
+        [XmlElement]
+        public CreateBulletDirection Direction { get; set; }
+
         public override void Run(Simulation.Actor actor)
         {
             var bullet = new Simulation.BulletActor(actor.World,
@@ -48,6 +57,8 @@ namespace GS_PatEditor.Pat.Effects
 
             bullet.X = point.X;
             bullet.Y = point.Y;
+            bullet.InversedDirection = Direction == CreateBulletDirection.Same ?
+                actor.InversedDirection : !actor.InversedDirection;
 
             var action = actor.Actions.GetActionByID(ActionName);
             if (action != null)
@@ -60,7 +71,12 @@ namespace GS_PatEditor.Pat.Effects
         public override ILineObject Generate(GenerationEnvironment env)
         {
             var funcName = env.GenerateActionAsActorInit(ActionName);
+            var dir = ThisExpr.Instance.MakeIndex("direction");
 
+            if (Direction == CreateBulletDirection.Opposite)
+            {
+                dir = new UnOpExpr(dir, UnOpExpr.Op.Sub);
+            }
             return new SimpleBlock(new ILineObject[] {
                 //create t
                 new SimpleLineObject("local t = this.DefaultShotTable();"),
@@ -70,7 +86,7 @@ namespace GS_PatEditor.Pat.Effects
                 ThisExpr.Instance.MakeIndex("world2d").MakeIndex("CreateActor").Call(
                     Position.GenerateX(env),
                     Position.GenerateY(env),
-                    ThisExpr.Instance.MakeIndex("direction"),
+                    dir,
                     ThisExpr.Instance.MakeIndex("u").MakeIndex("uu").MakeIndex(funcName),
                     new IdentifierExpr("t")
                 ).Statement(),
@@ -262,6 +278,9 @@ namespace GS_PatEditor.Pat.Effects
                 case ActorMemberType.sy:
                     actor.ScaleY = val;
                     break;
+                case ActorMemberType.alpha:
+                    actor.Alpha = val;
+                    break;
             }
         }
 
@@ -290,6 +309,9 @@ namespace GS_PatEditor.Pat.Effects
                     break;
                 case ActorMemberType.sy:
                     index = "sy";
+                    break;
+                case ActorMemberType.alpha:
+                    index = "alpha";
                     break;
             }
             if (index == null)

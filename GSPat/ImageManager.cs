@@ -41,7 +41,10 @@ namespace GS_PatEditor.GSPat
         {
             foreach (var bitmap in _LoadedBitmap.Values)
             {
-                bitmap.Dispose();
+                if (bitmap != null)
+                {
+                    bitmap.Dispose();
+                }
             }
             _LoadedBitmap.Clear();
         }
@@ -91,7 +94,16 @@ namespace GS_PatEditor.GSPat
             }
             finally
             {
-                img.Dispose();
+                if (img != null)
+                {
+                    try
+                    {
+                        img.Dispose();
+                    }
+                    catch
+                    {
+                    }
+                }
             }
             if (frame.ImageManipulation != null && frame.ImageManipulation.AlphaBlend != 0)
             {

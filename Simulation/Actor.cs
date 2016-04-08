@@ -46,6 +46,8 @@ namespace GS_PatEditor.Simulation
         public int Priority;
         public float ScaleX, ScaleY;
         public float Rotation;
+        public float Alpha; //TODO support alpha in simulation
+        public bool InversedDirection;
 
         //position
         public float DefaultGravity;
@@ -103,6 +105,7 @@ namespace GS_PatEditor.Simulation
 
             this.ScaleX = 1;
             this.ScaleY = 1;
+            this.Alpha = 1.0f;
 
             this.ImmuneGravity = true;
 
@@ -152,18 +155,21 @@ namespace GS_PatEditor.Simulation
                 if (++CurrentFrameIndex == seg.Frames.Count)
                 {
                     //CurrentFrameIndex = 0;
-                    //make a flag on CurrentFrameIndex
-                    CurrentFrameIndex = -1;
+                    //make a flag on CurrentFrameCounter
+                    CurrentFrameCounter = -1;
 
                     //next segment or loop
 
                     //anyway, first trigget key callback
                     if (EndKeyFrameLabel != null && CurrentSegmentIndex < EndKeyFrameLabel.Length)
                     {
+                        //restore CurrentFrameIndex
+                        --CurrentFrameIndex;
                         EndKeyFrameLabel[CurrentSegmentIndex](this);
+                        ++CurrentFrameIndex;
                     }
 
-                    if (CurrentFrameIndex == -1)
+                    if (CurrentFrameCounter == -1)
                     {
                         //SetMotion not called in EndKeyFrameLabel
                         CurrentFrameIndex = 0;
@@ -180,6 +186,7 @@ namespace GS_PatEditor.Simulation
                             World.OnFinished();
                         }
                     }
+                    CurrentFrameCounter = 0;
                 }
             }
         }

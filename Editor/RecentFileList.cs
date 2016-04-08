@@ -12,6 +12,7 @@ namespace GS_PatEditor.Editor
     class RecentFileList
     {
         private ToolStripSplitButton _Button;
+        public bool ShouldSaveSettings = false;
 
         public event Action<string> OpenFile;
 
@@ -30,7 +31,10 @@ namespace GS_PatEditor.Editor
         private void SaveList(StringCollection coll)
         {
             Settings.Default.RecentFiles = coll;
-            Settings.Default.Save();
+            if (ShouldSaveSettings)
+            {
+                Settings.Default.Save();
+            }
         }
 
         public RecentFileList(ToolStripSplitButton button)
@@ -45,7 +49,7 @@ namespace GS_PatEditor.Editor
             foreach (var item in GetList())
             {
                 var menu = new ToolStripMenuItem(item);
-                menu.Click += delegate(object ssender, EventArgs ee)
+                menu.Click += delegate(object ss, EventArgs ee)
                 {
                     if (OpenFile != null)
                     {
@@ -54,6 +58,18 @@ namespace GS_PatEditor.Editor
                 };
                 _Button.DropDownItems.Add(menu);
             }
+            if (_Button.DropDownItems.Count != 0)
+            {
+                _Button.DropDownItems.Add(new ToolStripSeparator());
+            }
+            var s = new ToolStripMenuItem("Save Recent List");
+            s.Checked = ShouldSaveSettings;
+            s.Click += delegate(object ss, EventArgs ee)
+            {
+                s.Checked = !s.Checked;
+                ShouldSaveSettings = s.Checked;
+            };
+            _Button.DropDownItems.Add(s);
         }
 
         public void AddToRecentList(string file)

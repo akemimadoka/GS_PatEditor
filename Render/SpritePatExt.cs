@@ -25,10 +25,12 @@ namespace GS_PatEditor.Render
                 return;
             }
 
+            var dirScale = actor.InversedDirection ? -1.0f : 1.0f;
+
             sprite.Setup(txt,
                 OriginX: frame.OriginX + editing.OffsetX + 0.5f,
                 OriginY: frame.OriginY + editing.OffsetY + 0.5f,
-                ScaleX: frame.ScaleX / 100.0f * actor.ScaleX,
+                ScaleX: frame.ScaleX / 100.0f * actor.ScaleX * dirScale,
                 ScaleY: frame.ScaleY / 100.0f * actor.ScaleY);
             sprite.SetupPosition(actor.X, actor.Y, frame.Rotation / 180.0f * 3.1415926f + actor.Rotation);
         }

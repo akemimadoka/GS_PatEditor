@@ -4,6 +4,7 @@
     <ProjectName>homura</ProjectName>
     <Directories>
       <Directory Name="images" Usage="Image" />
+      <Directory Name="system_images" Usage="Image" />
     </Directories>
     <Palettes>
       <Palette>palette000.pal</Palette>
@@ -382,6 +383,162 @@
       <Resource>Homura_minimi0011.cv2</Resource>
       <W>106</W>
       <H>106</H>
+    </FrameImage>
+    <FrameImage ImageID="effect_kemuriA_00000">
+      <Resource>effect_kemuriA_00000.dds</Resource>
+      <AlphaBlendMode>true</AlphaBlendMode>
+      <W>64</W>
+      <H>96</H>
+    </FrameImage>
+    <FrameImage ImageID="effect_kemuriA_00001">
+      <Resource>effect_kemuriA_00001.dds</Resource>
+      <AlphaBlendMode>true</AlphaBlendMode>
+      <W>128</W>
+      <H>128</H>
+    </FrameImage>
+    <FrameImage ImageID="effect_kemuriA_00002">
+      <Resource>effect_kemuriA_00002.dds</Resource>
+      <AlphaBlendMode>true</AlphaBlendMode>
+      <W>160</W>
+      <H>160</H>
+    </FrameImage>
+    <FrameImage ImageID="effect_kemuriA_00003">
+      <Resource>effect_kemuriA_00003.dds</Resource>
+      <AlphaBlendMode>true</AlphaBlendMode>
+      <W>160</W>
+      <H>128</H>
+    </FrameImage>
+    <FrameImage ImageID="effect_kemuriA_00004">
+      <Resource>effect_kemuriA_00004.dds</Resource>
+      <AlphaBlendMode>true</AlphaBlendMode>
+      <W>160</W>
+      <H>160</H>
+    </FrameImage>
+    <FrameImage ImageID="effect_kemuriA_00005">
+      <Resource>effect_kemuriA_00005.dds</Resource>
+      <AlphaBlendMode>true</AlphaBlendMode>
+      <W>160</W>
+      <H>160</H>
+    </FrameImage>
+    <FrameImage ImageID="effect_kemuriA_00006">
+      <Resource>effect_kemuriA_00006.dds</Resource>
+      <AlphaBlendMode>true</AlphaBlendMode>
+      <W>160</W>
+      <H>160</H>
+    </FrameImage>
+    <FrameImage ImageID="effect_kemuriA_00007">
+      <Resource>effect_kemuriA_00007.dds</Resource>
+      <AlphaBlendMode>true</AlphaBlendMode>
+      <W>160</W>
+      <H>128</H>
+    </FrameImage>
+    <FrameImage ImageID="Homura_RPG0001">
+      <Resource>Homura_RPG0001.cv2</Resource>
+      <W>128</W>
+      <H>128</H>
+    </FrameImage>
+    <FrameImage ImageID="Homura_RPG0002">
+      <Resource>Homura_RPG0002.cv2</Resource>
+      <W>115</W>
+      <H>113</H>
+    </FrameImage>
+    <FrameImage ImageID="Homura_RPG0003">
+      <Resource>Homura_RPG0003.cv2</Resource>
+      <W>115</W>
+      <H>113</H>
+    </FrameImage>
+    <FrameImage ImageID="Homura_RPG0004">
+      <Resource>Homura_RPG0004.cv2</Resource>
+      <W>115</W>
+      <H>113</H>
+    </FrameImage>
+    <FrameImage ImageID="Homura_RPG0005">
+      <Resource>Homura_RPG0005.cv2</Resource>
+      <W>115</W>
+      <H>113</H>
+    </FrameImage>
+    <FrameImage ImageID="Homura_RPG0006">
+      <Resource>Homura_RPG0006.cv2</Resource>
+      <W>115</W>
+      <H>113</H>
+    </FrameImage>
+    <FrameImage ImageID="Homura_RPG0007">
+      <Resource>Homura_RPG0007.cv2</Resource>
+      <W>115</W>
+      <H>113</H>
+    </FrameImage>
+    <FrameImage ImageID="Homura_RPG0008">
+      <Resource>Homura_RPG0008.cv2</Resource>
+      <W>115</W>
+      <H>113</H>
+    </FrameImage>
+    <FrameImage ImageID="Homura_RPG0009">
+      <Resource>Homura_RPG0009.cv2</Resource>
+      <W>115</W>
+      <H>113</H>
+    </FrameImage>
+    <FrameImage ImageID="Homura_RPG0010">
+      <Resource>Homura_RPG0010.cv2</Resource>
+      <W>115</W>
+      <H>113</H>
+    </FrameImage>
+    <FrameImage ImageID="Homura_RPG0011">
+      <Resource>Homura_RPG0011.cv2</Resource>
+      <W>115</W>
+      <H>113</H>
+    </FrameImage>
+    <FrameImage ImageID="Homura_RPG0012">
+      <Resource>Homura_RPG0012.cv2</Resource>
+      <W>115</W>
+      <H>113</H>
+    </FrameImage>
+    <FrameImage ImageID="effect_kemuriC_00000">
+      <Resource>effect_kemuriC_00000.dds</Resource>
+      <AlphaBlendMode>true</AlphaBlendMode>
+      <W>96</W>
+      <H>96</H>
+    </FrameImage>
+    <FrameImage ImageID="effect_kemuriC_00001">
+      <Resource>effect_kemuriC_00001.dds</Resource>
+      <AlphaBlendMode>true</AlphaBlendMode>
+      <W>128</W>
+      <H>96</H>
+    </FrameImage>
+    <FrameImage ImageID="effect_kemuriC_00002">
+      <Resource>effect_kemuriC_00002.dds</Resource>
+      <AlphaBlendMode>true</AlphaBlendMode>
+      <W>160</W>
+      <H>96</H>
+    </FrameImage>
+    <FrameImage ImageID="effect_kemuriC_00003">
+      <Resource>effect_kemuriC_00003.dds</Resource>
+      <AlphaBlendMode>true</AlphaBlendMode>
+      <W>160</W>
+      <H>96</H>
+    </FrameImage>
+    <FrameImage ImageID="effect_kemuriC_00004">
+      <Resource>effect_kemuriC_00004.dds</Resource>
+      <AlphaBlendMode>true</AlphaBlendMode>
+      <W>128</W>
+      <H>128</H>
+    </FrameImage>
+    <FrameImage ImageID="effect_kemuriC_00005">
+      <Resource>effect_kemuriC_00005.dds</Resource>
+      <AlphaBlendMode>true</AlphaBlendMode>
+      <W>128</W>
+      <H>128</H>
+    </FrameImage>
+    <FrameImage ImageID="effect_kemuriC_00006">
+      <Resource>effect_kemuriC_00006.dds</Resource>
+      <AlphaBlendMode>true</AlphaBlendMode>
+      <W>160</W>
+      <H>128</H>
+    </FrameImage>
+    <FrameImage ImageID="effect_kemuriC_00007">
+      <Resource>effect_kemuriC_00007.dds</Resource>
+      <AlphaBlendMode>true</AlphaBlendMode>
+      <W>160</W>
+      <H>128</H>
     </FrameImage>
   </Images>
   <Actions>
@@ -1282,14 +1439,17 @@
             <Effect xsi:type="CreateBulletEffect">
               <Position xsi:type="FrameSinglePointProvider" Index="0" />
               <ActionName>assult_rifle</ActionName>
+              <Direction>Same</Direction>
             </Effect>
             <Effect xsi:type="CreateBulletEffect">
               <Position xsi:type="FrameSinglePointProvider" Index="1" />
               <ActionName>drop_shell</ActionName>
+              <Direction>Same</Direction>
             </Effect>
             <Effect xsi:type="CreateBulletEffect">
               <Position xsi:type="FrameSinglePointProvider" Index="0" />
               <ActionName>attack_long_bullet</ActionName>
+              <Direction>Same</Direction>
             </Effect>
             <Effect xsi:type="FilteredEffect">
               <Filter xsi:type="ValueCompareFilter">
@@ -2535,14 +2695,17 @@
             <Effect xsi:type="CreateBulletEffect">
               <Position xsi:type="FrameSinglePointProvider" Index="0" />
               <ActionName>assult_rifle</ActionName>
+              <Direction>Same</Direction>
             </Effect>
             <Effect xsi:type="CreateBulletEffect">
               <Position xsi:type="FrameSinglePointProvider" Index="1" />
               <ActionName>drop_shell</ActionName>
+              <Direction>Same</Direction>
             </Effect>
             <Effect xsi:type="CreateBulletEffect">
               <Position xsi:type="FrameSinglePointProvider" Index="0" />
               <ActionName>attack_long_air_bullet</ActionName>
+              <Direction>Same</Direction>
             </Effect>
           </Effect>
         </Effect>
@@ -2633,6 +2796,511 @@
       </UpdateEffects>
       <KeyFrameEffects />
     </Action>
+    <Action ActionID="system_smoke_0" ImageID="effect_kemuriA_00000">
+      <Segments>
+        <AnimationSegment CancelLevel="Free" IsLoop="false">
+          <Frame>
+            <ImageID>effect_kemuriA_00000</ImageID>
+            <OriginX>8</OriginX>
+            <OriginY>93</OriginY>
+            <Duration>2</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <HitBoxes />
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>effect_kemuriA_00001</ImageID>
+            <OriginX>40</OriginX>
+            <OriginY>93</OriginY>
+            <Duration>2</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <HitBoxes />
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>effect_kemuriA_00002</ImageID>
+            <OriginX>40</OriginX>
+            <OriginY>127</OriginY>
+            <Duration>2</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <HitBoxes />
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>effect_kemuriA_00003</ImageID>
+            <OriginX>40</OriginX>
+            <OriginY>127</OriginY>
+            <Duration>2</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <HitBoxes />
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>effect_kemuriA_00004</ImageID>
+            <OriginX>40</OriginX>
+            <OriginY>159</OriginY>
+            <Duration>2</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <HitBoxes />
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>effect_kemuriA_00005</ImageID>
+            <OriginX>40</OriginX>
+            <OriginY>159</OriginY>
+            <Duration>2</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <HitBoxes />
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>effect_kemuriA_00006</ImageID>
+            <OriginX>40</OriginX>
+            <OriginY>159</OriginY>
+            <Duration>2</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <HitBoxes />
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>effect_kemuriA_00007</ImageID>
+            <OriginX>40</OriginX>
+            <OriginY>159</OriginY>
+            <Duration>2</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <HitBoxes />
+            <AttackBoxes />
+          </Frame>
+        </AnimationSegment>
+      </Segments>
+      <InitEffects>
+        <Effect xsi:type="BulletInitEffect" />
+        <Effect xsi:type="SetMotionEffect" Animation="system_smoke_3" Segment="0" />
+        <Effect xsi:type="SetPriorityEffect">
+          <Value>300</Value>
+        </Effect>
+        <Effect xsi:type="FilteredEffect">
+          <Filter xsi:type="ValueCompareFilter">
+            <Left xsi:type="ActorMemberValue" Type="x" />
+            <Right xsi:type="ConstValue" Value="0.08" />
+            <Operator>Greater</Operator>
+          </Filter>
+          <Effect xsi:type="TestEffect" />
+        </Effect>
+      </InitEffects>
+      <UpdateEffects />
+      <KeyFrameEffects />
+    </Action>
+    <Action ActionID="attack_front" ImageID="Homura_minimiB0000">
+      <Segments>
+        <AnimationSegment CancelLevel="Heavy" IsLoop="false">
+          <Frame>
+            <ImageID>Homura_minimiB0000</ImageID>
+            <OriginX>54</OriginX>
+            <OriginY>100</OriginY>
+            <Duration>3</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-94" W="44" H="94" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>Homura_RPG0001</ImageID>
+            <OriginX>59</OriginX>
+            <OriginY>109</OriginY>
+            <Duration>3</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-94" W="44" H="94" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>Homura_RPG0002</ImageID>
+            <OriginX>59</OriginX>
+            <OriginY>109</OriginY>
+            <Duration>3</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-94" W="44" H="94" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>Homura_RPG0003</ImageID>
+            <OriginX>59</OriginX>
+            <OriginY>109</OriginY>
+            <Duration>3</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-94" W="44" H="94" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>Homura_RPG0004</ImageID>
+            <OriginX>59</OriginX>
+            <OriginY>109</OriginY>
+            <Duration>3</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-94" W="44" H="94" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>Homura_RPG0005</ImageID>
+            <OriginX>59</OriginX>
+            <OriginY>109</OriginY>
+            <Duration>5</Duration>
+            <Points>
+              <FramePoint X="54" Y="-73" />
+              <FramePoint X="-46" Y="-71" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-94" W="44" H="94" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+        </AnimationSegment>
+        <AnimationSegment CancelLevel="Heavy" IsLoop="false" JumpCancellable="0" SkillCancellable="3">
+          <Frame>
+            <ImageID>Homura_RPG0006</ImageID>
+            <OriginX>59</OriginX>
+            <OriginY>109</OriginY>
+            <Duration>3</Duration>
+            <Points>
+              <FramePoint X="54" Y="-73" />
+              <FramePoint X="-46" Y="-71" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-94" W="44" H="94" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>Homura_RPG0007</ImageID>
+            <OriginX>59</OriginX>
+            <OriginY>109</OriginY>
+            <Duration>10</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-94" W="44" H="94" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>Homura_RPG0008</ImageID>
+            <OriginX>59</OriginX>
+            <OriginY>109</OriginY>
+            <Duration>5</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-94" W="44" H="94" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>Homura_RPG0009</ImageID>
+            <OriginX>59</OriginX>
+            <OriginY>109</OriginY>
+            <Duration>5</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-94" W="44" H="94" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>Homura_RPG0010</ImageID>
+            <OriginX>59</OriginX>
+            <OriginY>109</OriginY>
+            <Duration>5</Duration>
+            <Points>
+              <FramePoint X="-15" Y="-64" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-94" W="44" H="94" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+        </AnimationSegment>
+        <AnimationSegment CancelLevel="Heavy" IsLoop="false" JumpCancellable="0" SkillCancellable="0">
+          <Frame>
+            <ImageID>Homura_RPG0011</ImageID>
+            <OriginX>59</OriginX>
+            <OriginY>109</OriginY>
+            <Duration>10</Duration>
+            <Points>
+              <FramePoint X="-15" Y="-64" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-94" W="44" H="94" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>Homura_RPG0012</ImageID>
+            <OriginX>59</OriginX>
+            <OriginY>109</OriginY>
+            <Duration>5</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-94" W="44" H="94" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+        </AnimationSegment>
+      </Segments>
+      <InitEffects>
+        <Effect xsi:type="PlayerSkillInitEffect" IsInAir="false" AutoCancel="true" />
+        <Effect xsi:type="SetActorMemberEffect" Type="vx">
+          <Value xsi:type="BinaryExpressionValue" Operator="Multiply">
+            <Left xsi:type="ActorMemberValue" Type="vx" />
+            <Right xsi:type="ConstValue" Value="0.25" />
+          </Value>
+        </Effect>
+      </InitEffects>
+      <UpdateEffects>
+        <Effect xsi:type="PlayerSkillStopMovingEffect">
+          <ReduceSpeed>0.2</ReduceSpeed>
+        </Effect>
+      </UpdateEffects>
+      <KeyFrameEffects>
+        <ArrayOfEffect>
+          <Effect xsi:type="CreateBulletEffect">
+            <Position xsi:type="FrameSinglePointProvider" Index="1" />
+            <ActionName>system_smoke_3</ActionName>
+            <Direction>Opposite</Direction>
+          </Effect>
+          <Effect xsi:type="FilteredEffect">
+            <Filter xsi:type="ValueCompareFilter">
+              <Left xsi:type="ActorMemberValue" Type="vx" />
+              <Right xsi:type="ConstValue" Value="-3" />
+              <Operator>GreaterOrEqual</Operator>
+            </Filter>
+            <Effect xsi:type="SetActorMemberEffect" Type="vx">
+              <Value xsi:type="BinaryExpressionValue" Operator="Add">
+                <Left xsi:type="ActorMemberValue" Type="vx" />
+                <Right xsi:type="ConstValue" Value="-3" />
+              </Value>
+            </Effect>
+          </Effect>
+        </ArrayOfEffect>
+        <ArrayOfEffect />
+        <ArrayOfEffect>
+          <Effect xsi:type="PlayerEndToFreeMoveEffect" />
+        </ArrayOfEffect>
+      </KeyFrameEffects>
+    </Action>
+    <Action ActionID="system_smoke_3" ImageID="effect_kemuriC_00000">
+      <Segments>
+        <AnimationSegment CancelLevel="Free" IsLoop="false">
+          <Frame>
+            <ImageID>effect_kemuriC_00000</ImageID>
+            <OriginX>9</OriginX>
+            <OriginY>64</OriginY>
+            <Duration>2</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <HitBoxes />
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>effect_kemuriC_00001</ImageID>
+            <OriginX>9</OriginX>
+            <OriginY>64</OriginY>
+            <Duration>2</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <HitBoxes />
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>effect_kemuriC_00002</ImageID>
+            <OriginX>9</OriginX>
+            <OriginY>64</OriginY>
+            <Duration>2</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <HitBoxes />
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>effect_kemuriC_00003</ImageID>
+            <OriginX>9</OriginX>
+            <OriginY>64</OriginY>
+            <Duration>2</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <HitBoxes />
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>effect_kemuriC_00004</ImageID>
+            <OriginX>-22</OriginX>
+            <OriginY>96</OriginY>
+            <Duration>2</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <HitBoxes />
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>effect_kemuriC_00005</ImageID>
+            <OriginX>-22</OriginX>
+            <OriginY>96</OriginY>
+            <Duration>2</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <HitBoxes />
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>effect_kemuriC_00006</ImageID>
+            <OriginX>-22</OriginX>
+            <OriginY>96</OriginY>
+            <Duration>2</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <HitBoxes />
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>effect_kemuriC_00007</ImageID>
+            <OriginX>-22</OriginX>
+            <OriginY>96</OriginY>
+            <Duration>2</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <HitBoxes />
+            <AttackBoxes />
+          </Frame>
+        </AnimationSegment>
+      </Segments>
+      <InitEffects>
+        <Effect xsi:type="BulletInitEffect" />
+        <Effect xsi:type="SetMotionEffect" Animation="system_smoke_3" Segment="0" />
+      </InitEffects>
+      <UpdateEffects />
+      <KeyFrameEffects>
+        <ArrayOfEffect>
+          <Effect xsi:type="ReleaseActorEffect" />
+        </ArrayOfEffect>
+      </KeyFrameEffects>
+    </Action>
   </Actions>
   <Exporter xsi:type="PlayerExporter">
     <Animations>
@@ -2650,6 +3318,7 @@
       <Skill xsi:type="NormalSkill" Key="KeyC" CancelLevel="Magic" MagicUse="50" ActionID="magic" />
       <Skill xsi:type="NormalSkill" Key="KeyC" AirState="AirOnly" CancelLevel="Magic" MagicUse="50" ActionID="magic_air" />
       <Skill xsi:type="NormalSkill" Key="KeyB" X="Empty" Y="Empty" AirState="AirOnly" CancelLevel="Long" ActionID="attack_long_air" />
+      <Skill xsi:type="NormalSkill" Key="KeyB" X="Front" Y="Empty" CancelLevel="Heavy" ActionID="attack_front" />
     </Skills>
     <BaseIndex>0</BaseIndex>
     <PlayerName>Homura</PlayerName>
