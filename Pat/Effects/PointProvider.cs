@@ -15,6 +15,15 @@ namespace GS_PatEditor.Pat.Effects
         [XmlAttribute]
         public int Index { get; set; }
 
+        [XmlAttribute]
+        public bool AdjustSpeed { get; set; }
+        public bool ShouldSerializeAdjustSpeed() { return !AdjustSpeed; }
+
+        public FrameSinglePointProvider()
+        {
+            AdjustSpeed = true;
+        }
+
         public override FramePoint GetPointForActor(Simulation.Actor actor)
         {
             if (Index < 0 || Index >= actor.CurrentFrame.Points.Count)
@@ -31,8 +40,8 @@ namespace GS_PatEditor.Pat.Effects
 
             return new FramePoint
             {
-                X = (int)(actor.X + actor.VX + scaleX * p.X),
-                Y = (int)(actor.Y + actor.VY + scaleY * p.Y),
+                X = (int)(actor.X + (AdjustSpeed ? actor.VX : 0) + scaleX * p.X),
+                Y = (int)(actor.Y + (AdjustSpeed ? actor.VY : 0) + scaleY * p.Y),
             };
         }
 
@@ -41,14 +50,14 @@ namespace GS_PatEditor.Pat.Effects
 
         public override Expression GenerateX(Expression actor, GenerationEnvironment env)
         {
-            return new BiOpExpr(actor.MakeIndex(pointXNames[Index]),
-                actor.MakeIndex("vx"), BiOpExpr.Op.Add);
+            var px = actor.MakeIndex(pointXNames[Index]);
+            return AdjustSpeed ? new BiOpExpr(px, actor.MakeIndex("vx"), BiOpExpr.Op.Add) : px;
         }
 
         public override Expression GenerateY(Expression actor, GenerationEnvironment env)
         {
-            return new BiOpExpr(actor.MakeIndex(pointYNames[Index]),
-                actor.MakeIndex("vy"), BiOpExpr.Op.Add);
+            var py = actor.MakeIndex(pointYNames[Index]);
+            return AdjustSpeed ? new BiOpExpr(py, actor.MakeIndex("vy"), BiOpExpr.Op.Add) : py;
         }
     }
 }

@@ -87,6 +87,82 @@ namespace GS_PatEditor.Pat.Effects
     }
 
     [Serializable]
+    public class BulletIncreaseSpeedEffect : Effect
+    {
+        [XmlAttribute]
+        public float Value { get; set; }
+
+        public override void Run(Simulation.Actor actor)
+        {
+            actor.VX += Value * (float)Math.Cos(actor.Rotation);
+            actor.VY += Value * (float)Math.Sin(actor.Rotation);
+        }
+
+        public override ILineObject Generate(GenerationEnvironment env)
+        {
+            var vx = ThisExpr.Instance.MakeIndex("vx");
+            var vy = ThisExpr.Instance.MakeIndex("vy");
+            var val = new ConstNumberExpr(Value);
+            var rz = ThisExpr.Instance.MakeIndex("rz");
+            var vxd = new BiOpExpr(val, ThisExpr.Instance.MakeIndex("cos").Call(rz), BiOpExpr.Op.Multiply);
+            var vyd = new BiOpExpr(val, ThisExpr.Instance.MakeIndex("sin").Call(rz), BiOpExpr.Op.Multiply);
+            vxd = new BiOpExpr(vxd, ThisExpr.Instance.MakeIndex("direction"), BiOpExpr.Op.Multiply);
+
+            return new SimpleBlock(new ILineObject[] {
+                vx.Assign(new BiOpExpr(vx, vxd, BiOpExpr.Op.Add)).Statement(),
+                vy.Assign(new BiOpExpr(vy, vyd, BiOpExpr.Op.Add)).Statement(),
+            }).Statement();
+        }
+    }
+
+    [Serializable]
+    public class BulletRotationFromSpeedEffect : Effect
+    {
+        public override void Run(Simulation.Actor actor)
+        {
+            actor.Rotation = (float)Math.Atan2(actor.VY, actor.VX);
+        }
+
+        public override ILineObject Generate(GenerationEnvironment env)
+        {
+            return new SimpleLineObject("this.rz = this.atan2(this.vy, this.vx * this.direction);");
+        }
+    }
+
+    [Serializable]
+    public class BulletReduceAlphaEffect : Effect
+    {
+        [XmlAttribute]
+        public float Value { get; set; }
+
+        public override void Run(Simulation.Actor actor)
+        {
+            if (actor.Alpha < Value)
+            {
+                actor.Release();
+            }
+            else
+            {
+                actor.Alpha -= Value;
+            }
+        }
+
+        public override ILineObject Generate(GenerationEnvironment env)
+        {
+            var val = new ConstNumberExpr(Value);
+            var alpha = ThisExpr.Instance.MakeIndex("alpha");
+            return new SimpleBlock(new ILineObject[] {
+                new ControlBlock(ControlBlockType.If, new BiOpExpr(alpha, val, BiOpExpr.Op.Greater), new ILineObject[] {
+                    alpha.Assign(new BiOpExpr(alpha, val, BiOpExpr.Op.Minus)).Statement(),
+                }).Statement(),
+                new ControlBlock(ControlBlockType.Else, new ILineObject[] {
+                    ThisExpr.Instance.MakeIndex("Release").Call().Statement(),
+                }).Statement(),
+            }).Statement();
+        }
+    }
+
+    [Serializable]
     public class BulletFollowingOwnerInitEffect : Effect
     {
         [XmlAttribute]
@@ -126,10 +202,13 @@ namespace GS_PatEditor.Pat.Effects
         [EditorChildNode("Position")]
         public PointProvider Position;
 
+        [XmlAttribute]
+        public bool IgnoreRotation { get; set; }
+
         public override void Run(Simulation.Actor actor)
         {
             var owner = actor.Owner;
-            if (owner != null)
+            if (owner != null && !owner.IsReleased)
             {
                 if (CheckInstance != null && CheckInstance.Length != 0)
                 {
@@ -143,6 +222,15 @@ namespace GS_PatEditor.Pat.Effects
 
                 actor.X = owner.X + owner.VX;
                 actor.Y = owner.Y + owner.VY;
+
+                if (!IgnoreRotation)
+                {
+                    actor.Rotation = owner.Rotation;
+                }
+            }
+            else
+            {
+                actor.Release();
             }
         }
 
@@ -162,11 +250,13 @@ namespace GS_PatEditor.Pat.Effects
             var x = Position.GenerateX(ownerActor, env);
             var y = Position.GenerateY(ownerActor, env);
 
+            var setRotation = ThisExpr.Instance.MakeIndex("rz").Assign(ownerActor.MakeIndex("rz")).Statement();
             ret.AddRange(new ILineObject[] {
                 new LocalVarStatement("ownerActor", ActorVariableHelper.GenerateGet("SYS_parent").MakeIndex("wr")),
                 new ControlBlock(ControlBlockType.If, "ownerActor != null", new ILineObject[] {
                     ThisExpr.Instance.MakeIndex("x").Assign(x).Statement(),
                     ThisExpr.Instance.MakeIndex("y").Assign(y).Statement(),
+                    IgnoreRotation ? new SimpleLineObject("") : setRotation,
                 }).Statement(),
                 new ControlBlock(ControlBlockType.Else, new ILineObject[] {
                     ThisExpr.Instance.MakeIndex("Release").Call().Statement(),

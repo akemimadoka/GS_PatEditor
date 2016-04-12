@@ -569,6 +569,51 @@
       <W>128</W>
       <H>64</H>
     </FrameImage>
+    <FrameImage ImageID="kemuri_A_00000">
+      <Resource>kemuri_A_00000.dds</Resource>
+      <W>128</W>
+      <H>128</H>
+    </FrameImage>
+    <FrameImage ImageID="kemuri_A_00001">
+      <Resource>kemuri_A_00001.dds</Resource>
+      <W>128</W>
+      <H>128</H>
+    </FrameImage>
+    <FrameImage ImageID="kemuri_A_00002">
+      <Resource>kemuri_A_00002.dds</Resource>
+      <W>128</W>
+      <H>128</H>
+    </FrameImage>
+    <FrameImage ImageID="kemuri_A_00003">
+      <Resource>kemuri_A_00003.dds</Resource>
+      <W>128</W>
+      <H>128</H>
+    </FrameImage>
+    <FrameImage ImageID="kemuri_A_00004">
+      <Resource>kemuri_A_00004.dds</Resource>
+      <W>128</W>
+      <H>128</H>
+    </FrameImage>
+    <FrameImage ImageID="kemuri_A_00005">
+      <Resource>kemuri_A_00005.dds</Resource>
+      <W>128</W>
+      <H>128</H>
+    </FrameImage>
+    <FrameImage ImageID="kemuri_A_00006">
+      <Resource>kemuri_A_00006.dds</Resource>
+      <W>128</W>
+      <H>128</H>
+    </FrameImage>
+    <FrameImage ImageID="kemuri_A_00007">
+      <Resource>kemuri_A_00007.dds</Resource>
+      <W>128</W>
+      <H>128</H>
+    </FrameImage>
+    <FrameImage ImageID="kemuri_A_00008">
+      <Resource>kemuri_A_00008.dds</Resource>
+      <W>128</W>
+      <H>128</H>
+    </FrameImage>
   </Images>
   <Actions>
     <Action ActionID="stand" ImageID="Homura_stand0000">
@@ -3345,7 +3390,7 @@
             <Duration>2</Duration>
             <Points>
               <FramePoint X="0" Y="0" />
-              <FramePoint X="0" Y="0" />
+              <FramePoint X="-20" Y="0" />
               <FramePoint X="0" Y="0" />
             </Points>
             <PhysicalBox X="-15" Y="-6" W="59" H="12" />
@@ -3374,8 +3419,8 @@
         <Effect xsi:type="BulletInitEffect" />
         <Effect xsi:type="SetMotionEffect" Animation="rpg" Segment="0" />
         <Effect xsi:type="BulletSetSpeedEffect">
-          <Speed xsi:type="ConstValue" Value="0.3" />
-          <Rotation xsi:type="ConstValue" Value="0" />
+          <Speed xsi:type="ConstValue" Value="3" />
+          <Rotation xsi:type="ConstValue" Value="-0.15" />
         </Effect>
         <Effect xsi:type="CreateBulletEffect">
           <Position xsi:type="FrameSinglePointProvider" Index="0" />
@@ -3383,14 +3428,43 @@
           <Direction>Same</Direction>
         </Effect>
         <Effect xsi:type="InitCountEffect" />
+        <Effect xsi:type="SetLabelEffect" Label="Hit">
+          <Effect xsi:type="SimpleListEffect">
+            <Effect xsi:type="ReleaseActorEffect" />
+          </Effect>
+        </Effect>
       </InitEffects>
       <UpdateEffects>
+        <Effect xsi:type="TimeStopCheckEffect" />
         <Effect xsi:type="IncreaseCountEffect" />
         <Effect xsi:type="FilteredEffect">
           <Filter xsi:type="AnimationCountAfterFilter">
             <Count xsi:type="ConstValue" Value="180" />
           </Filter>
           <Effect xsi:type="ReleaseActorEffect" />
+        </Effect>
+        <Effect xsi:type="BulletIncreaseSpeedEffect" Value="0.75" />
+        <Effect xsi:type="FilteredEffect">
+          <Filter xsi:type="ValueCompareFilter">
+            <Left xsi:type="ActorMemberValue" Type="vx" />
+            <Right xsi:type="ConstValue" Value="30" />
+            <Operator>Greater</Operator>
+          </Filter>
+          <Effect xsi:type="SetActorMemberEffect" Type="vx">
+            <Value xsi:type="ConstValue" Value="30" />
+          </Effect>
+        </Effect>
+        <Effect xsi:type="SetActorMemberEffect" Type="vy">
+          <Value xsi:type="BinaryExpressionValue" Operator="Add">
+            <Left xsi:type="ActorMemberValue" Type="vy" />
+            <Right xsi:type="ConstValue" Value="0.05" />
+          </Value>
+        </Effect>
+        <Effect xsi:type="BulletRotationFromSpeedEffect" />
+        <Effect xsi:type="CreateBulletEffect">
+          <Position xsi:type="FrameSinglePointProvider" Index="1" AdjustSpeed="false" />
+          <ActionName>rpg_smoke</ActionName>
+          <Direction>Same</Direction>
         </Effect>
       </UpdateEffects>
       <KeyFrameEffects />
@@ -3458,11 +3532,212 @@
         <Effect xsi:type="BulletFollowingOwnerInitEffect" CheckInstance="" />
       </InitEffects>
       <UpdateEffects>
-        <Effect xsi:type="BulletFollowingOwnerUpdateEffect">
+        <Effect xsi:type="BulletFollowingOwnerUpdateEffect" IgnoreRotation="false">
           <Position xsi:type="FrameSinglePointProvider" Index="0" />
         </Effect>
+        <Effect xsi:type="TimeStopCheckEffect" />
       </UpdateEffects>
       <KeyFrameEffects />
+    </Action>
+    <Action ActionID="rpg_smoke" ImageID="kemuri_A_00000">
+      <Segments>
+        <AnimationSegment CancelLevel="Free" IsLoop="false">
+          <Frame>
+            <ImageID>kemuri_A_00000</ImageID>
+            <ScaleX>50</ScaleX>
+            <ScaleY>50</ScaleY>
+            <OriginX>64</OriginX>
+            <OriginY>64</OriginY>
+            <Duration>3</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <HitBoxes />
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>kemuri_A_00001</ImageID>
+            <ScaleX>50</ScaleX>
+            <ScaleY>50</ScaleY>
+            <OriginX>64</OriginX>
+            <OriginY>64</OriginY>
+            <Duration>3</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <HitBoxes />
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>kemuri_A_00002</ImageID>
+            <ScaleX>50</ScaleX>
+            <ScaleY>50</ScaleY>
+            <OriginX>64</OriginX>
+            <OriginY>64</OriginY>
+            <Duration>3</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <HitBoxes />
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>kemuri_A_00003</ImageID>
+            <ScaleX>50</ScaleX>
+            <ScaleY>50</ScaleY>
+            <OriginX>64</OriginX>
+            <OriginY>64</OriginY>
+            <Duration>3</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <HitBoxes />
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>kemuri_A_00004</ImageID>
+            <ScaleX>50</ScaleX>
+            <ScaleY>50</ScaleY>
+            <OriginX>64</OriginX>
+            <OriginY>64</OriginY>
+            <Duration>3</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <HitBoxes />
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>kemuri_A_00005</ImageID>
+            <ScaleX>50</ScaleX>
+            <ScaleY>50</ScaleY>
+            <OriginX>64</OriginX>
+            <OriginY>64</OriginY>
+            <Duration>3</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <HitBoxes />
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>kemuri_A_00006</ImageID>
+            <ScaleX>50</ScaleX>
+            <ScaleY>50</ScaleY>
+            <OriginX>64</OriginX>
+            <OriginY>64</OriginY>
+            <Duration>3</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <HitBoxes />
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>kemuri_A_00007</ImageID>
+            <ScaleX>50</ScaleX>
+            <ScaleY>50</ScaleY>
+            <OriginX>64</OriginX>
+            <OriginY>64</OriginY>
+            <Duration>3</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <HitBoxes />
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>kemuri_A_00008</ImageID>
+            <ScaleX>50</ScaleX>
+            <ScaleY>50</ScaleY>
+            <OriginX>64</OriginX>
+            <OriginY>64</OriginY>
+            <Duration>3</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <HitBoxes />
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>kemuri_A_00008</ImageID>
+            <ScaleX>50</ScaleX>
+            <ScaleY>50</ScaleY>
+            <OriginX>64</OriginX>
+            <OriginY>64</OriginY>
+            <Duration>3</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <HitBoxes />
+            <AttackBoxes />
+          </Frame>
+        </AnimationSegment>
+      </Segments>
+      <InitEffects>
+        <Effect xsi:type="BulletInitEffect" />
+        <Effect xsi:type="SetMotionEffect" Animation="rpg_smoke" Segment="0" />
+        <Effect xsi:type="BulletSetSpeedEffect">
+          <Speed xsi:type="RandomFloatValue" Max="5" Min="4" Step="0.01" />
+          <Rotation xsi:type="ConstValue" Value="0" />
+        </Effect>
+        <Effect xsi:type="SetActorMemberEffect" Type="rz">
+          <Value xsi:type="RandomFloatValue" Max="6.2832" Min="0" Step="0.001" />
+        </Effect>
+        <Effect xsi:type="SetPriorityEffect">
+          <Value>250</Value>
+        </Effect>
+      </InitEffects>
+      <UpdateEffects>
+        <Effect xsi:type="TimeStopCheckEffect" />
+        <Effect xsi:type="SetActorMemberEffect" Type="vx">
+          <Value xsi:type="BinaryExpressionValue" Operator="Multiply">
+            <Left xsi:type="ActorMemberValue" Type="vy" />
+            <Right xsi:type="ConstValue" Value="0.98" />
+          </Value>
+        </Effect>
+        <Effect xsi:type="SetActorMemberEffect" Type="vy">
+          <Value xsi:type="BinaryExpressionValue" Operator="Multiply">
+            <Left xsi:type="ActorMemberValue" Type="vy" />
+            <Right xsi:type="ConstValue" Value="0.98" />
+          </Value>
+        </Effect>
+        <Effect xsi:type="SetActorMemberEffect" Type="sx">
+          <Value xsi:type="BinaryExpressionValue" Operator="Add">
+            <Left xsi:type="ActorMemberValue" Type="sx" />
+            <Right xsi:type="ConstValue" Value="0.01" />
+          </Value>
+        </Effect>
+        <Effect xsi:type="SetActorMemberEffect" Type="sy">
+          <Value xsi:type="ActorMemberValue" Type="sx" />
+        </Effect>
+        <Effect xsi:type="BulletReduceAlphaEffect" Value="0.03" />
+      </UpdateEffects>
+      <KeyFrameEffects>
+        <ArrayOfEffect>
+          <Effect xsi:type="ReleaseActorEffect" />
+        </ArrayOfEffect>
+      </KeyFrameEffects>
     </Action>
   </Actions>
   <Exporter xsi:type="PlayerExporter">
