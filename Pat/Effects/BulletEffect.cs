@@ -168,6 +168,9 @@ namespace GS_PatEditor.Pat.Effects
                     ThisExpr.Instance.MakeIndex("x").Assign(x).Statement(),
                     ThisExpr.Instance.MakeIndex("y").Assign(y).Statement(),
                 }).Statement(),
+                new ControlBlock(ControlBlockType.Else, new ILineObject[] {
+                    ThisExpr.Instance.MakeIndex("Release").Call().Statement(),
+                }).Statement(),
             });
 
             return new SimpleBlock(ret).Statement();

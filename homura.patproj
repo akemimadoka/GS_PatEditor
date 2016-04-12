@@ -3374,7 +3374,7 @@
         <Effect xsi:type="BulletInitEffect" />
         <Effect xsi:type="SetMotionEffect" Animation="rpg" Segment="0" />
         <Effect xsi:type="BulletSetSpeedEffect">
-          <Speed xsi:type="ConstValue" Value="3" />
+          <Speed xsi:type="ConstValue" Value="0.3" />
           <Rotation xsi:type="ConstValue" Value="0" />
         </Effect>
         <Effect xsi:type="CreateBulletEffect">
@@ -3382,8 +3382,17 @@
           <ActionName>rpg_tail</ActionName>
           <Direction>Same</Direction>
         </Effect>
+        <Effect xsi:type="InitCountEffect" />
       </InitEffects>
-      <UpdateEffects />
+      <UpdateEffects>
+        <Effect xsi:type="IncreaseCountEffect" />
+        <Effect xsi:type="FilteredEffect">
+          <Filter xsi:type="AnimationCountAfterFilter">
+            <Count xsi:type="ConstValue" Value="180" />
+          </Filter>
+          <Effect xsi:type="ReleaseActorEffect" />
+        </Effect>
+      </UpdateEffects>
       <KeyFrameEffects />
     </Action>
     <Action ActionID="rpg_tail" ImageID="bazooka_fireA_00000">
