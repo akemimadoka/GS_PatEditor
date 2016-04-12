@@ -17,11 +17,9 @@ namespace GS_PatEditor.Simulation
 
     public enum ActorVariableType
     {
-        //Integer,
         Float,
-        //Label
         ActorLabel,
-        //ActorReference,
+        Actor,
     }
 
     public class ActorVariable
@@ -34,6 +32,10 @@ namespace GS_PatEditor.Simulation
     {
         //world
         public World World { get; private set; }
+
+        //owner
+        //null if it's main actor
+        public Actor Owner;
 
         public SystemAnimationProvider SystemAnimations { get; private set; }
         public AnimationProvider Animations { get; private set; }
@@ -183,7 +185,10 @@ namespace GS_PatEditor.Simulation
                         if (CurrentSegmentIndex == CurrentAction.Segments.Count)
                         {
                             //end of animation
-                            World.OnFinished();
+                            if (Owner == null)
+                            {
+                                World.OnFinished();
+                            }
                         }
                     }
                     CurrentFrameCounter = 0;

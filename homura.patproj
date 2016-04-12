@@ -540,6 +540,35 @@
       <W>160</W>
       <H>128</H>
     </FrameImage>
+    <FrameImage ImageID="bazooka_tama">
+      <Resource>bazooka_tama.cv2</Resource>
+      <W>64</W>
+      <H>42</H>
+    </FrameImage>
+    <FrameImage ImageID="bazooka_fireA_00000">
+      <Resource>bazooka_fireA_00000.dds</Resource>
+      <AlphaBlendMode>true</AlphaBlendMode>
+      <W>128</W>
+      <H>64</H>
+    </FrameImage>
+    <FrameImage ImageID="bazooka_fireA_00001">
+      <Resource>bazooka_fireA_00001.dds</Resource>
+      <AlphaBlendMode>true</AlphaBlendMode>
+      <W>128</W>
+      <H>64</H>
+    </FrameImage>
+    <FrameImage ImageID="bazooka_fireA_00002">
+      <Resource>bazooka_fireA_00002.dds</Resource>
+      <AlphaBlendMode>true</AlphaBlendMode>
+      <W>128</W>
+      <H>64</H>
+    </FrameImage>
+    <FrameImage ImageID="bazooka_fireA_00003">
+      <Resource>bazooka_fireA_00003.dds</Resource>
+      <AlphaBlendMode>true</AlphaBlendMode>
+      <W>128</W>
+      <H>64</H>
+    </FrameImage>
   </Images>
   <Actions>
     <Action ActionID="stand" ImageID="Homura_stand0000">
@@ -3174,6 +3203,11 @@
               </Value>
             </Effect>
           </Effect>
+          <Effect xsi:type="CreateBulletEffect">
+            <Position xsi:type="FrameSinglePointProvider" Index="0" />
+            <ActionName>rpg</ActionName>
+            <Direction>Same</Direction>
+          </Effect>
         </ArrayOfEffect>
         <ArrayOfEffect />
         <ArrayOfEffect>
@@ -3300,6 +3334,126 @@
           <Effect xsi:type="ReleaseActorEffect" />
         </ArrayOfEffect>
       </KeyFrameEffects>
+    </Action>
+    <Action ActionID="rpg" ImageID="bazooka_tama">
+      <Segments>
+        <AnimationSegment CancelLevel="Free" IsLoop="true">
+          <Frame>
+            <ImageID>bazooka_tama</ImageID>
+            <OriginX>9</OriginX>
+            <OriginY>21</OriginY>
+            <Duration>2</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-15" Y="-6" W="59" H="12" />
+            <HitBoxes />
+            <AttackBoxes>
+              <Box X="-25" Y="-10" W="75" H="20" R="0" />
+            </AttackBoxes>
+          </Frame>
+          <Damage>
+            <AttackType>None</AttackType>
+            <BaseDamage>0</BaseDamage>
+            <HitStop>
+              <Self>0</Self>
+              <Opponent>0</Opponent>
+            </HitStop>
+            <Knockback>
+              <SpeedX>0</SpeedX>
+              <SpeedY>0</SpeedY>
+              <Gravity>0</Gravity>
+            </Knockback>
+            <SoundEffect>0</SoundEffect>
+          </Damage>
+        </AnimationSegment>
+      </Segments>
+      <InitEffects>
+        <Effect xsi:type="BulletInitEffect" />
+        <Effect xsi:type="SetMotionEffect" Animation="rpg" Segment="0" />
+        <Effect xsi:type="BulletSetSpeedEffect">
+          <Speed xsi:type="ConstValue" Value="3" />
+          <Rotation xsi:type="ConstValue" Value="0" />
+        </Effect>
+        <Effect xsi:type="CreateBulletEffect">
+          <Position xsi:type="FrameSinglePointProvider" Index="0" />
+          <ActionName>rpg_tail</ActionName>
+          <Direction>Same</Direction>
+        </Effect>
+      </InitEffects>
+      <UpdateEffects />
+      <KeyFrameEffects />
+    </Action>
+    <Action ActionID="rpg_tail" ImageID="bazooka_fireA_00000">
+      <Segments>
+        <AnimationSegment CancelLevel="Free" IsLoop="true">
+          <Frame>
+            <ImageID>bazooka_fireA_00000</ImageID>
+            <OriginX>121</OriginX>
+            <OriginY>36</OriginY>
+            <Duration>3</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <HitBoxes />
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>bazooka_fireA_00001</ImageID>
+            <OriginX>120</OriginX>
+            <OriginY>36</OriginY>
+            <Duration>3</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <HitBoxes />
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>bazooka_fireA_00002</ImageID>
+            <OriginX>122</OriginX>
+            <OriginY>36</OriginY>
+            <Duration>3</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <HitBoxes />
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>bazooka_fireA_00003</ImageID>
+            <OriginX>122</OriginX>
+            <OriginY>36</OriginY>
+            <Duration>3</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <HitBoxes />
+            <AttackBoxes />
+          </Frame>
+        </AnimationSegment>
+      </Segments>
+      <InitEffects>
+        <Effect xsi:type="BulletInitEffect" />
+        <Effect xsi:type="SetMotionEffect" Animation="rpg_tail" Segment="0" />
+        <Effect xsi:type="BulletFollowingOwnerInitEffect" CheckInstance="" />
+      </InitEffects>
+      <UpdateEffects>
+        <Effect xsi:type="BulletFollowingOwnerUpdateEffect">
+          <Position xsi:type="FrameSinglePointProvider" Index="0" />
+        </Effect>
+      </UpdateEffects>
+      <KeyFrameEffects />
     </Action>
   </Actions>
   <Exporter xsi:type="PlayerExporter">

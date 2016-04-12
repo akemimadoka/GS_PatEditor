@@ -41,16 +41,14 @@ namespace GS_PatEditor.Editor.Editable
             return new Pat.FramePoint { X = (int)actor.X, Y = (int)actor.Y };
         }
 
-        public override Exporters.CodeFormat.Expression GenerateX(Exporters.GenerationEnvironment env)
+        public override Exporters.CodeFormat.Expression GenerateX(Expression actor, Exporters.GenerationEnvironment env)
         {
-            return new BiOpExpr(ThisExpr.Instance.MakeIndex("x"),
-                ThisExpr.Instance.MakeIndex("vx"), BiOpExpr.Op.Add);
+            return new ConstNumberExpr(0);
         }
 
-        public override Exporters.CodeFormat.Expression GenerateY(Exporters.GenerationEnvironment env)
+        public override Exporters.CodeFormat.Expression GenerateY(Expression actor, Exporters.GenerationEnvironment env)
         {
-            return new BiOpExpr(ThisExpr.Instance.MakeIndex("y"),
-                ThisExpr.Instance.MakeIndex("vy"), BiOpExpr.Op.Add);
+            return new ConstNumberExpr(0);
         }
 
         [Browsable(false)]

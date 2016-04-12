@@ -28,7 +28,7 @@ namespace GS_PatEditor.Pat.Effects
 
         public override Expression Generate(GenerationEnvironment env)
         {
-            return ThisExpr.Instance.MakeIndex("u").MakeIndex("variables").MakeIndex(Name);
+            return ActorVariableHelper.GenerateGet(Name);
         }
     }
 
@@ -53,13 +53,7 @@ namespace GS_PatEditor.Pat.Effects
 
         public override ILineObject Generate(GenerationEnvironment env)
         {
-            var nname = Name.Replace("\\", "\\\\").Replace("\"", "\\\\");
-            return new SimpleBlock(new ILineObject[] {
-                new SimpleLineObject("if (!(\"variables\" in this.u)) this.u.variables <- {};"),
-                new SimpleLineObject("if (!(\"" + nname + "\" in this.u.variables)) this.u.variables[\"" + nname + "\"] <- 0;"),
-                new BiOpExpr(ThisExpr.Instance.MakeIndex("u").MakeIndex("variables").MakeIndex(Name),
-                    Value.Generate(env), BiOpExpr.Op.Assign).Statement(),
-            }).Statement();
+            return ActorVariableHelper.GenerateSet(Name, Value.Generate(env));
         }
     }
 }

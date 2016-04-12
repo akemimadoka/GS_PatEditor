@@ -158,6 +158,7 @@
     <Compile Include="GSPat\GSPatWriter.cs" />
     <Compile Include="GSPat\ImageManager.cs" />
     <Compile Include="Pat\Effects\ActorMemberValue.cs" />
+    <Compile Include="Pat\Effects\ActorVariableHelper.cs" />
     <Compile Include="Pat\Effects\ActorVariables.cs" />
     <Compile Include="Pat\Effects\BulletEffect.cs" />
     <Compile Include="Pat\Effects\CommonEffect.cs" />

@@ -28,8 +28,8 @@ namespace GS_PatEditor.Pat
     public abstract class PointProvider
     {
         public abstract FramePoint GetPointForActor(Simulation.Actor actor);
-        public abstract Expression GenerateX(GenerationEnvironment env);
-        public abstract Expression GenerateY(GenerationEnvironment env);
+        public abstract Expression GenerateX(Expression actor, GenerationEnvironment env);
+        public abstract Expression GenerateY(Expression actor, GenerationEnvironment env);
     }
 
     [Serializable]

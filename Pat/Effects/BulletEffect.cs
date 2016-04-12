@@ -25,7 +25,7 @@ namespace GS_PatEditor.Pat.Effects
                     new SimpleLineObject("this.u.uu <- this.actor[t.owner].u.uu;"),
                 }).Statement(),
                 new ControlBlock(ControlBlockType.Else, new ILineObject[] {
-                    new SimpleLineObject("this.u.uu <- {};"),
+                    new SimpleLineObject("this.u.uu <- { uuu = null };"),
                 }).Statement(),
             }).Statement();
         }
@@ -83,6 +83,94 @@ namespace GS_PatEditor.Pat.Effects
                 ThisExpr.Instance.MakeIndex("vy").Assign(vy).Statement(),
                 new SimpleLineObject("this.SetCollisionRotation(0.0, 0.0, this.rz);"),
             }).Statement();
+        }
+    }
+
+    [Serializable]
+    public class BulletFollowingOwnerInitEffect : Effect
+    {
+        [XmlAttribute]
+        public string CheckInstance { get; set; }
+
+        public override void Run(Simulation.Actor actor)
+        {
+            actor.Variables.Add(CheckInstance, new Simulation.ActorVariable
+            {
+                Type = Simulation.ActorVariableType.Actor,
+                Value = actor,
+            });
+        }
+
+        public override ILineObject Generate(GenerationEnvironment env)
+        {
+            List<ILineObject> ret = new List<ILineObject>();
+            if (CheckInstance != null && CheckInstance.Length != 0)
+            {
+                //TODO fix this: set variable in owner, not this
+                ret.Add(ActorVariableHelper.GenerateSet(CheckInstance, ThisExpr.Instance.MakeIndex("name")));
+            }
+
+            //get parent actor from table t
+            ret.Add(ActorVariableHelper.GenerateSet("SYS_parent", new IdentifierExpr("t").MakeIndex("flag1")));
+            return new SimpleBlock(ret).Statement();
+        }
+    }
+
+    [Serializable]
+    public class BulletFollowingOwnerUpdateEffect : Effect
+    {
+        [XmlAttribute]
+        public string CheckInstance { get; set; }
+
+        [XmlElement]
+        [EditorChildNode("Position")]
+        public PointProvider Position;
+
+        public override void Run(Simulation.Actor actor)
+        {
+            var owner = actor.Owner;
+            if (owner != null)
+            {
+                if (CheckInstance != null && CheckInstance.Length != 0)
+                {
+                    if (!owner.Variables.ContainsKey(CheckInstance) ||
+                        owner.Variables[CheckInstance].Value as Simulation.Actor != actor)
+                    {
+                        actor.Release();
+                        return;
+                    }
+                }
+
+                actor.X = owner.X + owner.VX;
+                actor.Y = owner.Y + owner.VY;
+            }
+        }
+
+        public override ILineObject Generate(GenerationEnvironment env)
+        {
+            List<ILineObject> ret = new List<ILineObject>();
+            if (CheckInstance != null && CheckInstance.Length != 0)
+            {
+                ret.Add(new ControlBlock(ControlBlockType.If,
+                    new BiOpExpr(ActorVariableHelper.GenerateGet(CheckInstance), ThisExpr.Instance.MakeIndex("name"), BiOpExpr.Op.NotEqual),
+                    new ILineObject[] {
+                        ThisExpr.Instance.MakeIndex("Release").Call().Statement(),
+                    }).Statement());
+            }
+
+            var ownerActor = new IdentifierExpr("ownerActor");
+            var x = Position.GenerateX(ownerActor, env);
+            var y = Position.GenerateY(ownerActor, env);
+
+            ret.AddRange(new ILineObject[] {
+                new LocalVarStatement("ownerActor", ActorVariableHelper.GenerateGet("SYS_parent").MakeIndex("wr")),
+                new ControlBlock(ControlBlockType.If, "ownerActor != null", new ILineObject[] {
+                    ThisExpr.Instance.MakeIndex("x").Assign(x).Statement(),
+                    ThisExpr.Instance.MakeIndex("y").Assign(y).Statement(),
+                }).Statement(),
+            });
+
+            return new SimpleBlock(ret).Statement();
         }
     }
 }

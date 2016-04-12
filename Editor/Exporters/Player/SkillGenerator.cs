@@ -89,7 +89,7 @@ namespace GS_PatEditor.Editor.Exporters.Player
                     var functionContent = GenerateNormalSkillFunction(exporter, env, cskill.ActionID, false);
                     functionContent = new ILineObject[] {
                         new ControlBlock(ControlBlockType.If, "!(\"uu\" in this.u)", new ILineObject[] {
-                            new SimpleLineObject("this.u.uu <- this.u;"),
+                            new SimpleLineObject("this.u.uu <- { uuu = this.u.weakref() };"),
                         }).Statement(),
                     }.Concat(functionContent);
 

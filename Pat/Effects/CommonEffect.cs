@@ -55,6 +55,7 @@ namespace GS_PatEditor.Pat.Effects
                 actor.Animations, null, actor.Actions);
             var point = Position.GetPointForActor(actor);
 
+            bullet.Owner = actor;
             bullet.X = point.X;
             bullet.Y = point.Y;
             bullet.InversedDirection = Direction == CreateBulletDirection.Same ?
@@ -80,16 +81,23 @@ namespace GS_PatEditor.Pat.Effects
             return new SimpleBlock(new ILineObject[] {
                 //create t
                 new SimpleLineObject("local t = this.DefaultShotTable();"),
+
+                //set parent actor
+                new SimpleLineObject("t.flag1 = { wr = this.weakref() };"),
+
                 //TODO setup t
 
                 //create actor
                 ThisExpr.Instance.MakeIndex("world2d").MakeIndex("CreateActor").Call(
-                    Position.GenerateX(env),
-                    Position.GenerateY(env),
+                    Position.GenerateX(ThisExpr.Instance, env),
+                    Position.GenerateY(ThisExpr.Instance, env),
                     dir,
-                    ThisExpr.Instance.MakeIndex("u").MakeIndex("uu").MakeIndex(funcName),
+                    ThisExpr.Instance.MakeIndex("u").MakeIndex("uu").MakeIndex("uuu").MakeIndex(funcName),
                     new IdentifierExpr("t")
                 ).Statement(),
+
+                //clear actor reference (safety)
+                new SimpleLineObject("t.flag1 = null;"),
             }).Statement();
         }
 
@@ -381,7 +389,7 @@ namespace GS_PatEditor.Pat.Effects
         {
             var funcName = env.GenerateActionAsActorInit(Action);
             return ThisExpr.Instance.MakeIndex("hitEffect").Assign(
-                ThisExpr.Instance.MakeIndex("u").MakeIndex("uu").MakeIndex(funcName)).Statement();
+                ThisExpr.Instance.MakeIndex("u").MakeIndex("uu").MakeIndex("uuu").MakeIndex(funcName)).Statement();
         }
 
         [XmlIgnore]
