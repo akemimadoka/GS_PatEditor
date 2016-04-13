@@ -3546,6 +3546,8 @@
             <ImageID>kemuri_A_00000</ImageID>
             <ScaleX>50</ScaleX>
             <ScaleY>50</ScaleY>
+            <Green>0.5</Green>
+            <Blue>0</Blue>
             <OriginX>64</OriginX>
             <OriginY>64</OriginY>
             <Duration>3</Duration>
@@ -3561,6 +3563,8 @@
             <ImageID>kemuri_A_00001</ImageID>
             <ScaleX>50</ScaleX>
             <ScaleY>50</ScaleY>
+            <Green>0.5</Green>
+            <Blue>0</Blue>
             <OriginX>64</OriginX>
             <OriginY>64</OriginY>
             <Duration>3</Duration>
@@ -3576,6 +3580,8 @@
             <ImageID>kemuri_A_00002</ImageID>
             <ScaleX>50</ScaleX>
             <ScaleY>50</ScaleY>
+            <Green>0.5</Green>
+            <Blue>0</Blue>
             <OriginX>64</OriginX>
             <OriginY>64</OriginY>
             <Duration>3</Duration>
@@ -3591,6 +3597,8 @@
             <ImageID>kemuri_A_00003</ImageID>
             <ScaleX>50</ScaleX>
             <ScaleY>50</ScaleY>
+            <Green>0.5</Green>
+            <Blue>0</Blue>
             <OriginX>64</OriginX>
             <OriginY>64</OriginY>
             <Duration>3</Duration>
@@ -3606,6 +3614,8 @@
             <ImageID>kemuri_A_00004</ImageID>
             <ScaleX>50</ScaleX>
             <ScaleY>50</ScaleY>
+            <Green>0.5</Green>
+            <Blue>0</Blue>
             <OriginX>64</OriginX>
             <OriginY>64</OriginY>
             <Duration>3</Duration>
@@ -3621,6 +3631,8 @@
             <ImageID>kemuri_A_00005</ImageID>
             <ScaleX>50</ScaleX>
             <ScaleY>50</ScaleY>
+            <Green>0.5</Green>
+            <Blue>0</Blue>
             <OriginX>64</OriginX>
             <OriginY>64</OriginY>
             <Duration>3</Duration>
@@ -3636,6 +3648,8 @@
             <ImageID>kemuri_A_00006</ImageID>
             <ScaleX>50</ScaleX>
             <ScaleY>50</ScaleY>
+            <Green>0.5</Green>
+            <Blue>0</Blue>
             <OriginX>64</OriginX>
             <OriginY>64</OriginY>
             <Duration>3</Duration>
@@ -3651,6 +3665,8 @@
             <ImageID>kemuri_A_00007</ImageID>
             <ScaleX>50</ScaleX>
             <ScaleY>50</ScaleY>
+            <Green>0.5</Green>
+            <Blue>0</Blue>
             <OriginX>64</OriginX>
             <OriginY>64</OriginY>
             <Duration>3</Duration>
@@ -3666,6 +3682,8 @@
             <ImageID>kemuri_A_00008</ImageID>
             <ScaleX>50</ScaleX>
             <ScaleY>50</ScaleY>
+            <Green>0.5</Green>
+            <Blue>0</Blue>
             <OriginX>64</OriginX>
             <OriginY>64</OriginY>
             <Duration>3</Duration>
@@ -3681,6 +3699,8 @@
             <ImageID>kemuri_A_00008</ImageID>
             <ScaleX>50</ScaleX>
             <ScaleY>50</ScaleY>
+            <Green>0.5</Green>
+            <Blue>0</Blue>
             <OriginX>64</OriginX>
             <OriginY>64</OriginY>
             <Duration>3</Duration>

@@ -14,12 +14,14 @@ struct VS_IN
 {
     float4 pos : POSITION;
     float2 tex : TEXCOORD0;
+    float4 col : COLOR;
 };
 
 struct PS_IN
 {
     float4 pos : POSITION;
     float2 tex : TEXCOORD0;
+    float4 col : COLOR;
 };
 
 float4x4 mat_ViewProj;
@@ -44,12 +46,13 @@ PS_IN VS(VS_IN input)
     input.pos.y *= f_Scale;
     output.pos = mul(input.pos + vec_Offset, mat_ViewProj);
     output.tex = input.tex;
+    output.col = input.col;
     return output;
 }
 
 float4 PS(PS_IN input) : COLOR
 {
-    return tex2D(s_2D, input.tex);
+    return tex2D(s_2D, input.tex) * input.col;
 }
 
 technique Main {

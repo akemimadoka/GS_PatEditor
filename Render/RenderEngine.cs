@@ -217,6 +217,10 @@ namespace GS_PatEditor.Render
             ret.ScaleX = 1;
             ret.ScaleY = 1;
             ret.Rotation = 0;
+            ret.Alpha = 1;
+            ret.Red = 1;
+            ret.Green = 1;
+            ret.Blue = 1;
             ret.Texture = null;
             ret.RepeatX = 1;
             ret.RepeatY = 1;

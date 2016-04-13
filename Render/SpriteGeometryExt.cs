@@ -116,5 +116,13 @@ namespace GS_PatEditor.Render
             spriteArray[2].SetRotationOffset(2);
             spriteArray[3].SetRotationOffset(3);
         }
+
+        public static void SetupColor(this Sprite sprite, float a, float r, float g, float b)
+        {
+            sprite.Alpha = a;
+            sprite.Red = r;
+            sprite.Green = g;
+            sprite.Blue = b;
+        }
     }
 }

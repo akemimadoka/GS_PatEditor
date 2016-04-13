@@ -33,6 +33,10 @@ namespace GS_PatEditor.Render
                 ScaleX: frame.ScaleX / 100.0f * actor.ScaleX * dirScale,
                 ScaleY: frame.ScaleY / 100.0f * actor.ScaleY);
             sprite.SetupPosition(actor.X, actor.Y, frame.Rotation / 180.0f * 3.1415926f + actor.Rotation);
+            sprite.SetupColor(actor.Alpha * frame.Alpha,
+                actor.Red * frame.Red,
+                actor.Green * frame.Green,
+                actor.Blue * frame.Blue);
         }
 
         public static void SetupFrame(this Sprite sprite, Texture txt, Frame frame, EditingPoint editing)
@@ -44,6 +48,7 @@ namespace GS_PatEditor.Render
                 ScaleX: frame.ScaleX / 100.0f,
                 ScaleY: frame.ScaleY / 100.0f);
             sprite.SetupPosition(0, 0, frame.Rotation / 180.0f * 3.1415926f);
+            sprite.SetupColor(frame.Alpha, frame.Red, frame.Green, frame.Blue);
         }
 
         public static void SetupPhysical(this Sprite[] rect, uint color, EditingPhysicalBox box)

@@ -320,16 +320,21 @@ namespace GS_PatEditor
         }
         private static Pat.Frame ImportFrame(Pat.Project proj, GSPat.GSPatFile pat, GSPat.Frame frame)
         {
+            var hasIM = frame.ImageManipulation != null;
             return new Pat.Frame
             {
                 ImageID = AddImageToProject(proj, pat.Images[frame.SpriteID], frame).ImageID,
                 OriginX = frame.OriginX,
                 OriginY = frame.OriginY,
-                ScaleX = frame.ImageManipulation != null ? frame.ImageManipulation.ScaleX : 100,
-                ScaleY = frame.ImageManipulation != null ? frame.ImageManipulation.ScaleY : 100,
+                ScaleX = hasIM ? frame.ImageManipulation.ScaleX : 100,
+                ScaleY = hasIM ? frame.ImageManipulation.ScaleY : 100,
+                Alpha = hasIM ? frame.ImageManipulation.Alpha / 255.0f : 1.0f,
+                Red = hasIM ? frame.ImageManipulation.Red / 255.0f : 1.0f,
+                Green = hasIM ? frame.ImageManipulation.Green / 255.0f : 1.0f,
+                Blue = hasIM ? frame.ImageManipulation.Blue / 255.0f : 1.0f,
                 Duration = frame.DisplayTime,
                 //TODO check if rotation should be inversed
-                Rotation = frame.ImageManipulation != null ? frame.ImageManipulation.Rotation : 0,
+                Rotation = hasIM ? frame.ImageManipulation.Rotation : 0,
                 PhysicalBox = ImportPhysicalBox(frame.PhysicsBox),
                 HitBoxes = frame.HitBoxes.Select(ImportBox).ToList(),
                 AttackBoxes = frame.AttackBoxes.Select(ImportBox).ToList(),

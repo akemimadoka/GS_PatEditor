@@ -173,10 +173,10 @@ namespace GS_PatEditor.Editor.Exporters
                 ScaleY = (short)scaleY,
                 Rotation = (short)rotation,
 
-                Alpha = 255,
-                Red = 255,
-                Green = 255,
-                Blue = 255,
+                Alpha = (byte)(255 * frame.Alpha),
+                Red = (byte)(255 * frame.Red),
+                Green = (byte)(255 * frame.Green),
+                Blue = (byte)(255 * frame.Blue),
             };
         }
     }

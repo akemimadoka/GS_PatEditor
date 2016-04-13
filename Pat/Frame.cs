@@ -65,6 +65,22 @@ namespace GS_PatEditor.Pat
         public bool ShouldSerializeRotation() { return Rotation != 0; }
 
         [XmlElement]
+        public float Alpha = 1.0f;
+        public bool ShouldSerializeAlpha() { return Alpha != 1.0f; }
+
+        [XmlElement]
+        public float Red = 1.0f;
+        public bool ShouldSerializeRed() { return Red != 1.0f; }
+
+        [XmlElement]
+        public float Green = 1.0f;
+        public bool ShouldSerializeGreen() { return Green != 1.0f; }
+
+        [XmlElement]
+        public float Blue = 1.0f;
+        public bool ShouldSerializeBlue() { return Blue != 1.0f; }
+
+        [XmlElement]
         public int OriginX;
         [XmlElement]
         public int OriginY;

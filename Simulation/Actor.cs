@@ -48,8 +48,10 @@ namespace GS_PatEditor.Simulation
         public int Priority;
         public float ScaleX, ScaleY;
         public float Rotation;
-        public float Alpha; //TODO support alpha in simulation
         public bool InversedDirection;
+
+        public float Alpha;
+        public float Red, Green, Blue;
 
         //position
         public float DefaultGravity;
@@ -107,7 +109,11 @@ namespace GS_PatEditor.Simulation
 
             this.ScaleX = 1;
             this.ScaleY = 1;
+
             this.Alpha = 1.0f;
+            this.Red = 1.0f;
+            this.Green = 1.0f;
+            this.Blue = 1.0f;
 
             this.ImmuneGravity = true;
 

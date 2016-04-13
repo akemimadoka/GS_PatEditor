@@ -203,6 +203,60 @@ namespace GS_PatEditor.Render
         }
         #endregion
 
+        #region Color Properties
+
+        private Vector4 Color = new Vector4(1, 1, 1, 1);
+
+        public float Alpha
+        {
+            get
+            {
+                return Color.W;
+            }
+            set
+            {
+                Color.W = value;
+            }
+        }
+
+        public float Red
+        {
+            get
+            {
+                return Color.X;
+            }
+            set
+            {
+                Color.X = value;
+            }
+        }
+
+        public float Green
+        {
+            get
+            {
+                return Color.Y;
+            }
+            set
+            {
+                Color.Y = value;
+            }
+        }
+
+        public float Blue
+        {
+            get
+            {
+                return Color.Z;
+            }
+            set
+            {
+                Color.Z = value;
+            }
+        }
+
+        #endregion
+
         //only used in sprite setup functions
         public float RotationOffset { get; set; }
 
@@ -222,6 +276,8 @@ namespace GS_PatEditor.Render
             public Vector4 pos;
             [VertexField(DeclarationUsage.TextureCoordinate)]
             public Vector4 tex;
+            [VertexField(DeclarationUsage.Color)]
+            public Vector4 col;
             //Don't add more fields
         }
 
@@ -303,10 +359,30 @@ namespace GS_PatEditor.Render
 
             //apply rotation
 
-            stream.Write(new Vertex { pos = MakePosition(x, y, t_l, t_t), tex = new Vector4(0.0f, 0.0f, 0.0f, 0.0f) });
-            stream.Write(new Vertex { pos = MakePosition(x, y, t_r, t_t), tex = new Vector4(_RepeatX, 0.0f, 0.0f, 0.0f) });
-            stream.Write(new Vertex { pos = MakePosition(x, y, t_l, t_b), tex = new Vector4(0.0f, _RepeatY, 0.0f, 0.0f) });
-            stream.Write(new Vertex { pos = MakePosition(x, y, t_r, t_b), tex = new Vector4(_RepeatX, _RepeatY, 0.0f, 0.0f) });
+            stream.Write(new Vertex
+            {
+                pos = MakePosition(x, y, t_l, t_t),
+                tex = new Vector4(0.0f, 0.0f, 0.0f, 0.0f),
+                col = Color,
+            });
+            stream.Write(new Vertex
+            {
+                pos = MakePosition(x, y, t_r, t_t),
+                tex = new Vector4(_RepeatX, 0.0f, 0.0f, 0.0f),
+                col = Color,
+            });
+            stream.Write(new Vertex
+            {
+                pos = MakePosition(x, y, t_l, t_b),
+                tex = new Vector4(0.0f, _RepeatY, 0.0f, 0.0f),
+                col = Color,
+            });
+            stream.Write(new Vertex
+            {
+                pos = MakePosition(x, y, t_r, t_b),
+                tex = new Vector4(_RepeatX, _RepeatY, 0.0f, 0.0f),
+                col = Color,
+            });
             stream.Dispose();
 
             _Buffer.Unlock();
