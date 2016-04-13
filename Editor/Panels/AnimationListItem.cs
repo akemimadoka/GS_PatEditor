@@ -14,8 +14,9 @@ namespace GS_PatEditor.Editor.Panels
         private PointF _Position;
         private string _Text, _Desc;
         private int _Index;
+        private Pat.Action _Obj;
 
-        public AnimationListItem(Bitmap image, string text, string desc, int index)
+        public AnimationListItem(Bitmap image, string text, string desc, int index, Pat.Action obj)
         {
             if (image != null)
             {
@@ -36,11 +37,13 @@ namespace GS_PatEditor.Editor.Panels
             _Text = text;
             _Desc = desc;
             _Index = index;
+            _Obj = obj;
         }
 
         public bool IsSelected { get; set; }
         public float Height { get { return FrameGridSize; } }
         public int Index { get { return _Index; } }
+        public Pat.Action Object { get { return _Obj; } }
 
         private Pen _Pen = Pens.Black;
         private Brush _BrushBackground = new SolidBrush(Color.FromArgb(200, 200, 200));

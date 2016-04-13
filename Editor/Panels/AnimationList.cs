@@ -114,6 +114,8 @@ namespace GS_PatEditor.Editor.Panels
 
         private void RefreshList()
         {
+            var lastSelectedAction = _SelectedItem == null ? null : _SelectedItem.Object;
+
             _Items.Clear();
 
             var list = _Parent.Project.Actions;
@@ -129,8 +131,11 @@ namespace GS_PatEditor.Editor.Panels
                 _Control.Invalidate();
             }
 
-            //TODO reserve selected
-            _SelectedItem = null;
+            _SelectedItem = _Items.FirstOrDefault(i => i.Object == lastSelectedAction);
+            if (_SelectedItem != null)
+            {
+                _SelectedItem.IsSelected = true;
+            }
 
             if (SelectedChange != null)
             {
@@ -146,7 +151,7 @@ namespace GS_PatEditor.Editor.Panels
             var frameCount = action.Segments.Sum(s => s.Frames.Count);
             var desc = action.Segments.Count.ToString() + " segment(s), " +
                 frameCount.ToString() + " frame(s).";
-            return new AnimationListItem(img, action.ActionID, desc, index);
+            return new AnimationListItem(img, action.ActionID, desc, index, action);
         }
 
         public void Activate()
@@ -242,13 +247,7 @@ namespace GS_PatEditor.Editor.Panels
                 {
                     currentAnimation.ActionID = dialog.AnimationID;
 
-                    _SelectedItem.IsSelected = false;
-                    _SelectedItem = null;
-
                     RefreshList();
-
-                    _SelectedItem = _Items[id];
-                    _SelectedItem.IsSelected = true;
 
                     OnSelectChange();
                 }
