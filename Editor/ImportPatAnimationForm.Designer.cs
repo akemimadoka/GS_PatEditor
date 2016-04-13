@@ -167,7 +167,7 @@
             this.MinimizeBox = false;
             this.Name = "ImportPatAnimationForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "ImportPatAnimationForm";
+            this.Text = "Import Animation";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ImportPatAnimationForm_FormClosing);
             this.Shown += new System.EventHandler(this.ImportPatAnimationForm_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

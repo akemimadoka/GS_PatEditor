@@ -95,6 +95,8 @@ namespace GS_PatEditor.Editor
                         frm.toolStripButtonSaveAs,
                         frm.toolStripButtonDirectories,
                         frm.toolStripSeparator13,
+                        frm.toolStripButtonImport,
+                        frm.toolStripSeparator14,
                         frm.toolStripButtonExporter,
                         frm.toolStripButtonExport,
                         frm.toolStripSeparator7,
@@ -238,7 +240,7 @@ namespace GS_PatEditor.Editor
             {
                 if (clock.ElapsedMilliseconds >= 1000 * 5)
                 {
-                    Text = (count * 1000.0f / clock.ElapsedMilliseconds).ToString();
+                    var fps = (count * 1000.0f / clock.ElapsedMilliseconds);
                     clock.Restart();
                     count = 0;
                 }
