@@ -619,6 +619,167 @@
       <W>128</W>
       <H>64</H>
     </FrameImage>
+    <FrameImage ImageID="exploadA000">
+      <Resource>exploadA000.cv2</Resource>
+      <AlphaBlendMode>true</AlphaBlendMode>
+      <W>128</W>
+      <H>128</H>
+    </FrameImage>
+    <FrameImage ImageID="bom_kemuri_00001">
+      <Resource>bom_kemuri_00001.dds</Resource>
+      <W>128</W>
+      <H>96</H>
+    </FrameImage>
+    <FrameImage ImageID="bom_kemuri_00002">
+      <Resource>bom_kemuri_00002.dds</Resource>
+      <W>128</W>
+      <H>128</H>
+    </FrameImage>
+    <FrameImage ImageID="bom_kemuri_00003">
+      <Resource>bom_kemuri_00003.dds</Resource>
+      <W>128</W>
+      <H>128</H>
+    </FrameImage>
+    <FrameImage ImageID="bom_kemuri_00004">
+      <Resource>bom_kemuri_00004.dds</Resource>
+      <W>160</W>
+      <H>128</H>
+    </FrameImage>
+    <FrameImage ImageID="bom_kemuri_00005">
+      <Resource>bom_kemuri_00005.dds</Resource>
+      <W>256</W>
+      <H>256</H>
+    </FrameImage>
+    <FrameImage ImageID="bom_kemuri_00006">
+      <Resource>bom_kemuri_00006.dds</Resource>
+      <W>256</W>
+      <H>256</H>
+    </FrameImage>
+    <FrameImage ImageID="bom_kemuri_00007">
+      <Resource>bom_kemuri_00007.dds</Resource>
+      <W>256</W>
+      <H>256</H>
+    </FrameImage>
+    <FrameImage ImageID="bom_kemuri_00008">
+      <Resource>bom_kemuri_00008.dds</Resource>
+      <W>256</W>
+      <H>256</H>
+    </FrameImage>
+    <FrameImage ImageID="bom_kemuri_00009">
+      <Resource>bom_kemuri_00009.dds</Resource>
+      <W>256</W>
+      <H>256</H>
+    </FrameImage>
+    <FrameImage ImageID="bom_kemuri_00010">
+      <Resource>bom_kemuri_00010.dds</Resource>
+      <W>256</W>
+      <H>256</H>
+    </FrameImage>
+    <FrameImage ImageID="bom_kemuri_00011">
+      <Resource>bom_kemuri_00011.dds</Resource>
+      <W>256</W>
+      <H>256</H>
+    </FrameImage>
+    <FrameImage ImageID="bom_kemuri_00012">
+      <Resource>bom_kemuri_00012.dds</Resource>
+      <W>256</W>
+      <H>256</H>
+    </FrameImage>
+    <FrameImage ImageID="bom_kemuri_00013">
+      <Resource>bom_kemuri_00013.dds</Resource>
+      <W>256</W>
+      <H>256</H>
+    </FrameImage>
+    <FrameImage ImageID="bom_fire_00000">
+      <Resource>bom_fire_00000.dds</Resource>
+      <AlphaBlendMode>true</AlphaBlendMode>
+      <W>96</W>
+      <H>96</H>
+    </FrameImage>
+    <FrameImage ImageID="bom_fire_00001">
+      <Resource>bom_fire_00001.dds</Resource>
+      <AlphaBlendMode>true</AlphaBlendMode>
+      <W>96</W>
+      <H>96</H>
+    </FrameImage>
+    <FrameImage ImageID="bom_fire_00002">
+      <Resource>bom_fire_00002.dds</Resource>
+      <AlphaBlendMode>true</AlphaBlendMode>
+      <W>96</W>
+      <H>96</H>
+    </FrameImage>
+    <FrameImage ImageID="bom_fire_00003">
+      <Resource>bom_fire_00003.dds</Resource>
+      <AlphaBlendMode>true</AlphaBlendMode>
+      <W>96</W>
+      <H>128</H>
+    </FrameImage>
+    <FrameImage ImageID="bom_fire_00004">
+      <Resource>bom_fire_00004.dds</Resource>
+      <AlphaBlendMode>true</AlphaBlendMode>
+      <W>96</W>
+      <H>128</H>
+    </FrameImage>
+    <FrameImage ImageID="Homura_RPGair0000">
+      <Resource>Homura_RPGair0000.cv2</Resource>
+      <W>115</W>
+      <H>113</H>
+    </FrameImage>
+    <FrameImage ImageID="Homura_RPGair0002">
+      <Resource>Homura_RPGair0002.cv2</Resource>
+      <W>115</W>
+      <H>113</H>
+    </FrameImage>
+    <FrameImage ImageID="Homura_RPGair0003">
+      <Resource>Homura_RPGair0003.cv2</Resource>
+      <W>115</W>
+      <H>113</H>
+    </FrameImage>
+    <FrameImage ImageID="Homura_RPGair0004">
+      <Resource>Homura_RPGair0004.cv2</Resource>
+      <W>115</W>
+      <H>113</H>
+    </FrameImage>
+    <FrameImage ImageID="Homura_RPGair0005">
+      <Resource>Homura_RPGair0005.cv2</Resource>
+      <W>115</W>
+      <H>113</H>
+    </FrameImage>
+    <FrameImage ImageID="Homura_RPGair0006">
+      <Resource>Homura_RPGair0006.cv2</Resource>
+      <W>115</W>
+      <H>113</H>
+    </FrameImage>
+    <FrameImage ImageID="Homura_RPGair0007">
+      <Resource>Homura_RPGair0007.cv2</Resource>
+      <W>115</W>
+      <H>113</H>
+    </FrameImage>
+    <FrameImage ImageID="Homura_RPGair0008">
+      <Resource>Homura_RPGair0008.cv2</Resource>
+      <W>115</W>
+      <H>113</H>
+    </FrameImage>
+    <FrameImage ImageID="Homura_RPGair0009">
+      <Resource>Homura_RPGair0009.cv2</Resource>
+      <W>115</W>
+      <H>113</H>
+    </FrameImage>
+    <FrameImage ImageID="Homura_RPGair0010">
+      <Resource>Homura_RPGair0010.cv2</Resource>
+      <W>115</W>
+      <H>113</H>
+    </FrameImage>
+    <FrameImage ImageID="Homura_RPGair0011">
+      <Resource>Homura_RPGair0011.cv2</Resource>
+      <W>115</W>
+      <H>113</H>
+    </FrameImage>
+    <FrameImage ImageID="Homura_RPGair0012">
+      <Resource>Homura_RPGair0012.cv2</Resource>
+      <W>115</W>
+      <H>113</H>
+    </FrameImage>
   </Images>
   <Actions>
     <Action ActionID="stand" ImageID="Homura_stand0000">
@@ -3384,7 +3545,9 @@
         <Effect xsi:type="BulletInitEffect" />
         <Effect xsi:type="SetMotionEffect" Animation="system_smoke_3" Segment="0" />
       </InitEffects>
-      <UpdateEffects />
+      <UpdateEffects>
+        <Effect xsi:type="BulletReduceAlphaEffect" Value="0.08" />
+      </UpdateEffects>
       <KeyFrameEffects>
         <ArrayOfEffect>
           <Effect xsi:type="ReleaseActorEffect" />
@@ -3441,6 +3604,11 @@
         <Effect xsi:type="InitCountEffect" />
         <Effect xsi:type="SetLabelEffect" Label="Hit">
           <Effect xsi:type="SimpleListEffect">
+            <Effect xsi:type="CreateBulletEffect">
+              <Position xsi:type="FrameSinglePointProvider" Index="0" />
+              <ActionName>rpg_explode_attack</ActionName>
+              <Direction>Same</Direction>
+            </Effect>
             <Effect xsi:type="ReleaseActorEffect" />
           </Effect>
         </Effect>
@@ -3822,6 +3990,771 @@
       </UpdateEffects>
       <KeyFrameEffects />
     </Action>
+    <Action ActionID="rpg_explode_attack" ImageID="exploadA000">
+      <Segments>
+        <AnimationSegment CancelLevel="Free" IsLoop="false">
+          <Frame>
+            <ImageID>exploadA000</ImageID>
+            <ScaleX>300</ScaleX>
+            <ScaleY>300</ScaleY>
+            <OriginX>64</OriginX>
+            <OriginY>64</OriginY>
+            <Duration>3</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <HitBoxes />
+            <AttackBoxes>
+              <Box X="-95" Y="-95" W="190" H="190" R="0" />
+              <Box X="-55" Y="-115" W="110" H="230" R="0" />
+              <Box X="-115" Y="-55" W="230" H="110" R="0" />
+            </AttackBoxes>
+          </Frame>
+          <Frame>
+            <ImageID>exploadA000</ImageID>
+            <ScaleX>200</ScaleX>
+            <ScaleY>200</ScaleY>
+            <OriginX>64</OriginX>
+            <OriginY>64</OriginY>
+            <Duration>3</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <HitBoxes />
+            <AttackBoxes />
+          </Frame>
+          <Damage>
+            <AttackType>Heavy</AttackType>
+            <BaseDamage>2800</BaseDamage>
+            <HitStop>
+              <Self>0</Self>
+              <Opponent>0</Opponent>
+            </HitStop>
+            <Knockback>
+              <SpeedX>-5000</SpeedX>
+              <SpeedY>-7500</SpeedY>
+              <Gravity>250</Gravity>
+            </Knockback>
+            <SoundEffect>0</SoundEffect>
+          </Damage>
+        </AnimationSegment>
+      </Segments>
+      <InitEffects>
+        <Effect xsi:type="BulletInitEffect" />
+        <Effect xsi:type="SetMotionEffect" Animation="rpg_explode_attack" Segment="0" />
+        <Effect xsi:type="CreateBulletEffect">
+          <Position xsi:type="FrameSinglePointProvider" Index="0" />
+          <ActionName>rpg_explode_light</ActionName>
+          <Direction>Same</Direction>
+        </Effect>
+        <Effect xsi:type="CreateBulletEffect">
+          <Position xsi:type="FrameSinglePointProvider" Index="0" />
+          <ActionName>rpg_explode_fire_1</ActionName>
+          <Direction>Same</Direction>
+        </Effect>
+        <Effect xsi:type="CreateBulletEffect">
+          <Position xsi:type="FrameSinglePointProvider" Index="0" />
+          <ActionName>rpg_explode_fire_2</ActionName>
+          <Direction>Same</Direction>
+        </Effect>
+      </InitEffects>
+      <UpdateEffects>
+        <Effect xsi:type="SetActorMemberEffect" Type="sx">
+          <Value xsi:type="BinaryExpressionValue" Operator="Multiply">
+            <Left xsi:type="ActorMemberValue" Type="sx" />
+            <Right xsi:type="ConstValue" Value="0.9" />
+          </Value>
+        </Effect>
+        <Effect xsi:type="SetActorMemberEffect" Type="sy">
+          <Value xsi:type="ActorMemberValue" Type="sx" />
+        </Effect>
+        <Effect xsi:type="BulletReduceAlphaEffect" Value="0.05" />
+      </UpdateEffects>
+      <KeyFrameEffects />
+    </Action>
+    <Action ActionID="rpg_explode_light" ImageID="exploadA000">
+      <Segments>
+        <AnimationSegment CancelLevel="Free" IsLoop="true">
+          <Frame>
+            <ImageID>exploadA000</ImageID>
+            <ScaleX>305</ScaleX>
+            <ScaleY>305</ScaleY>
+            <Green>0.2509804</Green>
+            <Blue>0</Blue>
+            <OriginX>64</OriginX>
+            <OriginY>64</OriginY>
+            <Duration>3</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <HitBoxes />
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>exploadA000</ImageID>
+            <ScaleX>300</ScaleX>
+            <ScaleY>300</ScaleY>
+            <Green>0.2509804</Green>
+            <Blue>0</Blue>
+            <OriginX>64</OriginX>
+            <OriginY>64</OriginY>
+            <Duration>3</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <HitBoxes />
+            <AttackBoxes />
+          </Frame>
+        </AnimationSegment>
+      </Segments>
+      <InitEffects>
+        <Effect xsi:type="BulletInitEffect" />
+        <Effect xsi:type="SetMotionEffect" Segment="0" />
+      </InitEffects>
+      <UpdateEffects>
+        <Effect xsi:type="TimeStopCheckEffect" />
+        <Effect xsi:type="SetActorMemberEffect" Type="sx">
+          <Value xsi:type="BinaryExpressionValue" Operator="Add">
+            <Left xsi:type="ActorMemberValue" Type="sx" />
+            <Right xsi:type="ConstValue" Value="0.01" />
+          </Value>
+        </Effect>
+        <Effect xsi:type="SetActorMemberEffect" Type="sy">
+          <Value xsi:type="ActorMemberValue" Type="sx" />
+        </Effect>
+        <Effect xsi:type="BulletReduceAlphaEffect" Value="0.025" />
+      </UpdateEffects>
+      <KeyFrameEffects />
+    </Action>
+    <Action ActionID="rpg_explode_fire_1" ImageID="bom_kemuri_00001">
+      <Segments>
+        <AnimationSegment CancelLevel="Free" IsLoop="false">
+          <Frame>
+            <ImageID>bom_kemuri_00001</ImageID>
+            <ScaleX>200</ScaleX>
+            <ScaleY>200</ScaleY>
+            <OriginX>54</OriginX>
+            <OriginY>74</OriginY>
+            <Duration>2</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <HitBoxes />
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>bom_kemuri_00002</ImageID>
+            <ScaleX>200</ScaleX>
+            <ScaleY>200</ScaleY>
+            <OriginX>48</OriginX>
+            <OriginY>109</OriginY>
+            <Duration>2</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <HitBoxes />
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>bom_kemuri_00003</ImageID>
+            <ScaleX>200</ScaleX>
+            <ScaleY>200</ScaleY>
+            <OriginX>48</OriginX>
+            <OriginY>109</OriginY>
+            <Duration>2</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <HitBoxes />
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>bom_kemuri_00004</ImageID>
+            <ScaleX>200</ScaleX>
+            <ScaleY>200</ScaleY>
+            <OriginX>48</OriginX>
+            <OriginY>109</OriginY>
+            <Duration>2</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <HitBoxes />
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>bom_kemuri_00005</ImageID>
+            <ScaleX>200</ScaleX>
+            <ScaleY>200</ScaleY>
+            <OriginX>112</OriginX>
+            <OriginY>236</OriginY>
+            <Duration>2</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <HitBoxes />
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>bom_kemuri_00006</ImageID>
+            <ScaleX>200</ScaleX>
+            <ScaleY>200</ScaleY>
+            <OriginX>112</OriginX>
+            <OriginY>236</OriginY>
+            <Duration>2</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <HitBoxes />
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>bom_kemuri_00007</ImageID>
+            <ScaleX>200</ScaleX>
+            <ScaleY>200</ScaleY>
+            <OriginX>112</OriginX>
+            <OriginY>236</OriginY>
+            <Duration>2</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <HitBoxes />
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>bom_kemuri_00008</ImageID>
+            <ScaleX>200</ScaleX>
+            <ScaleY>200</ScaleY>
+            <OriginX>112</OriginX>
+            <OriginY>236</OriginY>
+            <Duration>2</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <HitBoxes />
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>bom_kemuri_00009</ImageID>
+            <ScaleX>200</ScaleX>
+            <ScaleY>200</ScaleY>
+            <OriginX>112</OriginX>
+            <OriginY>236</OriginY>
+            <Duration>2</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <HitBoxes />
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>bom_kemuri_00010</ImageID>
+            <ScaleX>200</ScaleX>
+            <ScaleY>200</ScaleY>
+            <OriginX>112</OriginX>
+            <OriginY>236</OriginY>
+            <Duration>2</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <HitBoxes />
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>bom_kemuri_00011</ImageID>
+            <ScaleX>200</ScaleX>
+            <ScaleY>200</ScaleY>
+            <OriginX>112</OriginX>
+            <OriginY>236</OriginY>
+            <Duration>2</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <HitBoxes />
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>bom_kemuri_00012</ImageID>
+            <ScaleX>200</ScaleX>
+            <ScaleY>200</ScaleY>
+            <OriginX>112</OriginX>
+            <OriginY>236</OriginY>
+            <Duration>2</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <HitBoxes />
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>bom_kemuri_00013</ImageID>
+            <ScaleX>200</ScaleX>
+            <ScaleY>200</ScaleY>
+            <OriginX>112</OriginX>
+            <OriginY>236</OriginY>
+            <Duration>2</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <HitBoxes />
+            <AttackBoxes />
+          </Frame>
+        </AnimationSegment>
+      </Segments>
+      <InitEffects>
+        <Effect xsi:type="BulletInitEffect" />
+        <Effect xsi:type="SetMotionEffect" Animation="rpg_explode_fire_1" Segment="0" />
+      </InitEffects>
+      <UpdateEffects>
+        <Effect xsi:type="TimeStopCheckEffect" />
+      </UpdateEffects>
+      <KeyFrameEffects>
+        <ArrayOfEffect>
+          <Effect xsi:type="ReleaseActorEffect" />
+        </ArrayOfEffect>
+      </KeyFrameEffects>
+    </Action>
+    <Action ActionID="rpg_explode_fire_2" ImageID="bom_fire_00000">
+      <Segments>
+        <AnimationSegment CancelLevel="Free" IsLoop="false">
+          <Frame>
+            <ImageID>bom_fire_00000</ImageID>
+            <ScaleX>200</ScaleX>
+            <ScaleY>200</ScaleY>
+            <OriginX>53</OriginX>
+            <OriginY>76</OriginY>
+            <Duration>2</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <HitBoxes />
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>bom_fire_00001</ImageID>
+            <ScaleX>200</ScaleX>
+            <ScaleY>200</ScaleY>
+            <OriginX>53</OriginX>
+            <OriginY>76</OriginY>
+            <Duration>2</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <HitBoxes />
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>bom_fire_00002</ImageID>
+            <ScaleX>200</ScaleX>
+            <ScaleY>200</ScaleY>
+            <OriginX>53</OriginX>
+            <OriginY>79</OriginY>
+            <Duration>2</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <HitBoxes />
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>bom_fire_00003</ImageID>
+            <ScaleX>200</ScaleX>
+            <ScaleY>200</ScaleY>
+            <OriginX>51</OriginX>
+            <OriginY>117</OriginY>
+            <Duration>2</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <HitBoxes />
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>bom_fire_00004</ImageID>
+            <ScaleX>200</ScaleX>
+            <ScaleY>200</ScaleY>
+            <OriginX>51</OriginX>
+            <OriginY>117</OriginY>
+            <Duration>2</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <HitBoxes />
+            <AttackBoxes />
+          </Frame>
+        </AnimationSegment>
+      </Segments>
+      <InitEffects>
+        <Effect xsi:type="BulletInitEffect" />
+        <Effect xsi:type="SetMotionEffect" Animation="rpg_explode_fire_2" Segment="0" />
+      </InitEffects>
+      <UpdateEffects>
+        <Effect xsi:type="TimeStopCheckEffect" />
+      </UpdateEffects>
+      <KeyFrameEffects>
+        <ArrayOfEffect>
+          <Effect xsi:type="ReleaseActorEffect" />
+        </ArrayOfEffect>
+      </KeyFrameEffects>
+    </Action>
+    <Action ActionID="attack_front_air" ImageID="Homura_jump0004">
+      <Segments>
+        <AnimationSegment CancelLevel="Heavy" IsLoop="false">
+          <Frame>
+            <ImageID>Homura_jump0004</ImageID>
+            <OriginX>36</OriginX>
+            <OriginY>109</OriginY>
+            <Duration>3</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-99" W="44" H="76" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>Homura_minimi0000</ImageID>
+            <OriginX>54</OriginX>
+            <OriginY>100</OriginY>
+            <Duration>3</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-99" W="44" H="76" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>Homura_RPGair0000</ImageID>
+            <OriginX>59</OriginX>
+            <OriginY>109</OriginY>
+            <Duration>3</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-99" W="44" H="76" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>Homura_RPGair0002</ImageID>
+            <OriginX>59</OriginX>
+            <OriginY>109</OriginY>
+            <Duration>3</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-99" W="44" H="76" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>Homura_RPGair0003</ImageID>
+            <OriginX>59</OriginX>
+            <OriginY>109</OriginY>
+            <Duration>3</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-99" W="44" H="76" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>Homura_RPGair0004</ImageID>
+            <OriginX>59</OriginX>
+            <OriginY>109</OriginY>
+            <Duration>3</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-99" W="44" H="76" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>Homura_RPGair0005</ImageID>
+            <OriginX>59</OriginX>
+            <OriginY>109</OriginY>
+            <Duration>5</Duration>
+            <Points>
+              <FramePoint X="54" Y="-73" />
+              <FramePoint X="-46" Y="-71" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-99" W="44" H="76" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+        </AnimationSegment>
+        <AnimationSegment CancelLevel="Heavy" IsLoop="false" JumpCancellable="0" SkillCancellable="3">
+          <Frame>
+            <ImageID>Homura_RPGair0006</ImageID>
+            <OriginX>59</OriginX>
+            <OriginY>109</OriginY>
+            <Duration>3</Duration>
+            <Points>
+              <FramePoint X="54" Y="-73" />
+              <FramePoint X="-46" Y="-71" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-99" W="44" H="76" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>Homura_RPGair0007</ImageID>
+            <OriginX>59</OriginX>
+            <OriginY>109</OriginY>
+            <Duration>10</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-99" W="44" H="76" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>Homura_RPGair0008</ImageID>
+            <OriginX>59</OriginX>
+            <OriginY>109</OriginY>
+            <Duration>5</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-99" W="44" H="76" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>Homura_RPGair0009</ImageID>
+            <OriginX>59</OriginX>
+            <OriginY>109</OriginY>
+            <Duration>5</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-99" W="44" H="76" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>Homura_RPGair0010</ImageID>
+            <OriginX>59</OriginX>
+            <OriginY>109</OriginY>
+            <Duration>5</Duration>
+            <Points>
+              <FramePoint X="-15" Y="-66" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-99" W="44" H="76" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+        </AnimationSegment>
+        <AnimationSegment CancelLevel="Heavy" IsLoop="false" JumpCancellable="0" SkillCancellable="0">
+          <Frame>
+            <ImageID>Homura_RPGair0011</ImageID>
+            <OriginX>59</OriginX>
+            <OriginY>111</OriginY>
+            <Duration>15</Duration>
+            <Points>
+              <FramePoint X="-15" Y="-66" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-99" W="44" H="76" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>Homura_RPGair0012</ImageID>
+            <OriginX>55</OriginX>
+            <OriginY>114</OriginY>
+            <Duration>5</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-99" W="44" H="76" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>Homura_jump0004</ImageID>
+            <OriginX>36</OriginX>
+            <OriginY>109</OriginY>
+            <Duration>4</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-99" W="44" H="76" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+        </AnimationSegment>
+      </Segments>
+      <InitEffects>
+        <Effect xsi:type="PlayerSkillInitEffect" IsInAir="true" AutoCancel="true" />
+        <Effect xsi:type="SetActorMemberEffect" Type="vx">
+          <Value xsi:type="BinaryExpressionValue" Operator="Multiply">
+            <Left xsi:type="ActorMemberValue" Type="vx" />
+            <Right xsi:type="ConstValue" Value="0.25" />
+          </Value>
+        </Effect>
+        <Effect xsi:type="SetActorMemberEffect" Type="vy">
+          <Value xsi:type="BinaryExpressionValue" Operator="Multiply">
+            <Left xsi:type="ActorMemberValue" Type="vy" />
+            <Right xsi:type="ConstValue" Value="0.1" />
+          </Value>
+        </Effect>
+      </InitEffects>
+      <UpdateEffects>
+        <Effect xsi:type="FilteredEffect">
+          <Filter xsi:type="AnimationSegmentFilter" Segment="0" />
+          <Effect xsi:type="GravityEffect">
+            <Value>0.025</Value>
+          </Effect>
+        </Effect>
+        <Effect xsi:type="FilteredEffect">
+          <Filter xsi:type="AnimationSegmentFilter" Segment="2" />
+          <Effect xsi:type="GravityEffect">
+            <Value>0.025</Value>
+          </Effect>
+        </Effect>
+      </UpdateEffects>
+      <KeyFrameEffects>
+        <ArrayOfEffect>
+          <Effect xsi:type="SetActorMemberEffect" Type="vx">
+            <Value xsi:type="BinaryExpressionValue" Operator="Add">
+              <Left xsi:type="ActorMemberValue" Type="vx" />
+              <Right xsi:type="ConstValue" Value="-4" />
+            </Value>
+          </Effect>
+          <Effect xsi:type="SetActorMemberEffect" Type="vy">
+            <Value xsi:type="BinaryExpressionValue" Operator="Add">
+              <Left xsi:type="ActorMemberValue" Type="vy" />
+              <Right xsi:type="ConstValue" Value="-10" />
+            </Value>
+          </Effect>
+          <Effect xsi:type="CreateBulletEffect">
+            <Position xsi:type="FrameSinglePointProvider" Index="0" />
+            <ActionName>rpg</ActionName>
+            <Direction>Same</Direction>
+          </Effect>
+          <Effect xsi:type="CreateBulletEffect">
+            <Position xsi:type="FrameSinglePointProvider" Index="1" />
+            <ActionName>system_smoke_3</ActionName>
+            <Direction>Opposite</Direction>
+          </Effect>
+        </ArrayOfEffect>
+        <ArrayOfEffect>
+          <Effect xsi:type="CreateBulletEffect">
+            <Position xsi:type="FrameSinglePointProvider" Index="0" />
+            <ActionName>rpg_drop</ActionName>
+            <Direction>Same</Direction>
+          </Effect>
+        </ArrayOfEffect>
+        <ArrayOfEffect>
+          <Effect xsi:type="PlayerEndToFreeMoveEffect" />
+        </ArrayOfEffect>
+      </KeyFrameEffects>
+    </Action>
   </Actions>
   <Exporter xsi:type="PlayerExporter">
     <Animations>
@@ -3840,6 +4773,7 @@
       <Skill xsi:type="NormalSkill" Key="KeyC" AirState="AirOnly" CancelLevel="Magic" MagicUse="50" ActionID="magic_air" />
       <Skill xsi:type="NormalSkill" Key="KeyB" X="Empty" Y="Empty" AirState="AirOnly" CancelLevel="Long" ActionID="attack_long_air" />
       <Skill xsi:type="NormalSkill" Key="KeyB" X="Front" Y="Empty" CancelLevel="Heavy" ActionID="attack_front" />
+      <Skill xsi:type="NormalSkill" Key="KeyB" X="Front" Y="Empty" AirState="AirOnly" CancelLevel="Heavy" ActionID="attack_front_air" />
     </Skills>
     <BaseIndex>0</BaseIndex>
     <PlayerName>Homura</PlayerName>

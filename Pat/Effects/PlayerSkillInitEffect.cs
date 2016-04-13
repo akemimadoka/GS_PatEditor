@@ -53,7 +53,7 @@ namespace GS_PatEditor.Pat.Effects
         public PlayerSkillSitCancelEffect()
         {
             base.Label = Simulation.ActorLabelType.Sit;
-            base.Effect = PlayerBeginStandEffect.Instance;
+            base.Effect = PlayerBeginSitEffect.Instance;
         }
     }
 
