@@ -153,6 +153,7 @@ namespace GS_PatEditor.Editor.Editable
                 else
                 {
                     var newNode = new TreeNode { Text = attr.Name };
+                    newNode.Expand();
                     node.Nodes.Add(newNode);
                     coll = newNode.Nodes;
                 }
