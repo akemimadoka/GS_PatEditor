@@ -34,6 +34,24 @@ namespace GS_PatEditor.Editor.Panels
             ctrl.Height = _Items.Sum(item => (int)item.Height) + 1;
 
             ctrl.Click += ctrl_Click;
+
+            ctrl.FindForm().MouseWheel += _Control_MouseWheel;
+            ctrl.MouseWheel += _Control_MouseWheel;
+        }
+
+        private void _Control_MouseWheel(object sender, MouseEventArgs e)
+        {
+            if (!_Control.IsMouseInRange())
+            {
+                return;
+            }
+            ScrollableControl p = _Control.Parent as ScrollableControl;
+            if (p != null)
+            {
+                var point = p.AutoScrollPosition;
+                point.Y = -point.Y + (e.Delta / -6);
+                p.AutoScrollPosition = point;
+            }
         }
 
         private void ctrl_Click(object sender, EventArgs e)
