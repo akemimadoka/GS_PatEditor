@@ -162,5 +162,13 @@ namespace GS_PatEditor.Editor
                 listBox1.Items[s] = txt + "(" + effects.Count() + ")";
             }
         }
+
+        private void listBox1_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (button3.Enabled)
+            {
+                button3_Click(null, EventArgs.Empty);
+            }
+        }
     }
 }
