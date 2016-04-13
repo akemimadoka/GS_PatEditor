@@ -614,6 +614,11 @@
       <W>128</W>
       <H>128</H>
     </FrameImage>
+    <FrameImage ImageID="AT4">
+      <Resource>AT4.cv2</Resource>
+      <W>128</W>
+      <H>64</H>
+    </FrameImage>
   </Images>
   <Actions>
     <Action ActionID="stand" ImageID="Homura_stand0000">
@@ -3254,7 +3259,13 @@
             <Direction>Same</Direction>
           </Effect>
         </ArrayOfEffect>
-        <ArrayOfEffect />
+        <ArrayOfEffect>
+          <Effect xsi:type="CreateBulletEffect">
+            <Position xsi:type="FrameSinglePointProvider" Index="0" />
+            <ActionName>rpg_drop</ActionName>
+            <Direction>Same</Direction>
+          </Effect>
+        </ArrayOfEffect>
         <ArrayOfEffect>
           <Effect xsi:type="PlayerEndToFreeMoveEffect" />
         </ArrayOfEffect>
@@ -3727,6 +3738,12 @@
         <Effect xsi:type="SetPriorityEffect">
           <Value>250</Value>
         </Effect>
+        <Effect xsi:type="SetActorMemberEffect" Type="sx">
+          <Value xsi:type="RandomFloatValue" Max="0.9" Min="0.5" Step="0.01" />
+        </Effect>
+        <Effect xsi:type="SetActorMemberEffect" Type="sy">
+          <Value xsi:type="ActorMemberValue" Type="sx" />
+        </Effect>
       </InitEffects>
       <UpdateEffects>
         <Effect xsi:type="TimeStopCheckEffect" />
@@ -3758,6 +3775,52 @@
           <Effect xsi:type="ReleaseActorEffect" />
         </ArrayOfEffect>
       </KeyFrameEffects>
+    </Action>
+    <Action ActionID="rpg_drop" ImageID="AT4">
+      <Segments>
+        <AnimationSegment CancelLevel="Free" IsLoop="true">
+          <Frame>
+            <ImageID>AT4</ImageID>
+            <OriginX>61</OriginX>
+            <OriginY>41</OriginY>
+            <Duration>3</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <HitBoxes />
+            <AttackBoxes />
+          </Frame>
+        </AnimationSegment>
+      </Segments>
+      <InitEffects>
+        <Effect xsi:type="BulletInitEffect" />
+        <Effect xsi:type="SetMotionEffect" Animation="rpg_drop" Segment="0" />
+        <Effect xsi:type="SetActorMemberEffect" Type="vx">
+          <Value xsi:type="ConstValue" Value="-4" />
+        </Effect>
+        <Effect xsi:type="SetActorMemberEffect" Type="vy">
+          <Value xsi:type="ConstValue" Value="1.5" />
+        </Effect>
+      </InitEffects>
+      <UpdateEffects>
+        <Effect xsi:type="TimeStopCheckEffect" />
+        <Effect xsi:type="SetActorMemberEffect" Type="rz">
+          <Value xsi:type="BinaryExpressionValue" Operator="Add">
+            <Left xsi:type="ActorMemberValue" Type="rz" />
+            <Right xsi:type="ConstValue" Value="-0.05236" />
+          </Value>
+        </Effect>
+        <Effect xsi:type="SetActorMemberEffect" Type="vy">
+          <Value xsi:type="BinaryExpressionValue" Operator="Add">
+            <Left xsi:type="ActorMemberValue" Type="vy" />
+            <Right xsi:type="ConstValue" Value="0.25" />
+          </Value>
+        </Effect>
+        <Effect xsi:type="BulletReduceAlphaEffect" Value="0.05" />
+      </UpdateEffects>
+      <KeyFrameEffects />
     </Action>
   </Actions>
   <Exporter xsi:type="PlayerExporter">
