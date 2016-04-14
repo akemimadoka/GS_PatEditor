@@ -782,7 +782,7 @@
     </FrameImage>
   </Images>
   <Actions>
-    <Action ActionID="stand" ImageID="Homura_stand0000">
+    <Action ActionID="stand" Category="system" ImageID="Homura_stand0000">
       <Segments>
         <AnimationSegment CancelLevel="Free" IsLoop="true">
           <Frame>
@@ -919,7 +919,7 @@
       <UpdateEffects />
       <KeyFrameEffects />
     </Action>
-    <Action ActionID="walk" ImageID="Homura_run0000">
+    <Action ActionID="walk" Category="system" ImageID="Homura_run0000">
       <Segments>
         <AnimationSegment CancelLevel="Free" IsLoop="true">
           <Frame>
@@ -1064,7 +1064,7 @@
       <UpdateEffects />
       <KeyFrameEffects />
     </Action>
-    <Action ActionID="attack" ImageID="Homura_handGun0000">
+    <Action ActionID="attack" Category="" ImageID="Homura_handGun0000">
       <Segments>
         <AnimationSegment CancelLevel="Light" IsLoop="false">
           <Frame>
@@ -1267,7 +1267,7 @@
       <UpdateEffects />
       <KeyFrameEffects />
     </Action>
-    <Action ActionID="assult_rifle" ImageID="shotFlashA000">
+    <Action ActionID="assult_rifle" Category="shot_common" ImageID="shotFlashA000">
       <Segments>
         <AnimationSegment CancelLevel="Free" IsLoop="true">
           <Frame>
@@ -1317,7 +1317,7 @@
       </UpdateEffects>
       <KeyFrameEffects />
     </Action>
-    <Action ActionID="drop_shell" ImageID="yakkyouA">
+    <Action ActionID="drop_shell" Category="shot_common" ImageID="yakkyouA">
       <Segments>
         <AnimationSegment CancelLevel="Free" IsLoop="true">
           <Frame>
@@ -1434,7 +1434,7 @@
       </UpdateEffects>
       <KeyFrameEffects />
     </Action>
-    <Action ActionID="attack_long" ImageID="Homura_minimiB0000">
+    <Action ActionID="attack_long" Category="attack_long" ImageID="Homura_minimiB0000">
       <Segments>
         <AnimationSegment CancelLevel="Long" IsLoop="false">
           <Frame>
@@ -1719,7 +1719,7 @@
         </ArrayOfEffect>
       </KeyFrameEffects>
     </Action>
-    <Action ActionID="attack_long_bullet" ImageID="shotA000">
+    <Action ActionID="attack_long_bullet" Category="attack_long" ImageID="shotA000">
       <Segments>
         <AnimationSegment CancelLevel="Free" IsLoop="true">
           <Frame>
@@ -1799,7 +1799,7 @@
       </UpdateEffects>
       <KeyFrameEffects />
     </Action>
-    <Action ActionID="bullet_hit_effect" ImageID="shotFlashB000">
+    <Action ActionID="bullet_hit_effect" Category="shot_common" ImageID="shotFlashB000">
       <Segments>
         <AnimationSegment CancelLevel="Free" IsLoop="true">
           <Frame>
@@ -1866,7 +1866,7 @@
       </UpdateEffects>
       <KeyFrameEffects />
     </Action>
-    <Action ActionID="jump_up" ImageID="Homura_jump0000">
+    <Action ActionID="jump_up" Category="system" ImageID="Homura_jump0000">
       <Segments>
         <AnimationSegment CancelLevel="Free" IsLoop="false">
           <Frame>
@@ -2005,7 +2005,7 @@
       <UpdateEffects />
       <KeyFrameEffects />
     </Action>
-    <Action ActionID="jump_front" ImageID="Homura_jump0001">
+    <Action ActionID="jump_front" Category="system" ImageID="Homura_jump0001">
       <Segments>
         <AnimationSegment CancelLevel="Free" IsLoop="false">
           <Frame>
@@ -2208,7 +2208,7 @@
       <UpdateEffects />
       <KeyFrameEffects />
     </Action>
-    <Action ActionID="fall" ImageID="Homura_jump0005">
+    <Action ActionID="fall" Category="system" ImageID="Homura_jump0005">
       <Segments>
         <AnimationSegment CancelLevel="Free" IsLoop="true">
           <Frame>
@@ -2265,7 +2265,7 @@
       <UpdateEffects />
       <KeyFrameEffects />
     </Action>
-    <Action ActionID="magic" ImageID="Homura_mortar0000">
+    <Action ActionID="magic" Category="magic" ImageID="Homura_mortar0000">
       <Segments>
         <AnimationSegment CancelLevel="Magic" IsLoop="false">
           <Frame>
@@ -2417,7 +2417,7 @@
         </ArrayOfEffect>
       </KeyFrameEffects>
     </Action>
-    <Action ActionID="magic_air" ImageID="Homura_jump0003">
+    <Action ActionID="magic_air" Category="magic" ImageID="Homura_jump0003">
       <Segments>
         <AnimationSegment CancelLevel="Magic" IsLoop="false">
           <Frame>
@@ -2622,7 +2622,7 @@
         </ArrayOfEffect>
       </KeyFrameEffects>
     </Action>
-    <Action ActionID="attack_long_air" ImageID="Homura_minimi0000">
+    <Action ActionID="attack_long_air" Category="attack_long" ImageID="Homura_minimi0000">
       <Segments>
         <AnimationSegment CancelLevel="Long" IsLoop="false">
           <Frame>
@@ -2959,7 +2959,7 @@
         </ArrayOfEffect>
       </KeyFrameEffects>
     </Action>
-    <Action ActionID="attack_long_air_bullet" ImageID="shotA000">
+    <Action ActionID="attack_long_air_bullet" Category="attack_long" ImageID="shotA000">
       <Segments>
         <AnimationSegment CancelLevel="Free" IsLoop="true">
           <Frame>
@@ -3036,7 +3036,7 @@
       </UpdateEffects>
       <KeyFrameEffects />
     </Action>
-    <Action ActionID="system_smoke_0" ImageID="effect_kemuriA_00000">
+    <Action ActionID="system_smoke_0" Category="effects" ImageID="effect_kemuriA_00000">
       <Segments>
         <AnimationSegment CancelLevel="Free" IsLoop="false">
           <Frame>
@@ -3163,7 +3163,7 @@
       <UpdateEffects />
       <KeyFrameEffects />
     </Action>
-    <Action ActionID="attack_front" ImageID="Homura_minimiB0000">
+    <Action ActionID="attack_front" Category="attack_front" ImageID="Homura_minimiB0000">
       <Segments>
         <AnimationSegment CancelLevel="Heavy" IsLoop="false">
           <Frame>
@@ -3432,7 +3432,7 @@
         </ArrayOfEffect>
       </KeyFrameEffects>
     </Action>
-    <Action ActionID="system_smoke_3" ImageID="effect_kemuriC_00000">
+    <Action ActionID="system_smoke_3" Category="effects" ImageID="effect_kemuriC_00000">
       <Segments>
         <AnimationSegment CancelLevel="Free" IsLoop="false">
           <Frame>
@@ -3554,7 +3554,7 @@
         </ArrayOfEffect>
       </KeyFrameEffects>
     </Action>
-    <Action ActionID="rpg" ImageID="bazooka_tama">
+    <Action ActionID="rpg" Category="attack_front" ImageID="bazooka_tama">
       <Segments>
         <AnimationSegment CancelLevel="Free" IsLoop="true">
           <Frame>
@@ -3648,7 +3648,7 @@
       </UpdateEffects>
       <KeyFrameEffects />
     </Action>
-    <Action ActionID="rpg_tail" ImageID="bazooka_fireA_00000">
+    <Action ActionID="rpg_tail" Category="attack_front" ImageID="bazooka_fireA_00000">
       <Segments>
         <AnimationSegment CancelLevel="Free" IsLoop="true">
           <Frame>
@@ -3718,7 +3718,7 @@
       </UpdateEffects>
       <KeyFrameEffects />
     </Action>
-    <Action ActionID="rpg_smoke" ImageID="kemuri_A_00000">
+    <Action ActionID="rpg_smoke" Category="attack_front" ImageID="kemuri_A_00000">
       <Segments>
         <AnimationSegment CancelLevel="Free" IsLoop="false">
           <Frame>
@@ -3944,7 +3944,7 @@
         </ArrayOfEffect>
       </KeyFrameEffects>
     </Action>
-    <Action ActionID="rpg_drop" ImageID="AT4">
+    <Action ActionID="rpg_drop" Category="attack_front" ImageID="AT4">
       <Segments>
         <AnimationSegment CancelLevel="Free" IsLoop="true">
           <Frame>
@@ -3990,7 +3990,7 @@
       </UpdateEffects>
       <KeyFrameEffects />
     </Action>
-    <Action ActionID="rpg_explode_attack" ImageID="exploadA000">
+    <Action ActionID="rpg_explode_attack" Category="attack_front" ImageID="exploadA000">
       <Segments>
         <AnimationSegment CancelLevel="Free" IsLoop="false">
           <Frame>
@@ -4076,7 +4076,7 @@
       </UpdateEffects>
       <KeyFrameEffects />
     </Action>
-    <Action ActionID="rpg_explode_light" ImageID="exploadA000">
+    <Action ActionID="rpg_explode_light" Category="attack_front" ImageID="exploadA000">
       <Segments>
         <AnimationSegment CancelLevel="Free" IsLoop="true">
           <Frame>
@@ -4134,7 +4134,7 @@
       </UpdateEffects>
       <KeyFrameEffects />
     </Action>
-    <Action ActionID="rpg_explode_fire_1" ImageID="bom_kemuri_00001">
+    <Action ActionID="rpg_explode_fire_1" Category="attack_front" ImageID="bom_kemuri_00001">
       <Segments>
         <AnimationSegment CancelLevel="Free" IsLoop="false">
           <Frame>
@@ -4347,7 +4347,7 @@
         </ArrayOfEffect>
       </KeyFrameEffects>
     </Action>
-    <Action ActionID="rpg_explode_fire_2" ImageID="bom_fire_00000">
+    <Action ActionID="rpg_explode_fire_2" Category="attack_front" ImageID="bom_fire_00000">
       <Segments>
         <AnimationSegment CancelLevel="Free" IsLoop="false">
           <Frame>
@@ -4440,7 +4440,7 @@
         </ArrayOfEffect>
       </KeyFrameEffects>
     </Action>
-    <Action ActionID="attack_front_air" ImageID="Homura_jump0004">
+    <Action ActionID="attack_front_air" Category="attack_front" ImageID="Homura_jump0004">
       <Segments>
         <AnimationSegment CancelLevel="Heavy" IsLoop="false">
           <Frame>

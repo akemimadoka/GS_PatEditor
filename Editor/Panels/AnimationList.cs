@@ -34,9 +34,25 @@ namespace GS_PatEditor.Editor.Panels
             ctrl.Height = _Items.Sum(item => (int)item.Height) + 1;
 
             ctrl.Click += ctrl_Click;
+            ctrl.DoubleClick += ctrl_DoubleClick;
 
             ctrl.FindForm().MouseWheel += _Control_MouseWheel;
             ctrl.MouseWheel += _Control_MouseWheel;
+        }
+
+        private void ctrl_DoubleClick(object sender, EventArgs e)
+        {
+            var pos = _Control.PointToClient(Control.MousePosition);
+
+            //find the item
+            var item = FindItem(pos);
+            if (!item.CanCollapse)
+            {
+                return;
+            }
+            item.IsCollapsed = !item.IsCollapsed;
+
+            RefreshList();
         }
 
         private void _Control_MouseWheel(object sender, MouseEventArgs e)
@@ -60,6 +76,11 @@ namespace GS_PatEditor.Editor.Panels
 
             //find the item
             var item = FindItem(pos);
+            if (!item.CanSelect)
+            {
+                return;
+            }
+
             if (_SelectedItem != null)
             {
                 _SelectedItem.IsSelected = false;
@@ -115,6 +136,9 @@ namespace GS_PatEditor.Editor.Panels
         private void RefreshList()
         {
             var lastSelectedAction = _SelectedItem == null ? null : _SelectedItem.Object;
+            var unsortedItems = new List<AnimationListItem>();
+            var addedCategories = new HashSet<string>();
+            var lastCollapsed = _Items.Where(i => i.CanCollapse && i.IsCollapsed).Select(i => i.CategoryName).ToArray();
 
             _Items.Clear();
 
@@ -122,7 +146,41 @@ namespace GS_PatEditor.Editor.Panels
             for (int i = 0; i < list.Count; ++i)
             {
                 var a = list[i];
-                _Items.Add(CreateItemForAnimation(a,  i));
+                unsortedItems.Add(CreateItemForAnimation(a, i));
+            }
+
+            foreach (var item in unsortedItems)
+            {
+                var c = item.Object.Category;
+                if (c != null && c.Length > 0 && !addedCategories.Contains(c))
+                {
+                    addedCategories.Add(c);
+                    var items = unsortedItems.Where(i => i.Object.Category == c);
+                    var ci = new AnimationListItem(c, "" + items.Count() + " animation(s)", c);
+                    _Items.Add(ci);
+                    if (lastCollapsed.Contains(ci.CategoryName))
+                    {
+                        ci.IsCollapsed = true;
+                    }
+                    else
+                    {
+                        _Items.AddRange(items);
+                    }
+                }
+            }
+            {
+                var items = unsortedItems
+                    .Where(i => i.Object.Category == null || i.Object.Category.Length == 0);
+                var ci = new AnimationListItem("uncategoried", "" + items.Count() + " animation(s)", "");
+                _Items.Add(ci);
+                if (lastCollapsed.Contains(ci.CategoryName))
+                {
+                    ci.IsCollapsed = true;
+                }
+                else
+                {
+                    _Items.AddRange(items);
+                }
             }
 
             if (_Control != null)
@@ -131,11 +189,13 @@ namespace GS_PatEditor.Editor.Panels
                 _Control.Invalidate();
             }
 
-            _SelectedItem = _Items.FirstOrDefault(i => i.Object == lastSelectedAction);
+            _SelectedItem = _Items.FirstOrDefault(i => i.CanSelect && i.Object == lastSelectedAction);
             if (_SelectedItem != null)
             {
                 _SelectedItem.IsSelected = true;
             }
+
+            //TODO ensure visible
 
             if (SelectedChange != null)
             {
@@ -237,15 +297,18 @@ namespace GS_PatEditor.Editor.Panels
         {
             if (_SelectedItem != null)
             {
-                var dialog = new AnimationPropertyFrom();
+                var dialog = new AnimationPropertyFrom(_Parent.Project);
                 
                 var id = _SelectedItem.Index;
 
                 var currentAnimation = _Parent.Project.Actions[id];
                 dialog.AnimationID = currentAnimation.ActionID;
+                dialog.Category = currentAnimation.Category;
+
                 if (dialog.ShowDialog() == DialogResult.OK)
                 {
                     currentAnimation.ActionID = dialog.AnimationID;
+                    currentAnimation.Category = dialog.Category;
 
                     RefreshList();
 

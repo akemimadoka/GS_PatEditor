@@ -38,17 +38,38 @@ namespace GS_PatEditor.Editor.Panels
             _Desc = desc;
             _Index = index;
             _Obj = obj;
+
+            CanSelect = true;
         }
 
+        public AnimationListItem(string displayName, string desc, string catName)
+        {
+            _Text = displayName;
+            _Desc = desc;
+            _Index = -1;
+            _Obj = null;
+
+            CategoryName = catName;
+            CanSelect = false;
+        }
+
+        public bool CanSelect { get; private set; }
+        public bool CanCollapse { get { return !CanSelect; } }
+
         public bool IsSelected { get; set; }
+        public bool IsCollapsed { get; set; }
+
         public float Height { get { return FrameGridSize; } }
         public int Index { get { return _Index; } }
         public Pat.Action Object { get { return _Obj; } }
+
+        public string CategoryName { get; private set; }
 
         private Pen _Pen = Pens.Black;
         private Brush _BrushBackground = new SolidBrush(Color.FromArgb(200, 200, 200));
         private Brush _Brush = Brushes.Black;
         private Brush _BrushDesc = Brushes.Gray;
+        private Brush _BrushBackground2 = new SolidBrush(Color.FromArgb(230, 230, 230));
         private static Font _Font = new Font("Times New Roman", FrameGridSize / 5);
 
         public void Render(Graphics g, float w)
@@ -59,6 +80,11 @@ namespace GS_PatEditor.Editor.Panels
             {
                 g.FillRectangle(_BrushBackground, 0, 0, width, FrameGridSize);
             }
+            else if (_Index == -1)
+            {
+                g.FillRectangle(_BrushBackground2, 0, 0, width, FrameGridSize);
+            }
+
             g.DrawLine(_Pen, 0, 0, width, 0);
             g.DrawLine(_Pen, 0, FrameGridSize, width, FrameGridSize);
 

@@ -14,6 +14,9 @@ namespace GS_PatEditor.Pat
         public string ActionID;
 
         [XmlAttribute]
+        public string Category;
+
+        [XmlAttribute]
         public string ImageID;
 
         [XmlArray]

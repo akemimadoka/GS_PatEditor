@@ -12,9 +12,14 @@ namespace GS_PatEditor.Editor
 {
     public partial class AnimationPropertyFrom : Form
     {
-        public AnimationPropertyFrom()
+        public AnimationPropertyFrom(Pat.Project proj)
         {
             InitializeComponent();
+            comboBox1.Items.AddRange(proj.Actions
+                .Select(a => a.Category)
+                .Where(s => s != null && s.Length != 0)
+                .Distinct()
+                .ToArray());
         }
 
         public string AnimationID
@@ -26,6 +31,18 @@ namespace GS_PatEditor.Editor
             set
             {
                 textBox1.Text = value;
+            }
+        }
+
+        public string Category
+        {
+            get
+            {
+                return comboBox1.Text;
+            }
+            set
+            {
+                comboBox1.Text = value;
             }
         }
     }
