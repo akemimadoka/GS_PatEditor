@@ -780,6 +780,17 @@
       <W>115</W>
       <H>113</H>
     </FrameImage>
+    <FrameImage ImageID="Homura_mortarB">
+      <Resource>Homura_mortarB.cv2</Resource>
+      <W>82</W>
+      <H>90</H>
+    </FrameImage>
+    <FrameImage ImageID="mortarShellA000">
+      <Resource>mortarShellA000.cv2</Resource>
+      <AlphaBlendMode>true</AlphaBlendMode>
+      <W>128</W>
+      <H>128</H>
+    </FrameImage>
   </Images>
   <Actions>
     <Action ActionID="stand" Category="system" ImageID="Homura_stand0000">
@@ -4755,6 +4766,342 @@
         </ArrayOfEffect>
       </KeyFrameEffects>
     </Action>
+    <Action ActionID="attack_up" Category="attack_up" ImageID="Homura_mortar0000">
+      <Segments>
+        <AnimationSegment CancelLevel="Heavy" IsLoop="false">
+          <Frame>
+            <ImageID>Homura_mortar0000</ImageID>
+            <OriginX>37</OriginX>
+            <OriginY>102</OriginY>
+            <Duration>3</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-94" W="44" H="94" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>Homura_mortar0001</ImageID>
+            <OriginX>37</OriginX>
+            <OriginY>102</OriginY>
+            <Duration>3</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-94" W="44" H="94" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>Homura_mortar0002</ImageID>
+            <OriginX>37</OriginX>
+            <OriginY>102</OriginY>
+            <Duration>3</Duration>
+            <Points>
+              <FramePoint X="-100" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-94" W="44" H="94" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+        </AnimationSegment>
+        <AnimationSegment CancelLevel="Heavy" IsLoop="false" JumpCancellable="4" SkillCancellable="8">
+          <Frame>
+            <ImageID>Homura_mortar0003</ImageID>
+            <OriginX>37</OriginX>
+            <OriginY>102</OriginY>
+            <Duration>4</Duration>
+            <Points>
+              <FramePoint X="26" Y="-67" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-94" W="44" H="94" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>Homura_mortar0004</ImageID>
+            <OriginX>37</OriginX>
+            <OriginY>102</OriginY>
+            <Duration>4</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-94" W="44" H="94" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>Homura_mortar0004</ImageID>
+            <OriginX>37</OriginX>
+            <OriginY>102</OriginY>
+            <Duration>16</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-94" W="44" H="94" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>Homura_mortar0005</ImageID>
+            <OriginX>37</OriginX>
+            <OriginY>102</OriginY>
+            <Duration>6</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-94" W="44" H="94" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>Homura_mortar0006</ImageID>
+            <OriginX>37</OriginX>
+            <OriginY>102</OriginY>
+            <Duration>6</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-94" W="44" H="94" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+        </AnimationSegment>
+      </Segments>
+      <InitEffects>
+        <Effect xsi:type="PlayerSkillInitEffect" IsInAir="false" AutoCancel="true" />
+        <Effect xsi:type="SetActorMemberEffect" Type="vx">
+          <Value xsi:type="BinaryExpressionValue" Operator="Multiply">
+            <Left xsi:type="ActorMemberValue" Type="vx" />
+            <Right xsi:type="ConstValue" Value="0.25" />
+          </Value>
+        </Effect>
+      </InitEffects>
+      <UpdateEffects>
+        <Effect xsi:type="PlayerSkillStopMovingEffect">
+          <ReduceSpeed>0.2</ReduceSpeed>
+        </Effect>
+      </UpdateEffects>
+      <KeyFrameEffects>
+        <ArrayOfEffect>
+          <Effect xsi:type="CreateBulletEffect">
+            <Position xsi:type="FrameSinglePointProvider" Index="0" />
+            <ActionName>attack_up_mortar</ActionName>
+            <Direction>Same</Direction>
+          </Effect>
+        </ArrayOfEffect>
+        <ArrayOfEffect>
+          <Effect xsi:type="PlayerEndToFreeMoveEffect" />
+        </ArrayOfEffect>
+      </KeyFrameEffects>
+    </Action>
+    <Action ActionID="attack_up_mortar" Category="attack_up" ImageID="Homura_mortarB">
+      <Segments>
+        <AnimationSegment CancelLevel="Free" IsLoop="false">
+          <Frame>
+            <ImageID>Homura_mortarB</ImageID>
+            <OriginX>36</OriginX>
+            <OriginY>74</OriginY>
+            <Duration>20</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <HitBoxes />
+            <AttackBoxes />
+          </Frame>
+        </AnimationSegment>
+        <AnimationSegment CancelLevel="Free" IsLoop="false">
+          <Frame>
+            <ImageID>Homura_mortarB</ImageID>
+            <OriginX>36</OriginX>
+            <OriginY>74</OriginY>
+            <Duration>1</Duration>
+            <Points>
+              <FramePoint X="36" Y="-65" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <HitBoxes />
+            <AttackBoxes />
+          </Frame>
+        </AnimationSegment>
+        <AnimationSegment IsLoop="true">
+          <Frame>
+            <ImageID>Homura_mortarB</ImageID>
+            <OriginX>36</OriginX>
+            <OriginY>74</OriginY>
+            <Duration>2</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <HitBoxes />
+            <AttackBoxes />
+          </Frame>
+        </AnimationSegment>
+      </Segments>
+      <InitEffects>
+        <Effect xsi:type="BulletInitEffect" />
+        <Effect xsi:type="SetMotionEffect" Animation="attack_up_mortar" Segment="0" />
+      </InitEffects>
+      <UpdateEffects>
+        <Effect xsi:type="TimeStopCheckEffect" />
+        <Effect xsi:type="FilteredEffect">
+          <Filter xsi:type="AnimationSegmentFilter" Segment="2" />
+          <Effect xsi:type="BulletReduceAlphaEffect" Value="0.1" />
+        </Effect>
+      </UpdateEffects>
+      <KeyFrameEffects>
+        <ArrayOfEffect />
+        <ArrayOfEffect>
+          <Effect xsi:type="CreateBulletEffect">
+            <Position xsi:type="FrameSinglePointProvider" Index="0" />
+            <ActionName>attack_up_bullet</ActionName>
+            <Direction>Same</Direction>
+          </Effect>
+        </ArrayOfEffect>
+      </KeyFrameEffects>
+    </Action>
+    <Action ActionID="attack_up_bullet" Category="attack_up" ImageID="mortarShellA000">
+      <Segments>
+        <AnimationSegment CancelLevel="Free" IsLoop="true">
+          <Frame>
+            <ImageID>mortarShellA000</ImageID>
+            <OriginX>64</OriginX>
+            <OriginY>64</OriginY>
+            <Duration>2</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-10" Y="-10" W="20" H="20" />
+            <HitBoxes />
+            <AttackBoxes>
+              <Box X="-30" Y="-30" W="60" H="60" R="0" />
+            </AttackBoxes>
+          </Frame>
+          <Frame>
+            <ImageID>mortarShellA000</ImageID>
+            <ScaleX>150</ScaleX>
+            <ScaleY>150</ScaleY>
+            <OriginX>64</OriginX>
+            <OriginY>64</OriginY>
+            <Duration>2</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-10" Y="-10" W="20" H="20" />
+            <HitBoxes />
+            <AttackBoxes>
+              <Box X="-30" Y="-30" W="60" H="60" R="0" />
+            </AttackBoxes>
+          </Frame>
+          <Damage>
+            <AttackType>None</AttackType>
+            <BaseDamage>0</BaseDamage>
+            <HitStop>
+              <Self>0</Self>
+              <Opponent>0</Opponent>
+            </HitStop>
+            <Knockback>
+              <SpeedX>0</SpeedX>
+              <SpeedY>0</SpeedY>
+              <Gravity>0</Gravity>
+            </Knockback>
+            <SoundEffect>0</SoundEffect>
+          </Damage>
+        </AnimationSegment>
+      </Segments>
+      <InitEffects>
+        <Effect xsi:type="BulletInitEffect" />
+        <Effect xsi:type="SetMotionEffect" Animation="attack_up_bullet" Segment="0" />
+        <Effect xsi:type="SetActorMemberEffect" Type="vx">
+          <Value xsi:type="ConstValue" Value="14" />
+        </Effect>
+        <Effect xsi:type="SetActorMemberEffect" Type="vy">
+          <Value xsi:type="ConstValue" Value="-30" />
+        </Effect>
+        <Effect xsi:type="SetLabelEffect" Label="Hit">
+          <Effect xsi:type="SimpleListEffect">
+            <Effect xsi:type="CreateBulletEffect">
+              <Position xsi:type="FrameSinglePointProvider" Index="0" />
+              <ActionName>rpg_explode_attack</ActionName>
+              <Direction>Same</Direction>
+            </Effect>
+            <Effect xsi:type="ReleaseActorEffect" />
+          </Effect>
+        </Effect>
+        <Effect xsi:type="SetMaskEffect" CollisionMask="-1" CallbackMask="10" />
+      </InitEffects>
+      <UpdateEffects>
+        <Effect xsi:type="TimeStopCheckEffect" />
+        <Effect xsi:type="SetActorMemberEffect" Type="vx">
+          <Value xsi:type="BinaryExpressionValue" Operator="Multiply">
+            <Left xsi:type="ActorMemberValue" Type="vx" />
+            <Right xsi:type="ConstValue" Value="0.98" />
+          </Value>
+        </Effect>
+        <Effect xsi:type="SetActorMemberEffect" Type="vy">
+          <Value xsi:type="BinaryExpressionValue" Operator="Add">
+            <Left xsi:type="ActorMemberValue" Type="vy" />
+            <Right xsi:type="ConstValue" Value="1" />
+          </Value>
+        </Effect>
+        <Effect xsi:type="CreateBulletEffect">
+          <Position xsi:type="FrameSinglePointProvider" Index="0" AdjustSpeed="false" />
+          <ActionName>rpg_smoke</ActionName>
+          <Direction>Same</Direction>
+        </Effect>
+        <Effect xsi:type="FilteredEffect">
+          <Filter xsi:type="ValueCompareFilter">
+            <Left xsi:type="ActorMemberValue" Type="vy" />
+            <Right xsi:type="ConstValue" Value="0" />
+            <Operator>Greater</Operator>
+          </Filter>
+          <Effect xsi:type="SetMaskEffect" CollisionMask="-1" CallbackMask="14" />
+        </Effect>
+      </UpdateEffects>
+      <KeyFrameEffects />
+    </Action>
   </Actions>
   <Exporter xsi:type="PlayerExporter">
     <Animations>
@@ -4774,6 +5121,7 @@
       <Skill xsi:type="NormalSkill" Key="KeyB" X="Empty" Y="Empty" AirState="AirOnly" CancelLevel="Long" ActionID="attack_long_air" />
       <Skill xsi:type="NormalSkill" Key="KeyB" X="Front" Y="Empty" CancelLevel="Heavy" ActionID="attack_front" />
       <Skill xsi:type="NormalSkill" Key="KeyB" X="Front" Y="Empty" AirState="AirOnly" CancelLevel="Heavy" ActionID="attack_front_air" />
+      <Skill xsi:type="NormalSkill" Key="KeyB" Y="UpOnly" CancelLevel="Heavy" ActionID="attack_up" />
     </Skills>
     <BaseIndex>0</BaseIndex>
     <PlayerName>Homura</PlayerName>
