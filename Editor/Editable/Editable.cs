@@ -31,7 +31,12 @@ namespace GS_PatEditor.Editor.Editable
     class ListMultiEditable<T> : MultiEditable<T>
         where T : class
     {
-        public List<T> List;
+        public IList<T> List;
+
+        public ListMultiEditable(IList<T> list)
+        {
+            List = list;
+        }
 
         public void Remove(T val)
         {
@@ -45,17 +50,17 @@ namespace GS_PatEditor.Editor.Editable
 
         public bool IsFirst(T val)
         {
-            return List.FindIndex(i => i == val) == 0;
+            return List.IndexOf(val) == 0;
         }
 
         public bool IsLast(T val)
         {
-            return List.FindIndex(i => i == val) == List.Count - 1;
+            return List.IndexOf(val) == List.Count - 1;
         }
 
         public void MoveUp(T val)
         {
-            var index = List.FindIndex(i => i == val);
+            var index = List.IndexOf(val);
             if (index != 0)
             {
                 List.RemoveAt(index);
@@ -65,7 +70,7 @@ namespace GS_PatEditor.Editor.Editable
 
         public void MoveDown(T val)
         {
-            var index = List.FindIndex(i => i == val);
+            var index = List.IndexOf(val);
             if (index != List.Count - 1)
             {
                 List.RemoveAt(index);

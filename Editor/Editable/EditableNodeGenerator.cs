@@ -1,6 +1,7 @@
 ﻿using GS_PatEditor.Pat.Effects;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -60,7 +61,16 @@ namespace GS_PatEditor.Editor.Editable
                 }
                 else
                 {
-                    Text = Data.GetType().Name;
+                    var type = Data.GetType();
+                    var dn = type.GetCustomAttribute<DisplayNameAttribute>();
+                    if (dn != null)
+                    {
+                        Text = dn.DisplayName;
+                    }
+                    else
+                    {
+                        Text = type.Name;
+                    }
                 }
 
                 EditableNodeGenerator.SetupChildren<T>(this, Env, Data);
@@ -131,25 +141,38 @@ namespace GS_PatEditor.Editor.Editable
                 var valueF = f.GetValue(obj);
                 var typeV = f.FieldType;
                 var listInterface = typeV.GetInterfaces()
-                    .Where(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IEditableList<>))
-                    .Select(i => i.GetGenericArguments()[0])
+                    .Where(i => i.IsGenericType &&
+                        (i.GetGenericTypeDefinition() == typeof(IEditableList<>) ||
+                         i.GetGenericTypeDefinition() == typeof(IList<>)))
+                    .Select(i => new { Arg = i.GetGenericArguments()[0], Temp = i.GetGenericTypeDefinition() })
                     .FirstOrDefault();
                 if (listInterface != null)
                 {
                     //we've got a list
                     //first create our MultiEditable object
-                    var editableListT = typeof(IEditableList<>).MakeGenericType(listInterface);
-                    var editableT = typeof(Editable<>).MakeGenericType(listInterface);
-                    var treeNodeT = typeof(GenericEditableTreeNode<>).MakeGenericType(listInterface);
+                    var editableT = typeof(Editable<>).MakeGenericType(listInterface.Arg);
+                    var treeNodeT = typeof(GenericEditableTreeNode<>).MakeGenericType(listInterface.Arg);
 
-                    var me = typeof(EditableListMultiEditable<>).MakeGenericType(listInterface)
-                        .GetConstructor(new Type[] { editableListT })
-                        .Invoke(new object[] { valueF });
+                    object me;
+                    if (listInterface.Temp == typeof(IEditableList<>))
+                    {
+                        var editableListT = typeof(IEditableList<>).MakeGenericType(listInterface.Arg);
+                        me = typeof(EditableListMultiEditable<>).MakeGenericType(listInterface.Arg)
+                            .GetConstructor(new Type[] { editableListT })
+                            .Invoke(new object[] { valueF });
+                    }
+                    else
+                    {
+                        var editableListT = typeof(IList<>).MakeGenericType(listInterface.Arg);
+                        me = typeof(ListMultiEditable<>).MakeGenericType(listInterface.Arg)
+                            .GetConstructor(new Type[] { editableListT })
+                            .Invoke(new object[] { valueF });
+                    }
                     var creator1 = treeNodeT.GetConstructor(new Type[] {
-                        typeof(EditableEnvironment), listInterface, editableT });
+                        typeof(EditableEnvironment), listInterface.Arg, editableT });
                     var creator2 = treeNodeT.GetConstructor(new Type[] {
                         typeof(EditableEnvironment),
-                        typeof(MultiEditable<>).MakeGenericType(listInterface) });
+                        typeof(MultiEditable<>).MakeGenericType(listInterface.Arg) });
 
                     var list = (System.Collections.IEnumerable)valueF;
                     foreach (var item in list)

@@ -74,7 +74,7 @@ namespace GS_PatEditor.Editor.Editable
             EditableEnvironment env, List<T> list)
             where T : class
         {
-            var me = new ListMultiEditable<T> { List = list };
+            var me = new ListMultiEditable<T>(list);
             foreach (var item in list)
             {
                 coll.Add(EditableNodeGenerator.Create<T>(env, item, me));
