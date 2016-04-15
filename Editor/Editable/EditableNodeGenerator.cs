@@ -15,8 +15,8 @@ namespace GS_PatEditor.Editor.Editable
         private class GenericEditableTreeNode<T> : EditableTreeNode<T>
             where T : class
         {
-            public GenericEditableTreeNode(EditableEnvironment env, object data, Editable<T> dest)
-                : base(env, data as T, data, dest)
+            public GenericEditableTreeNode(EditableEnvironment env, object data, Editable<T> dest, string title)
+                : base(env, data as T, data, dest, title)
             {
                 if (data is IEditableEnvironment)
                 {
@@ -28,8 +28,8 @@ namespace GS_PatEditor.Editor.Editable
                 }
             }
 
-            public GenericEditableTreeNode(EditableEnvironment env, MultiEditable<T> dest)
-                : base(env, dest)
+            public GenericEditableTreeNode(EditableEnvironment env, MultiEditable<T> dest, string title)
+                : base(env, dest, title)
             {
             }
 
@@ -38,7 +38,7 @@ namespace GS_PatEditor.Editor.Editable
                 return new SelectObject<T>(obj =>
                 {
                     dest.Append((T)obj);
-                    this.InsertBefore(new GenericEditableTreeNode<T>(Env, obj, dest));
+                    this.InsertBefore(new GenericEditableTreeNode<T>(Env, obj, dest, Title));
                 }, Env);
             }
 
@@ -48,16 +48,25 @@ namespace GS_PatEditor.Editor.Editable
                 ret = new GenericEditableTreeNode<T>(Env, new SelectObject<T>(obj =>
                 {
                     dest.Reset((T)obj);
-                    ret.Replace(new GenericEditableTreeNode<T>(Env, obj, dest));
-                }, Env), null);
+                    ret.Replace(new GenericEditableTreeNode<T>(Env, obj, dest, Title));
+                }, Env), null, Title);
                 return ret;
+            }
+
+            private string MakeText(string str)
+            {
+                if (Title == null)
+                {
+                    return str;
+                }
+                return Title + "(" + str + ")";
             }
 
             protected override void SetupCommon()
             {
                 if (Data == null)
                 {
-                    Text = "<select>";
+                    Text = MakeText("select");
                 }
                 else
                 {
@@ -65,11 +74,11 @@ namespace GS_PatEditor.Editor.Editable
                     var dn = type.GetCustomAttribute<DisplayNameAttribute>();
                     if (dn != null)
                     {
-                        Text = dn.DisplayName;
+                        Text = MakeText(dn.DisplayName);
                     }
                     else
                     {
-                        Text = type.Name;
+                        Text = MakeText(type.Name);
                     }
                 }
 
@@ -95,16 +104,16 @@ namespace GS_PatEditor.Editor.Editable
             }
         }
 
-        public static EditableTreeNode<T> Create<T>(EditableEnvironment env, T value, Editable<T> dest)
+        public static EditableTreeNode<T> Create<T>(EditableEnvironment env, T value, Editable<T> dest, string title = null)
             where T : class
         {
-            return new GenericEditableTreeNode<T>(env, value, dest);
+            return new GenericEditableTreeNode<T>(env, value, dest, title);
         }
 
-        public static EditableTreeNode<T> Create<T>(EditableEnvironment env, MultiEditable<T> dest)
+        public static EditableTreeNode<T> Create<T>(EditableEnvironment env, MultiEditable<T> dest, string title = null)
             where T : class
         {
-            return new GenericEditableTreeNode<T>(env, dest);
+            return new GenericEditableTreeNode<T>(env, dest, title);
         }
 
         private static void SetupChildren<T>(TreeNode node, EditableEnvironment env, T obj)
@@ -126,7 +135,7 @@ namespace GS_PatEditor.Editor.Editable
                 }
 
                 TreeNodeCollection coll;
-                if (attr.Name == null)
+                if (attr.Name == null || attr.Merged)
                 {
                     coll = node.Nodes;
                 }
@@ -146,6 +155,10 @@ namespace GS_PatEditor.Editor.Editable
                          i.GetGenericTypeDefinition() == typeof(IList<>)))
                     .Select(i => new { Arg = i.GetGenericArguments()[0], Temp = i.GetGenericTypeDefinition() })
                     .FirstOrDefault();
+
+                var typeString = typeof(string);
+                var title = attr.Merged ? attr.Name : null;
+
                 if (listInterface != null)
                 {
                     //we've got a list
@@ -169,18 +182,18 @@ namespace GS_PatEditor.Editor.Editable
                             .Invoke(new object[] { valueF });
                     }
                     var creator1 = treeNodeT.GetConstructor(new Type[] {
-                        typeof(EditableEnvironment), listInterface.Arg, editableT });
+                        typeof(EditableEnvironment), listInterface.Arg, editableT, typeString });
                     var creator2 = treeNodeT.GetConstructor(new Type[] {
                         typeof(EditableEnvironment),
-                        typeof(MultiEditable<>).MakeGenericType(listInterface.Arg) });
+                        typeof(MultiEditable<>).MakeGenericType(listInterface.Arg), typeString });
 
                     var list = (System.Collections.IEnumerable)valueF;
                     foreach (var item in list)
                     {
-                        var newNode = (TreeNode)creator1.Invoke(new object[] { env, item, me });
+                        var newNode = (TreeNode)creator1.Invoke(new object[] { env, item, me, title });
                         coll.Add(newNode);
                     }
-                    coll.Add((TreeNode)creator2.Invoke(new object[] { env, me }));
+                    coll.Add((TreeNode)creator2.Invoke(new object[] { env, me, title }));
                 }
                 else
                 {
@@ -189,8 +202,8 @@ namespace GS_PatEditor.Editor.Editable
                         .GetConstructor(new Type[] { typeof(object), typeof(FieldInfo) })
                         .Invoke(new object[] { obj, f });
                     var creator = typeof(GenericEditableTreeNode<>).MakeGenericType(typeV)
-                        .GetConstructor(new Type[] { typeof(EditableEnvironment), typeV, editableT });
-                    var newNode = (IEditableTreeNode)creator.Invoke(new object[] { env, valueF, se });
+                        .GetConstructor(new Type[] { typeof(EditableEnvironment), typeV, editableT, typeString });
+                    var newNode = (IEditableTreeNode)creator.Invoke(new object[] { env, valueF, se, title });
                     coll.Add((TreeNode)newNode);
                     if (valueF == null)
                     {
@@ -214,10 +227,12 @@ namespace GS_PatEditor.Editor.Editable
     public class EditorChildNodeAttribute : Attribute
     {
         public string Name { get; private set; }
+        public bool Merged { get; private set; }
 
-        public EditorChildNodeAttribute(string name)
+        public EditorChildNodeAttribute(string name, bool merged = true)
         {
             Name = name;
+            Merged = merged;
         }
     }
 }

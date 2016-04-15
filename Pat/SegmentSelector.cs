@@ -118,4 +118,28 @@ namespace GS_PatEditor.Pat
             return base.ConvertTo(context, culture, value, destinationType);
         }
     }
+
+    public static class SegmentSelectorHelper
+    {
+        public static void MakeEffectsAsUpdate(ActionEffects dest, SegmentSelector ss, Effect effect)
+        {
+            IEnumerable<int> segments;
+            if (ss.IsReversed)
+            {
+                segments = Enumerable.Range(0, dest.SegmentCount).Except(ss.IndexList);
+            }
+            else
+            {
+                segments = ss.IndexList;
+            }
+            foreach (var s in segments)
+            {
+                dest.UpdateEffects.Add(new FilteredEffect
+                {
+                    Filter = new Effects.AnimationSegmentFilter { Segment = s },
+                    Effect = effect,
+                });
+            }
+        }
+    }
 }

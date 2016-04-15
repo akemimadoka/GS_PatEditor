@@ -15,21 +15,7 @@ namespace GS_PatEditor.Pat.Behaviors
     [SerializationBaseClassAttribute]
     public abstract class PlayerGroundSpeedCtrlBehaviorEntry
     {
-        [XmlElement]
-        public SegmentSelector Segments { get; set; }
-        public bool ShouldSerializeSegments()
-        {
-            return !(Segments != null && Segments.Index == "*");
-        }
-
-        [XmlIgnore]
-        [Browsable(false)]
-        public abstract Effect Effect { get; }
-
-        public PlayerGroundSpeedCtrlBehaviorEntry()
-        {
-            Segments = new SegmentSelector { Index = "*" };
-        }
+        public abstract void MakeEffects(ActionEffects effects);
     }
 
     [Serializable]
@@ -40,16 +26,155 @@ namespace GS_PatEditor.Pat.Behaviors
         [DefaultValue(0.2f)]
         public float Value { get; set; }
 
+        [XmlElement]
+        public SegmentSelector Segments { get; set; }
+        public bool ShouldSerializeSegments()
+        {
+            return !(Segments != null && Segments.Index == "*");
+        }
+
         public PlayerGroundSpeedCtrlBehaviorEntryFriction()
         {
             Value = 0.2f;
+            Segments = new SegmentSelector { Index = "*" };
         }
 
-        public override Effect Effect
+        private Effect GetEffect()
         {
-            get
+            return new Effects.PlayerSkillStopMovingEffect { ReduceSpeed = Value };
+        }
+
+        public override void MakeEffects(ActionEffects effects)
+        {
+            SegmentSelectorHelper.MakeEffectsAsUpdate(effects, Segments, GetEffect());
+        }
+    }
+
+    [Serializable]
+    [DisplayName("Recoil")]
+    public class PlayerGroundSpeedCtrlBehaviorEntryRecoil : PlayerGroundSpeedCtrlBehaviorEntry
+    {
+        [XmlElement]
+        [EditorChildNode("Time")]
+        public Time Time;
+
+        [XmlElement]
+        [DefaultValue(null)]
+        public float? CheckBefore { get; set; }
+
+        [XmlElement]
+        [DefaultValue(false)]
+        public bool StrictCheckBefore { get; set; }
+
+        [XmlElement]
+        public float Value { get; set; }
+
+        [XmlElement]
+        [DefaultValue(null)]
+        public float? CheckAfter { get; set; }
+
+        public override void MakeEffects(ActionEffects effects)
+        {
+            if (Value == 0)
             {
-                return new Effects.PlayerSkillStopMovingEffect { ReduceSpeed = Value };
+                return;
+            }
+            var e = MakeValue();
+            if (CheckAfter.HasValue)
+            {
+                var sle = new SimpleListEffect();
+                sle.EffectList.Add(e);
+                sle.EffectList.Add(MakeCheckAfter());
+                e = sle;
+            }
+            if (CheckBefore.HasValue)
+            {
+                e = MakeCheckBefore(e);
+            }
+            Time.MakeEffects(effects, e);
+        }
+
+        private Effect MakeCheckBefore(Effect e)
+        {
+            var cmp = StrictCheckBefore ? CompareOperator.Greater : CompareOperator.GreaterOrEqual;
+            var cv = new ConstValue { Value = CheckBefore.Value };
+            var pv = new Effects.ActorMemberValue { Type = ActorMemberType.vx };
+            if (Value > 0)
+            {
+                return new FilteredEffect
+                {
+                    Filter = new Effects.ValueCompareFilter
+                    {
+                        Operator = cmp,
+                        Left = cv,
+                        Right = pv,
+                    },
+                    Effect = e,
+                };
+            }
+            else
+            {
+                return new FilteredEffect
+                {
+                    Filter = new Effects.ValueCompareFilter
+                    {
+                        Operator = cmp,
+                        Left = pv,
+                        Right = cv,
+                    },
+                    Effect = e,
+                };
+            }
+        }
+
+        private Effect MakeValue()
+        {
+            return new Effects.SetActorMemberEffect
+            {
+                Type = ActorMemberType.vx,
+                Value = new BinaryExpressionValue
+                {
+                    Operator = BinaryOperator.Add,
+                    Left = new ActorMemberValue { Type = ActorMemberType.vx },
+                    Right = new ConstValue { Value = Value },
+                },
+            };
+        }
+
+        private Effect MakeCheckAfter()
+        {
+            var cv = new ConstValue { Value = CheckAfter.Value };
+            var pv = new Effects.ActorMemberValue { Type = ActorMemberType.vx };
+            var e = new Effects.SetActorMemberEffect
+            {
+                Type = ActorMemberType.vx,
+                Value = cv,
+            };
+            if (Value > 0)
+            {
+                return new FilteredEffect
+                {
+                    Filter = new Effects.ValueCompareFilter
+                    {
+                        Operator = CompareOperator.Greater,
+                        Left = pv,
+                        Right = cv,
+                    },
+                    Effect = e,
+                };
+            }
+            else
+            {
+                return new FilteredEffect
+                {
+                    Filter = new Effects.ValueCompareFilter
+                    {
+                        Operator = CompareOperator.Greater,
+                        Left = cv,
+                        Right = pv,
+                    },
+                    Effect = e,
+                };
             }
         }
     }
@@ -57,9 +182,12 @@ namespace GS_PatEditor.Pat.Behaviors
     [Serializable]
     public class PlayerGroundSpeedCtrlBehavior : Behavior
     {
-        [XmlAttribute]
-        [DefaultValue(true)]
-        public bool ReduceInitialSpeed { get; set; }
+        [XmlElement]
+        public float? ReduceInitialSpeed { get; set; }
+        public bool ShouldSerializeReduceInitialSpeed()
+        {
+            return !(ReduceInitialSpeed.HasValue && ReduceInitialSpeed.Value == 0.25f);
+        }
 
         [XmlArray]
         [EditorChildNode(null)]
@@ -67,11 +195,15 @@ namespace GS_PatEditor.Pat.Behaviors
 
         public PlayerGroundSpeedCtrlBehavior()
         {
-            ReduceInitialSpeed = true;
+            ReduceInitialSpeed = 0.25f;
         }
 
         public override void MakeEffects(ActionEffects effects)
         {
+            foreach (var e in Entries)
+            {
+                e.MakeEffects(effects);
+            }
         }
     }
 }

@@ -27,21 +27,25 @@ namespace GS_PatEditor.Editor.Editable
         protected readonly T Data;
         protected readonly Editable<T> Dest;
 
-        protected EditableTreeNode(EditableEnvironment env, T data, object tag, Editable<T> dest)
+        protected readonly string Title;
+
+        protected EditableTreeNode(EditableEnvironment env, T data, object tag, Editable<T> dest, string title)
         {
             Env = env;
             Data = data;
             Dest = dest;
             Tag = tag;
+            Title = title;
 
             SetupCommon();
         }
 
-        protected EditableTreeNode(EditableEnvironment env, MultiEditable<T> dest)
+        protected EditableTreeNode(EditableEnvironment env, MultiEditable<T> dest, string title)
         {
             Env = env;
             Dest = null;
             Tag = CreateSelectObject(dest);
+            Title = title;
 
             SetupCommon();
         }

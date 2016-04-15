@@ -942,7 +942,6 @@
             <Segment>1</Segment>
           </Segments>
         </Behavior>
-        <Behavior xsi:type="PlayerGroundSpeedCtrlBehavior" ReduceInitialSpeed="false" />
       </Behaviors>
     </Action>
     <Action ActionID="walk" Category="system" ImageID="Homura_run0000">

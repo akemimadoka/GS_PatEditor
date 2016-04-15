@@ -163,6 +163,7 @@
     <Compile Include="Pat\Behaviors\BasicBehaviors.cs" />
     <Compile Include="Pat\Behaviors\PlayerGroundSpeedCtrlBehavior.cs" />
     <Compile Include="Pat\Behaviors\PlayerSkillGroundBehavior.cs" />
+    <Compile Include="Pat\Behaviors\Time.cs" />
     <Compile Include="Pat\Effects\ActorMemberValue.cs" />
     <Compile Include="Pat\Effects\ActorVariableHelper.cs" />
     <Compile Include="Pat\Effects\ActorVariables.cs" />
