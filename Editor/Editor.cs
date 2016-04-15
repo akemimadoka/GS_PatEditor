@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace GS_PatEditor.Editor
 {
@@ -245,8 +246,25 @@ namespace GS_PatEditor.Editor
         {
             if (CurrentAction != null)
             {
-                var dialog = new ActionEditForm(Project, CurrentAction);
-                dialog.ShowDialog();
+                if (CurrentAction.InitEffects.Count > 0 ||
+                    CurrentAction.UpdateEffects.Count > 0 ||
+                    CurrentAction.KeyFrameEffects.Count > 0)
+                {
+                    //advanced mode
+                    if (CurrentAction.Behaviors.Count > 0)
+                    {
+                        MessageBox.Show("Advanced mode. Behaviors is neglated. " +
+                            "Remove all the effects to edit behaviors.");
+                    }
+                    var dialog = new ActionEditForm(Project, CurrentAction);
+                    dialog.ShowDialog();
+                }
+                else
+                {
+                    //normal mode
+                    var dialog = new ActionBehaviorEditForm(Project, CurrentAction);
+                    dialog.ShowDialog();
+                }
             }
         }
 

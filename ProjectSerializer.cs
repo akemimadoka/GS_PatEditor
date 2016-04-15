@@ -29,6 +29,7 @@ namespace GS_PatEditor
                             typeof(Filter).IsAssignableFrom(t) ||
                             typeof(PointProvider).IsAssignableFrom(t) ||
                             typeof(Value).IsAssignableFrom(t) ||
+                            typeof(Behavior).IsAssignableFrom(t) ||
                             typeof(AbstractExporter).IsAssignableFrom(t)
                         ))
                         .Where(t => !t.IsAbstract)

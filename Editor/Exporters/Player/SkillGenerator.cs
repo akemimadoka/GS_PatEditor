@@ -219,9 +219,15 @@ namespace GS_PatEditor.Editor.Exporters.Player
             List<ILineObject> ret = new List<ILineObject>();
 
             var action = exporter.GetAction(id);
-            ret.AddRange(action.InitEffects.Select(e => e.Generate(env)));
+            var ae = new Pat.ActionEffects(action);
+            foreach (var b in action.Behaviors)
+            {
+                b.MakeEffects(ae);
+            }
 
-            var list2 = action.UpdateEffects.Select(e => e.Generate(env))
+            ret.AddRange(ae.InitEffects.Select(e => e.Generate(env)));
+
+            var list2 = ae.UpdateEffects.Select(e => e.Generate(env))
                 .Concat(new ILineObject[] { new SimpleLineObject("return true;") });
             var updateFunc = new FunctionBlock("", new string[0], list2).AsExpression();
             ILineObject setUpdate;
@@ -235,21 +241,21 @@ namespace GS_PatEditor.Editor.Exporters.Player
             }
             ret.Add(setUpdate);
 
-            var keys = action.KeyFrameEffects.Select(
+            var keys = ae.KeyFrameEffects.Select(
                 keyEffect => new FunctionBlock("", new string[0], keyEffect.Select(e => e.Generate(env))).AsExpression());
             var keyCount = action.Segments.Count - 1;
-            if (action.KeyFrameEffects.Count < keyCount)
+            if (ae.KeyFrameEffects.Count < keyCount)
             {
-                keyCount = action.KeyFrameEffects.Count;
+                keyCount = ae.KeyFrameEffects.Count;
             }
             var arrayObj = new ArrayExpr(keys.Take(keyCount).ToArray());
             var setKey = ThisExpr.Instance.MakeIndex("keyAction").Assign(arrayObj).Statement();
             ret.Add(new SimpleLineObject("this.SetEndTakeCallbackFunction(this.KeyActionCheck);"));
             ret.Add(setKey);
 
-            if (action.KeyFrameEffects.Count >= action.Segments.Count)
+            if (ae.KeyFrameEffects.Count >= action.Segments.Count)
             {
-                var effects = action.KeyFrameEffects[action.Segments.Count - 1].Select(e => e.Generate(env));
+                var effects = ae.KeyFrameEffects[action.Segments.Count - 1].Select(e => e.Generate(env));
                 var funcEndMotion = new FunctionBlock("", new string[0], effects).AsExpression();
                 var setEndMotion = ThisExpr.Instance.MakeIndex("SetEndMotionCallbackFunction").Call(funcEndMotion).Statement();
                 ret.Add(setEndMotion);

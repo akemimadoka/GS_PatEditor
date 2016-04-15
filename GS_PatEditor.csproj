@@ -82,6 +82,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Editor\ActionBehaviorEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Editor\ActionBehaviorEditForm.Designer.cs">
+      <DependentUpon>ActionBehaviorEditForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Editor\ActionEditForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -95,6 +101,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Editor\Editable\GenericEditorSelectorTypeConverter.cs" />
+    <Compile Include="Editor\Editable\SelectBehavior.cs" />
     <Compile Include="Editor\Editable\SelectEffect.cs" />
     <Compile Include="Editor\Editable\SelectFilter.cs" />
     <Compile Include="Editor\Editable\SelectHelper.cs" />
@@ -157,6 +164,8 @@
     <Compile Include="Editor\RecentFileList.cs" />
     <Compile Include="GSPat\GSPatWriter.cs" />
     <Compile Include="GSPat\ImageManager.cs" />
+    <Compile Include="Pat\Behavior.cs" />
+    <Compile Include="Pat\Behaviors\BasicBehaviors.cs" />
     <Compile Include="Pat\Effects\ActorMemberValue.cs" />
     <Compile Include="Pat\Effects\ActorVariableHelper.cs" />
     <Compile Include="Pat\Effects\ActorVariables.cs" />
@@ -173,6 +182,7 @@
     <Compile Include="Pat\Effects\PlayerSystemEffect.cs" />
     <Compile Include="Pat\Effects\PointProvider.cs" />
     <Compile Include="Pat\Effects\TimestopEffect.cs" />
+    <Compile Include="Pat\SegmentSelector.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="ProjectSerializer.cs" />
     <Compile Include="Editor\AnimationPropertyFrom.cs">
@@ -292,6 +302,9 @@
     <Compile Include="Simulation\PlayerActor.cs" />
     <Compile Include="Simulation\SystemAnimationProvider.cs" />
     <Compile Include="Simulation\World.cs" />
+    <EmbeddedResource Include="Editor\ActionBehaviorEditForm.resx">
+      <DependentUpon>ActionBehaviorEditForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Editor\ActionEditForm.resx">
       <DependentUpon>ActionEditForm.cs</DependentUpon>
     </EmbeddedResource>

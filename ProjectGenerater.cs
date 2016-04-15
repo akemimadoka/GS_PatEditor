@@ -84,6 +84,7 @@ namespace GS_PatEditor
                 InitEffects = new EffectList(),
                 UpdateEffects = new EffectList(),
                 KeyFrameEffects = new List<EffectList>(),
+                Behaviors = new List<Behavior>(),
             });
             proj.Actions.Add(new Pat.Action
             {
@@ -92,6 +93,7 @@ namespace GS_PatEditor
                 InitEffects = new EffectList(),
                 UpdateEffects = new EffectList(),
                 KeyFrameEffects = new List<EffectList>(),
+                Behaviors = new List<Behavior>(),
             });
             proj.Actions.Add(new Pat.Action
             {
@@ -100,6 +102,7 @@ namespace GS_PatEditor
                 InitEffects = new EffectList(),
                 UpdateEffects = new EffectList(),
                 KeyFrameEffects = new List<EffectList>(),
+                Behaviors = new List<Behavior>(),
             });
 
             //import homura's attack long for test
@@ -127,6 +130,7 @@ namespace GS_PatEditor
                         },
                         new Pat.Effects.IncreaseCountEffect(),
                     },
+                    Behaviors = new List<Behavior>(),
                 };
                 proj.Actions.Add(assult_rifle);
 
@@ -142,7 +146,8 @@ namespace GS_PatEditor
                     },
                     UpdateEffects = new EffectList()
                     {
-                    }
+                    },
+                    Behaviors = new List<Behavior>(),
                 };
                 proj.Actions.Add(drop_shell);
 
@@ -199,6 +204,7 @@ namespace GS_PatEditor
                             },
                         },
                     },
+                    Behaviors = new List<Behavior>(),
                 };
                 proj.Actions.Add(attack_long);
 

@@ -817,6 +817,7 @@ namespace GS_PatEditor.Editor
                         InitEffects = new Pat.EffectList(),
                         KeyFrameEffects = new List<Pat.EffectList>(),
                         UpdateEffects = new Pat.EffectList(),
+                        Behaviors = new List<Pat.Behavior>(),
                     };
 
                     //TODO move to action

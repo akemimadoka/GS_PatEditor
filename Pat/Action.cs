@@ -30,5 +30,8 @@ namespace GS_PatEditor.Pat
 
         [XmlArray]
         public List<EffectList> KeyFrameEffects;
+
+        [XmlArray]
+        public List<Behavior> Behaviors;
     }
 }

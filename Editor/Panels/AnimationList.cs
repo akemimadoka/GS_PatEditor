@@ -276,6 +276,7 @@ namespace GS_PatEditor.Editor.Panels
                 InitEffects = new Pat.EffectList(),
                 UpdateEffects = new Pat.EffectList(),
                 KeyFrameEffects = new List<Pat.EffectList>(),
+                Behaviors = new List<Pat.Behavior>(),
             };
 
             _Parent.Project.Actions.Add(action);
