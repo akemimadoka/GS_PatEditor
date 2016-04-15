@@ -105,6 +105,7 @@
     <Compile Include="Editor\Editable\SelectEffect.cs" />
     <Compile Include="Editor\Editable\SelectFilter.cs" />
     <Compile Include="Editor\Editable\SelectHelper.cs" />
+    <Compile Include="Editor\Editable\SelectObject.cs" />
     <Compile Include="Editor\Editable\SelectPointProvider.cs" />
     <Compile Include="Editor\Editable\SelectValue.cs" />
     <Compile Include="Editor\Editable\TreeViewExt.cs" />

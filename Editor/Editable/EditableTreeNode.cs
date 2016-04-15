@@ -27,11 +27,12 @@ namespace GS_PatEditor.Editor.Editable
         protected readonly T Data;
         protected readonly Editable<T> Dest;
 
-        protected EditableTreeNode(EditableEnvironment env, T data, Editable<T> dest)
+        protected EditableTreeNode(EditableEnvironment env, T data, object tag, Editable<T> dest)
         {
             Env = env;
             Data = data;
             Dest = dest;
+            Tag = tag;
 
             SetupCommon();
         }
@@ -39,13 +40,14 @@ namespace GS_PatEditor.Editor.Editable
         protected EditableTreeNode(EditableEnvironment env, MultiEditable<T> dest)
         {
             Env = env;
-            Data = CreateSelectObject(dest);
+            //Data = CreateSelectObject(dest);
             Dest = null;
+            Tag = CreateSelectObject(dest);
 
             SetupCommon();
         }
 
-        protected abstract T CreateSelectObject(MultiEditable<T> dest);
+        protected abstract object CreateSelectObject(MultiEditable<T> dest);
         protected abstract TreeNode CreateSingleEditableNode(SingleEditable<T> dest);
 
         protected abstract void SetupCommon();

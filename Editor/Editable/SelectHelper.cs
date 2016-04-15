@@ -18,5 +18,15 @@ namespace GS_PatEditor.Editor.Editable
             }
             return ret;
         }
+
+        public static object Create(Type type, EditableEnvironment env)
+        {
+            var ret = type.GetConstructor(new Type[0]).Invoke(new object[0]);
+            if (ret is IEditableEnvironment)
+            {
+                ((IEditableEnvironment)ret).Environment = env;
+            }
+            return ret;
+        }
     }
 }

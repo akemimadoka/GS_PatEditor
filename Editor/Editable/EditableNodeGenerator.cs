@@ -14,8 +14,8 @@ namespace GS_PatEditor.Editor.Editable
         private class GenericEditableTreeNode<T> : EditableTreeNode<T>
             where T : class
         {
-            public GenericEditableTreeNode(EditableEnvironment env, T data, Editable<T> dest)
-                : base(env, data, dest)
+            public GenericEditableTreeNode(EditableEnvironment env, object data, Editable<T> dest)
+                : base(env, data as T, data, dest)
             {
                 if (data is IEditableEnvironment)
                 {
@@ -32,9 +32,9 @@ namespace GS_PatEditor.Editor.Editable
             {
             }
 
-            protected override T CreateSelectObject(MultiEditable<T> dest)
+            protected override object CreateSelectObject(MultiEditable<T> dest)
             {
-                return EditableNodeGenerator.CreateSelectObject<T>(obj =>
+                return EditableNodeGenerator.CreateSelectObject_new<T>(obj =>
                 {
                     dest.Append(obj);
                     this.InsertBefore(new GenericEditableTreeNode<T>(Env, obj, dest));
@@ -44,7 +44,7 @@ namespace GS_PatEditor.Editor.Editable
             protected override TreeNode CreateSingleEditableNode(SingleEditable<T> dest)
             {
                 GenericEditableTreeNode<T> ret = null;
-                ret = new GenericEditableTreeNode<T>(Env, EditableNodeGenerator.CreateSelectObject<T>(obj =>
+                ret = new GenericEditableTreeNode<T>(Env, EditableNodeGenerator.CreateSelectObject_new<T>(obj =>
                 {
                     dest.Reset(obj);
                     ret.Replace(new GenericEditableTreeNode<T>(Env, obj, dest));
@@ -54,10 +54,9 @@ namespace GS_PatEditor.Editor.Editable
 
             protected override void SetupCommon()
             {
-                Tag = Data;
                 if (Data == null)
                 {
-                    Text = "<null>";
+                    Text = "<select>";
                 }
                 else if (EditableNodeGenerator._SelectObjectTypes.ContainsKey(typeof(T)) &&
                     EditableNodeGenerator._SelectObjectTypes[typeof(T)].IsAssignableFrom(Data.GetType()))
@@ -117,6 +116,18 @@ namespace GS_PatEditor.Editor.Editable
                     _SelectObjectTypes.Add(attr.Type, type);
                 }
             }
+        }
+
+        private static object CreateSelectObject_new<T>(Action<T> action, GS_PatEditor.Pat.Effects.EditableEnvironment env)
+            where T : class
+        {
+            var ret = new SelectObject<T>();
+            ret.Callback = delegate(object obj)
+            {
+                action(obj as T);
+            };
+            ret.Env = env;
+            return ret;
         }
 
         private static T CreateSelectObject<T>(Action<T> action, GS_PatEditor.Pat.Effects.EditableEnvironment env)

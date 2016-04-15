@@ -26,8 +26,6 @@ namespace GS_PatEditor.Pat.Behaviors
 
     public class EntrySelectTypeDescriptor : CustomTypeDescriptor
     {
-        private PlayerGroundSpeedCtrlBehaviorEntrySelect _Instance;
-
         class CustomFieldPropertyDescriptor : PropertyDescriptor
         {
             private readonly PropertyInfo _PI;
@@ -88,9 +86,8 @@ namespace GS_PatEditor.Pat.Behaviors
             }
         }
 
-        public EntrySelectTypeDescriptor(PlayerGroundSpeedCtrlBehaviorEntrySelect inst)
+        public EntrySelectTypeDescriptor()
         {
-            _Instance = inst;
         }
 
         public override PropertyDescriptorCollection GetProperties(Attribute[] attributes)
@@ -106,7 +103,7 @@ namespace GS_PatEditor.Pat.Behaviors
     {
         public override ICustomTypeDescriptor GetTypeDescriptor(Type objectType, object instance)
         {
-            return new EntrySelectTypeDescriptor(instance as PlayerGroundSpeedCtrlBehaviorEntrySelect);
+            return new EntrySelectTypeDescriptor();
         }
     }
 
