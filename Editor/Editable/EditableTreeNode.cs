@@ -40,7 +40,6 @@ namespace GS_PatEditor.Editor.Editable
         protected EditableTreeNode(EditableEnvironment env, MultiEditable<T> dest)
         {
             Env = env;
-            //Data = CreateSelectObject(dest);
             Dest = null;
             Tag = CreateSelectObject(dest);
 
@@ -81,8 +80,8 @@ namespace GS_PatEditor.Editor.Editable
                 this.RemoveFromParent();
             }
         }
+        
         public bool CanDelete { get { return Dest != null && Dest is MultiEditable<T>; } }
-
 
         public void MoveUp()
         {

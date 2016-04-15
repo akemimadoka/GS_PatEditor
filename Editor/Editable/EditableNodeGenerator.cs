@@ -34,9 +34,9 @@ namespace GS_PatEditor.Editor.Editable
 
             protected override object CreateSelectObject(MultiEditable<T> dest)
             {
-                return EditableNodeGenerator.CreateSelectObject_new<T>(obj =>
+                return new SelectObject<T>(obj =>
                 {
-                    dest.Append(obj);
+                    dest.Append((T)obj);
                     this.InsertBefore(new GenericEditableTreeNode<T>(Env, obj, dest));
                 }, Env);
             }
@@ -44,9 +44,9 @@ namespace GS_PatEditor.Editor.Editable
             protected override TreeNode CreateSingleEditableNode(SingleEditable<T> dest)
             {
                 GenericEditableTreeNode<T> ret = null;
-                ret = new GenericEditableTreeNode<T>(Env, EditableNodeGenerator.CreateSelectObject_new<T>(obj =>
+                ret = new GenericEditableTreeNode<T>(Env, new SelectObject<T>(obj =>
                 {
-                    dest.Reset(obj);
+                    dest.Reset((T)obj);
                     ret.Replace(new GenericEditableTreeNode<T>(Env, obj, dest));
                 }, Env), null);
                 return ret;
@@ -55,11 +55,6 @@ namespace GS_PatEditor.Editor.Editable
             protected override void SetupCommon()
             {
                 if (Data == null)
-                {
-                    Text = "<select>";
-                }
-                else if (EditableNodeGenerator._SelectObjectTypes.ContainsKey(typeof(T)) &&
-                    EditableNodeGenerator._SelectObjectTypes[typeof(T)].IsAssignableFrom(Data.GetType()))
                 {
                     Text = "<select>";
                 }
@@ -100,42 +95,6 @@ namespace GS_PatEditor.Editor.Editable
             where T : class
         {
             return new GenericEditableTreeNode<T>(env, dest);
-        }
-
-        //select object class
-        private static Dictionary<Type, Type> _SelectObjectTypes = new Dictionary<Type, Type>();
-
-        static EditableNodeGenerator()
-        {
-            //TODO all assemblies?
-            foreach (var type in typeof(EditableNodeGenerator).Assembly.GetTypes())
-            {
-                var attr = type.GetCustomAttribute<EditorSelectorAttribute>();
-                if (attr != null)
-                {
-                    _SelectObjectTypes.Add(attr.Type, type);
-                }
-            }
-        }
-
-        private static object CreateSelectObject_new<T>(Action<T> action, GS_PatEditor.Pat.Effects.EditableEnvironment env)
-            where T : class
-        {
-            var ret = new SelectObject<T>();
-            ret.Callback = delegate(object obj)
-            {
-                action(obj as T);
-            };
-            ret.Env = env;
-            return ret;
-        }
-
-        private static T CreateSelectObject<T>(Action<T> action, GS_PatEditor.Pat.Effects.EditableEnvironment env)
-        {
-            var type = _SelectObjectTypes[typeof(T)];
-            var ret = (T)(type.GetConstructor(new Type[] { typeof(Action<T>) }).Invoke(new object[] { action }));
-            ((GS_PatEditor.Pat.Effects.IEditableEnvironment)ret).Environment = env;
-            return ret;
         }
 
         private static void SetupChildren<T>(TreeNode node, EditableEnvironment env, T obj)
@@ -236,16 +195,6 @@ namespace GS_PatEditor.Editor.Editable
         public EditorChildNodeAttribute(string name)
         {
             Name = name;
-        }
-    }
-
-    public class EditorSelectorAttribute : Attribute
-    {
-        public Type Type { get; set; }
-
-        public EditorSelectorAttribute(Type type)
-        {
-            Type = type;
         }
     }
 }

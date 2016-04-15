@@ -34,7 +34,6 @@ namespace GS_PatEditor
                     var types = allTypes
                         .Where(t => baseClasses.Any(tt => tt.IsAssignableFrom(t)))
                         .Where(t => !t.IsAbstract)
-                        .Where(t => t.GetCustomAttribute<EditorSelectorAttribute>() == null)
                         .ToArray();
                     _ProjSerializer = new XmlSerializer(typeof(Project), types);
                 }

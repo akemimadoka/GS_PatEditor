@@ -24,125 +24,125 @@ namespace GS_PatEditor.Pat.Behaviors
         public abstract Effect Effect { get; }
     }
 
-    public class EntrySelectTypeDescriptor : CustomTypeDescriptor
-    {
-        class CustomFieldPropertyDescriptor : PropertyDescriptor
-        {
-            private readonly PropertyInfo _PI;
+    //public class EntrySelectTypeDescriptor : CustomTypeDescriptor
+    //{
+    //    class CustomFieldPropertyDescriptor : PropertyDescriptor
+    //    {
+    //        private readonly PropertyInfo _PI;
 
-            public CustomFieldPropertyDescriptor(PropertyInfo pi)
-                : base(pi.Name, pi.GetCustomAttributes().ToArray())
-            {
-                _PI = pi;
-            }
+    //        public CustomFieldPropertyDescriptor(PropertyInfo pi)
+    //            : base(pi.Name, pi.GetCustomAttributes().ToArray())
+    //        {
+    //            _PI = pi;
+    //        }
 
-            public override bool CanResetValue(object component)
-            {
-                return false;
-            }
+    //        public override bool CanResetValue(object component)
+    //        {
+    //            return false;
+    //        }
 
-            public override Type ComponentType
-            {
-                get
-                {
-                    return _PI.DeclaringType;
-                }
-            }
+    //        public override Type ComponentType
+    //        {
+    //            get
+    //            {
+    //                return _PI.DeclaringType;
+    //            }
+    //        }
 
-            public override object GetValue(object component)
-            {
-                return _PI.GetValue(component);
-            }
+    //        public override object GetValue(object component)
+    //        {
+    //            return _PI.GetValue(component);
+    //        }
 
-            public override bool IsReadOnly
-            {
-                get
-                {
-                    return _PI.CanRead && !_PI.CanWrite;
-                }
-            }
+    //        public override bool IsReadOnly
+    //        {
+    //            get
+    //            {
+    //                return _PI.CanRead && !_PI.CanWrite;
+    //            }
+    //        }
 
-            public override Type PropertyType
-            {
-                get
-                {
-                    return _PI.PropertyType;
-                }
-            }
+    //        public override Type PropertyType
+    //        {
+    //            get
+    //            {
+    //                return _PI.PropertyType;
+    //            }
+    //        }
 
-            public override void ResetValue(object component)
-            {
-                throw new NotImplementedException();
-            }
+    //        public override void ResetValue(object component)
+    //        {
+    //            throw new NotImplementedException();
+    //        }
 
-            public override void SetValue(object component, object value)
-            {
-                _PI.SetValue(component, value);
-            }
+    //        public override void SetValue(object component, object value)
+    //        {
+    //            _PI.SetValue(component, value);
+    //        }
 
-            public override bool ShouldSerializeValue(object component)
-            {
-                return false;
-            }
-        }
+    //        public override bool ShouldSerializeValue(object component)
+    //        {
+    //            return false;
+    //        }
+    //    }
 
-        public EntrySelectTypeDescriptor()
-        {
-        }
+    //    public EntrySelectTypeDescriptor()
+    //    {
+    //    }
 
-        public override PropertyDescriptorCollection GetProperties(Attribute[] attributes)
-        {
-            return new PropertyDescriptorCollection(new PropertyDescriptor[]
-            {
-                new CustomFieldPropertyDescriptor(typeof(PlayerGroundSpeedCtrlBehaviorEntrySelect).GetProperty("Type")),
-            });
-        }
-    }
+    //    public override PropertyDescriptorCollection GetProperties(Attribute[] attributes)
+    //    {
+    //        return new PropertyDescriptorCollection(new PropertyDescriptor[]
+    //        {
+    //            new CustomFieldPropertyDescriptor(typeof(PlayerGroundSpeedCtrlBehaviorEntrySelect).GetProperty("Type")),
+    //        });
+    //    }
+    //}
 
-    public class EntrySelectTypeDescriptionProvider : TypeDescriptionProvider
-    {
-        public override ICustomTypeDescriptor GetTypeDescriptor(Type objectType, object instance)
-        {
-            return new EntrySelectTypeDescriptor();
-        }
-    }
+    //public class EntrySelectTypeDescriptionProvider : TypeDescriptionProvider
+    //{
+    //    public override ICustomTypeDescriptor GetTypeDescriptor(Type objectType, object instance)
+    //    {
+    //        return new EntrySelectTypeDescriptor();
+    //    }
+    //}
 
-    [EditorSelector(typeof(PlayerGroundSpeedCtrlBehaviorEntry))]
-    [TypeDescriptionProvider(typeof(EntrySelectTypeDescriptionProvider))]
-    public class PlayerGroundSpeedCtrlBehaviorEntrySelect : PlayerGroundSpeedCtrlBehaviorEntry, IHideFromEditor, IEditableEnvironment
-    {
-        private readonly Action<PlayerGroundSpeedCtrlBehaviorEntry> _OnNewEntry;
+    //[EditorSelector(typeof(PlayerGroundSpeedCtrlBehaviorEntry))]
+    //[TypeDescriptionProvider(typeof(EntrySelectTypeDescriptionProvider))]
+    //public class PlayerGroundSpeedCtrlBehaviorEntrySelect : PlayerGroundSpeedCtrlBehaviorEntry, IHideFromEditor, IEditableEnvironment
+    //{
+    //    private readonly Action<PlayerGroundSpeedCtrlBehaviorEntry> _OnNewEntry;
 
-        public PlayerGroundSpeedCtrlBehaviorEntrySelect(Action<PlayerGroundSpeedCtrlBehaviorEntry> onNewEntry)
-        {
-            _OnNewEntry = onNewEntry;
-        }
+    //    public PlayerGroundSpeedCtrlBehaviorEntrySelect(Action<PlayerGroundSpeedCtrlBehaviorEntry> onNewEntry)
+    //    {
+    //        _OnNewEntry = onNewEntry;
+    //    }
 
-        [TypeConverter(typeof(GenericEditorSelectorTypeConverter<PlayerGroundSpeedCtrlBehaviorEntry>))]
-        public SelectType Type
-        {
-            get
-            {
-                return null;
-            }
-            set
-            {
-                if (value == null || value.Value == null)
-                {
-                    return;
-                }
-                _OnNewEntry(SelectHelper.Create<PlayerGroundSpeedCtrlBehaviorEntry>(value.Value, Environment));
-            }
-        }
+    //    [TypeConverter(typeof(GenericEditorSelectorTypeConverter<PlayerGroundSpeedCtrlBehaviorEntry>))]
+    //    public SelectType Type
+    //    {
+    //        get
+    //        {
+    //            return null;
+    //        }
+    //        set
+    //        {
+    //            if (value == null || value.Value == null)
+    //            {
+    //                return;
+    //            }
+    //            _OnNewEntry(SelectHelper.Create<PlayerGroundSpeedCtrlBehaviorEntry>(value.Value, Environment));
+    //        }
+    //    }
 
-        [Browsable(false)]
-        public EditableEnvironment Environment { get; set; }
+    //    [Browsable(false)]
+    //    public EditableEnvironment Environment { get; set; }
 
-        public override Effect Effect
-        {
-            get { return null; }
-        }
-    }
+    //    public override Effect Effect
+    //    {
+    //        get { return null; }
+    //    }
+    //}
 
     [Serializable]
     public class PlayerGroundSpeedCtrlBehaviorEntryFriction : PlayerGroundSpeedCtrlBehaviorEntry

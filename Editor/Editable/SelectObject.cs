@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GS_PatEditor.Pat.Effects;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -10,15 +11,17 @@ namespace GS_PatEditor.Editor.Editable
     class AbstractSelectObject
     {
         public Action<object> Callback;
-        public GS_PatEditor.Pat.Effects.EditableEnvironment Env;
+        public EditableEnvironment Env;
         public Type GenericType;
     }
 
     [TypeDescriptionProvider(typeof(SelectObjectTypeDescriptionProvider))]
     class SelectObject<T> : AbstractSelectObject
     {
-        public SelectObject()
+        public SelectObject(Action<object> cb, EditableEnvironment env)
         {
+            base.Callback = cb;
+            base.Env = env;
             base.GenericType = typeof(T);
         }
 
@@ -99,7 +102,14 @@ namespace GS_PatEditor.Editor.Editable
                 {
                     var cc = (AbstractSelectObject)component;
                     var cv = (SelectType)value;
-                    cc.Callback(SelectHelper.Create(cv.Value, cc.Env));
+
+                    var created = cv.Value.GetConstructor(new Type[0]).Invoke(new object[0]);
+                    if (created is IEditableEnvironment)
+                    {
+                        ((IEditableEnvironment)created).Environment = cc.Env;
+                    }
+
+                    cc.Callback(created);
                 }
             }
 
