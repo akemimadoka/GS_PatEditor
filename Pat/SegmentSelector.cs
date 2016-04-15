@@ -19,12 +19,18 @@ namespace GS_PatEditor.Pat
             }
             set
             {
+                if (value == null || value.Length == 0)
+                {
+                    IndexList.Clear();
+                    return;
+                }
+
                 var list = value.Split(',');
                 var listInt = new List<int>();
                 foreach (var i in list)
                 {
                     int ii;
-                    if (Int32.TryParse(i, out ii) && ii > 0)
+                    if (Int32.TryParse(i, out ii) && ii >= 0)
                     {
                         listInt.Add(ii);
                     }
