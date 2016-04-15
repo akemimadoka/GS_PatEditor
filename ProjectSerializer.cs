@@ -14,6 +14,10 @@ using System.Xml.Serialization;
 
 namespace GS_PatEditor
 {
+    class SerializationBaseClassAttribute : Attribute
+    {
+    }
+
     class ProjectSerializer
     {
         private static XmlSerializer _ProjSerializer;
@@ -23,15 +27,12 @@ namespace GS_PatEditor
             {
                 if (_ProjSerializer == null)
                 {
-                    var types = System.Reflection.Assembly.GetExecutingAssembly().GetTypes()
-                        .Where(t => (
-                            typeof(Effect).IsAssignableFrom(t) ||
-                            typeof(Filter).IsAssignableFrom(t) ||
-                            typeof(PointProvider).IsAssignableFrom(t) ||
-                            typeof(Value).IsAssignableFrom(t) ||
-                            typeof(Behavior).IsAssignableFrom(t) ||
-                            typeof(AbstractExporter).IsAssignableFrom(t)
-                        ))
+                    var allTypes = System.Reflection.Assembly.GetExecutingAssembly().GetTypes();
+                    var baseClasses = allTypes
+                        .Where(t => t.GetCustomAttribute<SerializationBaseClassAttribute>() != null)
+                        .ToArray();
+                    var types = allTypes
+                        .Where(t => baseClasses.Any(tt => tt.IsAssignableFrom(t)))
                         .Where(t => !t.IsAbstract)
                         .Where(t => t.GetCustomAttribute<EditorSelectorAttribute>() == null)
                         .ToArray();

@@ -11,6 +11,7 @@ using System.Xml.Serialization;
 namespace GS_PatEditor.Pat
 {
     [Serializable]
+    [SerializationBaseClass]
     public abstract class Effect
     {
         public abstract void Run(Simulation.Actor actor);
@@ -18,6 +19,7 @@ namespace GS_PatEditor.Pat
     }
 
     [Serializable]
+    [SerializationBaseClass]
     public abstract class Filter
     {
         public abstract bool Test(Simulation.Actor actor);
@@ -25,6 +27,7 @@ namespace GS_PatEditor.Pat
     }
 
     [Serializable]
+    [SerializationBaseClass]
     public abstract class PointProvider
     {
         public abstract FramePoint GetPointForActor(Simulation.Actor actor);
@@ -33,6 +36,7 @@ namespace GS_PatEditor.Pat
     }
 
     [Serializable]
+    [SerializationBaseClass]
     public abstract class Value
     {
         public abstract float Get(Simulation.Actor actor);

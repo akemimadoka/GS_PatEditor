@@ -933,6 +933,16 @@
         <Behavior xsi:type="InitEffectBehavior" Priority="First">
           <Effect xsi:type="PlayerSkillInitEffect" IsInAir="false" AutoCancel="false" />
         </Behavior>
+        <Behavior xsi:type="UpdateEffectBehavior" Priority="First">
+          <Effect xsi:type="TestEffect" />
+          <Segments IsReversed="true" />
+        </Behavior>
+        <Behavior xsi:type="UpdateEffectBehavior" Priority="First">
+          <Segments IsReversed="true">
+            <Segment>1</Segment>
+          </Segments>
+        </Behavior>
+        <Behavior xsi:type="PlayerGroundSpeedCtrlBehavior" ReduceInitialSpeed="false" />
       </Behaviors>
     </Action>
     <Action ActionID="walk" Category="system" ImageID="Homura_run0000">
@@ -1724,9 +1734,7 @@
             </Effect>
           </Effect>
         </Effect>
-        <Effect xsi:type="PlayerSkillStopMovingEffect">
-          <ReduceSpeed>0.2</ReduceSpeed>
-        </Effect>
+        <Effect xsi:type="PlayerSkillStopMovingEffect" />
       </UpdateEffects>
       <KeyFrameEffects>
         <ArrayOfEffect />
@@ -2426,9 +2434,7 @@
         <Effect xsi:type="PlayerSkillInitEffect" IsInAir="false" AutoCancel="true" />
       </InitEffects>
       <UpdateEffects>
-        <Effect xsi:type="PlayerSkillStopMovingEffect">
-          <ReduceSpeed>0.2</ReduceSpeed>
-        </Effect>
+        <Effect xsi:type="PlayerSkillStopMovingEffect" />
       </UpdateEffects>
       <KeyFrameEffects>
         <ArrayOfEffect>
@@ -3415,9 +3421,7 @@
         </Effect>
       </InitEffects>
       <UpdateEffects>
-        <Effect xsi:type="PlayerSkillStopMovingEffect">
-          <ReduceSpeed>0.2</ReduceSpeed>
-        </Effect>
+        <Effect xsi:type="PlayerSkillStopMovingEffect" />
       </UpdateEffects>
       <KeyFrameEffects>
         <ArrayOfEffect>
@@ -4927,9 +4931,7 @@
         </Effect>
       </InitEffects>
       <UpdateEffects>
-        <Effect xsi:type="PlayerSkillStopMovingEffect">
-          <ReduceSpeed>0.2</ReduceSpeed>
-        </Effect>
+        <Effect xsi:type="PlayerSkillStopMovingEffect" />
       </UpdateEffects>
       <KeyFrameEffects>
         <ArrayOfEffect>

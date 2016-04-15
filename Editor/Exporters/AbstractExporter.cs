@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 namespace GS_PatEditor.Editor.Exporters
 {
     [Serializable]
+    [SerializationBaseClass]
     public abstract class AbstractExporter
     {
         private Pat.Project _Project;

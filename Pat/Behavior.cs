@@ -25,6 +25,7 @@ namespace GS_PatEditor.Pat
     }
 
     [Serializable]
+    [SerializationBaseClass]
     public abstract class Behavior
     {
         public abstract void MakeEffects(ActionEffects effects);

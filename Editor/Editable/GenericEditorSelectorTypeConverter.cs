@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -14,6 +15,11 @@ namespace GS_PatEditor.Editor.Editable
 
         public override string ToString()
         {
+            var dn = Value.GetCustomAttribute<DisplayNameAttribute>();
+            if (dn != null)
+            {
+                return dn.DisplayName;
+            }
             return Value.Name;
         }
     }

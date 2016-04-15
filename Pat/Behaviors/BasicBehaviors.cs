@@ -45,23 +45,8 @@ namespace GS_PatEditor.Pat.Behaviors
         [EditorChildNode("Effect")]
         public Effect Effect;
 
-        [XmlIgnore]
-        [Browsable(false)]
-        private SegmentSelector Segments = new SegmentSelector();
-
         [XmlElement]
-        [DisplayName("Segment")]
-        public string SegmentsStr
-        {
-            get
-            {
-                return Segments.Index;
-            }
-            set
-            {
-                Segments.Index = value;
-            }
-        }
+        public SegmentSelector Segments { get; set; }
 
         [XmlAttribute]
         public EffectBehaviorPriority Priority;
@@ -93,23 +78,8 @@ namespace GS_PatEditor.Pat.Behaviors
         [EditorChildNode("Effect")]
         public Effect Effect;
 
-        [XmlIgnore]
-        [Browsable(false)]
-        private SegmentSelector Segments = new SegmentSelector();
-
         [XmlElement]
-        [DisplayName("Segment")]
-        public string SegmentsStr
-        {
-            get
-            {
-                return Segments.Index;
-            }
-            set
-            {
-                Segments.Index = value;
-            }
-        }
+        public SegmentSelector Segments { get; set; }
 
         [XmlAttribute]
         public EffectBehaviorPriority Priority;
