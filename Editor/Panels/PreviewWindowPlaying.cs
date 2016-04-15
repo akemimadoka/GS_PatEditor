@@ -26,6 +26,11 @@ namespace GS_PatEditor.Editor.Panels
                     .Where(a => a.ActionID == (id == null ? DefaultAnimation : id))
                     .FirstOrDefault();
             }
+
+            public Simulation.AnimationProvider SetDefault(string id)
+            {
+                return new PatProjectAnimationProvider { Project = Project, DefaultAnimation = id };
+            }
         }
 
         private class PatProjectActionProvider : Simulation.ActionProvider

@@ -1322,7 +1322,6 @@
       </Segments>
       <InitEffects>
         <Effect xsi:type="BulletInitEffect" />
-        <Effect xsi:type="SetMotionEffect" Animation="assult_rifle" Segment="0" />
       </InitEffects>
       <UpdateEffects>
         <Effect xsi:type="FilteredEffect">
@@ -1372,7 +1371,6 @@
       </Segments>
       <InitEffects>
         <Effect xsi:type="BulletInitEffect" />
-        <Effect xsi:type="SetMotionEffect" Animation="drop_shell" Segment="0" />
         <Effect xsi:type="InitCountEffect" />
         <Effect xsi:type="SetActorMemberEffect" Type="vx">
           <Value xsi:type="RandomFloatValue" Max="-1" Min="-3" Step="0.01" />
@@ -1795,7 +1793,6 @@
       </Segments>
       <InitEffects>
         <Effect xsi:type="BulletInitEffect" />
-        <Effect xsi:type="SetMotionEffect" Animation="attack_long_bullet" Segment="0" />
         <Effect xsi:type="BulletSetSpeedEffect">
           <Speed xsi:type="ConstValue" Value="60" />
           <Rotation xsi:type="RandomFloatValue" Max="0.09" Min="-0.09" Step="0.001" />
@@ -1856,7 +1853,6 @@
       </Segments>
       <InitEffects>
         <Effect xsi:type="BulletInitEffect" />
-        <Effect xsi:type="SetMotionEffect" Animation="bullet_hit_effect" Segment="0" />
         <Effect xsi:type="SetActorMemberEffect" Type="rz">
           <Value xsi:type="RandomFloatValue" Max="6.2832" Min="0" Step="0.01" />
         </Effect>
@@ -3042,7 +3038,6 @@
       </Segments>
       <InitEffects>
         <Effect xsi:type="BulletInitEffect" />
-        <Effect xsi:type="SetMotionEffect" Animation="attack_long_air_bullet" Segment="0" />
         <Effect xsi:type="BulletSetSpeedEffect">
           <Speed xsi:type="ConstValue" Value="60" />
           <Rotation xsi:type="RandomFloatValue" Max="0.09" Min="-0.09" Step="0.001" />
@@ -3177,7 +3172,6 @@
       </Segments>
       <InitEffects>
         <Effect xsi:type="BulletInitEffect" />
-        <Effect xsi:type="SetMotionEffect" Animation="system_smoke_3" Segment="0" />
         <Effect xsi:type="SetPriorityEffect">
           <Value>300</Value>
         </Effect>
@@ -3575,7 +3569,6 @@
       </Segments>
       <InitEffects>
         <Effect xsi:type="BulletInitEffect" />
-        <Effect xsi:type="SetMotionEffect" Animation="system_smoke_3" Segment="0" />
       </InitEffects>
       <UpdateEffects>
         <Effect xsi:type="BulletReduceAlphaEffect" Value="0.08" />
@@ -3624,7 +3617,6 @@
       </Segments>
       <InitEffects>
         <Effect xsi:type="BulletInitEffect" />
-        <Effect xsi:type="SetMotionEffect" Animation="rpg" Segment="0" />
         <Effect xsi:type="BulletSetSpeedEffect">
           <Speed xsi:type="ConstValue" Value="3" />
           <Rotation xsi:type="ConstValue" Value="-0.15" />
@@ -3741,7 +3733,6 @@
       </Segments>
       <InitEffects>
         <Effect xsi:type="BulletInitEffect" />
-        <Effect xsi:type="SetMotionEffect" Animation="rpg_tail" Segment="0" />
         <Effect xsi:type="BulletFollowingOwnerInitEffect" CheckInstance="" />
       </InitEffects>
       <UpdateEffects>
@@ -3930,7 +3921,6 @@
       </Segments>
       <InitEffects>
         <Effect xsi:type="BulletInitEffect" />
-        <Effect xsi:type="SetMotionEffect" Animation="rpg_smoke" Segment="0" />
         <Effect xsi:type="BulletSetSpeedEffect">
           <Speed xsi:type="RandomFloatValue" Max="5" Min="4" Step="0.01" />
           <Rotation xsi:type="ConstValue" Value="0" />
@@ -4000,7 +3990,6 @@
       </Segments>
       <InitEffects>
         <Effect xsi:type="BulletInitEffect" />
-        <Effect xsi:type="SetMotionEffect" Animation="rpg_drop" Segment="0" />
         <Effect xsi:type="SetActorMemberEffect" Type="vx">
           <Value xsi:type="ConstValue" Value="-4" />
         </Effect>
@@ -4082,7 +4071,6 @@
       </Segments>
       <InitEffects>
         <Effect xsi:type="BulletInitEffect" />
-        <Effect xsi:type="SetMotionEffect" Animation="rpg_explode_attack" Segment="0" />
         <Effect xsi:type="CreateBulletEffect">
           <Position xsi:type="FrameSinglePointProvider" Index="0" />
           <ActionName>rpg_explode_light</ActionName>
@@ -4155,7 +4143,6 @@
       </Segments>
       <InitEffects>
         <Effect xsi:type="BulletInitEffect" />
-        <Effect xsi:type="SetMotionEffect" Segment="0" />
       </InitEffects>
       <UpdateEffects>
         <Effect xsi:type="TimeStopCheckEffect" />
@@ -4375,7 +4362,6 @@
       </Segments>
       <InitEffects>
         <Effect xsi:type="BulletInitEffect" />
-        <Effect xsi:type="SetMotionEffect" Animation="rpg_explode_fire_1" Segment="0" />
       </InitEffects>
       <UpdateEffects>
         <Effect xsi:type="TimeStopCheckEffect" />
@@ -4469,7 +4455,6 @@
       </Segments>
       <InitEffects>
         <Effect xsi:type="BulletInitEffect" />
-        <Effect xsi:type="SetMotionEffect" Animation="rpg_explode_fire_2" Segment="0" />
       </InitEffects>
       <UpdateEffects>
         <Effect xsi:type="TimeStopCheckEffect" />
@@ -5010,7 +4995,6 @@
       </Segments>
       <InitEffects>
         <Effect xsi:type="BulletInitEffect" />
-        <Effect xsi:type="SetMotionEffect" Animation="attack_up_mortar" Segment="0" />
       </InitEffects>
       <UpdateEffects>
         <Effect xsi:type="TimeStopCheckEffect" />
@@ -5086,7 +5070,6 @@
       </Segments>
       <InitEffects>
         <Effect xsi:type="BulletInitEffect" />
-        <Effect xsi:type="SetMotionEffect" Animation="attack_up_bullet" Segment="0" />
         <Effect xsi:type="SetActorMemberEffect" Type="vx">
           <Value xsi:type="ConstValue" Value="14" />
         </Effect>

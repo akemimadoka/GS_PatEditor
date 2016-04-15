@@ -13,8 +13,11 @@ namespace GS_PatEditor.Pat.Effects
     [Serializable]
     public class BulletInitEffect : Effect
     {
+        private SetMotionEffect _SetMotion = new SetMotionEffect();
+
         public override void Run(Simulation.Actor actor)
         {
+            _SetMotion.Run(actor);
         }
 
         public override ILineObject Generate(GenerationEnvironment env)
@@ -27,6 +30,7 @@ namespace GS_PatEditor.Pat.Effects
                 new ControlBlock(ControlBlockType.Else, new ILineObject[] {
                     new SimpleLineObject("this.u.uu <- { uuu = null };"),
                 }).Statement(),
+                _SetMotion.Generate(env),
             }).Statement();
         }
     }

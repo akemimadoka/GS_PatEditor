@@ -52,7 +52,7 @@ namespace GS_PatEditor.Pat.Effects
         public override void Run(Simulation.Actor actor)
         {
             var bullet = new Simulation.BulletActor(actor.World,
-                actor.Animations, null, actor.Actions);
+                actor.Animations.SetDefault(ActionName), null, actor.Actions);
             var point = Position.GetPointForActor(actor);
 
             bullet.Owner = actor;
@@ -121,7 +121,7 @@ namespace GS_PatEditor.Pat.Effects
     }
 
     [Serializable]
-    public class SetMotionEffect : Effect, IEditableEnvironment
+    public class SetMotionEffect : Effect, IEditableEnvironment, IHideFromEditor
     {
         [XmlAttribute]
         [TypeConverter(typeof(ActionIDConverter))]
