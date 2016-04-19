@@ -87,6 +87,11 @@ namespace GS_PatEditor.Editor.Exporters.Player
         private Pat.Project _Project;
         private Dictionary<string, int> _GeneratedActionID = new Dictionary<string, int>();
         private int _NextFreeActionID;
+        private SegmentStartEventRecorder _SSERecorder;
+
+        [XmlIgnore]
+        [Browsable(false)]
+        public GenerationEnvironment GenEnv { get; private set; }
 
         public override void ShowOptionDialog(Pat.Project proj)
         {
@@ -101,6 +106,8 @@ namespace GS_PatEditor.Editor.Exporters.Player
         {
             _Project = proj;
             _GeneratedActionID.Clear();
+            _SSERecorder = new SegmentStartEventRecorder();
+
             _NextFreeActionID = 20;
 
             //init script
@@ -119,8 +126,14 @@ namespace GS_PatEditor.Editor.Exporters.Player
             //TODO make Revive action here
 
             var playerScript = base.AddCodeFile(ScriptFileName + ".cv4");
+
             SystemActionFunctionGenerator.Generate(this, proj, playerScript);
-            SkillGenerator.GenerateSkills(this, proj, playerScript);
+
+            this.GenEnv = SkillGenerator.CreateEnv(this, playerScript);
+            SkillGenerator.GenerateSkills(this, playerScript);
+            this.GenEnv = null;
+
+            SkillGenerator.GenerateStartMotionFunction(_SSERecorder, playerScript);
 
             ExportAction(Animations.Stand, 100);
             ExportAction(Animations.Stand, 101);
@@ -139,6 +152,10 @@ namespace GS_PatEditor.Editor.Exporters.Player
             if (action != null)
             {
                 base.AddNormalAnimation(action, id + BaseIndex);
+                if (this.GenEnv != null)
+                {
+                    _SSERecorder.AddAction(action, id + BaseIndex, this.GenEnv);
+                }
             }
         }
 

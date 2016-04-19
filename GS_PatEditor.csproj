@@ -130,6 +130,7 @@
     <Compile Include="Editor\Exporters\Player\Skill.cs" />
     <Compile Include="Editor\Exporters\Player\SkillGenerator.cs" />
     <Compile Include="Editor\Exporters\Player\SystemActionFunctionGenerator.cs" />
+    <Compile Include="Editor\Exporters\SegmentStartEventRecorder.cs" />
     <Compile Include="Editor\ExportForm.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -12,6 +12,22 @@ using System.Xml.Serialization;
 
 namespace GS_PatEditor.Pat.Effects
 {
+    public static class SetMotionEffectHelper
+    {
+        public static ILineObject Generate(GenerationEnvironment env, ILineObject effect)
+        {
+            var func = env.GetSegmentStartEventHandlerFunctionName();
+            if (func == null || func.Length == 0)
+            {
+                return effect;
+            }
+            return new SimpleBlock(new ILineObject[] {
+                effect,
+                new SimpleLineObject("this.u.uu.uuu." + func + ".call(this);"),
+            }).Statement();
+        }
+    }
+
     [Serializable]
     public class AnimationContinueEffect : Effect
     {
@@ -22,10 +38,11 @@ namespace GS_PatEditor.Pat.Effects
 
         public override ILineObject Generate(GenerationEnvironment env)
         {
-            return ThisExpr.Instance.MakeIndex("SetMotion").Call(
+            var ret = ThisExpr.Instance.MakeIndex("SetMotion").Call(
                 ThisExpr.Instance.MakeIndex("motion"),
                 new BiOpExpr(ThisExpr.Instance.MakeIndex("keyTake"), new ConstNumberExpr(1), BiOpExpr.Op.Add)
                 ).Statement();
+            return SetMotionEffectHelper.Generate(env, ret);
         }
     }
 
@@ -138,9 +155,10 @@ namespace GS_PatEditor.Pat.Effects
         public override ILineObject Generate(GenerationEnvironment env)
         {
             var id = env.GetActionID(Animation);
-            return ThisExpr.Instance.MakeIndex("SetMotion").Call(
+            var ret = ThisExpr.Instance.MakeIndex("SetMotion").Call(
                 new ConstNumberExpr(id),
                 new ConstNumberExpr(Segment)).Statement();
+            return SetMotionEffectHelper.Generate(env, ret);
         }
 
         [XmlIgnore]
@@ -168,7 +186,8 @@ namespace GS_PatEditor.Pat.Effects
             var id = env.GetActionID(Animation);
             var segment = new BiOpExpr(ThisExpr.Instance.MakeIndex("rand").Call(),
                 new ConstNumberExpr(SegmentCount), BiOpExpr.Op.Mod);
-            return ThisExpr.Instance.MakeIndex("SetMotion").Call(new ConstNumberExpr(id), segment).Statement();
+            var ret = ThisExpr.Instance.MakeIndex("SetMotion").Call(new ConstNumberExpr(id), segment).Statement();
+            return SetMotionEffectHelper.Generate(env, ret);
         }
 
         [XmlIgnore]

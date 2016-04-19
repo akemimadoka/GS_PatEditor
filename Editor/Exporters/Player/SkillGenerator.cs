@@ -56,6 +56,11 @@ namespace GS_PatEditor.Editor.Exporters.Player
             {
                 return CurrentSkillKeyName;
             }
+
+            public string GetSegmentStartEventHandlerFunctionName()
+            {
+                return "SegmentStartEventHandler";
+            }
         }
 
         public static ILineObject[] GenerateInputAttackFunction(PlayerExporter exporter)
@@ -68,13 +73,18 @@ namespace GS_PatEditor.Editor.Exporters.Player
             return ret;
         }
 
-        public static void GenerateSkills(PlayerExporter exporter, Pat.Project proj, CodeGenerator output)
+        public static GenerationEnvironment CreateEnv(PlayerExporter exporter, CodeGenerator output)
         {
-            var env = new SkillGeneratorEnv()
+            return new SkillGeneratorEnv()
             {
                 Exporter = exporter,
                 Output = output,
             };
+        }
+
+        public static void GenerateSkills(PlayerExporter exporter, CodeGenerator output)
+        {
+            SkillGeneratorEnv env = (SkillGeneratorEnv)exporter.GenEnv;
 
             for (int i = 0; i < exporter.Skills.Count; ++i)
             {
@@ -97,6 +107,12 @@ namespace GS_PatEditor.Editor.Exporters.Player
                     output.WriteStatement(func.Statement());
                 }
             }
+        }
+
+        public static void GenerateStartMotionFunction(SegmentStartEventRecorder r, CodeGenerator output)
+        {
+            output.WriteStatement(new FunctionBlock("SegmentStartEventHandler",
+                new string[0], new ILineObject[] { r.Generate() }).Statement());
         }
 
         #region InputAttack

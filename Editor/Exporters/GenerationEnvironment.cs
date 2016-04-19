@@ -12,5 +12,6 @@ namespace GS_PatEditor.Editor.Exporters
         int GetActionID(string name); //null or "" -> current action
         string GenerateActionAsActorInit(string name);
         string GetCurrentSkillKeyName(); //"b1"
+        string GetSegmentStartEventHandlerFunctionName(); //"SegmentStartEventHandler" or null (not generated)
     }
 }
