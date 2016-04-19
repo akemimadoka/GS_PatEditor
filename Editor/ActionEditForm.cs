@@ -15,27 +15,129 @@ namespace GS_PatEditor.Editor
         private readonly Pat.Project _Project;
         private readonly Pat.Action _Action;
 
+        private static readonly string
+            NameInit = "Initialization",
+            NameUpdate = "Update",
+            NameStart = "SegmentStart",
+            NameFinish = "SegmentFinish";
+
         public ActionEditForm(Pat.Project proj, Pat.Action action)
         {
             InitializeComponent();
 
             _Project = proj;
             _Action = action;
+
+            AdjustListSize();
             RefreshList();
         }
 
-        private void RefreshList()
+        private void AdjustListSize()
+        {
+            //make sure two list have same number of items
+            while (_Action.SegmentStartEffects.Count > _Action.SegmentFinishEffects.Count)
+            {
+                _Action.SegmentFinishEffects.Add(new Pat.EffectList());
+            }
+            while (_Action.SegmentFinishEffects.Count > _Action.SegmentStartEffects.Count)
+            {
+                _Action.SegmentStartEffects.Add(new Pat.EffectList());
+            }
+        }
+
+        private void AddListItem(string type, Pat.EffectList list, Pat.EffectList selected)
+        {
+            listBox1.Items.Add(type + "(" + list.Count + ")");
+            if (list == selected)
+            {
+                listBox1.SelectedIndex = listBox1.Items.Count - 1;
+            }
+        }
+
+        private void RefreshList(Pat.EffectList selected = null)
         {
             listBox1.Items.Clear();
-            listBox1.Items.Add("Initialization(" + _Action.InitEffects.Count() + ")");
-            listBox1.Items.Add("Update(" + _Action.UpdateEffects.Count() + ")");
+            AddListItem(NameInit, _Action.InitEffects, selected);
+            AddListItem(NameUpdate, _Action.UpdateEffects, selected);
+
             listBox1.Items.Add("-----");
-            foreach (var key in _Action.SegmentFinishEffects)
+
+            AdjustListSize();
+            for (int i = 0; i < _Action.SegmentStartEffects.Count; ++i)
             {
-                listBox1.Items.Add("KeyFrame(" + key.Count() + ")");
+                AddListItem(NameStart, _Action.SegmentStartEffects[i], selected);
+                AddListItem(NameFinish, _Action.SegmentFinishEffects[i], selected);
             }
 
             RefreshButtonEnabled();
+        }
+
+        private int ListSelectedIndex
+        {
+            get
+            {
+                return listBox1.SelectedIndex;
+            }
+        }
+
+        private int ListSelectedActionIndex
+        {
+            get
+            {
+                var s = ListSelectedIndex;
+                if (s <= 2)
+                {
+                    return -1;
+                }
+                return (s - 3) / 2;
+            }
+        }
+
+        private bool ListSelectedActionIsStart
+        {
+            get
+            {
+                var s = ListSelectedIndex;
+                if (s <= 2)
+                {
+                    return false;
+                }
+                return ((s - 3) % 2) == 0;
+            }
+        }
+
+        private int GetListIndexStart(int ai)
+        {
+            return 3 + ai * 2;
+        }
+
+        private int GetListIndexFinish(int ai)
+        {
+            return 4 + ai * 2;
+        }
+
+        private Pat.EffectList GetSelectedEffectList()
+        {
+            var s = ListSelectedIndex;
+            var ai = ListSelectedActionIndex;
+            switch (s)
+            {
+                case 0:
+                    return _Action.InitEffects;
+                case 1:
+                    return _Action.UpdateEffects;
+                case 2:
+                    return null;
+                default:
+                    if (ListSelectedActionIsStart)
+                    {
+                        return _Action.SegmentStartEffects[ai];
+                    }
+                    else
+                    {
+                        return _Action.SegmentFinishEffects[ai];
+                    }
+            }
         }
 
         private void RefreshButtonEnabled()
@@ -58,16 +160,17 @@ namespace GS_PatEditor.Editor
             }
             else
             {
+                var ai = ListSelectedActionIndex;
                 button1.Enabled = true;
                 button2.Enabled = true;
                 button3.Enabled = true;
                 button4.Enabled = false;
                 button5.Enabled = false;
-                if (listBox1.SelectedIndex != 3)
+                if (ListSelectedActionIndex != 0)
                 {
                     button4.Enabled = true;
                 }
-                if (listBox1.SelectedIndex != listBox1.Items.Count - 1)
+                if (ListSelectedActionIndex != _Action.SegmentStartEffects.Count - 1)
                 {
                     button5.Enabled = true;
                 }
@@ -81,85 +184,62 @@ namespace GS_PatEditor.Editor
 
         private void button1_Click(object sender, EventArgs e)
         {
+            _Action.SegmentStartEffects.Add(new Pat.EffectList());
             _Action.SegmentFinishEffects.Add(new Pat.EffectList());
-            listBox1.Items.Add("KeyFrame(0)");
+
+            RefreshList(GetSelectedEffectList());
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if (listBox1.SelectedIndex >= 3)
+            var ai = ListSelectedActionIndex;
+            if (ai != -1)
             {
-                _Action.SegmentFinishEffects.RemoveAt(listBox1.SelectedIndex - 3);
-                listBox1.Items.RemoveAt(listBox1.SelectedIndex);
+                _Action.SegmentStartEffects.RemoveAt(ai);
+                _Action.SegmentFinishEffects.RemoveAt(ai);
+
+                RefreshList();
+            }
+        }
+
+        private void SwapSegment(int first)
+        {
+            AdjustListSize();
+
+            if (first >= 0 && first + 1 < _Action.SegmentStartEffects.Count)
+            {
+                var s = GetSelectedEffectList();
+
+                var key = _Action.SegmentStartEffects[first + 1];
+                _Action.SegmentStartEffects.RemoveAt(first + 1);
+                _Action.SegmentStartEffects.Insert(first, key);
+
+                key = _Action.SegmentFinishEffects[first + 1];
+                _Action.SegmentFinishEffects.RemoveAt(first + 1);
+                _Action.SegmentFinishEffects.Insert(first, key);
+
+                RefreshList(s);
             }
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            var s = listBox1.SelectedIndex;
-            if (s >= 4)
-            {
-                var key = _Action.SegmentFinishEffects[s - 3];
-                _Action.SegmentFinishEffects.RemoveAt(s - 3);
-                _Action.SegmentFinishEffects.Insert(s - 4, key);
-
-                var item = listBox1.Items[s];
-                listBox1.Items.RemoveAt(s);
-                listBox1.Items.Insert(s - 1, item);
-
-                listBox1.SelectedIndex = s - 1;
-            }
+            SwapSegment(ListSelectedActionIndex - 1);
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-            var s = listBox1.SelectedIndex;
-            if (s >= 3 && s != listBox1.Items.Count - 1)
-            {
-                var key = _Action.SegmentFinishEffects[s - 3];
-                _Action.SegmentFinishEffects.RemoveAt(s - 3);
-                _Action.SegmentFinishEffects.Insert(s - 2, key);
-
-                var item = listBox1.Items[s];
-                listBox1.Items.RemoveAt(s);
-                listBox1.Items.Insert(s + 1, item);
-
-                listBox1.SelectedIndex = s + 1;
-            }
+            SwapSegment(ListSelectedActionIndex);
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            var s = listBox1.SelectedIndex;
-            Pat.EffectList effects = null;
-            switch (s)
-            {
-                case 0:
-                    effects = _Action.InitEffects;
-                    break;
-                case 1:
-                    effects = _Action.UpdateEffects;
-                    break;
-                case 2:
-                    break;
-                default:
-                    effects = _Action.SegmentFinishEffects[s - 3];
-                    break;
-            }
+            var effects = GetSelectedEffectList();
             if (effects != null)
             {
                 var dialog = new EffectListEditForm(_Project, effects);
                 dialog.ShowDialog();
-                var txt = "KeyFrame";
-                if (s == 0)
-                {
-                    txt = "Initialization";
-                }
-                else if (s == 1)
-                {
-                    txt = "Update";
-                }
-                listBox1.Items[s] = txt + "(" + effects.Count() + ")";
+                RefreshList(effects);
             }
         }
 
