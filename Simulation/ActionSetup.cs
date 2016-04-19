@@ -16,16 +16,21 @@ namespace GS_PatEditor.Simulation
             }
         }
 
-        public static void SetupActorForAction(Actor actor, Pat.Action action)
+        //set labels, run init effects (if specified)
+        public static void SetupActorForAction(Actor actor, Pat.Action action, bool runInit)
         {
             var ae = new Pat.ActionEffects(action);
             foreach (var b in action.Behaviors)
             {
                 b.MakeEffects(ae);
             }
-            ae.InitEffects.RunEffects(actor);
+            if (runInit)
+            {
+                ae.InitEffects.RunEffects(actor);
+            }
             actor.UpdateLabel = ae.UpdateEffects.RunEffects;
-            actor.EndKeyFrameLabel = ae.KeyFrameEffects.Select(list => (ActorLabel)list.RunEffects).ToArray();
+            actor.StartKeyFrameLabel = ae.SegmentStartEffects.Select(list => (ActorLabel)list.RunEffects).ToArray();
+            actor.EndKeyFrameLabel = ae.SegmentFinishEffects.Select(list => (ActorLabel)list.RunEffects).ToArray();
         }
     }
 }

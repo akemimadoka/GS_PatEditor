@@ -81,151 +81,17 @@ namespace GS_PatEditor
             {
                 ActionID = "stand",
                 Segments = ImportAnimationSegments(proj, gspat, 0),
-                InitEffects = new EffectList(),
-                UpdateEffects = new EffectList(),
-                KeyFrameEffects = new List<EffectList>(),
-                Behaviors = new List<Behavior>(),
             });
             proj.Actions.Add(new Pat.Action
             {
                 ActionID = "walk",
                 Segments = ImportAnimationSegments(proj, gspat, 1),
-                InitEffects = new EffectList(),
-                UpdateEffects = new EffectList(),
-                KeyFrameEffects = new List<EffectList>(),
-                Behaviors = new List<Behavior>(),
             });
             proj.Actions.Add(new Pat.Action
             {
                 ActionID = "attack",
                 Segments = ImportAnimationSegments(proj, gspat, 20),
-                InitEffects = new EffectList(),
-                UpdateEffects = new EffectList(),
-                KeyFrameEffects = new List<EffectList>(),
-                Behaviors = new List<Behavior>(),
             });
-
-            //import homura's attack long for test
-            //open homura_m's pat (which is also named homura.pat) may produce error
-            if (Path.GetFileNameWithoutExtension(patfile) == "homura")
-            {
-                Pat.Action assult_rifle = new Pat.Action
-                {
-                    ActionID = "assult_rifle",
-                    Segments = ImportAnimationSegments(proj, gspat, 51),
-                    InitEffects = new EffectList()
-                    {
-                        new Pat.Effects.BulletInitEffect(),
-                        new Pat.Effects.SetMotionEffect { Animation = "assult_rifle" },
-                    },
-                    KeyFrameEffects = new List<EffectList>()
-                    {
-                    },
-                    UpdateEffects = new EffectList()
-                    {
-                        new FilteredEffect()
-                        {
-                            Filter = new Pat.Effects.AnimationCountAfterFilter { Count = new ConstValue { Value = 4 } },
-                            Effect = new Pat.Effects.ReleaseActorEffect(),
-                        },
-                        new Pat.Effects.IncreaseCountEffect(),
-                    },
-                    Behaviors = new List<Behavior>(),
-                };
-                proj.Actions.Add(assult_rifle);
-
-                Pat.Action drop_shell = new Pat.Action
-                {
-                    ActionID = "drop_shell",
-                    Segments = ImportSegment(proj, gspat, 52, 4),
-                    InitEffects = new EffectList()
-                    {
-                    },
-                    KeyFrameEffects = new List<EffectList>()
-                    {
-                    },
-                    UpdateEffects = new EffectList()
-                    {
-                    },
-                    Behaviors = new List<Behavior>(),
-                };
-                proj.Actions.Add(drop_shell);
-
-                Pat.Action attack_long = new Pat.Action()
-                {
-                    ActionID = "attack_long",
-                    Segments = ImportAnimationSegments(proj, gspat, 24),
-                    InitEffects = new EffectList()
-                    {
-                        //new Pat.TestEffect(),
-                        new Pat.Effects.PlayerSkillInitEffect {
-                            AutoCancel = true,
-                            IsInAir = false,
-                        },
-                    },
-                    KeyFrameEffects = new List<EffectList>()
-                    {
-                        new EffectList(),
-                        new EffectList(),
-                        new EffectList(),
-                        new EffectList()
-                        {
-                            new Pat.Effects.PlayerBeginStandEffect(),
-                        },
-                    },
-                    UpdateEffects = new EffectList()
-                    {
-                        new FilteredEffect
-                        {
-                            Filter = new SimpleListFilter(
-                                new Pat.Effects.AnimationCountAfterFilter { Count = new ConstValue { Value = 95 } },
-                                new Pat.Effects.AnimationSegmentFilter { Segment = 1 }
-                            ),
-                            Effect = new Pat.Effects.AnimationContinueEffect(),
-                        },
-                        new Pat.Effects.IncreaseCountEffect(),
-                        new FilteredEffect
-                        {
-                            Filter = new SimpleListFilter(
-                                new Pat.Effects.AnimationCountModFilter
-                                {
-                                    Divisor = new ConstValue { Value = 5 },
-                                    Mod = new ConstValue { Value = 0 },
-                                },
-                                new Pat.Effects.AnimationSegmentFilter { Segment = 1 }
-                            ),
-                            Effect = new Pat.Effects.CreateBulletEffect
-                            {
-                                ActionName = "assult_rifle",
-                                Position = new Pat.Effects.FrameSinglePointProvider
-                                {
-                                    Index = 0,
-                                }
-                            },
-                        },
-                    },
-                    Behaviors = new List<Behavior>(),
-                };
-                proj.Actions.Add(attack_long);
-
-                var exporter = new Editor.Exporters.Player.PlayerExporter();
-                exporter.BaseIndex = 0;
-                exporter.PlayerName = "Homura";
-                exporter.ScriptFileName = "homura";
-                exporter.Skills.Add(new Editor.Exporters.Player.NormalSkill()
-                {
-                    ActionID = "attack_long",
-                    AirState = Editor.Exporters.Player.AirState.GroundOnly,
-                    CancelLevel = CancelLevel.Long,
-                    Key = Editor.Exporters.Player.SkillKey.KeyB,
-                    MagicUse = 0,
-                    X = Editor.Exporters.Player.DirectionHorizontal.Empty,
-                    Y = Editor.Exporters.Player.DirectionVertical.Empty,
-                });
-                exporter.Animations.Stand = "stand";
-                exporter.Animations.Walk = "walk";
-                proj.Exporter = exporter;
-            }
 
             //set action image
             //TODO merge to import functions?

@@ -64,7 +64,7 @@ namespace GS_PatEditor.Pat.Effects
             var action = actor.Actions.GetActionByID(ActionName);
             if (action != null)
             {
-                Simulation.ActionSetup.SetupActorForAction(bullet, action);
+                Simulation.ActionSetup.SetupActorForAction(bullet, action, true);
                 actor.World.Add(bullet);
             }
         }

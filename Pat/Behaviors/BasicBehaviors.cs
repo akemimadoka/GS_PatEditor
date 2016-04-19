@@ -88,18 +88,13 @@ namespace GS_PatEditor.Pat.Behaviors
         {
             foreach (var i in Segments.IndexList)
             {
-                while (effects.KeyFrameEffects.Count <= i)
-                {
-                    effects.KeyFrameEffects.Add(new EffectList());
-                }
-
                 if (Priority == EffectBehaviorPriority.First)
                 {
-                    effects.KeyFrameEffects[i].Insert(0, Effect);
+                    effects.SegmentFinishEffects.InsertEffectToList(i, Effect);
                 }
                 else if (Priority == EffectBehaviorPriority.Last)
                 {
-                    effects.KeyFrameEffects[i].Add(Effect);
+                    effects.SegmentFinishEffects.AddEffectToList(i, Effect);
                 }
             }
         }

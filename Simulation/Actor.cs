@@ -93,6 +93,7 @@ namespace GS_PatEditor.Simulation
         public ActorLabel UpdateLabel;
         public ActorLabel SitLabel;
         public ActorLabel FallLabel; //not used in simulation
+        public ActorLabel[] StartKeyFrameLabel;
         public ActorLabel[] EndKeyFrameLabel; //TODO IMPORTANT if it will be executed in looping animation, if EndMotion will be executed in looping animation
         public ActorLabel HitEvent; //bullet only
 
@@ -140,10 +141,22 @@ namespace GS_PatEditor.Simulation
                 return;
             }
 
+            bool resetLabels = action != CurrentAction;
+
             CurrentAction = action;
             CurrentSegmentIndex = segment;
             CurrentFrameIndex = 0;
             CurrentFrameCounter = 0;
+
+            if (resetLabels)
+            {
+                ActionSetup.SetupActorForAction(this, CurrentAction, false);
+            }
+
+            if (StartKeyFrameLabel != null && CurrentSegmentIndex < StartKeyFrameLabel.Length)
+            {
+                StartKeyFrameLabel[CurrentSegmentIndex](this);
+            }
         }
 
         public void Release()

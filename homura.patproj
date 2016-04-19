@@ -928,7 +928,7 @@
       </Segments>
       <InitEffects />
       <UpdateEffects />
-      <KeyFrameEffects />
+      <SegmentFinishEffects />
       <Behaviors>
         <Behavior xsi:type="InitEffectBehavior" Priority="First">
           <Effect xsi:type="PlayerSkillInitEffect" IsInAir="false" AutoCancel="false" />
@@ -1087,7 +1087,7 @@
       </Segments>
       <InitEffects />
       <UpdateEffects />
-      <KeyFrameEffects />
+      <SegmentFinishEffects />
       <Behaviors />
     </Action>
     <Action ActionID="attack" Category="" ImageID="Homura_handGun0000">
@@ -1291,7 +1291,7 @@
       </Segments>
       <InitEffects />
       <UpdateEffects />
-      <KeyFrameEffects />
+      <SegmentFinishEffects />
       <Behaviors />
     </Action>
     <Action ActionID="assult_rifle" Category="shot_common" ImageID="shotFlashA000">
@@ -1341,7 +1341,7 @@
         </Effect>
         <Effect xsi:type="IncreaseCountEffect" />
       </UpdateEffects>
-      <KeyFrameEffects />
+      <SegmentFinishEffects />
       <Behaviors />
     </Action>
     <Action ActionID="drop_shell" Category="shot_common" ImageID="yakkyouA">
@@ -1458,7 +1458,7 @@
           </Effect>
         </Effect>
       </UpdateEffects>
-      <KeyFrameEffects />
+      <SegmentFinishEffects />
       <Behaviors />
     </Action>
     <Action ActionID="attack_long" Category="attack_long" ImageID="Homura_minimiB0000">
@@ -1735,14 +1735,14 @@
         </Effect>
         <Effect xsi:type="PlayerSkillStopMovingEffect" />
       </UpdateEffects>
-      <KeyFrameEffects>
+      <SegmentFinishEffects>
         <ArrayOfEffect />
         <ArrayOfEffect />
         <ArrayOfEffect />
         <ArrayOfEffect>
           <Effect xsi:type="PlayerEndToFreeMoveEffect" />
         </ArrayOfEffect>
-      </KeyFrameEffects>
+      </SegmentFinishEffects>
       <Behaviors />
     </Action>
     <Action ActionID="attack_long_bullet" Category="attack_long" ImageID="shotA000">
@@ -1822,7 +1822,7 @@
           <Effect xsi:type="ReleaseActorEffect" />
         </Effect>
       </UpdateEffects>
-      <KeyFrameEffects />
+      <SegmentFinishEffects />
       <Behaviors />
     </Action>
     <Action ActionID="bullet_hit_effect" Category="shot_common" ImageID="shotFlashB000">
@@ -1889,7 +1889,7 @@
           <Value xsi:type="ActorMemberValue" Type="sx" />
         </Effect>
       </UpdateEffects>
-      <KeyFrameEffects />
+      <SegmentFinishEffects />
       <Behaviors />
     </Action>
     <Action ActionID="jump_up" Category="system" ImageID="Homura_jump0000">
@@ -2029,7 +2029,7 @@
       </Segments>
       <InitEffects />
       <UpdateEffects />
-      <KeyFrameEffects />
+      <SegmentFinishEffects />
       <Behaviors />
     </Action>
     <Action ActionID="jump_front" Category="system" ImageID="Homura_jump0001">
@@ -2233,7 +2233,7 @@
       </Segments>
       <InitEffects />
       <UpdateEffects />
-      <KeyFrameEffects />
+      <SegmentFinishEffects />
       <Behaviors />
     </Action>
     <Action ActionID="fall" Category="system" ImageID="Homura_jump0005">
@@ -2291,7 +2291,7 @@
       </Segments>
       <InitEffects />
       <UpdateEffects />
-      <KeyFrameEffects />
+      <SegmentFinishEffects />
       <Behaviors />
     </Action>
     <Action ActionID="magic" Category="magic" ImageID="Homura_mortar0000">
@@ -2435,14 +2435,14 @@
       <UpdateEffects>
         <Effect xsi:type="PlayerSkillStopMovingEffect" />
       </UpdateEffects>
-      <KeyFrameEffects>
+      <SegmentFinishEffects>
         <ArrayOfEffect>
           <Effect xsi:type="TimeStopEffect" Time="240" />
         </ArrayOfEffect>
         <ArrayOfEffect>
           <Effect xsi:type="PlayerEndToFreeMoveEffect" />
         </ArrayOfEffect>
-      </KeyFrameEffects>
+      </SegmentFinishEffects>
       <Behaviors />
     </Action>
     <Action ActionID="magic_air" Category="magic" ImageID="Homura_jump0003">
@@ -2640,7 +2640,7 @@
           </Effect>
         </Effect>
       </UpdateEffects>
-      <KeyFrameEffects>
+      <SegmentFinishEffects>
         <ArrayOfEffect>
           <Effect xsi:type="TimeStopEffect" Time="240" />
         </ArrayOfEffect>
@@ -2648,7 +2648,7 @@
         <ArrayOfEffect>
           <Effect xsi:type="PlayerEndToFreeMoveEffect" />
         </ArrayOfEffect>
-      </KeyFrameEffects>
+      </SegmentFinishEffects>
       <Behaviors />
     </Action>
     <Action ActionID="attack_long_air" Category="attack_long" ImageID="Homura_minimi0000">
@@ -2979,14 +2979,14 @@
           </Effect>
         </Effect>
       </UpdateEffects>
-      <KeyFrameEffects>
+      <SegmentFinishEffects>
         <ArrayOfEffect />
         <ArrayOfEffect />
         <ArrayOfEffect />
         <ArrayOfEffect>
           <Effect xsi:type="PlayerEndToFreeMoveEffect" />
         </ArrayOfEffect>
-      </KeyFrameEffects>
+      </SegmentFinishEffects>
       <Behaviors />
     </Action>
     <Action ActionID="attack_long_air_bullet" Category="attack_long" ImageID="shotA000">
@@ -3063,7 +3063,7 @@
           <Effect xsi:type="ReleaseActorEffect" />
         </Effect>
       </UpdateEffects>
-      <KeyFrameEffects />
+      <SegmentFinishEffects />
       <Behaviors />
     </Action>
     <Action ActionID="system_smoke_0" Category="effects" ImageID="effect_kemuriA_00000">
@@ -3190,7 +3190,7 @@
         </Effect>
       </InitEffects>
       <UpdateEffects />
-      <KeyFrameEffects />
+      <SegmentFinishEffects />
       <Behaviors />
     </Action>
     <Action ActionID="attack_front" Category="attack_front" ImageID="Homura_minimiB0000">
@@ -3422,7 +3422,7 @@
       <UpdateEffects>
         <Effect xsi:type="PlayerSkillStopMovingEffect" />
       </UpdateEffects>
-      <KeyFrameEffects>
+      <SegmentFinishEffects>
         <ArrayOfEffect>
           <Effect xsi:type="CreateBulletEffect">
             <Position xsi:type="FrameSinglePointProvider" Index="1" />
@@ -3458,7 +3458,7 @@
         <ArrayOfEffect>
           <Effect xsi:type="PlayerEndToFreeMoveEffect" />
         </ArrayOfEffect>
-      </KeyFrameEffects>
+      </SegmentFinishEffects>
       <Behaviors />
     </Action>
     <Action ActionID="system_smoke_3" Category="effects" ImageID="effect_kemuriC_00000">
@@ -3576,11 +3576,11 @@
       <UpdateEffects>
         <Effect xsi:type="BulletReduceAlphaEffect" Value="0.08" />
       </UpdateEffects>
-      <KeyFrameEffects>
+      <SegmentFinishEffects>
         <ArrayOfEffect>
           <Effect xsi:type="ReleaseActorEffect" />
         </ArrayOfEffect>
-      </KeyFrameEffects>
+      </SegmentFinishEffects>
       <Behaviors />
     </Action>
     <Action ActionID="rpg" Category="attack_front" ImageID="bazooka_tama">
@@ -3674,7 +3674,7 @@
           <Direction>Same</Direction>
         </Effect>
       </UpdateEffects>
-      <KeyFrameEffects />
+      <SegmentFinishEffects />
       <Behaviors />
     </Action>
     <Action ActionID="rpg_tail" Category="attack_front" ImageID="bazooka_fireA_00000">
@@ -3744,7 +3744,7 @@
         </Effect>
         <Effect xsi:type="TimeStopCheckEffect" />
       </UpdateEffects>
-      <KeyFrameEffects />
+      <SegmentFinishEffects />
       <Behaviors />
     </Action>
     <Action ActionID="rpg_smoke" Category="attack_front" ImageID="kemuri_A_00000">
@@ -3966,11 +3966,11 @@
         </Effect>
         <Effect xsi:type="BulletReduceAlphaEffect" Value="0.03" />
       </UpdateEffects>
-      <KeyFrameEffects>
+      <SegmentFinishEffects>
         <ArrayOfEffect>
           <Effect xsi:type="ReleaseActorEffect" />
         </ArrayOfEffect>
-      </KeyFrameEffects>
+      </SegmentFinishEffects>
       <Behaviors />
     </Action>
     <Action ActionID="rpg_drop" Category="attack_front" ImageID="AT4">
@@ -4016,7 +4016,7 @@
         </Effect>
         <Effect xsi:type="BulletReduceAlphaEffect" Value="0.05" />
       </UpdateEffects>
-      <KeyFrameEffects />
+      <SegmentFinishEffects />
       <Behaviors />
     </Action>
     <Action ActionID="rpg_explode_attack" Category="attack_front" ImageID="exploadA000">
@@ -4102,7 +4102,7 @@
         </Effect>
         <Effect xsi:type="BulletReduceAlphaEffect" Value="0.05" />
       </UpdateEffects>
-      <KeyFrameEffects />
+      <SegmentFinishEffects />
       <Behaviors />
     </Action>
     <Action ActionID="rpg_explode_light" Category="attack_front" ImageID="exploadA000">
@@ -4160,7 +4160,7 @@
         </Effect>
         <Effect xsi:type="BulletReduceAlphaEffect" Value="0.025" />
       </UpdateEffects>
-      <KeyFrameEffects />
+      <SegmentFinishEffects />
       <Behaviors />
     </Action>
     <Action ActionID="rpg_explode_fire_1" Category="attack_front" ImageID="bom_kemuri_00001">
@@ -4369,11 +4369,11 @@
       <UpdateEffects>
         <Effect xsi:type="TimeStopCheckEffect" />
       </UpdateEffects>
-      <KeyFrameEffects>
+      <SegmentFinishEffects>
         <ArrayOfEffect>
           <Effect xsi:type="ReleaseActorEffect" />
         </ArrayOfEffect>
-      </KeyFrameEffects>
+      </SegmentFinishEffects>
       <Behaviors />
     </Action>
     <Action ActionID="rpg_explode_fire_2" Category="attack_front" ImageID="bom_fire_00000">
@@ -4462,11 +4462,11 @@
       <UpdateEffects>
         <Effect xsi:type="TimeStopCheckEffect" />
       </UpdateEffects>
-      <KeyFrameEffects>
+      <SegmentFinishEffects>
         <ArrayOfEffect>
           <Effect xsi:type="ReleaseActorEffect" />
         </ArrayOfEffect>
-      </KeyFrameEffects>
+      </SegmentFinishEffects>
       <Behaviors />
     </Action>
     <Action ActionID="attack_front_air" Category="attack_front" ImageID="Homura_jump0004">
@@ -4747,7 +4747,7 @@
           </Effect>
         </Effect>
       </UpdateEffects>
-      <KeyFrameEffects>
+      <SegmentFinishEffects>
         <ArrayOfEffect>
           <Effect xsi:type="SetActorMemberEffect" Type="vx">
             <Value xsi:type="BinaryExpressionValue" Operator="Add">
@@ -4782,7 +4782,7 @@
         <ArrayOfEffect>
           <Effect xsi:type="PlayerEndToFreeMoveEffect" />
         </ArrayOfEffect>
-      </KeyFrameEffects>
+      </SegmentFinishEffects>
       <Behaviors />
     </Action>
     <Action ActionID="attack_up" Category="attack_up" ImageID="Homura_mortar0000">
@@ -4932,7 +4932,7 @@
       <UpdateEffects>
         <Effect xsi:type="PlayerSkillStopMovingEffect" />
       </UpdateEffects>
-      <KeyFrameEffects>
+      <SegmentFinishEffects>
         <ArrayOfEffect>
           <Effect xsi:type="CreateBulletEffect">
             <Position xsi:type="FrameSinglePointProvider" Index="0" />
@@ -4943,7 +4943,7 @@
         <ArrayOfEffect>
           <Effect xsi:type="PlayerEndToFreeMoveEffect" />
         </ArrayOfEffect>
-      </KeyFrameEffects>
+      </SegmentFinishEffects>
       <Behaviors />
     </Action>
     <Action ActionID="attack_up_mortar" Category="attack_up" ImageID="Homura_mortarB">
@@ -5004,7 +5004,7 @@
           <Effect xsi:type="BulletReduceAlphaEffect" Value="0.1" />
         </Effect>
       </UpdateEffects>
-      <KeyFrameEffects>
+      <SegmentFinishEffects>
         <ArrayOfEffect />
         <ArrayOfEffect>
           <Effect xsi:type="CreateBulletEffect">
@@ -5013,7 +5013,7 @@
             <Direction>Same</Direction>
           </Effect>
         </ArrayOfEffect>
-      </KeyFrameEffects>
+      </SegmentFinishEffects>
       <Behaviors />
     </Action>
     <Action ActionID="attack_up_bullet" Category="attack_up" ImageID="mortarShellA000">
@@ -5117,7 +5117,7 @@
           <Effect xsi:type="SetMaskEffect" CollisionMask="-1" CallbackMask="14" />
         </Effect>
       </UpdateEffects>
-      <KeyFrameEffects />
+      <SegmentFinishEffects />
       <Behaviors />
     </Action>
   </Actions>

@@ -246,9 +246,7 @@ namespace GS_PatEditor.Editor
         {
             if (CurrentAction != null)
             {
-                if (CurrentAction.InitEffects.Count > 0 ||
-                    CurrentAction.UpdateEffects.Count > 0 ||
-                    CurrentAction.KeyFrameEffects.Count > 0)
+                if (CurrentAction.ContainsLowLevelEffects)
                 {
                     //advanced mode
                     if (CurrentAction.Behaviors.Count > 0)

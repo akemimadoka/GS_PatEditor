@@ -34,11 +34,7 @@ namespace GS_PatEditor.Pat.Behaviors
 
         public override void MakeEffects(ActionEffects dest, Effect effect)
         {
-            while (dest.KeyFrameEffects.Count <= Segment)
-            {
-                dest.KeyFrameEffects.Add(new EffectList());
-            }
-            dest.KeyFrameEffects[Segment].Add(effect);
+            dest.SegmentFinishEffects.AddEffectToList(Segment, effect);
         }
     }
 

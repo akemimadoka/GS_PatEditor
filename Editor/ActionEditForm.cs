@@ -30,7 +30,7 @@ namespace GS_PatEditor.Editor
             listBox1.Items.Add("Initialization(" + _Action.InitEffects.Count() + ")");
             listBox1.Items.Add("Update(" + _Action.UpdateEffects.Count() + ")");
             listBox1.Items.Add("-----");
-            foreach (var key in _Action.KeyFrameEffects)
+            foreach (var key in _Action.SegmentFinishEffects)
             {
                 listBox1.Items.Add("KeyFrame(" + key.Count() + ")");
             }
@@ -81,7 +81,7 @@ namespace GS_PatEditor.Editor
 
         private void button1_Click(object sender, EventArgs e)
         {
-            _Action.KeyFrameEffects.Add(new Pat.EffectList());
+            _Action.SegmentFinishEffects.Add(new Pat.EffectList());
             listBox1.Items.Add("KeyFrame(0)");
         }
 
@@ -89,7 +89,7 @@ namespace GS_PatEditor.Editor
         {
             if (listBox1.SelectedIndex >= 3)
             {
-                _Action.KeyFrameEffects.RemoveAt(listBox1.SelectedIndex - 3);
+                _Action.SegmentFinishEffects.RemoveAt(listBox1.SelectedIndex - 3);
                 listBox1.Items.RemoveAt(listBox1.SelectedIndex);
             }
         }
@@ -99,9 +99,9 @@ namespace GS_PatEditor.Editor
             var s = listBox1.SelectedIndex;
             if (s >= 4)
             {
-                var key = _Action.KeyFrameEffects[s - 3];
-                _Action.KeyFrameEffects.RemoveAt(s - 3);
-                _Action.KeyFrameEffects.Insert(s - 4, key);
+                var key = _Action.SegmentFinishEffects[s - 3];
+                _Action.SegmentFinishEffects.RemoveAt(s - 3);
+                _Action.SegmentFinishEffects.Insert(s - 4, key);
 
                 var item = listBox1.Items[s];
                 listBox1.Items.RemoveAt(s);
@@ -116,9 +116,9 @@ namespace GS_PatEditor.Editor
             var s = listBox1.SelectedIndex;
             if (s >= 3 && s != listBox1.Items.Count - 1)
             {
-                var key = _Action.KeyFrameEffects[s - 3];
-                _Action.KeyFrameEffects.RemoveAt(s - 3);
-                _Action.KeyFrameEffects.Insert(s - 2, key);
+                var key = _Action.SegmentFinishEffects[s - 3];
+                _Action.SegmentFinishEffects.RemoveAt(s - 3);
+                _Action.SegmentFinishEffects.Insert(s - 2, key);
 
                 var item = listBox1.Items[s];
                 listBox1.Items.RemoveAt(s);
@@ -143,7 +143,7 @@ namespace GS_PatEditor.Editor
                 case 2:
                     break;
                 default:
-                    effects = _Action.KeyFrameEffects[s - 3];
+                    effects = _Action.SegmentFinishEffects[s - 3];
                     break;
             }
             if (effects != null)

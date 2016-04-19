@@ -58,7 +58,7 @@ namespace GS_PatEditor.Editor.Panels
                 new Simulation.SystemAnimationProvider(_Parent.Project),
                 new PatProjectActionProvider { Project = parent.Project });
 
-            Simulation.ActionSetup.SetupActorForAction(actor, action);
+            Simulation.ActionSetup.SetupActorForAction(actor, action, true);
 
             _World.Add(actor);
 

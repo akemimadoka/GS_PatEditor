@@ -241,21 +241,21 @@ namespace GS_PatEditor.Editor.Exporters.Player
             }
             ret.Add(setUpdate);
 
-            var keys = ae.KeyFrameEffects.Select(
+            var keys = ae.SegmentFinishEffects.Select(
                 keyEffect => new FunctionBlock("", new string[0], keyEffect.Select(e => e.Generate(env))).AsExpression());
             var keyCount = action.Segments.Count - 1;
-            if (ae.KeyFrameEffects.Count < keyCount)
+            if (ae.SegmentFinishEffects.Count < keyCount)
             {
-                keyCount = ae.KeyFrameEffects.Count;
+                keyCount = ae.SegmentFinishEffects.Count;
             }
             var arrayObj = new ArrayExpr(keys.Take(keyCount).ToArray());
             var setKey = ThisExpr.Instance.MakeIndex("keyAction").Assign(arrayObj).Statement();
             ret.Add(new SimpleLineObject("this.SetEndTakeCallbackFunction(this.KeyActionCheck);"));
             ret.Add(setKey);
 
-            if (ae.KeyFrameEffects.Count >= action.Segments.Count)
+            if (ae.SegmentFinishEffects.Count >= action.Segments.Count)
             {
-                var effects = ae.KeyFrameEffects[action.Segments.Count - 1].Select(e => e.Generate(env));
+                var effects = ae.SegmentFinishEffects[action.Segments.Count - 1].Select(e => e.Generate(env));
                 var funcEndMotion = new FunctionBlock("", new string[0], effects).AsExpression();
                 var setEndMotion = ThisExpr.Instance.MakeIndex("SetEndMotionCallbackFunction").Call(funcEndMotion).Statement();
                 ret.Add(setEndMotion);

@@ -814,10 +814,6 @@ namespace GS_PatEditor.Editor
                         ActionID = "Imported " + id,
                         ImageID = null,
                         Segments = segments,
-                        InitEffects = new Pat.EffectList(),
-                        KeyFrameEffects = new List<Pat.EffectList>(),
-                        UpdateEffects = new Pat.EffectList(),
-                        Behaviors = new List<Pat.Behavior>(),
                     };
 
                     //TODO move to action

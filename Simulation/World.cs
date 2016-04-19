@@ -65,7 +65,6 @@ namespace GS_PatEditor.Simulation
                         actor.SitLabel(actor);
                     }
                 }
-                actor.IsInAir = !actor.HitBottom;
             }
 
             foreach (var actor in _AddActors)
