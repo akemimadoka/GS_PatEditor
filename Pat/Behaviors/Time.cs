@@ -26,6 +26,19 @@ namespace GS_PatEditor.Pat.Behaviors
     }
 
     [Serializable]
+    [DisplayName("StartOfSegment")]
+    public class TimeStartSegment : Time
+    {
+        [XmlAttribute]
+        public int Segment { get; set; }
+
+        public override void MakeEffects(ActionEffects dest, Effect effect)
+        {
+            dest.SegmentStartEffects.AddEffectToList(Segment, effect);
+        }
+    }
+
+    [Serializable]
     [DisplayName("EndOfSegment")]
     public class TimeEndSegment : Time
     {
