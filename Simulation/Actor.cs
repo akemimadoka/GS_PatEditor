@@ -73,6 +73,8 @@ namespace GS_PatEditor.Simulation
         public int CurrentFrameIndex { get; private set; }
         public int CurrentFrameCounter { get; private set; }
 
+        private int _LastSegmentIndex = -1;
+
         //count, used in Action Code
         public int ActionCount;
 
@@ -157,6 +159,7 @@ namespace GS_PatEditor.Simulation
             {
                 StartKeyFrameLabel[CurrentSegmentIndex](this);
             }
+            _LastSegmentIndex = CurrentSegmentIndex;
         }
 
         public void Release()
@@ -237,6 +240,15 @@ namespace GS_PatEditor.Simulation
 
         protected void RunUpdateLabel()
         {
+            if (_LastSegmentIndex != CurrentSegmentIndex)
+            {
+                if (StartKeyFrameLabel != null && CurrentSegmentIndex < StartKeyFrameLabel.Length)
+                {
+                    StartKeyFrameLabel[CurrentSegmentIndex](this);
+                }
+                _LastSegmentIndex = CurrentSegmentIndex;
+            }
+
             if (UpdateLabel != null)
             {
                 UpdateLabel(this);

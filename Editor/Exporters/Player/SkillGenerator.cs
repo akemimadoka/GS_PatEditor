@@ -111,8 +111,23 @@ namespace GS_PatEditor.Editor.Exporters.Player
 
         public static void GenerateStartMotionFunction(SegmentStartEventRecorder r, CodeGenerator output)
         {
-            output.WriteStatement(new FunctionBlock("SegmentStartEventHandler",
-                new string[0], new ILineObject[] { r.Generate() }).Statement());
+            output.WriteStatement(new FunctionBlock("SegmentStartEventHandler", new string[0],
+                new ILineObject[] {
+                    r.Generate(),
+                    new SimpleLineObject("if (!(\"lastKeyTake\" in this.u)) this.u.lastKeyTake <- -1;"),
+                    new SimpleLineObject("this.u.lastKeyTake = this.keyTake;"),
+                }).Statement());
+        }
+
+        private static ILineObject GenerateNormalSkillUpdateSSEChecker()
+        {
+            return new SimpleBlock(new ILineObject[] {
+                new SimpleLineObject("if (!(\"lastKeyTake\" in this.u)) this.u.lastKeyTake <- -1;"),
+                new ControlBlock(ControlBlockType.If, "this.u.lastKeyTake != this.keyTake", new ILineObject[] {
+                    new SimpleLineObject("this.u.uu.uuu.SegmentStartEventHandler.call(this);"),
+                    new SimpleLineObject("this.u.lastKeyTake = this.keyTake;"),
+                }).Statement(),
+            }).Statement();
         }
 
         #region InputAttack
@@ -243,8 +258,13 @@ namespace GS_PatEditor.Editor.Exporters.Player
 
             ret.AddRange(ae.InitEffects.Select(e => e.Generate(env)));
 
-            var list2 = ae.UpdateEffects.Select(e => e.Generate(env))
-                .Concat(new ILineObject[] { new SimpleLineObject("return true;") });
+            var list2 = ae.UpdateEffects.Select(e => e.Generate(env));
+            list2 = new ILineObject[] { GenerateNormalSkillUpdateSSEChecker() }.Concat(list2);
+            if (stateLabelAsUpdate)
+            {
+                list2 = list2.Concat(new ILineObject[] { new SimpleLineObject("return true;") });
+            }
+
             var updateFunc = new FunctionBlock("", new string[0], list2).AsExpression();
             ILineObject setUpdate;
             if (stateLabelAsUpdate)
