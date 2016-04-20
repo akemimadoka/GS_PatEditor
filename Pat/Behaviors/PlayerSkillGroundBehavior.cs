@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,8 +12,8 @@ namespace GS_PatEditor.Pat.Behaviors
     public class PlayerSkillGroundBehavior : Behavior
     {
         [XmlAttribute]
+        [DefaultValue(true)]
         public bool AutoCancel { get; set; }
-        public bool ShouldSerializeAutoCancel() { return !AutoCancel; }
 
         public PlayerSkillGroundBehavior()
         {

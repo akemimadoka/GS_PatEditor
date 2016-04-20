@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
@@ -13,46 +12,90 @@ namespace GS_PatEditor.Pat.Behaviors
 {
     [Serializable]
     [SerializationBaseClassAttribute]
-    public abstract class PlayerGroundSpeedCtrlBehaviorEntry
+    public abstract class PlayerAirSpeedCtrlBehaviorEntry
     {
         public abstract void MakeEffects(ActionEffects effects);
     }
 
     [Serializable]
-    [DisplayName("Friction")]
-    public class PlayerGroundSpeedCtrlBehaviorEntryFriction : PlayerGroundSpeedCtrlBehaviorEntry
+    [DisplayName("Gravity")]
+    public class PlayerAirSpeedCtrlBehaviorEntryGravity : PlayerAirSpeedCtrlBehaviorEntry
     {
-        [XmlAttribute]
-        [DefaultValue(0.2f)]
+        [XmlElement]
+        [DefaultValue(1.0f)]
         public float Value { get; set; }
 
         [XmlElement]
         public SegmentSelector Segments { get; set; }
-        public bool ShouldSerializeSegments()
-        {
-            return !(Segments != null && Segments.Index == "*");
-        }
 
-        public PlayerGroundSpeedCtrlBehaviorEntryFriction()
+        public PlayerAirSpeedCtrlBehaviorEntryGravity()
         {
-            Value = 0.2f;
+            Value = 1.0f;
             Segments = new SegmentSelector { Index = "*" };
-        }
-
-        private Effect GetEffect()
-        {
-            return new Effects.PlayerSkillStopMovingEffect { ReduceSpeed = Value };
         }
 
         public override void MakeEffects(ActionEffects effects)
         {
-            SegmentSelectorHelper.MakeEffectsAsUpdate(effects, Segments, GetEffect());
+            SegmentSelectorHelper.MakeEffectsAsUpdate(effects, Segments,
+                new GravityEffect { Value = Value });
         }
     }
 
     [Serializable]
-    [DisplayName("Recoil")]
-    public class PlayerGroundSpeedCtrlBehaviorEntryRecoil : PlayerGroundSpeedCtrlBehaviorEntry
+    [DisplayName("ReduceSpeed")]
+    public class PlayerAirSpeedCtrlBehaviorEntryReduceSpeed : PlayerAirSpeedCtrlBehaviorEntry
+    {
+        [XmlElement]
+        public float? RatioX { get; set; }
+
+        [XmlElement]
+        public float? RatioY { get; set; }
+
+        [XmlElement]
+        [EditorChildNode("Time")]
+        public Time Time;
+
+        private Effect GetEffect()
+        {
+            var list = new SimpleListEffect();
+            if (RatioX.HasValue)
+            {
+                list.EffectList.Add(new SetActorMemberEffect
+                {
+                    Type = ActorMemberType.vx,
+                    Value = new BinaryExpressionValue
+                    {
+                        Operator = BinaryOperator.Multiply,
+                        Left = new ActorMemberValue { Type = ActorMemberType.vx },
+                        Right = new ConstValue { Value = RatioX.Value },
+                    },
+                });
+            }
+            if (RatioY.HasValue)
+            {
+                list.EffectList.Add(new SetActorMemberEffect
+                {
+                    Type = ActorMemberType.vy,
+                    Value = new BinaryExpressionValue
+                    {
+                        Operator = BinaryOperator.Multiply,
+                        Left = new ActorMemberValue { Type = ActorMemberType.vy },
+                        Right = new ConstValue { Value = RatioY.Value },
+                    },
+                });
+            }
+            return list;
+        }
+
+        public override void MakeEffects(ActionEffects effects)
+        {
+            Time.MakeEffects(effects, GetEffect());
+        }
+    }
+
+    [Serializable]
+    [DisplayName("RecoilX")]
+    public class PlayerAirSpeedCtrlBehaviorEntryRecoil : PlayerAirSpeedCtrlBehaviorEntry
     {
         [XmlElement]
         [EditorChildNode("Time")]
@@ -180,27 +223,55 @@ namespace GS_PatEditor.Pat.Behaviors
     }
 
     [Serializable]
-    public class PlayerGroundSpeedCtrlBehavior : Behavior
+    [DisplayName("AirJump")]
+    public class PlayerAirSpeedCtrlBehaviorEntryAirJump : PlayerAirSpeedCtrlBehaviorEntry
     {
+        [XmlAttribute]
+        public float Speed { get; set; }
+
+        [XmlAttribute]
+        [DefaultValue(true)]
+        public bool ResetOriginSpeed { get; set; }
+
         [XmlElement]
-        public float? ReduceInitialSpeed { get; set; }
-        public bool ShouldSerializeReduceInitialSpeed()
-        {
-            return !(ReduceInitialSpeed.HasValue && ReduceInitialSpeed.Value == 0.25f);
-        }
+        [EditorChildNode("Time")]
+        public Time Time;
 
-        [XmlArray]
-        [EditorChildNode(null)]
-        public List<PlayerGroundSpeedCtrlBehaviorEntry> Entries = new List<PlayerGroundSpeedCtrlBehaviorEntry>();
-
-        public PlayerGroundSpeedCtrlBehavior()
+        public PlayerAirSpeedCtrlBehaviorEntryAirJump()
         {
-            ReduceInitialSpeed = 0.25f;
+            ResetOriginSpeed = true;
         }
 
         public override void MakeEffects(ActionEffects effects)
         {
-            if (ReduceInitialSpeed.HasValue)
+            var effect = new SetActorMemberEffect
+            {
+                Type = ActorMemberType.vy,
+                Value = new ConstValue { Value = -Speed },
+            };
+            Time.MakeEffects(effects, effect);
+        }
+    }
+
+    [Serializable]
+    public class PlayerAirSpeedCtrlBehavior : Behavior
+    {
+        [XmlElement]
+        public float? ReduceInitialSpeedX { get; set; }
+
+        [XmlElement]
+        public float? ReduceInitialSpeedY { get; set; }
+
+        [XmlElement]
+        public float? InitialGravity { get; set; }
+
+        [XmlArray]
+        [EditorChildNode(null)]
+        public List<PlayerAirSpeedCtrlBehaviorEntry> Entries = new List<PlayerAirSpeedCtrlBehaviorEntry>();
+
+        public override void MakeEffects(ActionEffects effects)
+        {
+            if (ReduceInitialSpeedX.HasValue)
             {
                 effects.InitEffects.Add(new SetActorMemberEffect
                 {
@@ -209,8 +280,28 @@ namespace GS_PatEditor.Pat.Behaviors
                     {
                         Operator = BinaryOperator.Multiply,
                         Left = new ActorMemberValue { Type = ActorMemberType.vx },
-                        Right = new ConstValue { Value = ReduceInitialSpeed.Value },
+                        Right = new ConstValue { Value = ReduceInitialSpeedX.Value },
                     },
+                });
+            }
+            if (ReduceInitialSpeedY.HasValue)
+            {
+                effects.InitEffects.Add(new SetActorMemberEffect
+                {
+                    Type = ActorMemberType.vy,
+                    Value = new BinaryExpressionValue
+                    {
+                        Operator = BinaryOperator.Multiply,
+                        Left = new ActorMemberValue { Type = ActorMemberType.vy },
+                        Right = new ConstValue { Value = ReduceInitialSpeedY.Value },
+                    },
+                });
+            }
+            if (InitialGravity.HasValue)
+            {
+                effects.InitEffects.Add(new GravityEffect
+                {
+                    Value = InitialGravity.Value,
                 });
             }
             foreach (var e in Entries)

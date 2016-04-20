@@ -91,6 +91,16 @@ namespace GS_PatEditor.Editor.Exporters.Player
 
         [XmlIgnore]
         [Browsable(false)]
+        public SegmentStartEventRecorder SSERecorder
+        {
+            get
+            {
+                return _SSERecorder;
+            }
+        }
+
+        [XmlIgnore]
+        [Browsable(false)]
         public GenerationEnvironment GenEnv { get; private set; }
 
         public override void ShowOptionDialog(Pat.Project proj)
@@ -154,7 +164,7 @@ namespace GS_PatEditor.Editor.Exporters.Player
                 base.AddNormalAnimation(action, id + BaseIndex);
                 if (this.GenEnv != null)
                 {
-                    _SSERecorder.AddAction(action, id + BaseIndex, this.GenEnv);
+                    //_SSERecorder.AddAction(action, id + BaseIndex, this.GenEnv);
                 }
             }
         }
@@ -168,6 +178,7 @@ namespace GS_PatEditor.Editor.Exporters.Player
             }
             ret = _NextFreeActionID++;
             ExportAction(name, ret);
+            _GeneratedActionID.Add(name, ret);
             return ret;
         }
 

@@ -109,4 +109,38 @@ namespace GS_PatEditor.Pat.Behaviors
             }
         }
     }
+
+    [Serializable]
+    public class StartSegmentEffectBehavior : Behavior
+    {
+        [XmlElement]
+        [EditorChildNode("Effect")]
+        public Effect Effect;
+
+        [XmlElement]
+        public SegmentSelector Segments { get; set; }
+
+        [XmlAttribute]
+        public EffectBehaviorPriority Priority;
+
+        public StartSegmentEffectBehavior()
+        {
+            Segments = new SegmentSelector { Index = "0" };
+        }
+
+        public override void MakeEffects(ActionEffects effects)
+        {
+            foreach (var i in Segments.IndexList)
+            {
+                if (Priority == EffectBehaviorPriority.First)
+                {
+                    effects.SegmentStartEffects.InsertEffectToList(i, Effect);
+                }
+                else if (Priority == EffectBehaviorPriority.Last)
+                {
+                    effects.SegmentStartEffects.AddEffectToList(i, Effect);
+                }
+            }
+        }
+    }
 }

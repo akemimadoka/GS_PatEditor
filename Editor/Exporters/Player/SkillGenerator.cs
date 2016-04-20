@@ -256,6 +256,8 @@ namespace GS_PatEditor.Editor.Exporters.Player
                 b.MakeEffects(ae);
             }
 
+            exporter.SSERecorder.AddAction(ae, env.GetActionID(id), env);
+
             ret.AddRange(ae.InitEffects.Select(e => e.Generate(env)));
 
             var list2 = ae.UpdateEffects.Select(e => e.Generate(env));

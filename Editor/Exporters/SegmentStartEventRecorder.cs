@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace GS_PatEditor.Editor.Exporters
 {
-    class SegmentStartEventRecorder
+    public class SegmentStartEventRecorder
     {
         private Dictionary<int, ILineObject> _Generated = new Dictionary<int, ILineObject>();
 
-        public void AddAction(Pat.Action action, int motionId, GenerationEnvironment env)
+        public void AddAction(Pat.ActionEffects action, int motionId, GenerationEnvironment env)
         {
             _Generated.Add(motionId, GenerateList(action.SegmentStartEffects, env));
         }
