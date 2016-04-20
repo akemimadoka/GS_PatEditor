@@ -51,6 +51,11 @@ namespace GS_PatEditor.Pat.Behaviors
         [XmlAttribute]
         public EffectBehaviorPriority Priority;
 
+        public UpdateEffectBehavior()
+        {
+            Segments = new SegmentSelector { Index = "*" };
+        }
+
         public override void MakeEffects(ActionEffects effects)
         {
             var effectFiltered = new SimpleListEffect();
@@ -83,6 +88,11 @@ namespace GS_PatEditor.Pat.Behaviors
 
         [XmlAttribute]
         public EffectBehaviorPriority Priority;
+
+        public EndSegmentEffectBehavior()
+        {
+            Segments = new SegmentSelector { Index = "0" };
+        }
 
         public override void MakeEffects(ActionEffects effects)
         {

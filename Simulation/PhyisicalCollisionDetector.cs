@@ -74,8 +74,8 @@ namespace GS_PatEditor.Simulation
                 newX = left - cleft;
                 if (actor.VX < 0)
                 {
-                    //TODO check speed
-                    //actor.VX = 0;
+                    //TODO check if speed is reset
+                    actor.VX = 0;
                     actor.HitLeft = true;
                 }
             }
@@ -84,7 +84,7 @@ namespace GS_PatEditor.Simulation
                 newX = left + width - cright;
                 if (actor.VX > 0)
                 {
-                    //actor.VX = 0;
+                    actor.VX = 0;
                     actor.HitRight = true;
                 }
             }
@@ -93,7 +93,7 @@ namespace GS_PatEditor.Simulation
                 newY = top - ctop;
                 if (actor.VY < 0)
                 {
-                    //actor.VY = 0;
+                    actor.VY = 0;
                     actor.HitTop = true;
                 }
             }
@@ -102,7 +102,7 @@ namespace GS_PatEditor.Simulation
                 newY = top + height - cbottom;
                 if (actor.VY > 0)
                 {
-                    //actor.VY = 0;
+                    actor.VY = 0;
                     actor.HitBottom = true;
                 }
             }

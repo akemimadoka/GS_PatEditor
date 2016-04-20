@@ -26,6 +26,7 @@ namespace GS_PatEditor.Pat.Behaviors
                 AutoCancel = AutoCancel,
                 IsInAir = false,
             });
+            effects.UpdateEffects.Effects.Add(new Effects.IncreaseCountEffect());
             effects.SegmentFinishEffects.AddEffectToList(effects.SegmentCount - 1,
                 new Effects.PlayerEndToFreeMoveEffect());
         }

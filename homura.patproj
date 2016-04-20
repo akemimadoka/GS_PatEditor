@@ -929,6 +929,7 @@
       <InitEffects />
       <UpdateEffects />
       <SegmentFinishEffects />
+      <SegmentStartEffects />
       <Behaviors>
         <Behavior xsi:type="InitEffectBehavior" Priority="First">
           <Effect xsi:type="PlayerSkillInitEffect" IsInAir="false" AutoCancel="false" />
@@ -1088,6 +1089,7 @@
       <InitEffects />
       <UpdateEffects />
       <SegmentFinishEffects />
+      <SegmentStartEffects />
       <Behaviors />
     </Action>
     <Action ActionID="attack" Category="" ImageID="Homura_handGun0000">
@@ -1292,6 +1294,7 @@
       <InitEffects />
       <UpdateEffects />
       <SegmentFinishEffects />
+      <SegmentStartEffects />
       <Behaviors />
     </Action>
     <Action ActionID="assult_rifle" Category="shot_common" ImageID="shotFlashA000">
@@ -1342,6 +1345,7 @@
         <Effect xsi:type="IncreaseCountEffect" />
       </UpdateEffects>
       <SegmentFinishEffects />
+      <SegmentStartEffects />
       <Behaviors />
     </Action>
     <Action ActionID="drop_shell" Category="shot_common" ImageID="yakkyouA">
@@ -1459,6 +1463,7 @@
         </Effect>
       </UpdateEffects>
       <SegmentFinishEffects />
+      <SegmentStartEffects />
       <Behaviors />
     </Action>
     <Action ActionID="attack_long" Category="attack_long" ImageID="Homura_minimiB0000">
@@ -1743,6 +1748,12 @@
           <Effect xsi:type="PlayerEndToFreeMoveEffect" />
         </ArrayOfEffect>
       </SegmentFinishEffects>
+      <SegmentStartEffects>
+        <ArrayOfEffect />
+        <ArrayOfEffect />
+        <ArrayOfEffect />
+        <ArrayOfEffect />
+      </SegmentStartEffects>
       <Behaviors />
     </Action>
     <Action ActionID="attack_long_bullet" Category="attack_long" ImageID="shotA000">
@@ -1823,6 +1834,7 @@
         </Effect>
       </UpdateEffects>
       <SegmentFinishEffects />
+      <SegmentStartEffects />
       <Behaviors />
     </Action>
     <Action ActionID="bullet_hit_effect" Category="shot_common" ImageID="shotFlashB000">
@@ -1890,6 +1902,7 @@
         </Effect>
       </UpdateEffects>
       <SegmentFinishEffects />
+      <SegmentStartEffects />
       <Behaviors />
     </Action>
     <Action ActionID="jump_up" Category="system" ImageID="Homura_jump0000">
@@ -2030,6 +2043,7 @@
       <InitEffects />
       <UpdateEffects />
       <SegmentFinishEffects />
+      <SegmentStartEffects />
       <Behaviors />
     </Action>
     <Action ActionID="jump_front" Category="system" ImageID="Homura_jump0001">
@@ -2234,6 +2248,7 @@
       <InitEffects />
       <UpdateEffects />
       <SegmentFinishEffects />
+      <SegmentStartEffects />
       <Behaviors />
     </Action>
     <Action ActionID="fall" Category="system" ImageID="Homura_jump0005">
@@ -2292,6 +2307,7 @@
       <InitEffects />
       <UpdateEffects />
       <SegmentFinishEffects />
+      <SegmentStartEffects />
       <Behaviors />
     </Action>
     <Action ActionID="magic" Category="magic" ImageID="Homura_mortar0000">
@@ -2443,6 +2459,7 @@
           <Effect xsi:type="PlayerEndToFreeMoveEffect" />
         </ArrayOfEffect>
       </SegmentFinishEffects>
+      <SegmentStartEffects />
       <Behaviors />
     </Action>
     <Action ActionID="magic_air" Category="magic" ImageID="Homura_jump0003">
@@ -2649,6 +2666,7 @@
           <Effect xsi:type="PlayerEndToFreeMoveEffect" />
         </ArrayOfEffect>
       </SegmentFinishEffects>
+      <SegmentStartEffects />
       <Behaviors />
     </Action>
     <Action ActionID="attack_long_air" Category="attack_long" ImageID="Homura_minimi0000">
@@ -2987,6 +3005,7 @@
           <Effect xsi:type="PlayerEndToFreeMoveEffect" />
         </ArrayOfEffect>
       </SegmentFinishEffects>
+      <SegmentStartEffects />
       <Behaviors />
     </Action>
     <Action ActionID="attack_long_air_bullet" Category="attack_long" ImageID="shotA000">
@@ -3064,6 +3083,7 @@
         </Effect>
       </UpdateEffects>
       <SegmentFinishEffects />
+      <SegmentStartEffects />
       <Behaviors />
     </Action>
     <Action ActionID="system_smoke_0" Category="effects" ImageID="effect_kemuriA_00000">
@@ -3191,6 +3211,7 @@
       </InitEffects>
       <UpdateEffects />
       <SegmentFinishEffects />
+      <SegmentStartEffects />
       <Behaviors />
     </Action>
     <Action ActionID="attack_front" Category="attack_front" ImageID="Homura_minimiB0000">
@@ -3459,6 +3480,7 @@
           <Effect xsi:type="PlayerEndToFreeMoveEffect" />
         </ArrayOfEffect>
       </SegmentFinishEffects>
+      <SegmentStartEffects />
       <Behaviors />
     </Action>
     <Action ActionID="system_smoke_3" Category="effects" ImageID="effect_kemuriC_00000">
@@ -3581,6 +3603,7 @@
           <Effect xsi:type="ReleaseActorEffect" />
         </ArrayOfEffect>
       </SegmentFinishEffects>
+      <SegmentStartEffects />
       <Behaviors />
     </Action>
     <Action ActionID="rpg" Category="attack_front" ImageID="bazooka_tama">
@@ -3675,6 +3698,7 @@
         </Effect>
       </UpdateEffects>
       <SegmentFinishEffects />
+      <SegmentStartEffects />
       <Behaviors />
     </Action>
     <Action ActionID="rpg_tail" Category="attack_front" ImageID="bazooka_fireA_00000">
@@ -3745,6 +3769,7 @@
         <Effect xsi:type="TimeStopCheckEffect" />
       </UpdateEffects>
       <SegmentFinishEffects />
+      <SegmentStartEffects />
       <Behaviors />
     </Action>
     <Action ActionID="rpg_smoke" Category="attack_front" ImageID="kemuri_A_00000">
@@ -3971,6 +3996,7 @@
           <Effect xsi:type="ReleaseActorEffect" />
         </ArrayOfEffect>
       </SegmentFinishEffects>
+      <SegmentStartEffects />
       <Behaviors />
     </Action>
     <Action ActionID="rpg_drop" Category="attack_front" ImageID="AT4">
@@ -4017,6 +4043,7 @@
         <Effect xsi:type="BulletReduceAlphaEffect" Value="0.05" />
       </UpdateEffects>
       <SegmentFinishEffects />
+      <SegmentStartEffects />
       <Behaviors />
     </Action>
     <Action ActionID="rpg_explode_attack" Category="attack_front" ImageID="exploadA000">
@@ -4103,6 +4130,7 @@
         <Effect xsi:type="BulletReduceAlphaEffect" Value="0.05" />
       </UpdateEffects>
       <SegmentFinishEffects />
+      <SegmentStartEffects />
       <Behaviors />
     </Action>
     <Action ActionID="rpg_explode_light" Category="attack_front" ImageID="exploadA000">
@@ -4161,6 +4189,7 @@
         <Effect xsi:type="BulletReduceAlphaEffect" Value="0.025" />
       </UpdateEffects>
       <SegmentFinishEffects />
+      <SegmentStartEffects />
       <Behaviors />
     </Action>
     <Action ActionID="rpg_explode_fire_1" Category="attack_front" ImageID="bom_kemuri_00001">
@@ -4374,6 +4403,7 @@
           <Effect xsi:type="ReleaseActorEffect" />
         </ArrayOfEffect>
       </SegmentFinishEffects>
+      <SegmentStartEffects />
       <Behaviors />
     </Action>
     <Action ActionID="rpg_explode_fire_2" Category="attack_front" ImageID="bom_fire_00000">
@@ -4467,6 +4497,7 @@
           <Effect xsi:type="ReleaseActorEffect" />
         </ArrayOfEffect>
       </SegmentFinishEffects>
+      <SegmentStartEffects />
       <Behaviors />
     </Action>
     <Action ActionID="attack_front_air" Category="attack_front" ImageID="Homura_jump0004">
@@ -4783,6 +4814,7 @@
           <Effect xsi:type="PlayerEndToFreeMoveEffect" />
         </ArrayOfEffect>
       </SegmentFinishEffects>
+      <SegmentStartEffects />
       <Behaviors />
     </Action>
     <Action ActionID="attack_up" Category="attack_up" ImageID="Homura_mortar0000">
@@ -4944,6 +4976,7 @@
           <Effect xsi:type="PlayerEndToFreeMoveEffect" />
         </ArrayOfEffect>
       </SegmentFinishEffects>
+      <SegmentStartEffects />
       <Behaviors />
     </Action>
     <Action ActionID="attack_up_mortar" Category="attack_up" ImageID="Homura_mortarB">
@@ -5014,6 +5047,7 @@
           </Effect>
         </ArrayOfEffect>
       </SegmentFinishEffects>
+      <SegmentStartEffects />
       <Behaviors />
     </Action>
     <Action ActionID="attack_up_bullet" Category="attack_up" ImageID="mortarShellA000">
@@ -5118,7 +5152,277 @@
         </Effect>
       </UpdateEffects>
       <SegmentFinishEffects />
+      <SegmentStartEffects />
       <Behaviors />
+    </Action>
+    <Action ActionID="attack_long_b" Category="attack_long" ImageID="Homura_minimiB0000">
+      <Segments>
+        <AnimationSegment CancelLevel="Long" IsLoop="false">
+          <Frame>
+            <ImageID>Homura_minimiB0000</ImageID>
+            <OriginX>54</OriginX>
+            <OriginY>100</OriginY>
+            <Duration>2</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-94" W="44" H="94" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>Homura_minimiB0001</ImageID>
+            <OriginX>54</OriginX>
+            <OriginY>100</OriginY>
+            <Duration>3</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-94" W="44" H="94" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>Homura_minimiB0002</ImageID>
+            <OriginX>54</OriginX>
+            <OriginY>100</OriginY>
+            <Duration>3</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-94" W="44" H="94" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>Homura_minimiB0003</ImageID>
+            <OriginX>54</OriginX>
+            <OriginY>100</OriginY>
+            <Duration>3</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-94" W="44" H="94" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>Homura_minimiB0004</ImageID>
+            <OriginX>54</OriginX>
+            <OriginY>100</OriginY>
+            <Duration>2</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-94" W="44" H="94" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>Homura_minimiB0005</ImageID>
+            <OriginX>54</OriginX>
+            <OriginY>100</OriginY>
+            <Duration>3</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-94" W="44" H="94" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>Homura_minimiB0006</ImageID>
+            <OriginX>54</OriginX>
+            <OriginY>100</OriginY>
+            <Duration>3</Duration>
+            <Points>
+              <FramePoint X="45" Y="-39" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-94" W="44" H="94" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+        </AnimationSegment>
+        <AnimationSegment CancelLevel="Long" IsLoop="true" JumpCancellable="0" SkillCancellable="0">
+          <Frame>
+            <ImageID>Homura_minimiB0007</ImageID>
+            <OriginX>54</OriginX>
+            <OriginY>100</OriginY>
+            <Duration>3</Duration>
+            <Points>
+              <FramePoint X="46" Y="-41" />
+              <FramePoint X="4" Y="-43" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-94" W="44" H="94" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>Homura_minimiB0008</ImageID>
+            <OriginX>54</OriginX>
+            <OriginY>100</OriginY>
+            <Duration>3</Duration>
+            <Points>
+              <FramePoint X="46" Y="-41" />
+              <FramePoint X="5" Y="-43" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-94" W="44" H="94" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>Homura_minimiB0006</ImageID>
+            <OriginX>54</OriginX>
+            <OriginY>100</OriginY>
+            <Duration>3</Duration>
+            <Points>
+              <FramePoint X="45" Y="-39" />
+              <FramePoint X="3" Y="-41" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-94" W="44" H="94" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+        </AnimationSegment>
+        <AnimationSegment CancelLevel="Long" IsLoop="false" JumpCancellable="0" SkillCancellable="0">
+          <Frame>
+            <ImageID>Homura_minimiB0008</ImageID>
+            <OriginX>54</OriginX>
+            <OriginY>100</OriginY>
+            <Duration>15</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-94" W="44" H="94" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>Homura_minimiB0009</ImageID>
+            <OriginX>54</OriginX>
+            <OriginY>100</OriginY>
+            <Duration>5</Duration>
+            <Points>
+              <FramePoint X="-2" Y="-43" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-94" W="44" H="94" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+        </AnimationSegment>
+        <AnimationSegment CancelLevel="Long" IsLoop="false" JumpCancellable="0" SkillCancellable="0">
+          <Frame>
+            <ImageID>Homura_minimiB0010</ImageID>
+            <OriginX>54</OriginX>
+            <OriginY>100</OriginY>
+            <Duration>5</Duration>
+            <Points>
+              <FramePoint X="-2" Y="-43" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <PhysicalBox X="-20" Y="-90" W="40" H="90" />
+            <HitBoxes>
+              <Box X="-22" Y="-94" W="44" H="94" R="0" />
+            </HitBoxes>
+            <AttackBoxes />
+          </Frame>
+        </AnimationSegment>
+      </Segments>
+      <InitEffects />
+      <UpdateEffects />
+      <SegmentFinishEffects />
+      <SegmentStartEffects />
+      <Behaviors>
+        <Behavior xsi:type="PlayerSkillGroundBehavior" />
+        <Behavior xsi:type="PlayerGroundSpeedCtrlBehavior">
+          <Entries>
+            <PlayerGroundSpeedCtrlBehaviorEntry xsi:type="PlayerGroundSpeedCtrlBehaviorEntryFriction" />
+            <PlayerGroundSpeedCtrlBehaviorEntry xsi:type="PlayerGroundSpeedCtrlBehaviorEntryRecoil">
+              <Time xsi:type="TimeRepeat">
+                <Segment>1</Segment>
+                <Interval>5</Interval>
+              </Time>
+              <CheckBefore>-1</CheckBefore>
+              <Value>-1</Value>
+              <CheckAfter xsi:nil="true" />
+            </PlayerGroundSpeedCtrlBehaviorEntry>
+          </Entries>
+        </Behavior>
+        <Behavior xsi:type="CreateBulletBehavior">
+          <Time xsi:type="TimeRepeat">
+            <Segment>1</Segment>
+            <Interval>5</Interval>
+          </Time>
+          <Position xsi:type="FrameSinglePointProvider" Index="0" />
+          <Bullet>assult_rifle</Bullet>
+          <Direction>Same</Direction>
+        </Behavior>
+        <Behavior xsi:type="CreateBulletBehavior">
+          <Time xsi:type="TimeRepeat">
+            <Segment>1</Segment>
+            <Interval>5</Interval>
+          </Time>
+          <Position xsi:type="FrameSinglePointProvider" Index="0" />
+          <Bullet>attack_long_bullet</Bullet>
+          <Direction>Same</Direction>
+        </Behavior>
+        <Behavior xsi:type="CreateBulletBehavior">
+          <Time xsi:type="TimeRepeat">
+            <Segment>1</Segment>
+            <Interval>5</Interval>
+          </Time>
+          <Position xsi:type="FrameSinglePointProvider" Index="1" />
+          <Bullet>drop_shell</Bullet>
+          <Direction>Same</Direction>
+        </Behavior>
+        <Behavior xsi:type="PlayerSkillLoopBreakBehavior" Segment="1" Tick="95" KeyReleased="false" ResetSitCancel="false" />
+      </Behaviors>
     </Action>
   </Actions>
   <Exporter xsi:type="PlayerExporter">
@@ -5133,7 +5437,7 @@
       <MagicUse>0</MagicUse>
     </PlayerInformation>
     <Skills>
-      <Skill xsi:type="NormalSkill" Key="KeyB" X="Empty" Y="Empty" CancelLevel="Long" ActionID="attack_long" />
+      <Skill xsi:type="NormalSkill" Key="KeyB" X="Empty" Y="Empty" CancelLevel="Long" ActionID="attack_long_b" />
       <Skill xsi:type="NormalSkill" Key="KeyC" CancelLevel="Magic" MagicUse="50" ActionID="magic" />
       <Skill xsi:type="NormalSkill" Key="KeyC" AirState="AirOnly" CancelLevel="Magic" MagicUse="50" ActionID="magic_air" />
       <Skill xsi:type="NormalSkill" Key="KeyB" X="Empty" Y="Empty" AirState="AirOnly" CancelLevel="Long" ActionID="attack_long_air" />
