@@ -5405,7 +5405,7 @@
             <Interval>5</Interval>
           </Time>
           <Position xsi:type="FrameSinglePointProvider" Index="0" />
-          <Bullet>assult_rifle</Bullet>
+          <Bullet>assult_rifle_b</Bullet>
           <Direction>Same</Direction>
         </Behavior>
         <Behavior xsi:type="CreateBulletBehavior">
@@ -5723,6 +5723,59 @@
           <Position xsi:type="FrameSinglePointProvider" Index="1" />
           <Bullet>drop_shell</Bullet>
           <Direction>Same</Direction>
+        </Behavior>
+      </Behaviors>
+    </Action>
+    <Action ActionID="assult_rifle_b" Category="shot_common" ImageID="shotFlashA000">
+      <Segments>
+        <AnimationSegment CancelLevel="Free" IsLoop="true">
+          <Frame>
+            <ImageID>shotFlashA000</ImageID>
+            <ScaleX>150</ScaleX>
+            <ScaleY>150</ScaleY>
+            <OriginX>5</OriginX>
+            <OriginY>64</OriginY>
+            <Duration>2</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <HitBoxes />
+            <AttackBoxes />
+          </Frame>
+          <Frame>
+            <ImageID>shotFlashA000</ImageID>
+            <ScaleX>75</ScaleX>
+            <ScaleY>75</ScaleY>
+            <OriginX>5</OriginX>
+            <OriginY>64</OriginY>
+            <Duration>2</Duration>
+            <Points>
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+              <FramePoint X="0" Y="0" />
+            </Points>
+            <HitBoxes />
+            <AttackBoxes />
+          </Frame>
+        </AnimationSegment>
+      </Segments>
+      <InitEffects />
+      <UpdateEffects />
+      <SegmentFinishEffects />
+      <SegmentStartEffects />
+      <Behaviors>
+        <Behavior xsi:type="EffectActorBehavior">
+          <Entries>
+            <EffectActorBehaviorEntry xsi:type="EffectActorBehaviorEntryInitRandomScale" Max="1.1" Min="0.8" />
+            <EffectActorBehaviorEntry xsi:type="EffectActorBehaviorEntryRandomReverse" />
+            <EffectActorBehaviorEntry xsi:type="EffectActorBehaviorEntryReduceScaleRatio">
+              <RatioX>0.9</RatioX>
+              <RatioY xsi:nil="true" />
+            </EffectActorBehaviorEntry>
+            <EffectActorBehaviorEntry xsi:type="EffectActorBehaviorEntryReleaseAfter" Tick="4" />
+          </Entries>
         </Behavior>
       </Behaviors>
     </Action>
