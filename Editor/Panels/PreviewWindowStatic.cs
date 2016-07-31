@@ -1,4 +1,5 @@
-﻿using GS_PatEditor.Render;
+﻿using GS_PatEditor.Editor.Panels.Tools;
+using GS_PatEditor.Render;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,7 @@ namespace GS_PatEditor.Editor.Panels
 
         private Sprite _Sprite, _SpriteLineV, _SpriteLineH;
         private Sprite[] _SpriteListPhysical;
+        private Sprite[] _SpriteListBorder;
         private Sprite[] _SpritePoints;
 
         public PreviewWindowStatic(Editor parent)
@@ -35,6 +37,7 @@ namespace GS_PatEditor.Editor.Panels
             _SpriteLineV.SetupPosition(0, 0, 0);
 
             _SpriteListPhysical = sprites.GetRectangle(0);
+            _SpriteListBorder = sprites.GetRectangle(1);
 
             _SpritePoints = new[] {
                 sprites.GetSprite(3),
@@ -55,6 +58,16 @@ namespace GS_PatEditor.Editor.Panels
             }
         }
 
+        private class BorderRectProvider : EditingPhysicalBox
+        {
+            public float Left { get; set; }
+            public float Top { get; set; }
+            public float Width { get; set; }
+            public float Height { get; set; }
+        }
+
+        private BorderRectProvider _BorderProvider = new BorderRectProvider();
+
         public override void Render()
         {
             var frame = _Parent.CurrentFrame;
@@ -67,6 +80,33 @@ namespace GS_PatEditor.Editor.Panels
                 {
                     _Sprite.SetupFrame(txt, frame, window.SpriteMoving);
                     _Sprite.Render();
+                }
+                if (_Parent.BorderVisible)
+                {
+                    _SpriteListBorder.SetupBorder(frame, txt, window.SpriteMoving);
+                    _SpriteListBorder.Render();
+                }
+            }
+
+            if (true)
+            {
+                var spriteManagerRef = _Parent.PreviewWindowUI.SpriteManagerRef;
+                var opacity = _Parent.PreviewWindowUI.ReferenceOpacity;
+                for (int i = 0; i < _Parent.PreviewWindowUI.ReferenceList.Count; ++i)
+                {
+                    var info = _Parent.PreviewWindowUI.ReferenceList[i];
+                    if (info.Visible)
+                    {
+                        var s = spriteManagerRef.GetSprite(i);
+                        var txt = _Parent.Project.ImageList.GetTexture(info.Frame.ImageID,
+                            _Parent.PreviewWindowUI.Render);
+                        if (txt != null)
+                        {
+                            s.SetupFrame(txt, info.Frame, EmptyEditingPoint.Instance);
+                            s.Alpha *= opacity / 100.0f;
+                            s.Render();
+                        }
+                    }
                 }
             }
 
@@ -86,7 +126,7 @@ namespace GS_PatEditor.Editor.Panels
             }
 
             var sprites = _Parent.PreviewWindowUI.SpriteManager;
-            int rectIndex = 1;
+            int rectIndex = 2;
             if (_Parent.HitBoxVisible)
             {
                 foreach (var box in _Parent.PreviewWindowUI.HitEditing.BoxData.Data)

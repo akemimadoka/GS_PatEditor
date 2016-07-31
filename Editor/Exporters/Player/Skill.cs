@@ -89,6 +89,9 @@ namespace GS_PatEditor.Editor.Exporters.Player
     [XmlInclude(typeof(NormalSkill))]
     public abstract class Skill
     {
+        [XmlIgnore]
+        [Browsable(false)]
+        public abstract int Priority { get; }
     }
 
     [Serializable]
@@ -96,6 +99,10 @@ namespace GS_PatEditor.Editor.Exporters.Player
     {
         [XmlAttribute]
         public SkillKey Key { get; set; }
+
+        [XmlAttribute]
+        [DefaultValue(false)]
+        public bool IsRushSkill { get; set; }
 
         [XmlAttribute]
         public DirectionHorizontal X { get; set; }
@@ -120,8 +127,17 @@ namespace GS_PatEditor.Editor.Exporters.Player
         [TypeConverter(typeof(ActionIDConverter))]
         public string ActionID { get; set; }
 
+        [XmlAttribute]
+        [TypeConverter(typeof(ActionIDConverterNullable))]
+        public string RushCancel { get; set; }
+
         [XmlIgnore]
         [Browsable(false)]
         public EditableEnvironment Environment { get; set; }
+
+        public override int Priority
+        {
+            get { return IsRushSkill ? 100 : 0; }
+        }
     }
 }

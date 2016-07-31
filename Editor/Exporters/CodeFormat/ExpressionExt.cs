@@ -61,5 +61,19 @@ namespace GS_PatEditor.Editor.Exporters.CodeFormat
             }
             return ret;
         }
+
+        public static Expression OrAll(params Expression[] expr)
+        {
+            if (expr == null || expr.Length == 0)
+            {
+                return new ConstNumberExpr(1);
+            }
+            var ret = expr[0];
+            for (int i = 1; i < expr.Length; ++i)
+            {
+                ret = new BiOpExpr(ret, expr[i], BiOpExpr.Op.Or);
+            }
+            return ret;
+        }
     }
 }

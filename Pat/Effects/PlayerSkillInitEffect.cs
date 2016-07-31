@@ -154,4 +154,19 @@ namespace GS_PatEditor.Pat.Effects
             return ret;
         }
     }
+
+    [Serializable]
+    public class ResetHitEffect : Effect
+    {
+        public static readonly ResetHitEffect Instance = new ResetHitEffect();
+
+        public override void Run(Simulation.Actor actor)
+        {
+        }
+
+        public override ILineObject Generate(GenerationEnvironment env)
+        {
+            return new SimpleLineObject("this.HitReset();");
+        }
+    }
 }

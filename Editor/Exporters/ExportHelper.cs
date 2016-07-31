@@ -53,6 +53,8 @@ namespace GS_PatEditor.Editor.Exporters
                     return 31;
                 case Pat.CancelLevel.Magic:
                     return 50;
+                case Pat.CancelLevel.Highest:
+                    return 100;
             }
             return 0;
         }

@@ -65,12 +65,21 @@ namespace GS_PatEditor.Editor.Exporters.Player
 
         public static ILineObject[] GenerateInputAttackFunction(PlayerExporter exporter)
         {
-            ILineObject[] ret = new ILineObject[exporter.Skills.Count];
-            for (int i = 0; i < exporter.Skills.Count; ++i)
-            {
-                ret[i] = GenerateSkill(i == 0, exporter.Skills[i], "skill_" + i.ToString());
-            }
-            return ret;
+            //ILineObject[] ret = new ILineObject[exporter.Skills.Count];
+            //for (int i = 0; i < exporter.Skills.Count; ++i)
+            //{
+            //    ret[i] = GenerateSkill(i == 0, exporter.Skills[i], "skill_" + i.ToString());
+            //}
+            //return ret;
+            return Enumerable.Range(0, exporter.Skills.Count)
+                .Select(i => new
+                {
+                    Code = GenerateSkill(exporter, i == 0, exporter.Skills[i], "skill_" + i.ToString()),
+                    Priority = exporter.Skills[i].Priority,
+                })
+                .OrderByDescending(s => s.Priority)
+                .Select(s => s.Code)
+                .ToArray();
         }
 
         public static GenerationEnvironment CreateEnv(PlayerExporter exporter, CodeGenerator output)
@@ -132,16 +141,16 @@ namespace GS_PatEditor.Editor.Exporters.Player
 
         #region InputAttack
 
-        private static ILineObject GenerateSkill(bool isFirst, Skill skill, string name)
+        private static ILineObject GenerateSkill(PlayerExporter exporter, bool isFirst, Skill skill, string name)
         {
             if (skill is NormalSkill)
             {
-                return GenerateNormalSkill(isFirst, (NormalSkill)skill, name);
+                return GenerateNormalSkill(exporter, isFirst, (NormalSkill)skill, name);
             }
             return new SimpleLineObject("");
         }
 
-        private static ILineObject GenerateNormalSkill(bool isFirst, NormalSkill skill, string name)
+        private static ILineObject GenerateNormalSkill(PlayerExporter exporter, bool isFirst, NormalSkill skill, string name)
         {
             var u = ThisExpr.Instance.MakeIndex("u");
             var condition = ExpressionExt.AndAll(
@@ -150,12 +159,33 @@ namespace GS_PatEditor.Editor.Exporters.Player
                 AirCondition(skill.AirState),
                 XCondition(skill.X),
                 YCondition(skill.Y),
-                MagicCondition(skill.MagicUse));
+                MagicCondition(skill.MagicUse),
+                RushCondition(exporter, skill));
             return new ControlBlock(isFirst ? ControlBlockType.If : ControlBlockType.ElseIf,
                 condition, new ILineObject[] {
                 u.MakeIndex("InputReset").MakeIndex("call").Call(ThisExpr.Instance).Statement(),
                 u.MakeIndex(name).MakeIndex("call").Call(ThisExpr.Instance).Statement(),
             }).Statement();
+        }
+
+        private static Expression RushCondition(PlayerExporter exporter, NormalSkill skill)
+        {
+            if (skill.IsRushSkill)
+            {
+                var skillActionID = skill.ActionID;
+                var indexes = exporter.Skills
+                    .Where(s => s is NormalSkill)
+                    .Select(s => (NormalSkill)s)
+                    .Where(s => s.RushCancel == skillActionID)
+                    .Select(s =>
+                        new BiOpExpr(ThisExpr.Instance.MakeIndex("motion"),
+                            new BiOpExpr(ThisExpr.Instance.MakeIndex("u").MakeIndex("CA"),
+                                new ConstNumberExpr(exporter.GetActionID(s.ActionID)), BiOpExpr.Op.Add),
+                            BiOpExpr.Op.Equal))
+                    .ToArray();
+                return ExpressionExt.OrAll(indexes);
+            }
+            return new ConstNumberExpr(1);
         }
 
         private static Expression KeyCondition(SkillKey key)

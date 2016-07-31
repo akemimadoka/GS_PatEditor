@@ -137,6 +137,12 @@
     <Compile Include="Editor\ExportForm.Designer.cs">
       <DependentUpon>ExportForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Editor\FrameReferenceEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Editor\FrameReferenceEditForm.Designer.cs">
+      <DependentUpon>FrameReferenceEditForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Editor\ImportPatAnimationForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -186,6 +192,7 @@
     <Compile Include="Pat\Effects\PlayerSkillUpdateEffect.cs" />
     <Compile Include="Pat\Effects\PlayerSystemEffect.cs" />
     <Compile Include="Pat\Effects\PointProvider.cs" />
+    <Compile Include="Pat\Effects\ResetHitEffect.cs" />
     <Compile Include="Pat\Effects\TimestopEffect.cs" />
     <Compile Include="Pat\SegmentSelector.cs" />
     <Compile Include="Program.cs" />
@@ -339,6 +346,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Editor\FrameEditForm.resx">
       <DependentUpon>FrameEditForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editor\FrameReferenceEditForm.resx">
+      <DependentUpon>FrameReferenceEditForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Editor\ImageSelectForm.resx">
       <DependentUpon>ImageSelectForm.cs</DependentUpon>

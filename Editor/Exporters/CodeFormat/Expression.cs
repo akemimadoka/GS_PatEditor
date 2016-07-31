@@ -187,6 +187,7 @@ namespace GS_PatEditor.Editor.Exporters.CodeFormat
             Mod,
             Assign,
             And,
+            Or,
             Greater,
             GreaterOrEqual,
             Less,
@@ -237,6 +238,7 @@ namespace GS_PatEditor.Editor.Exporters.CodeFormat
                 case Op.Divide: return " / ";
                 case Op.Mod: return " % ";
                 case Op.Assign: return " = ";
+                case Op.Or: return " || ";
                 case Op.And: return " && ";
                 case Op.Greater: return " > ";
                 case Op.GreaterOrEqual: return " >= ";

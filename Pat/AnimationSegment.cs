@@ -17,6 +17,7 @@ namespace GS_PatEditor.Pat
         Long,
         Heavy,
         Magic,
+        Highest,
     }
     [Serializable]
     public class AnimationSegment

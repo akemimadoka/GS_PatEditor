@@ -302,6 +302,55 @@ namespace GS_PatEditor.Editor.Panels
             }
         }
 
+        public void SelectLastKeyGrid()
+        {
+            if (_GridList.Count == 0)
+            {
+                return;
+            }
+            var list = GetKeyFrames();
+            var index = GetKeyFrameIndex(list, _LastSelected);
+            index = (index - 1 + list.Count) % list.Count;
+            SelectKeyGrid(list[index]);
+        }
+
+        public void SelectNextKeyGrid()
+        {
+            if (_GridList.Count == 0)
+            {
+                return;
+            }
+            var list = GetKeyFrames();
+            var index = GetKeyFrameIndex(list, _LastSelected);
+            index = (index + 1) % list.Count;
+            SelectKeyGrid(list[index]);
+        }
+
+        private List<KeyFrameGrid> _CachedKeyFrame = new List<KeyFrameGrid>();
+        private List<KeyFrameGrid> GetKeyFrames()
+        {
+            _CachedKeyFrame.Clear();
+            foreach (var f in _GridList)
+            {
+                if (f is KeyFrameGrid)
+                {
+                    _CachedKeyFrame.Add((KeyFrameGrid)f);
+                }
+            }
+            _CachedKeyFrame.Add(null);
+            return _CachedKeyFrame;
+        }
+
+        private int GetKeyFrameIndex(List<KeyFrameGrid> list, KeyFrameGrid grid)
+        {
+            var index = list.FindIndex(g => g == grid);
+            if (index == -1)
+            {
+                return list.Count - 1;
+            }
+            return index;
+        }
+
         private AbstractGrid GetGridFromPoint(int x)
         {
             int sum = 0;
@@ -903,6 +952,26 @@ namespace GS_PatEditor.Editor.Panels
                     return 0;
                 }
                 return ret;
+            }
+            set
+            {
+                var action = _Parent.CurrentAction;
+                if (action == null || _LastSelected == null)
+                {
+                    return;
+                }
+                var grid = _LastSelected;
+                if (grid.Frame != 0)
+                {
+                    return;
+                }
+
+                var seg = grid.Segment;
+                if (value == -1)
+                {
+                    return;
+                }
+                action.Segments[seg].CancelLevel = (Pat.CancelLevel)value + 1;
             }
         }
 

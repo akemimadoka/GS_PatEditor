@@ -19,6 +19,13 @@ namespace GS_PatEditor.Editor.Panels
         public abstract void Render();
     }
 
+    class FrameReferenceInfo
+    {
+        public GS_PatEditor.Pat.Frame Frame;
+        public GS_PatEditor.Pat.Action Action;
+        public bool Visible = true;
+    }
+
     class PreviewWindow : IDisposable
     {
         private readonly Editor _Parent;
@@ -28,6 +35,7 @@ namespace GS_PatEditor.Editor.Panels
 
         public RenderEngine Render { get; private set; }
         public PreviewWindowSpriteManager SpriteManager { get; private set; }
+        public PreviewWindowSpriteManager SpriteManagerRef { get; private set; }
         public AbstractPreviewWindowContent CurrentContent { get; private set; }
 
         //tools
@@ -39,6 +47,9 @@ namespace GS_PatEditor.Editor.Panels
         public HitAttackBoxesEditingHandler HitEditing { get; private set; }
         public HitAttackBoxesEditingHandler AttackEditing { get; private set; }
         public PointEditingHandler PointEditing { get; private set; }
+
+        public List<FrameReferenceInfo> ReferenceList { get; private set; }
+        public int ReferenceOpacity { get; set; }
 
         public PreviewWindow(Editor parent)
         {
@@ -60,6 +71,7 @@ namespace GS_PatEditor.Editor.Panels
             Render.OnRender += _Render_OnRender;
 
             SpriteManager = new PreviewWindowSpriteManager(this);
+            SpriteManagerRef = new PreviewWindowSpriteManager(this);
 
             //tools
 
@@ -75,6 +87,9 @@ namespace GS_PatEditor.Editor.Panels
             PointEditing = new PointEditingHandler(_Parent, ctrl);
 
             OnPreviewModeChanged();
+
+            ReferenceList = new List<FrameReferenceInfo>();
+            ReferenceOpacity = 30;
         }
 
         public EventFilter GetFilterForEditMode(FrameEditMode mode)

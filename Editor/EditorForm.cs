@@ -20,6 +20,8 @@ namespace GS_PatEditor.Editor
             {
                 using (var editor = new Editor(proj))
                 {
+                    Program.EditorForBackup = editor;
+
                     frm._Editor = editor;
 
                     editor.AnimationFramesUI.Init(frm.animationFrames);
@@ -176,6 +178,8 @@ namespace GS_PatEditor.Editor
 
                     frm.Show();
                     frm.RunRenderLoop();
+
+                    Program.EditorForBackup = null;
                 }
             }
         }
@@ -459,6 +463,12 @@ namespace GS_PatEditor.Editor
         {
             pointVisibleToolStripMenuItem.Checked = !pointVisibleToolStripMenuItem.Checked;
             _Editor.PointVisible = pointVisibleToolStripMenuItem.Checked;
+        }
+
+        private void borderToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            borderToolStripMenuItem.Checked = !borderToolStripMenuItem.Checked;
+            _Editor.BorderVisible = borderToolStripMenuItem.Checked;
         }
 
         private void toolStripSplitEdit_DropDownOpening(object sender, EventArgs e)
@@ -828,6 +838,57 @@ namespace GS_PatEditor.Editor
                     _Editor.AnimationListUI.Activate();
                 }
             }
+        }
+
+        private void EditorForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (_Editor.CurrentUI == EditorUI.Animation)
+            {
+                if (e.KeyCode == Keys.Q && e.Modifiers == Keys.None)
+                {
+                    _Editor.AnimationFramesUI.SelectLastKeyGrid();
+                }
+                else if (e.KeyCode == Keys.E && e.Modifiers == Keys.None)
+                {
+                    _Editor.AnimationFramesUI.SelectNextKeyGrid();
+                }
+            }
+        }
+
+        private void addReferenceToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!_Editor.Project.IsEmptyProject && _Editor.CurrentUI == EditorUI.Animation)
+            {
+                if (_Editor.CurrentFrame != null)
+                {
+                    _Editor.PreviewWindowUI.ReferenceList.Add(new Panels.FrameReferenceInfo
+                    {
+                        Action = _Editor.CurrentAction,
+                        Frame = _Editor.CurrentFrame,
+                    });
+                }
+            }
+        }
+
+        private void editReferencesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!_Editor.Project.IsEmptyProject && _Editor.CurrentUI == EditorUI.Animation)
+            {
+                var dialog = new FrameReferenceEditForm(_Editor.Project);
+                dialog.List = _Editor.PreviewWindowUI.ReferenceList;
+                dialog.OpacityValue = _Editor.PreviewWindowUI.ReferenceOpacity;
+
+                dialog.ShowDialog();
+                
+                _Editor.PreviewWindowUI.ReferenceList.Clear();
+                _Editor.PreviewWindowUI.ReferenceList.AddRange(dialog.List);
+                _Editor.PreviewWindowUI.ReferenceOpacity = dialog.OpacityValue;
+            }
+        }
+
+        private void toolStripComboBoxCancelLevel_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            _Editor.AnimationFramesUI.CancelLevel = toolStripComboBoxCancelLevel.SelectedIndex;
         }
     }
 }

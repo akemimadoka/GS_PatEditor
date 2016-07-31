@@ -187,6 +187,7 @@ namespace GS_PatEditor
                 case 30: return CancelLevel.Long;
                 case 31: return CancelLevel.Heavy;
                 case 50: return CancelLevel.Magic;
+                case 100: return CancelLevel.Highest;
                 default: return CancelLevel.None;
             }
         }
@@ -238,7 +239,7 @@ namespace GS_PatEditor
                 Y = Math.Min(box.Y1, box.Y2),
                 W = Math.Abs(box.X1 - box.X2),
                 H = Math.Abs(box.Y1 - box.Y2),
-                R = -box.Rotation,
+                R = box.Rotation,
             };
         }
         private static Pat.PhysicalBox ImportPhysicalBox(GSPat.PhysicsBox box)
@@ -295,7 +296,7 @@ namespace GS_PatEditor
         //TODO move to image list
         public static Pat.FrameImage AddImageToProject(Project proj, string filename, GSPat.Frame frame)
         {
-            if (Path.GetExtension(filename) == ".bmp")
+            if (Path.GetExtension(filename) == ".bmp" || Path.GetExtension(filename) == ".png")
             {
                 filename = Path.ChangeExtension(filename, ".cv2");
             }
