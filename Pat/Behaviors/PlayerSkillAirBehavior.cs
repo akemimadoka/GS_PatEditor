@@ -19,9 +19,14 @@ namespace GS_PatEditor.Pat.Behaviors
         [XmlElement]
         public int? SitCancelSegment { get; set; }
 
+        [XmlElement]
+        [DefaultValue(true)]
+        public bool ResetHit { get; set; }
+
         public PlayerSkillAirBehavior()
         {
             AutoCancel = true;
+            ResetHit = true;
         }
 
         public override void MakeEffects(ActionEffects effects)
@@ -42,6 +47,10 @@ namespace GS_PatEditor.Pat.Behaviors
                         Label = Simulation.ActorLabelType.Sit,
                         Effect = PlayerBeginSitEffect.Instance,
                     });
+            }
+            if (ResetHit)
+            {
+                effects.InitEffects.Add(ResetHitEffect.Instance);
             }
         }
     }

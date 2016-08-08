@@ -15,9 +15,14 @@ namespace GS_PatEditor.Pat.Behaviors
         [DefaultValue(true)]
         public bool AutoCancel { get; set; }
 
+        [XmlElement]
+        [DefaultValue(true)]
+        public bool ResetHit { get; set; }
+
         public PlayerSkillGroundBehavior()
         {
             AutoCancel = true;
+            ResetHit = true;
         }
 
         public override void MakeEffects(ActionEffects effects)
@@ -30,6 +35,10 @@ namespace GS_PatEditor.Pat.Behaviors
             effects.UpdateEffects.Effects.Add(new Effects.IncreaseCountEffect());
             effects.SegmentFinishEffects.AddEffectToList(effects.SegmentCount - 1,
                 new Effects.PlayerEndToFreeMoveEffect());
+            if (ResetHit)
+            {
+                effects.InitEffects.Add(Effects.ResetHitEffect.Instance);
+            }
         }
     }
 }

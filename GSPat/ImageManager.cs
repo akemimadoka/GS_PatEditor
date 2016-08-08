@@ -76,7 +76,9 @@ namespace GS_PatEditor.GSPat
                         img = new DDSImage(imgFile);
                     }
                 }
-                else if (Path.GetExtension(imgFile) == ".bmp" || Path.GetExtension(imgFile) == ".cv2")
+                else if (Path.GetExtension(imgFile) == ".bmp" ||
+                    Path.GetExtension(imgFile) == ".cv2" ||
+                    Path.GetExtension(imgFile) == ".png")
                 {
                     var imgFileCV2 = Path.ChangeExtension(imgFile, ".cv2");
                     if (File.Exists(imgFileCV2))

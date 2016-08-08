@@ -131,9 +131,9 @@ namespace GS_PatEditor.Editor.Exporters.Player
             ExportAction(Animations.JumpFront, 4);
             ExportAction(Animations.Fall, 8);
             ExportAction(Animations.Damage, 10);
+            ExportReviveLightAction(17);
             ExportAction(Animations.Dead, 18);
             ExportAction(Animations.Lost, 19);
-            //TODO make Revive action here
 
             var playerScript = base.AddCodeFile(ScriptFileName + ".cv4");
 
@@ -167,6 +167,93 @@ namespace GS_PatEditor.Editor.Exporters.Player
                     //_SSERecorder.AddAction(action, id + BaseIndex, this.GenEnv);
                 }
             }
+        }
+
+        private void ExportReviveLightAction(int id)
+        {
+            var light = Animations.ReviveLight;
+            var dark = Animations.ReviveDark;
+            if (light == null || dark == null)
+            {
+                return;
+            }
+
+            var action = new Pat.Action
+            {
+                Segments = new List<Pat.AnimationSegment>()
+                {
+                    //segment 0
+                    new Pat.AnimationSegment
+                    {
+                        CancelLevel = Pat.CancelLevel.Highest,
+                        IsLoop = true,
+                        Frames = new List<Pat.Frame>()
+                        {
+                            CreateFrame(light, 255, 100, 64, 113, 3, true),
+                            CreateFrame(light, 255, 75, 64, 129, 3, true),
+                        },
+                    },
+                    //segment 1
+                    new Pat.AnimationSegment
+                    {
+                        CancelLevel = Pat.CancelLevel.Highest,
+                        IsLoop = true,
+                        Frames = new List<Pat.Frame>()
+                        {
+                            CreateFrame(dark, 255, 100, 64, 64, 3, false),
+                            CreateFrame(dark, 192, 100, 64, 64, 3, false),
+                        },
+                    },
+                    //segment 2
+                    new Pat.AnimationSegment
+                    {
+                        CancelLevel = Pat.CancelLevel.Highest,
+                        IsLoop = true,
+                        Frames = new List<Pat.Frame>()
+                        {
+                            CreateFrame(light, 255, 200, 64, 89, 3, false),
+                            CreateFrame(light, 255, 190, 64, 91, 3, false),
+                        },
+                    },
+                    //segment 3
+                    new Pat.AnimationSegment
+                    {
+                        CancelLevel = Pat.CancelLevel.Highest,
+                        IsLoop = true,
+                        Frames = new List<Pat.Frame>()
+                        {
+                            CreateFrame(light, 255, 25, 64, 64, 4, false),
+                            CreateFrame(light, 255, 22, 64, 64, 4, false),
+                        },
+                    },
+                },
+            };
+            base.AddNormalAnimation(action, id + BaseIndex);
+        }
+
+        private Pat.Frame CreateFrame(string img, int alpha, int scale, int ox, int oy, int dur, bool phy)
+        {
+            return new Pat.Frame
+            {
+                ImageID = img,
+                Alpha = alpha / 255.0f,
+                ScaleX = scale,
+                ScaleY = scale,
+                OriginX = ox,
+                OriginY = oy,
+                Duration = dur,
+                Points = new List<Pat.FramePoint>()
+                {
+                    new Pat.FramePoint(),
+                    new Pat.FramePoint(),
+                    new Pat.FramePoint(),
+                },
+                PhysicalBox = phy ?
+                    new Pat.PhysicalBox { X = -20, Y = -90, W = 40, H = 90 } :
+                    null,
+                AttackBoxes = new List<Pat.Box>(),
+                HitBoxes = new List<Pat.Box>(),
+            };
         }
 
         public int GetActionID(string name)

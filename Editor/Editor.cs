@@ -275,6 +275,7 @@ namespace GS_PatEditor.Editor
         public bool HitBoxVisible = true;
         public bool AttackBoxVisible = true;
         public bool PointVisible = true;
+        public bool BorderVisible = true;
 
         #endregion
 

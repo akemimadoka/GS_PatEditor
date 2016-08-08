@@ -201,7 +201,11 @@ namespace GS_PatEditor.Pat.Editing
                 _Palette = null;
                 return;
             }
-            var palName = _Project.FindResource(ProjectDirectoryUsage.Image, _Project.Settings.Palettes[SelectedPalette]);
+            string palName = null;
+            if (_Project.Settings.Palettes[SelectedPalette] != null)
+            {
+                palName = _Project.FindResource(ProjectDirectoryUsage.Image, _Project.Settings.Palettes[SelectedPalette]);
+            }
             if (palName == null)
             {
                 _Palette = null;

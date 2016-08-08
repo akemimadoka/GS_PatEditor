@@ -26,6 +26,7 @@ namespace GS_PatEditor.Pat.Effects
                 new SimpleLineObject("this.ShotInit(t);"),
                 new ControlBlock(ControlBlockType.If, "t.owner in this.actor", new ILineObject[] {
                     new SimpleLineObject("this.u.uu <- this.actor[t.owner].u.uu;"),
+                    new SimpleLineObject("this.u.CA = this.actor[t.owner].u.CA;"),
                 }).Statement(),
                 new ControlBlock(ControlBlockType.Else, new ILineObject[] {
                     new SimpleLineObject("this.u.uu <- { uuu = null };"),

@@ -93,5 +93,10 @@ namespace GS_PatEditor.Editor.Exporters
             _Codes.Add(ret);
             return ret;
         }
+
+        public virtual bool IsImageIDDirectlyUsed(string imageID)
+        {
+            return false;
+        }
     }
 }

@@ -11,4 +11,19 @@ namespace GS_PatEditor.Editor.Panels.Tools
         int OffsetX { get; }
         int OffsetY { get; }
     }
+
+    class EmptyEditingPoint : EditingPoint
+    {
+        public int OffsetX
+        {
+            get { return 0; }
+        }
+
+        public int OffsetY
+        {
+            get { return 0; }
+        }
+
+        public static readonly EmptyEditingPoint Instance = new EmptyEditingPoint();
+    }
 }

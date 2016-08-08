@@ -1,4 +1,5 @@
 ﻿using GS_PatEditor.Editor.Editable;
+using GS_PatEditor.Pat.Effects;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,7 +17,7 @@ namespace GS_PatEditor.Pat.Behaviors
     }
 
     [Serializable]
-    public class InitEffectBehavior : Behavior
+    public class InitEffectBehavior : Behavior, IHideFromEditor
     {
         [XmlElement]
         [EditorChildNode("Effect")]
@@ -39,7 +40,7 @@ namespace GS_PatEditor.Pat.Behaviors
     }
 
     [Serializable]
-    public class UpdateEffectBehavior : Behavior
+    public class UpdateEffectBehavior : Behavior, IHideFromEditor
     {
         [XmlElement]
         [EditorChildNode("Effect")]
@@ -77,7 +78,7 @@ namespace GS_PatEditor.Pat.Behaviors
     }
 
     [Serializable]
-    public class EndSegmentEffectBehavior : Behavior
+    public class EndSegmentEffectBehavior : Behavior, IHideFromEditor
     {
         [XmlElement]
         [EditorChildNode("Effect")]
@@ -111,7 +112,7 @@ namespace GS_PatEditor.Pat.Behaviors
     }
 
     [Serializable]
-    public class StartSegmentEffectBehavior : Behavior
+    public class StartSegmentEffectBehavior : Behavior, IHideFromEditor
     {
         [XmlElement]
         [EditorChildNode("Effect")]

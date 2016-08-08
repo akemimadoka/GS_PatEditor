@@ -16,6 +16,7 @@ namespace GS_PatEditor.Editor
     {
         private Pat.Project _Project;
         private Bitmap _PreviewImage;
+        private bool _IsBatch;
 
         public ImageSelectForm(Pat.Project project)
         {
@@ -28,11 +29,14 @@ namespace GS_PatEditor.Editor
         private void RefreshList()
         {
             listView1.Items.Clear();
-            foreach (var image in _Project.Images)
+            if (!_IsBatch)
             {
-                listView1.Items.Add(CreateItem(image));
+                foreach (var image in _Project.Images)
+                {
+                    listView1.Items.Add(CreateItem(image));
+                }
             }
-            if (checkBox1.Checked)
+            if (checkBox1.Checked || _IsBatch)
             {
                 var dirList = _Project.Settings.Directories
                     .Where(d => d.Usage == ProjectDirectoryUsage.Image && d.Path != null && d.Path.Length > 0)
@@ -115,6 +119,11 @@ namespace GS_PatEditor.Editor
 
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (_IsBatch)
+            {
+                return;
+            }
+
             if (listView1.SelectedItems.Count == 0)
             {
                 textBox1.Text = "";
@@ -194,11 +203,15 @@ namespace GS_PatEditor.Editor
             };
             img.Dispose();
             var image = ProjectGenerater.AddImageToProject(_Project, filenameWithoutPath, frame);
-            var item = CreateItem(image);
-            listView1.Items.Add(item);
-            listView1.SelectedItems.Clear();
-            item.Selected = true;
-            item.EnsureVisible();
+
+            if (!_IsBatch)
+            {
+                var item = CreateItem(image);
+                listView1.Items.Add(item);
+                listView1.SelectedItems.Clear();
+                item.Selected = true;
+                item.EnsureVisible();
+            }
             return image;
         }
 
@@ -444,6 +457,110 @@ namespace GS_PatEditor.Editor
                 _PreviewImage = _Project.ImageList.GetImageUnclippedByRes(Path.GetFileName(img), checkBox2.Checked);
                 pictureBox1.Invalidate();
             }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (!_IsBatch)
+            {
+                _IsBatch = true;
+                //begin
+                button2.Text = "Import";
+
+                textBox1.Enabled = false;
+                checkBox1.Enabled = false;
+                checkBox2.Enabled = false;
+                buttonOK.Enabled = false;
+                buttonCancel.Enabled = false;
+                button1.Enabled = false;
+
+                RefreshList();
+                listView1.CheckBoxes = true;
+            }
+            else
+            {
+                var list = listView1.Items.OfType<ListViewItem>().Select(i => (string)i.Tag).ToArray();
+                foreach (var f in list)
+                {
+                    MakeNewImageFromFile(f);
+                }
+
+                _IsBatch = false;
+
+                //finish
+                button2.Text = "Batch Import";
+
+                textBox1.Enabled = true;
+                checkBox1.Enabled = true;
+                checkBox2.Enabled = true;
+                buttonOK.Enabled = true;
+                buttonCancel.Enabled = true;
+                button1.Enabled = true;
+
+                RefreshList();
+                listView1.CheckBoxes = false;
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (_IsBatch)
+            {
+                return;
+            }
+
+            if (listView1.SelectedItems.Count != 0 && listView1.SelectedItems[0].Tag is Pat.FrameImage)
+            {
+                var img = (Pat.FrameImage)listView1.SelectedItems[0].Tag;
+                if (CheckImageUsage(img.ImageID))
+                {
+                    MessageBox.Show("This image is in use.", "Error",
+                        MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
+                else
+                {
+                    if (MessageBox.Show("Do you want to remove this image from project? " + 
+                        "You can add it later if you still need it.", "Warning",
+                        MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == System.Windows.Forms.DialogResult.Yes)
+                    {
+                        _Project.Images.Remove(img);
+                        _Project.ImageList.ResetImage(img);
+
+                        listView1.SelectedItems[0].Remove();
+                        listView1.SelectedItems.Clear();
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please choose an existing image.", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+        }
+
+        private bool CheckImageUsage(string img)
+        {
+            if (_Project.Exporter != null)
+            {
+                if (_Project.Exporter.IsImageIDDirectlyUsed(img))
+                {
+                    return true;
+                }
+            }
+            foreach (var action in _Project.Actions)
+            {
+                foreach (var seg in action.Segments)
+                {
+                    foreach (var frame in seg.Frames)
+                    {
+                        if (frame.ImageID == img)
+                        {
+                            return true;
+                        }
+                    }
+                }
+            }
+            return false;
         }
     }
 }

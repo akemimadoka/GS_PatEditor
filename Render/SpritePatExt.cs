@@ -73,5 +73,16 @@ namespace GS_PatEditor.Render
             }
             rect.SetupPosition(box.Left + hw, box.Top + hh, 0, box.Rotation);
         }
+
+        public static void SetupBorder(this Sprite[] rect, Frame frame, Texture txt, EditingPoint editing)
+        {
+            var size = txt.GetLevelDescription(0);
+
+            var w = size.Width * frame.ScaleX / 200.0f;
+            var h = size.Height * frame.ScaleY / 200.0f;
+            rect.SetupRect(0x222222, w, h);
+            rect.SetupPosition(-frame.OriginX - editing.OffsetX + w,
+                -frame.OriginY - editing.OffsetY + h, 0);
+        }
     }
 }

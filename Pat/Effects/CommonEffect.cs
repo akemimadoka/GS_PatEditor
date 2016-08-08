@@ -156,7 +156,9 @@ namespace GS_PatEditor.Pat.Effects
         {
             var id = env.GetActionID(Animation);
             var ret = ThisExpr.Instance.MakeIndex("SetMotion").Call(
-                new ConstNumberExpr(id),
+                new BiOpExpr(new ConstNumberExpr(id),
+                    ThisExpr.Instance.MakeIndex("u").MakeIndex("CA"),
+                    BiOpExpr.Op.Add),
                 new ConstNumberExpr(Segment)).Statement();
             return SetMotionEffectHelper.Generate(env, ret);
         }
